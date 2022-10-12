@@ -6,30 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="users")
-public class User {
+@Table(name = "seat")
+public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private int userId;
+    private int seatId;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "email_id")
-    private String emailId;
-
-    @Column(name = "contact_number")
-    private long contactNumber;
-
+    @Column(name = "seat_no")
+    private int seatNo;
     @ManyToOne
-    @JoinColumn(name = "roles_id")
-    private Role roles;
+    @JoinColumn(name = "screen_id")
+    private Screen screen;
 
+    @OneToMany(mappedBy = "seat")
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
 }
