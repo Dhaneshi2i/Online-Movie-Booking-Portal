@@ -30,7 +30,7 @@ public class Movie {
 
     @Column(name = " screen_id")
     @OneToMany(mappedBy = "movie")
-    private List<Screeing> screening = new ArrayList<>();
+    private List<Screening> screening = new ArrayList<>();
 
     @ManyToMany(cascade = {
             CascadeType.ALL
