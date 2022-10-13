@@ -1,3 +1,4 @@
+
 CREATE TABLE booked_seats (
   id INT NOT NULL,
    seat_id INT NULL,
@@ -8,6 +9,12 @@ CREATE TABLE booked_seats (
 
 ALTER TABLE booked_seats ADD CONSTRAINT FK_BOOKEDSEATS_ON_BOOKING FOREIGN KEY (booking_id) REFERENCES booking (id);
 
-ALTER TABLE booked_seats ADD CONSTRAINT FK_BOOKEDSEATS_ON_SCREENING FOREIGN KEY (screening_id) REFERENCES screening (id);
 
-ALTER TABLE booked_seats ADD CONSTRAINT FK_BOOKEDSEATS_ON_SEAT FOREIGN KEY (seat_id) REFERENCES seat (id);
+CREATE TABLE movie (
+  id INT NOT NULL,
+   movie_name VARCHAR(255) NULL,
+   release_date date NULL,
+   duration time NULL,
+   CONSTRAINT pk_movie PRIMARY KEY (id)
+);
+
