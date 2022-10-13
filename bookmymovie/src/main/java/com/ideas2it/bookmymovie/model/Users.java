@@ -5,7 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -28,8 +35,10 @@ public class Users {
     @Column(name = "contact_number")
     private long contactNumber;
 
+    @Column(name = "password")
+    private String password;
     @ManyToOne
     @JoinColumn(name = "roles_id")
-    private Role roles;
+    private Role role;
 
 }
