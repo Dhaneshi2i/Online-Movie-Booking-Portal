@@ -22,10 +22,10 @@ public class Booking {
     private LocalDate booking_date;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private Users users;
     @ManyToOne
     @JoinColumn(name = "screening_id", referencedColumnName = "id")
     private Screening screening;
     @OneToMany(mappedBy = "booking")
-    private List<BookedSeats> bookedSeats = new ArrayList<>();
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
 }

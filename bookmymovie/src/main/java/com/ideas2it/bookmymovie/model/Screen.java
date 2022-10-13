@@ -1,18 +1,12 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "screen")
 public class Screen {
@@ -39,5 +33,4 @@ public class Screen {
 
     @OneToMany(mappedBy = "screen")
     private List<Screening> screenings = new ArrayList<>();
-
 }

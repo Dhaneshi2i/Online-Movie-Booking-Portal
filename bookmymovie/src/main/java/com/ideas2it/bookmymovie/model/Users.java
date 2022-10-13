@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.ideas2it.bookmymovie.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,8 +29,7 @@ public class Users {
     @Column(name = "contact_number")
     private long contactNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "roles_id")
-    private Role roles;
-
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

@@ -1,15 +1,12 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "theatre")
 public class Theatre {
