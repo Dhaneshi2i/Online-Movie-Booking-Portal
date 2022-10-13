@@ -18,3 +18,4 @@ public class SeatDto {
     private ScreenDto screen;
     private List<BookedSeatDto> bookedSeats = new ArrayList<>();
 }
+

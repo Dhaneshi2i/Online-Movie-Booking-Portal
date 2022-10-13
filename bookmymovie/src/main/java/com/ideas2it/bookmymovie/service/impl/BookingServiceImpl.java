@@ -1,4 +1,4 @@
-package com.ideas2it.bookmymovie.service.imp;
+package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.service.BookingService;
 

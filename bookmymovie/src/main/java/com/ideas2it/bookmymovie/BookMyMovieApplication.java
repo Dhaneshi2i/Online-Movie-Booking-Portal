@@ -13,8 +13,8 @@ public class BookMyMovieApplication {
 	}
 
 	@Bean
-	public ModelMapper ModelMapper(){
-		return new ModelMapper();
+	public ModelMapper ModelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper;
 	}
-
 }
