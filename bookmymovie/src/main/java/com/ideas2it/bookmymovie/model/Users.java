@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.ideas2it.bookmymovie.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,10 +36,16 @@ public class Users {
     @Column(name = "contact_number")
     private long contactNumber;
 
+<<<<<<< HEAD
     @Column(name = "password")
     private String password;
     @ManyToOne
     @JoinColumn(name = "roles_id")
     private Role role;
 
+=======
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
+>>>>>>> d109535 (Online-Movie-Booking:)
 }

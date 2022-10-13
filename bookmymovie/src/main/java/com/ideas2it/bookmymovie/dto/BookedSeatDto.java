@@ -15,3 +15,4 @@ public class BookedSeatDto {
     private BookingDto booking;
     private ScreeningDto screening;
 }
+
