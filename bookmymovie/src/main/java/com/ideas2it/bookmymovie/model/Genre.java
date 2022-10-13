@@ -3,6 +3,7 @@ package com.ideas2it.bookmymovie.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 @Table(name = "genre")
 public class Genre {
     @Id
@@ -32,4 +34,7 @@ public class Genre {
 
     @ManyToMany(mappedBy = "genres", cascade = { CascadeType.ALL })
     private List<Movie> movies = new ArrayList<>();
+
+    public Genre(int id, String name, List<Movie> movies) {
+    }
 }

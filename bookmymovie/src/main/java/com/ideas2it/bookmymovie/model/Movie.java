@@ -1,13 +1,17 @@
 package com.ideas2it.bookmymovie.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
@@ -15,7 +19,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 @Table(name = "movie")
+
 public class Movie {
     @Id
     @GeneratedValue
@@ -26,7 +32,7 @@ public class Movie {
     private String name;
 
     @Column(name = "release_date")
-    private LocalDate releaseDate;
+    private ZonedDateTime releaseDate;
 
     @Column
     private LocalTime duration;
@@ -74,4 +80,5 @@ public class Movie {
             }
     )
     private List<Genre> genres = new ArrayList<>();
+
 }
