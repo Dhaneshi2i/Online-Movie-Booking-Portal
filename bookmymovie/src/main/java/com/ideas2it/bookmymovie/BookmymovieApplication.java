@@ -17,6 +17,4 @@ public class BookMyMovieApplication {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper;
 	}
-
-
 }
