@@ -1,17 +1,20 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Data
-@RequiredArgsConstructor
 @Table(name = "movie")
 public class Movie {
     @Id
@@ -28,10 +31,9 @@ public class Movie {
     @Column
     private LocalTime duration;
 
-    @Column(name = " screen_id")
+    @Column(name = " screening_id")
     @OneToMany(mappedBy = "movie")
     private List<Screening> screening = new ArrayList<>();
-
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
