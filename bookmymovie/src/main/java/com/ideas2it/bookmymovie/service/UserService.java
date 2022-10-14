@@ -6,9 +6,22 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import java.util.List;
 
 public interface UserService {
-    void createUser(UsersDto usersDto);
+    /**
+     * This method gets usersDto object as parameter to create user Details
+     *
+     * @param usersDto is passed as argument to add those value to the database.
+     */
+    UsersDto createUser(UsersDto usersDto);
+    /**
+     * This method List all the User Details that are present in Database
+     *
+     * @return List<UsersDto> which will have all the Users Details which are present in
+     * the database.
+     */
     public List<UsersDto> getAllUsers() throws NotFoundException;
     public UsersDto getUserById(int id) throws NotFoundException;
-    public UsersDto updateUser(int id);
+
+    UsersDto updateUser(UsersDto usersDto);
+
     public void deleteUser(int id);
 }

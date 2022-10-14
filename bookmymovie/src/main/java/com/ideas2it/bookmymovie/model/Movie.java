@@ -6,11 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 @Table(name = "movie")
-
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,7 +62,7 @@ public class Movie {
     )
     private List<Language> languages = new ArrayList<>();
 
-    @ManyToMany(cascade = {
+    /*@ManyToMany(cascade = {
             CascadeType.ALL
     })
     @JoinTable(
@@ -79,6 +74,6 @@ public class Movie {
                     @JoinColumn(name = "genre_id")
             }
     )
-    private List<Genre> genres = new ArrayList<>();
+    private List<Genre> genres = new ArrayList<>();*/
 
 }

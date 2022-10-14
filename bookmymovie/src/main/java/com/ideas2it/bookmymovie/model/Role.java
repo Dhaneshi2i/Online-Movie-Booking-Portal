@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,15 +22,21 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
+@Component
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int roleId;
 
     @Column(name = "role_type")
     private String roleType;
 
+<<<<<<< HEAD
 
 
+=======
+    @OneToMany(mappedBy = "role")
+    private List<Users> users = new ArrayList<>();
+>>>>>>> 20f47ba (Movie-Ticket-Booking:)
 }

@@ -1,3 +1,4 @@
+
 server.port: 8090
 
 spring:
@@ -9,6 +10,4 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost/movie_ticket_booking
     username: root
-    password: siva2001
-
-
+    password: sanjaiKing@2022

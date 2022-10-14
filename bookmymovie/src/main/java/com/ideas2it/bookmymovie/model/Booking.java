@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "booking")
+@Component
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +38,13 @@ public class Booking {
 
     @OneToMany(mappedBy = "booking")
     private List<BookedSeat> bookedSeats = new ArrayList<>();
+
+    @Column(name = "created_date")
+    private LocalDate creationDate;
+
+    @Column(name = "modified_date")
+    private LocalDate modifiedDate;
+
+    @Column(name = "status")
+    private boolean status;
 }

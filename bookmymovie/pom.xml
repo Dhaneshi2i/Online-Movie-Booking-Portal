@@ -58,7 +58,6 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.2.Final</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>

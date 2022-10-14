@@ -5,6 +5,7 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 
 import java.util.List;
 
+
 /**
  * This an interface for theatre related business logic
  */
