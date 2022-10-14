@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +16,10 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "theatre")
+@Where(clause="status=1")
 public class Theatre {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int theatreId;
 
@@ -29,5 +31,8 @@ public class Theatre {
 
     @OneToMany(mappedBy = "theatre")
     private List<Screen> screens = new ArrayList<>();
+
+    @Column(columnDefinition = "tinyint(1) default true")
+    private Boolean status = true;
 
 }

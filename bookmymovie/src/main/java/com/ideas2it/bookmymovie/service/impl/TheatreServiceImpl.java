@@ -24,7 +24,7 @@ public class TheatreServiceImpl {
      */
     public TheatreDto createTheatreDetails(TheatreDto theatreDto) {
         Theatre theatre = theatreRepository.save(mapper.map(theatreDto, Theatre.class));
-        return mapper.map(theatre, TheatreDto.class);
+        return mapper.map(theatre,TheatreDto.class);
     }
 
     /**
@@ -37,19 +37,21 @@ public class TheatreServiceImpl {
         List<Theatre> theatres = theatreRepository.findAll();
         if (theatres.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
-
         }
         return theatres.stream().
                 map(theatre -> (mapper.map(theatre, TheatreDto.class))).collect(Collectors.toList());
     }
 
-    public String updateTheatreDetails(TheatreDto theatreDto) {
+
+    /**
+     * This method gets TheatreDto as parameter and update the Theatre Details
+     *
+     * @param theatreDto is passed as argument to update those value to the database.
+     * @return String
+     */
+    public TheatreDto updateTheatreDetails(TheatreDto theatreDto) {
         Theatre theatre = theatreRepository.save(mapper.map(theatreDto, Theatre.class));
-        TheatreDto theatreDto1 = mapper.map(theatre, TheatreDto.class);
-        if (theatreDto1 != null) {
-            return "Theatre Added Successfully";
-        }
-        return "The Details are not added";
+        return mapper.map(theatre, TheatreDto.class);
     }
 
     /**
@@ -68,7 +70,6 @@ public class TheatreServiceImpl {
         ).collect(Collectors.toList());
     }
 
-
     /**
      * This method is to delete the Theatre Details by the given Theatre id
      *
@@ -83,3 +84,5 @@ public class TheatreServiceImpl {
         return false;
     }
 }
+
+
