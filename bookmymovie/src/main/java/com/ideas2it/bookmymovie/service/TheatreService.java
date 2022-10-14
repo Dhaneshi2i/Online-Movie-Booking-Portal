@@ -31,7 +31,7 @@ public interface TheatreService {
      * @param theatreDto is passed as argument to update those value to the database.
      * @return String
      */
-    String updateTheatreDetails(TheatreDto theatreDto);
+    TheatreDto updateTheatreDetails(TheatreDto theatreDto);
 
     /**
      * This method List all the Theatre Details by City Name that are present in Database
@@ -41,12 +41,4 @@ public interface TheatreService {
      * which was categorized by city name
      */
     List<TheatreDto> ListTheatreByCityName(String cityName) throws NotFoundException;
-
-    /**
-     * This method is to delete the Theatre Details by the given Theatre id
-     *
-     * @param theatreId is passed as parameter to get delete the particular Theatre Details
-     * @return True if the Details are deleted and False if the Details are not Deleted
-     */
-    Boolean DeleteTheatre(int theatreId);
 }

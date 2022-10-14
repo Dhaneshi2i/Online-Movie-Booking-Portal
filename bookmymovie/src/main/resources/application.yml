@@ -9,4 +9,5 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost/movie_ticket_booking
     username: root
-    password: sanjaiKing@2022
+    password: harini@04
+
