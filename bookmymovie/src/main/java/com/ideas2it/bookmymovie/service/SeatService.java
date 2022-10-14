@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
+import com.ideas2it.bookmymovie.dto.SeatDto;
+
 import java.util.List;
 
 public interface SeatService {

@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MovieDto {
 
-    private int id;
+    private int movieId;
 
     private String name;
 

@@ -30,7 +30,6 @@ public class Role {
     @Column(name = "role_type")
     private String roleType;
 
-    @OneToMany(mappedBy = "role")
-    private List<Users> users = new ArrayList<>();
+
 
 }

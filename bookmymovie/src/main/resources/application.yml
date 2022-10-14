@@ -1,4 +1,4 @@
-server.port: 2022
+server.port: 8090
 
 spring:
   database-platform=org:

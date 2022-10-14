@@ -1,31 +1,46 @@
 package com.ideas2it.bookmymovie.service.impl;
 
+import com.ideas2it.bookmymovie.dto.GenreDto;
+import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.repository.MovieRepository;
+import com.ideas2it.bookmymovie.service.GenreService;
+import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-    public ModelMapper mapper;
-    public MovieRepository movieRepository;
-    private MovieDto movieDto = null;
+    public final ModelMapper mapper;
 
-    public  void addMovie(MovieDto movieDto) {
+    public final MovieRepository movieRepository;
+
+    private final GenreService genreService;
+
+    private final LanguageService languageService;
+
+    public MovieServiceImpl(ModelMapper mapper, MovieRepository movieRepository, GenreService genreService, LanguageService languageService) {
+        this.mapper = mapper;
+        this.movieRepository = movieRepository;
+        this.genreService = genreService;
+        this.languageService = languageService;
+    }
+
+    public MovieDto addMovie(MovieDto movieDto) {
         Movie movie = movieRepository.save(mapper.map(movieDto, Movie.class));
-
+        return mapper.map(movie, MovieDto.class);
     }
 
 
     public List<MovieDto> getMovies() throws NotFoundException {
-        List<Movie> movies = (List<Movie>) movieRepository.findAllByActive("active");
+        List<Movie> movies = (List<Movie>) movieRepository.findAll();
 
         if(movies.isEmpty()) {
             throw new NotFoundException("No Movie Found");
@@ -38,37 +53,18 @@ public class MovieServiceImpl implements MovieService {
     }
 
 
-    public MovieDto getMovieByLanguage(String language) throws NotFoundException{
-        Optional<Movie> movie = movieRepository.findByLangugae(language);
-
-        if (movie.isPresent()) {
-            movieDto =  mapper.map(movie.get(), MovieDto.class);
-        } else {
-            throw new NotFoundException("No Movie Found");
-        }
-        return movieDto;
+    public List<MovieDto> getMovieByLanguage(String language) throws NotFoundException{
+        LanguageDto movieByLanguage = languageService.getLanguageByName(language);
+        return movieByLanguage.getMoviesDto();
     }
 
-    public MovieDto getMovieByGenre(String genre) throws NotFoundException{
-        Optional<Movie> movie = movieRepository.findByGenre(genre);
-
-        if (movie.isPresent()) {
-            movieDto =  mapper.map(movie.get(), MovieDto.class);
-        } else {
-            throw new NotFoundException("No Movie Found");
-        }
-        return movieDto;
+    public List<MovieDto> getMovieByGenre(String genre) throws NotFoundException{
+        GenreDto movieByGenre = genreService.getGenreByName(genre);
+        return movieByGenre.getMoviesDto();
     }
 
-
-    public MovieDto getMovieByScreening(String screening) throws NotFoundException{
-        Optional<Movie> movie = movieRepository.findByScreening(screening);
-        if (movie.isPresent()) {
-            movieDto =  mapper.map(movie.get(), MovieDto.class);
-        } else {
-            throw new NotFoundException("No Movie Found");
-        }
-        return movieDto;
+    public MovieDto updateMovie(MovieDto movieDto) {
+        Movie movie = movieRepository.save(mapper.map(movieDto, Movie.class));
+        return mapper.map(movie, MovieDto.class);
     }
-
 }

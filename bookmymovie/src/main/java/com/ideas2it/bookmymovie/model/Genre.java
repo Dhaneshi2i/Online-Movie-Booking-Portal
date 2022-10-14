@@ -6,13 +6,7 @@ import lombok.NoArgsConstructor;
 
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +19,9 @@ import java.util.List;
 @Table(name = "genre")
 public class Genre {
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long GenreId;
 
     @Column(name = "genre_name")
     private String name;
@@ -35,6 +29,5 @@ public class Genre {
     @ManyToMany(mappedBy = "genres", cascade = { CascadeType.ALL })
     private List<Movie> movies = new ArrayList<>();
 
-    public Genre(int id, String name, List<Movie> movies) {
-    }
+
 }
