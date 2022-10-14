@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 /**
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Users} entity
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 public class UsersDto {
     private int userId;
     private String name;

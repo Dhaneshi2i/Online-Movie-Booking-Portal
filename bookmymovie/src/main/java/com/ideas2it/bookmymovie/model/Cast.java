@@ -7,13 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +21,9 @@ import java.util.List;
 @Table(name = "cast")
 public class Cast {
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long castId;
 
     @Column(name = "cast_name")
     private String name;

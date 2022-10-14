@@ -5,21 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Component
 @Table(name="users")
 public class Users {
     @Id
@@ -36,16 +31,8 @@ public class Users {
     @Column(name = "contact_number")
     private long contactNumber;
 
-<<<<<<< HEAD
     @Column(name = "password")
     private String password;
-    @ManyToOne
-    @JoinColumn(name = "roles_id")
-    private Role role;
 
-=======
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Role role;
->>>>>>> d109535 (Online-Movie-Booking:)
+
 }

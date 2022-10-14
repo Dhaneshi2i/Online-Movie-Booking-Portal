@@ -1,9 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
-<<<<<<< HEAD
-public interface TheatreService {
-=======
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 
 import java.util.List;
 
@@ -50,5 +48,4 @@ public interface TheatreService {
      * @return True if the Details are deleted and False if the Details are not Deleted
      */
     Boolean DeleteTheatre(int theatreId);
->>>>>>> d109535 (Online-Movie-Booking:)
 }

@@ -1,13 +1,6 @@
 package com.ideas2it.bookmymovie.model;
 
-<<<<<<< HEAD
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-=======
 import lombok.Data;
->>>>>>> d109535 (Online-Movie-Booking:)
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

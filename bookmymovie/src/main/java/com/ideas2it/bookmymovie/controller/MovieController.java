@@ -9,43 +9,43 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/v1/movie")
 @RestController
+@RequestMapping("/api/v1/movie")
 public class MovieController {
 
-    private MovieService movieService;
+    private final MovieService movieService;
 
-    @PostMapping
-    public ResponseEntity<MovieDto> addMovie(@Valid @RequestBody MovieDto branchDto) {
-        return new ResponseEntity<>(movieService.addBranch(branchDto), HttpStatus.OK);
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
-    @GetMapping("api/v1/movie/add")
+    @PostMapping("/addMovie")
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+        return new ResponseEntity<>(movieService.addMovie(movieDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/getMovies")
     public ResponseEntity<List<MovieDto>> getMovies() throws NotFoundException {
 
         return new ResponseEntity<>(movieService.getMovies(), HttpStatus.OK);
 
     }
 
-    @GetMapping("/api/v1/{genre}")
-    public ResponseEntity<MovieDto> getMovieByGenre(@PathVariable("genre") int id) throws NotFoundException {
+    @GetMapping("/{genre}")
+    public ResponseEntity<List<MovieDto>> getMovieByGenre(@PathVariable("genre") String genre) throws NotFoundException {
 
         return new ResponseEntity<>(movieService.getMovieByGenre(genre), HttpStatus.OK);
     }
-    @GetMapping("/api/v1/{language}")
-    public ResponseEntity<MovieDto> getMovieByLanguage(@PathVariable("genre") int id) throws NotFoundException {
 
-        return new ResponseEntity<>(movieService.getMovieByLanguage(language), HttpStatus.OK);
+    @GetMapping("/api/v1/{language}")
+    public ResponseEntity<List<MovieDto>> getMovieByLanguage(@PathVariable("language") String language) throws NotFoundException {
+
+        return new ResponseEntity<List<MovieDto>>(movieService.getMovieByLanguage(language), HttpStatus.OK);
     }
 
-    @PatchMapping("/api/v1/movie/{id}/{language}")
-    public ResponseEntity<MovieDto> updateMovie(@Valid @RequestBody MovieDto movieDto) {
+    @PutMapping("/api/v1/movie/update")
+    public ResponseEntity<MovieDto> updateMovie(@RequestBody MovieDto movieDto) {
         return new ResponseEntity<>(movieService.updateMovie(movieDto), HttpStatus.OK);
     }
-
-
-
-    }
-
 
 }

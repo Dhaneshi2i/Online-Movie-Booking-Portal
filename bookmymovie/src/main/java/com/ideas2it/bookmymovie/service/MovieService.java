@@ -6,15 +6,15 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import java.util.List;
 
 public interface MovieService {
-    void addMovie(MovieDto movieDto);
+    MovieDto addMovie(MovieDto movieDto);
 
     List<MovieDto> getMovies() throws NotFoundException;
 
-    MovieDto getMovieByLanguage(String language) throws NotFoundException;
+    List<MovieDto> getMovieByLanguage(String language) throws NotFoundException;
 
-    MovieDto getMovieByGenre(String genre) throws NotFoundException, NotFoundException;
+    List<MovieDto> getMovieByGenre(String genre) throws  NotFoundException;
 
-    MovieDto getMovieByScreening(String Screening) throws NotFoundException;
+    MovieDto updateMovie(MovieDto movieDto);
 
 
 }

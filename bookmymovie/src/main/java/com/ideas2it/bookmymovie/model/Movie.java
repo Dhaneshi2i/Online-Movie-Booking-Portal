@@ -24,9 +24,9 @@ import java.util.List;
 
 public class Movie {
     @Id
-    @GeneratedValue
-    @Column
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private int movieId;
 
     @Column(name = "movie_name")
     private String name;
