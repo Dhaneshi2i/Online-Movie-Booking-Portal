@@ -1,11 +1,10 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.model.Movie;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 

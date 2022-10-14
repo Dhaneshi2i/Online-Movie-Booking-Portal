@@ -1,13 +1,19 @@
 package com.ideas2it.bookmymovie.model;
 
-import com.ideas2it.bookmymovie.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDate;
+>>>>>>> 20f47ba (Movie-Ticket-Booking:)
 
 @Getter
 @Setter
@@ -16,9 +22,10 @@ import javax.persistence.*;
 @Entity
 @Component
 @Table(name="users")
+@Component
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int userId;
 
@@ -34,5 +41,16 @@ public class Users {
     @Column(name = "password")
     private String password;
 
+<<<<<<< HEAD
+=======
+    @Column(name = "created_date")
+    private LocalDate creationDate;
+
+    @Column(name = "modified_date")
+    private LocalDate modifiedDate;
+
+    @Column(name = "status")
+    private boolean status;
+>>>>>>> 20f47ba (Movie-Ticket-Booking:)
 
 }

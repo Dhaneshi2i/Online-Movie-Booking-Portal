@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,11 +21,12 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "bookedSeats")
+@Component
 public class BookedSeat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int bookedSeatId;
+    private Long bookedSeatId;
 
     @ManyToOne
     @JoinColumn(name = "seat_id")

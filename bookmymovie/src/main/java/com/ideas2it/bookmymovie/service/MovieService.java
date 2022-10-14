@@ -10,7 +10,9 @@ public interface MovieService {
 
     List<MovieDto> getMovies() throws NotFoundException;
 
+
     List<MovieDto> getMovieByLanguage(String language) throws NotFoundException;
+
 
     List<MovieDto> getMovieByGenre(String genre) throws  NotFoundException;
 

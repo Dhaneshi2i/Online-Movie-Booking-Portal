@@ -9,7 +9,6 @@ import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,6 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = movieRepository.save(mapper.map(movieDto, Movie.class));
         return mapper.map(movie, MovieDto.class);
     }
-
 
     public List<MovieDto> getMovies() throws NotFoundException {
         List<Movie> movies = (List<Movie>) movieRepository.findAll();

@@ -1,10 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
-import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
-import com.ideas2it.bookmymovie.model.Genre;
 import com.ideas2it.bookmymovie.model.Language;
-import com.ideas2it.bookmymovie.repository.GenreRepository;
 import com.ideas2it.bookmymovie.repository.LanguageRepository;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import lombok.AllArgsConstructor;

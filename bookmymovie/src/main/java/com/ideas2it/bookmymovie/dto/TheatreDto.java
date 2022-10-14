@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
 import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
