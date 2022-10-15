@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "theatre")
 @Where(clause="status=1")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Theatre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,8 @@
 package com.ideas2it.bookmymovie.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "movie")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +65,7 @@ public class Movie {
     )
     private List<Language> languages = new ArrayList<>();
 
-    /*@ManyToMany(cascade = {
+    @ManyToMany(cascade = {
             CascadeType.ALL
     })
     @JoinTable(
@@ -74,6 +77,6 @@ public class Movie {
                     @JoinColumn(name = "genre_id")
             }
     )
-    private List<Genre> genres = new ArrayList<>();*/
+    private List<Genre> genres = new ArrayList<>();
 
 }

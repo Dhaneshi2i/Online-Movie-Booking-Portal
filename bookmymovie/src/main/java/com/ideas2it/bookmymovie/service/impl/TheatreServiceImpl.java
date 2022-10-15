@@ -4,7 +4,7 @@ import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
-import lombok.AllArgsConstructor;
+import com.ideas2it.bookmymovie.service.TheatreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
-public class TheatreServiceImpl {
+public class TheatreServiceImpl implements TheatreService {
     private final ModelMapper mapper;
+
     private final TheatreRepository theatreRepository;
+
+    public TheatreServiceImpl(ModelMapper mapper, TheatreRepository theatreRepository) {
+        this.mapper = mapper;
+        this.theatreRepository = theatreRepository;
+    }
 
     /**
      * This method gets theatreDto object as parameter to create Theatre Details
@@ -46,12 +51,17 @@ public class TheatreServiceImpl {
     /**
      * This method gets TheatreDto as parameter and update the Theatre Details
      *
-     * @param theatreDto is passed as argument to update those value to the database.
+     * @param theatreId is passed as argument to update those value to the database.
      * @return String
      */
-    public TheatreDto updateTheatreDetails(TheatreDto theatreDto) {
-        Theatre theatre = theatreRepository.save(mapper.map(theatreDto, Theatre.class));
-        return mapper.map(theatre, TheatreDto.class);
+    public TheatreDto updateTheatreStatusDetail(int theatreId) throws NotFoundException {
+        if(theatreRepository.existsById(theatreId)){
+            Theatre theatre = theatreRepository.findById(theatreId).get();
+            theatre.setStatus(false);
+            theatreRepository.save(theatre);
+            return mapper.map(theatre, TheatreDto.class);
+        }
+        throw new NotFoundException("No Details are found for this id");
     }
 
     /**
@@ -70,19 +80,7 @@ public class TheatreServiceImpl {
         ).collect(Collectors.toList());
     }
 
-    /**
-     * This method is to delete the Theatre Details by the given Theatre id
-     *
-     * @param theatreId is passed as parameter to get delete the particular Theatre Details
-     * @return True if the Details are deleted and False if the Details are not Deleted
-     */
-    public Boolean DeleteTheatre(int theatreId) {
-        if (theatreRepository.existsById(theatreId)) {
-            theatreRepository.deleteById(theatreId);
-            return true;
-        }
-        return false;
-    }
+
 }
 
 

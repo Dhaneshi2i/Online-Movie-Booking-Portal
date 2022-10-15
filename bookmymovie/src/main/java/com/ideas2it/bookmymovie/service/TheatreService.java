@@ -28,10 +28,10 @@ public interface TheatreService {
     /**
      * This method gets TheatreDto as parameter and update the Theatre Details
      *
-     * @param theatreDto is passed as argument to update those value to the database.
+     * @param theatreId is passed as argument to update those value to the database.
      * @return String
      */
-    TheatreDto updateTheatreDetails(TheatreDto theatreDto);
+    TheatreDto updateTheatreStatusDetail(int theatreId) throws NotFoundException;
 
     /**
      * This method List all the Theatre Details by City Name that are present in Database
