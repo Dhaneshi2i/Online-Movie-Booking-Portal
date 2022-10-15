@@ -79,4 +79,13 @@ public class Movie {
     )
     private List<Genre> genres = new ArrayList<>();
 
+    @Column
+    private Boolean Status;
+
+    @Column
+    private LocalDate createdDate;
+
+    @Column
+    private LocalDate modifiedDate;
+
 }

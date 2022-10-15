@@ -18,5 +18,7 @@ public interface MovieService {
 
     MovieDto updateMovie(MovieDto movieDto);
 
+    MovieDto deleteMovie(int id, Boolean status);
+
 
 }

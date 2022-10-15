@@ -37,21 +37,27 @@ public class MovieController {
 
     }
 
-    @GetMapping("/{genre}")
+    @GetMapping("genre/{genre}")
     public ResponseEntity<List<MovieDto>> getMovieByGenre(@PathVariable("genre") String genre) throws NotFoundException {
 
         return new ResponseEntity<>(movieService.getMovieByGenre(genre), HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/{language}")
+    @GetMapping("language/{language}")
     public ResponseEntity<List<MovieDto>> getMovieByLanguage(@PathVariable("language") String language) throws NotFoundException {
 
         return new ResponseEntity<List<MovieDto>>(movieService.getMovieByLanguage(language), HttpStatus.OK);
     }
 
-    @PutMapping("/api/v1/movie/update")
+    @PutMapping("/updateMovie")
     public ResponseEntity<MovieDto> updateMovie(@RequestBody MovieDto movieDto) {
         return new ResponseEntity<>(movieService.updateMovie(movieDto), HttpStatus.OK);
     }
 
+    @PatchMapping("delete/{id}/{status}")
+    public ResponseEntity<MovieDto> updateEmployeePartially(@PathVariable int id, @PathVariable boolean status) {
+
+        return new ResponseEntity<>(movieService.deleteMovie(id, status), HttpStatus.OK);
+
+    }
 }
