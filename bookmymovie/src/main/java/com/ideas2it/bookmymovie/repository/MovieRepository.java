@@ -6,16 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Integer> {
-<<<<<<< HEAD
 
-
-=======
-  //  Object findAllByActive(String active);
-
-    //Optional<Movie> findByLangugae(String language);
-
-    //Optional<Movie> findByScreening(String screening);
-
-//    Optional<Movie> findByGenre(String genre);
->>>>>>> 20f47ba (Movie-Ticket-Booking:)
 }

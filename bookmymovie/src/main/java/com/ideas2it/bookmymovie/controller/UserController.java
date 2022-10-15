@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
->>>>>>> 20f47ba (Movie-Ticket-Booking:)
 public class UserController {
     private final UserServiceImpl userService;
     private final RoleServiceImpl roleService;

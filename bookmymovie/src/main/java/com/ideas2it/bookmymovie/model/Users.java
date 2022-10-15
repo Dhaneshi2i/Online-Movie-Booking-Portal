@@ -1,19 +1,15 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
->>>>>>> 20f47ba (Movie-Ticket-Booking:)
 
 @Getter
 @Setter
@@ -22,7 +18,7 @@ import java.time.LocalDate;
 @Entity
 @Component
 @Table(name="users")
-@Component
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,8 +37,6 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-<<<<<<< HEAD
-=======
     @Column(name = "created_date")
     private LocalDate creationDate;
 
@@ -51,6 +45,8 @@ public class Users {
 
     @Column(name = "status")
     private boolean status;
->>>>>>> 20f47ba (Movie-Ticket-Booking:)
 
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

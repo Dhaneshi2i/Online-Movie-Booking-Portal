@@ -15,7 +15,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ModelMapper mapper;
     private final BookingDto bookingDto;
-    private Booking booking;
+    private final Booking booking;
 
     public CustomerServiceImpl(CustomerRepository customerRepository, ModelMapper mapper, BookingDto bookingDto,
                                Booking booking) {

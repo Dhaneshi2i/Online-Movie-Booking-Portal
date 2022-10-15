@@ -1,6 +1,9 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +20,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "screen")
+@Where(clause="status=1")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Screen {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int screenId;
 
@@ -40,4 +45,7 @@ public class Screen {
 
     @OneToMany(mappedBy = "screen")
     private List<Screening> screenings = new ArrayList<>();
+
+    @Column(columnDefinition = "tinyint(1) default true")
+    private Boolean status = true;
 }

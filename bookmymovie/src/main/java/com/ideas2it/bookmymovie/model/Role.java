@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 @Component
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +35,6 @@ public class Role {
     @Column(name = "role_type")
     private String roleType;
 
-<<<<<<< HEAD
-
-
-=======
     @OneToMany(mappedBy = "role")
     private List<Users> users = new ArrayList<>();
->>>>>>> 20f47ba (Movie-Ticket-Booking:)
 }
