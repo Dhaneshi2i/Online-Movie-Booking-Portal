@@ -1,3 +1,5 @@
+
+spring.mvc.pathmatch.matching-strategy : ant_path_matcher
 server.port: 8090
 
 spring:
@@ -8,5 +10,9 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/movie_ticket_booking
     username: root
-    password: harini@04
+    password: siva2001
+
+#    Set flyway:
+#      Outoforder: true
+
 

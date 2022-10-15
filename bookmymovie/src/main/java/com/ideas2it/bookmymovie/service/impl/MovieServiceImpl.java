@@ -12,6 +12,7 @@ import com.ideas2it.bookmymovie.service.MovieService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,5 +65,12 @@ public class MovieServiceImpl implements MovieService {
     public MovieDto updateMovie(MovieDto movieDto) {
         Movie movie = movieRepository.save(mapper.map(movieDto, Movie.class));
         return mapper.map(movie, MovieDto.class);
+    }
+
+    public MovieDto deleteMovie(int id, Boolean status) {
+        Movie movie = movieRepository.getById(id);
+        movie.setModifiedDate(LocalDate.now());
+        movie.setStatus(status);
+        return mapper.map(movieRepository.save(movie), MovieDto.class);
     }
 }
