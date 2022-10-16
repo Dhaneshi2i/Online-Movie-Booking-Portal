@@ -1,6 +1,8 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +25,10 @@ public class ScreenDto {
     private int noOfSeats;
     private int noOfRows;
     private int noOfColumns;
+    @JsonBackReference
     private TheatreDto theatre;
+    @JsonManagedReference
     private List<SeatDto> seats = new ArrayList<>();
+    @JsonManagedReference
     private List<ScreeningDto> screenings = new ArrayList<>();
 }

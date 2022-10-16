@@ -1,12 +1,10 @@
 package com.ideas2it.bookmymovie.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,11 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Component
 @Table(name = "movie")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
