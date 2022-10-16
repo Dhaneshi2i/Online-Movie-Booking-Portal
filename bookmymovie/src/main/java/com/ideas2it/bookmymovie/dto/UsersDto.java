@@ -1,14 +1,15 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
@@ -19,11 +20,23 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Component
 public class UsersDto {
+    @NotNull
     private int userId;
+
+    @Pattern(regexp = "([A-Z][a-z]{2,30}\\s*)+",message = "Only letter are valid")
     private String name;
+
+    @Email
     private String emailId;
+
+    //@NotNull
+    //@Pattern(regexp = "[6-9][0-9]{9}", message = "only number are allowed and they must have 10 numbers")
     private long contactNumber;
+
+    @Size(max = 20,message = "Must be only between 20 characters")
+    @Pattern(regexp = "[a-z0-9_-]+", message = "only number are allowed and they must have 10 numbers")
     private String password;
+
     private LocalDate creationDate;
     private LocalDate modifiedDate;
     private boolean status;

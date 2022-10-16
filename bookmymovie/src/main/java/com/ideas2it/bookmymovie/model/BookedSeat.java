@@ -1,8 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,17 +16,15 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "bookedSeats")
 @Component
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "bookedSeats")
 public class BookedSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long bookedSeatId;
+    private int bookedSeatId;
 
     @ManyToOne
     @JoinColumn(name = "seat_id")
@@ -42,5 +37,4 @@ public class BookedSeat {
     @ManyToOne
     @JoinColumn(name = "screening_id")
     private Screening screening;
-
 }

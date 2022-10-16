@@ -8,8 +8,6 @@ import com.ideas2it.bookmymovie.service.CustomerService;
 import com.ideas2it.bookmymovie.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.List;
