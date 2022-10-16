@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     private final UserServiceImpl userService;
     private final RoleServiceImpl roleService;
@@ -27,13 +27,15 @@ public class UserController {
     }
     @PostMapping("customer")
     public UsersDto createCustomer(@RequestBody UsersDto usersDto) throws NotFoundException {
-        usersDto.setRole(roleService.getRoleById(1));
+        //usersDto.setRole(roleService.getRoleById(1));
+        usersDto.setRole(roleService.getRoleByName("Customer"));
         return userService.createUser(usersDto);
     }
 
     @PostMapping("admin")
     public UsersDto createAdmin(@RequestBody UsersDto usersDto) throws NotFoundException {
-        usersDto.setRole(roleService.getRoleById(2));
+        //usersDto.setRole(roleService.getRoleById(2));
+        usersDto.setRole(roleService.getRoleByName("Admin"));
         return userService.createUser(usersDto);
     }
     @GetMapping("/getAllUsers")

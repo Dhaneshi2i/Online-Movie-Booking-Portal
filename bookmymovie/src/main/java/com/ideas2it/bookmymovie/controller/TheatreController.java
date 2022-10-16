@@ -49,12 +49,14 @@ public class TheatreController {
     }
 
     @PatchMapping("/{theatreId}")
-    public ResponseEntity<TheatreDto> updateTheatreStatus(@PathVariable("theatreId") int theatreId) throws NotFoundException{
+    public ResponseEntity<TheatreDto> updateTheatreStatus(@PathVariable("theatreId")
+                                                              int theatreId) throws NotFoundException{
         return new ResponseEntity<>(theatreService.updateTheatreStatusDetail(theatreId), HttpStatus.OK);
     }
 
     @PatchMapping("/screen/{screenId}/{status}")
-    public ResponseEntity<ScreenDto> updateScreenStatus(@PathVariable("screenId") int screenId,@PathVariable("status") Boolean status) throws NotFoundException{
+    public ResponseEntity<ScreenDto> updateScreenStatus(@PathVariable("screenId") int screenId,
+                                                       @PathVariable("status") Boolean status) throws NotFoundException{
         return new ResponseEntity<>(screenService.updateScreenStatusDetail(screenId,status), HttpStatus.OK);
     }
 }

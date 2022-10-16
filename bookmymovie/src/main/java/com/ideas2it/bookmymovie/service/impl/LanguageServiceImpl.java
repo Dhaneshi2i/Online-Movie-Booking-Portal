@@ -18,4 +18,9 @@ public class LanguageServiceImpl implements LanguageService {
 
         return mapper.map(language, LanguageDto.class);
     }
+
+    @Override
+    public LanguageDto addLanguage(LanguageDto languageDto) {
+        return mapper.map(languageRepository.save(mapper.map(languageDto, Language.class)), LanguageDto.class);
+    }
 }
