@@ -35,4 +35,9 @@ public class MovieDto {
 
     private List<GenreDto> genresDto = new ArrayList<>();
 
+    private Boolean Status;
+
+    private LocalDate createdDate;
+
+    private LocalDate modifiedDate;
 }
