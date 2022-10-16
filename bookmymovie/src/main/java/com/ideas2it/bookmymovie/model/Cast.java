@@ -32,7 +32,7 @@ public class Cast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long castId;
+    private int castId;
 
     @Column(name = "cast_name")
     private String name;

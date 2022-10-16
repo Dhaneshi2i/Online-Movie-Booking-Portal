@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -15,20 +16,18 @@ import java.time.LocalDate;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Component
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class UsersDto {
     private int userId;
     private String name;
     private String emailId;
     private long contactNumber;
     private String password;
-    private RoleDto role;
     private LocalDate creationDate;
     private LocalDate modifiedDate;
     private boolean status;
-    private RoleDto roleDto;
+    @JsonBackReference
+    private RoleDto role;
 }
 

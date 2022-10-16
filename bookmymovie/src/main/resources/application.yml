@@ -10,7 +10,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/movie_ticket_booking
     username: root
-    password: siva2001
+    password: sanjaiKing@2022
 
 #    Set flyway:
 #      Outoforder: true

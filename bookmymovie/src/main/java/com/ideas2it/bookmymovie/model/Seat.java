@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "seat")
+@Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Seat {
     @Id
@@ -34,6 +36,7 @@ public class Seat {
 
     @Column(name = "seat_no")
     private int seatNo;
+
     @ManyToOne
     @JoinColumn(name = "screen_id")
     private Screen screen;
