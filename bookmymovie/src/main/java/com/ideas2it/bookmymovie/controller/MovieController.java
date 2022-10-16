@@ -2,10 +2,12 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +22,7 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    public CastService castService;
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
@@ -34,7 +37,6 @@ public class MovieController {
     public ResponseEntity<List<MovieDto>> getMovies() throws NotFoundException {
 
         return new ResponseEntity<>(movieService.getMovies(), HttpStatus.OK);
-
     }
 
     @GetMapping("genre/{genre}")
@@ -58,6 +60,5 @@ public class MovieController {
     public ResponseEntity<MovieDto> updateEmployeePartially(@PathVariable int id, @PathVariable boolean status) {
 
         return new ResponseEntity<>(movieService.deleteMovie(id, status), HttpStatus.OK);
-
     }
 }

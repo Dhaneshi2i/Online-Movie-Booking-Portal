@@ -45,23 +45,31 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<UsersDto> getAllUsers() throws NotFoundException {
-        List<Users> users = userRepository.findAll();
+        List<Users> users = userRepository.getAllUsersByStatus(false);
         if (users.isEmpty()) {
-            throw new NotFoundException("No user found");
+            throw new NotFoundException("No users found");
         }
         return users.stream()
                 .map(user -> mapper.map(user, UsersDto.class))
                 .collect(Collectors.toList());
-
     }
 
     @Override
     public UsersDto getUserById(int id) throws NotFoundException {
         user = userRepository.findById(id);
-        if (user == null) {
+        if (null == user) {
             throw new NotFoundException("No user found");
         }
         return mapper.map(user , UsersDto.class);
+    }
+
+    @Override
+    public UsersDto getUserByName(String name) throws NotFoundException {
+        user = userRepository.findByName(name);
+        if (null == user) {
+            throw new NotFoundException("No user found");
+        }
+        return mapper.map(user, UsersDto.class);
     }
 
     @Override

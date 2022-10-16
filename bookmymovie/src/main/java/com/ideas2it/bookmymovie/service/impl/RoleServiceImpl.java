@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
@@ -33,20 +35,28 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDto> getAllRoles() throws NotFoundException {
         List<Role> roles = roleRepository.findAll();
         if (roles.isEmpty()) {
-            roleDto = mapper.map(roles, RoleDto.class);
-        } else {
             throw new NotFoundException("No roles found");
         }
-        return null;
+        return roles.stream().map(role ->mapper.map(role, RoleDto.class))
+                .collect(Collectors.toList());
     }
 
-    @Override
+    /*@Override
     public RoleDto getRoleById(int id) throws NotFoundException{
-        role = roleRepository.getReferenceById(id);
-        if (role == null) {
+        role = roleRepository.findRoleById(id);
+        if (null == role) {
             throw new NotFoundException("No role found");
         }
         return mapper.map(role , RoleDto.class);
+    }*/
+
+    @Override
+    public RoleDto getRoleByName(String roleType) throws NotFoundException {
+        role = roleRepository.findRoleByRoleType(roleType);
+        if (null == role) {
+            throw new NotFoundException("No role found");
+        }
+        return mapper.map(role, RoleDto.class);
     }
 
     @Override

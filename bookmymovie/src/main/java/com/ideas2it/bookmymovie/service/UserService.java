@@ -20,6 +20,7 @@ public interface UserService {
      */
     public List<UsersDto> getAllUsers() throws NotFoundException;
     public UsersDto getUserById(int id) throws NotFoundException;
+    UsersDto getUserByName(String name) throws NotFoundException;
 
     UsersDto updateUser(UsersDto usersDto);
 

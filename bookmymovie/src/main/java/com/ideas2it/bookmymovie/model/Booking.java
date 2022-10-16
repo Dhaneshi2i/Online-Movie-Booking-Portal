@@ -30,7 +30,7 @@ public class Booking {
     private List<String> seatNo;
 
     @Column
-    private LocalDate booking_date;
+    private LocalDate bookingDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

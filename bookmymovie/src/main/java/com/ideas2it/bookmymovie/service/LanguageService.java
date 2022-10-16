@@ -4,4 +4,5 @@ import com.ideas2it.bookmymovie.dto.LanguageDto;
 
 public interface LanguageService {
     LanguageDto getLanguageByName(String name);
+    LanguageDto addLanguage(LanguageDto languageDto);
 }
