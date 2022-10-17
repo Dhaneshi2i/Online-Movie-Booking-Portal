@@ -36,7 +36,7 @@ public class Cast {
     private String role;
 
 
-    @ManyToMany(mappedBy = "cast", cascade = { CascadeType.ALL })
+    @ManyToMany(mappedBy = "casts", cascade = { CascadeType.ALL })
     private List<Movie> movies = new ArrayList<>();
 
 }

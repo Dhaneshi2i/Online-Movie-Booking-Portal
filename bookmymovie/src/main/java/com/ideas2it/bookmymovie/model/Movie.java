@@ -48,7 +48,7 @@ public class Movie {
                     @JoinColumn(name = "cast_id")
             }
     )
-    private List<Cast> cast = new ArrayList<>();
+    private List<Cast> casts = new ArrayList<>();
     @ManyToMany(cascade = {
             CascadeType.ALL
     })

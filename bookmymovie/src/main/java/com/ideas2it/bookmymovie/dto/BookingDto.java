@@ -1,7 +1,5 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +18,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BookingDto{
     private int id;
     private List<String> seatNo;
     private LocalDate bookingDate;
     private UsersDto users;
     private ScreeningDto screening;
+    private LocalDate booking_date;
     private List<BookedSeatDto> bookedSeats = new ArrayList<>();
     private LocalDate creationDate;
     private LocalDate modifiedDate;

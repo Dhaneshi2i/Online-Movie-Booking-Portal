@@ -2,10 +2,10 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.service.ScreenService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class ScreenServiceImpl implements ScreenService {
-    private final ModelMapper mapper;
+    private final MapStructMapper mapper;
     private final ScreenRepository screenRepository;
 
-    public ScreenServiceImpl(ModelMapper mapper, ScreenRepository screenRepository) {
+    public ScreenServiceImpl(MapStructMapper mapper, ScreenRepository screenRepository) {
         this.mapper = mapper;
         this.screenRepository = screenRepository;
     }
@@ -27,8 +27,7 @@ public class ScreenServiceImpl implements ScreenService {
      * @param screenDto is passed as argument to add those value to the database.
      */
     public ScreenDto createScreenDetails(ScreenDto screenDto) {
-        Screen screen = screenRepository.save(mapper.map(screenDto, Screen.class));
-        return mapper.map(screen,ScreenDto.class);
+        return mapper.screenToScreenDto(screenRepository.save(mapper.screenDtoToScreen(screenDto)));
     }
 
     /**
@@ -38,14 +37,12 @@ public class ScreenServiceImpl implements ScreenService {
      * the database.
      */
     public List<ScreenDto> listAllScreen() throws NotFoundException {
-        System.out.println("screens");
-        List<Screen> screens = screenRepository.findAll();
-        System.out.println(screens);
+        List<Screen> screens = screenRepository.findAllByStatus(true);
         if (screens.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
         }
         return screens.stream().
-                map(screen -> (mapper.map(screen, ScreenDto.class))).collect(Collectors.toList());
+                map(screen -> mapper.screenToScreenDto(screen)).collect(Collectors.toList());
     }
 
 
@@ -60,7 +57,7 @@ public class ScreenServiceImpl implements ScreenService {
             Screen screen = screenRepository.findById(screenId).get();
             screen.setStatus(status);
             screenRepository.save(screen);
-            return mapper.map(screen, ScreenDto.class);
+            return mapper.screenToScreenDto(screen);
         }
         throw new NotFoundException("No Details are found for this id");
     }

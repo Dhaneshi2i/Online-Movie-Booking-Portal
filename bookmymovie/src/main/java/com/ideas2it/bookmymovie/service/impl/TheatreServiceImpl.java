@@ -2,22 +2,24 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.TheatreService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TheatreServiceImpl implements TheatreService {
-    private final ModelMapper mapper;
+    private final MapStructMapper mapper;
 
     private final TheatreRepository theatreRepository;
 
-    public TheatreServiceImpl(ModelMapper mapper, TheatreRepository theatreRepository) {
+    public TheatreServiceImpl(MapStructMapper mapper, TheatreRepository theatreRepository) {
         this.mapper = mapper;
         this.theatreRepository = theatreRepository;
     }
@@ -28,8 +30,7 @@ public class TheatreServiceImpl implements TheatreService {
      * @param theatreDto is passed as argument to add those value to the database.
      */
     public TheatreDto createTheatreDetails(TheatreDto theatreDto) {
-        Theatre theatre = theatreRepository.save(mapper.map(theatreDto, Theatre.class));
-        return mapper.map(theatre,TheatreDto.class);
+        return mapper.theatreToTheatreDto(theatreRepository.save(mapper.theatreDtoToTheatre(theatreDto)));
     }
 
     /**
@@ -39,12 +40,12 @@ public class TheatreServiceImpl implements TheatreService {
      * the database.
      */
     public List<TheatreDto> listAllTheatre() throws NotFoundException {
-        List<Theatre> theatres = theatreRepository.findAll();
+        List<Theatre> theatres = theatreRepository.findAllByStatus(true);
         if (theatres.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
         }
         return theatres.stream().
-                map(theatre -> (mapper.map(theatre, TheatreDto.class))).collect(Collectors.toList());
+                map(theatre -> mapper.theatreToTheatreDto(theatre)).collect(Collectors.toList());
     }
 
 
@@ -54,12 +55,13 @@ public class TheatreServiceImpl implements TheatreService {
      * @param theatreId is passed as argument to update those value to the database.
      * @return String
      */
-    public TheatreDto updateTheatreStatusDetail(int theatreId) throws NotFoundException {
-        if(theatreRepository.existsById(theatreId)){
+    public TheatreDto updateTheatreStatusDetail(int theatreId, boolean status) throws NotFoundException {
+        if (theatreRepository.existsById(theatreId)) {
             Theatre theatre = theatreRepository.findById(theatreId).get();
-            theatre.setStatus(false);
+            theatre.setModifiedDate(LocalDate.now());
+            theatre.setStatus(status);
             theatreRepository.save(theatre);
-            return mapper.map(theatre, TheatreDto.class);
+            return mapper.theatreToTheatreDto(theatre);
         }
         throw new NotFoundException("No Details are found for this id");
     }
@@ -76,11 +78,9 @@ public class TheatreServiceImpl implements TheatreService {
         if (theatres.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
         }
-        return theatres.stream().map(theatre -> (mapper.map(theatre, TheatreDto.class))
+        return theatres.stream().map(theatre -> (mapper.theatreToTheatreDto(theatre))
         ).collect(Collectors.toList());
     }
-
-
 }
 
 

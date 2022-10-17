@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,10 +19,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Component
 public class UsersDto {
-    @NotNull
     private int userId;
 
-    @Pattern(regexp = "([A-Z][a-z]{2,30}\\s*)+",message = "Only letter are valid")
+    @Pattern(regexp = "([A-Z][a-z]{2,30}\\s*)+", message = "Only letter are valid")
     private String name;
 
     @Email
@@ -33,14 +31,17 @@ public class UsersDto {
     //@Pattern(regexp = "[6-9][0-9]{9}", message = "only number are allowed and they must have 10 numbers")
     private long contactNumber;
 
-    @Size(max = 20,message = "Must be only between 20 characters")
+    @Size(max = 20, message = "Must be only between 20 characters")
     @Pattern(regexp = "[a-z0-9_-]+", message = "only number are allowed and they must have 10 numbers")
     private String password;
 
     private LocalDate creationDate;
+
     private LocalDate modifiedDate;
+
     private boolean status;
-    @JsonBackReference
+
     private RoleDto role;
+
 }
 

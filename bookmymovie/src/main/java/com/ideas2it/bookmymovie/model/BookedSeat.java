@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Component
 @Table(name = "bookedSeats")
+
 public class BookedSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
