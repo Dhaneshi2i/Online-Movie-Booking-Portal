@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,14 @@ public class Screen {
     @OneToMany(mappedBy = "screen")
     private List<Screening> screenings = new ArrayList<>();
 
-    @Column(name = "status")
-    private Boolean status;
+    @Column(name = "status",columnDefinition = "tinyint(1) default true")
+    private Boolean status = true;
+
+    @CreationTimestamp
+    @Column(name = "created_date")
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "modified_date")
+    private Timestamp modifiedDate;
 }
