@@ -44,6 +44,20 @@ public class AdminController {
     public TheatreService theatreService;
     public MovieService movieService;
 
+    public AdminController(GenreService genreService, CastService castService, LanguageService languageService,
+                           RoleService roleService, ScreeningService screeningService, ScreenService screenService,
+                           SeatService seatService, TheatreService theatreService, MovieService movieService) {
+        this.genreService = genreService;
+        this.castService = castService;
+        this.languageService = languageService;
+        this.roleService = roleService;
+        this.screeningService = screeningService;
+        this.screenService = screenService;
+        this.seatService = seatService;
+        this.theatreService = theatreService;
+        this.movieService = movieService;
+    }
+
     @PostMapping("/addCast")
     public ResponseEntity<CastDto> addCast(@RequestBody CastDto castDto) {
         return new ResponseEntity<>(castService.addCast(castDto), HttpStatus.OK);
@@ -99,11 +113,11 @@ public class AdminController {
         return new ResponseEntity<>(seatService.getSeatById(id), HttpStatus.OK);
     }
 
-    @PatchMapping("/updateSeat")
+    /*@PatchMapping("/updateSeat")
     public ResponseEntity<SeatDto> updateSeat (@PathVariable int id) throws NotFoundException {
         SeatDto seatDto = seatService.getSeatById(id);
         return new ResponseEntity<>(seatService.cancelSeat(seatDto), HttpStatus.OK);
-    }
+    }*/
 
     // Theatre operations for admin
     @PostMapping("/addTheatre")
@@ -130,7 +144,7 @@ public class AdminController {
     // Movie operations by admin
 
     @PostMapping("/addMovie")
-    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto  movieDto) {
         return new ResponseEntity<>(movieService.addMovie(movieDto), HttpStatus.OK);
     }
 

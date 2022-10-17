@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UsersDto getUserById(int id) throws NotFoundException {
         user = userRepository.findById(id);
-        if (null == user) {
+        if (null == user || user.isStatus() == true) {
             throw new NotFoundException("No user found");
         }
         return mapper.map(user , UsersDto.class);

@@ -28,10 +28,10 @@ public class Movie {
     private String name;
 
     @Column(name = "release_date")
-    private ZonedDateTime releaseDate;
+    private LocalDate releaseDate;
 
     @Column
-    private LocalTime duration;
+    private String duration;
 
     @Column(name = " screening_id")
     @OneToMany(mappedBy = "movie")

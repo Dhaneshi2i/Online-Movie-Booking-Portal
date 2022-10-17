@@ -3,6 +3,7 @@ package com.ideas2it.bookmymovie.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,12 +20,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@Component
 @Table(name = "genre")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int GenreId;
+    private int genreId;
 
     @Column(name = "genre_name")
     private String name;

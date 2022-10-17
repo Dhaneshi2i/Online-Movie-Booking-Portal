@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +15,5 @@ import java.util.List;
 public class RoleDto {
     private int roleId;
     private String roleType;
-    @JsonManagedReference
     private List<UsersDto> users = new ArrayList<>();
 }

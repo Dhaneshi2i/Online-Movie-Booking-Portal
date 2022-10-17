@@ -9,13 +9,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
     private final LanguageRepository languageRepository;
     private final ModelMapper mapper;
+
+    public LanguageServiceImpl(LanguageRepository languageRepository, ModelMapper mapper) {
+        this.languageRepository = languageRepository;
+        this.mapper = mapper;
+    }
+
     public LanguageDto getLanguageByName(String name) {
         Language language = languageRepository.findLanguageByName(name);
-
         return mapper.map(language, LanguageDto.class);
     }
 
