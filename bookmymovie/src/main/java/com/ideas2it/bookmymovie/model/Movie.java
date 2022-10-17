@@ -1,6 +1,8 @@
 package com.ideas2it.bookmymovie.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Component
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "movieId")
 @Table(name = "movie")
 public class Movie {
     @Id
@@ -27,7 +30,7 @@ public class Movie {
     private String name;
 
     @Column(name = "release_date")
-    private ZonedDateTime releaseDate;
+    private LocalDate releaseDate;
 
     @Column
     private String duration;

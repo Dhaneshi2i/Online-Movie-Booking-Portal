@@ -29,11 +29,9 @@ public class CastServiceImpl implements CastService {
 
     @Override
     public CastDto getCastByName(String name) throws NotFoundException {
-        cast = castRepository.findCastByName(name);
-        if (null == cast) {
-            throw new NotFoundException("No cast found");
-        }
-        return mapper.castToCastDto(cast);
+        return castRepository.findCastByName(name)
+                .map(cast -> mapper.castToCastDto(cast))
+                .orElseThrow(() -> new NotFoundException("No Cast Found"));
     }
 
     @Override
@@ -42,7 +40,7 @@ public class CastServiceImpl implements CastService {
         if (casts.isEmpty()) {
             throw new NotFoundException("No casts found");
         }
-        return casts.stream().map(cast -> mapper.map(cast, CastDto.class))
+        return casts.stream().map(cast -> mapper.castToCastDto(cast))
                 .collect(Collectors.toList());
     }
 }

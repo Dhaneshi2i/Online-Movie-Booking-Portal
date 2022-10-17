@@ -8,9 +8,10 @@ spring:
       dialect: MySQL5InnoDBDialect
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/movie_ticket_booking
+    url: jdbc:mysql://localhost:3306/movie_ticket_bookin
     username: root
-    password: harini@04
+    password: siva2001
+
 
 
 #    Set flyway:

@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Component
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "castId")
+
 public class CastDto {
     private int castId;
 

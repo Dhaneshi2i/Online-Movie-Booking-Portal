@@ -282,8 +282,21 @@ public class MapStructMapperImpl implements MapStructMapper {
         movie.setReleaseDate( movieDto.getReleaseDate() );
         movie.setDuration( movieDto.getDuration() );
         movie.setCasts( castDtoListToCastList( movieDto.getCasts() ) );
-        movie.setLanguages( languageDtoListToLanguageList( movieDto.getLanguages() ) );
-        movie.setGenres( genreDtoListToGenreList( movieDto.getGenres() ) );
+        movie.setLanguages(languageDtoListToLanguageList( movieDto.getLanguages() ) );
+        movie.setGenres(genreDtoListToGenreList( movieDto.getGenres() ) );
+        List<CastDto> castsDto = movieDto.getCasts();
+        List<Cast> casts = new ArrayList<>();
+        for(CastDto castDto : castsDto) {
+            Cast cast = new Cast();
+            if(castDto != null) {
+                if(castDto.getCastId() != 0) {
+                    cast.setCastId(cast.getCastId());
+                }
+                cast.setName(castDto.getName());
+            }
+            casts.add(cast);
+        }
+        movie.setCasts(casts);
         movie.setStatus( movieDto.getStatus() );
         movie.setCreatedDate( movieDto.getCreatedDate() );
         movie.setModifiedDate( movieDto.getModifiedDate() );
@@ -291,24 +304,65 @@ public class MapStructMapperImpl implements MapStructMapper {
         return movie;
     }
 
+
+
     @Override
-    public MovieDto movieToMovieDto(Movie Movie) {
-        if ( Movie == null ) {
+    public MovieDto movieToMovieDto(Movie movie) {
+        if ( movie == null ) {
             return null;
         }
 
         MovieDto movieDto = new MovieDto();
 
-        movieDto.setMovieId( Movie.getMovieId() );
-        movieDto.setName( Movie.getName() );
-        movieDto.setReleaseDate( Movie.getReleaseDate() );
-        movieDto.setDuration( Movie.getDuration() );
-        movieDto.setCasts( castListToCastDtoList( Movie.getCasts() ) );
-        movieDto.setLanguages( languageListToLanguageDtoList( Movie.getLanguages() ) );
-        movieDto.setGenres( genreListToGenreDtoList( Movie.getGenres() ) );
-        movieDto.setStatus( Movie.getStatus() );
-        movieDto.setCreatedDate( Movie.getCreatedDate() );
-        movieDto.setModifiedDate( Movie.getModifiedDate() );
+
+        movieDto.setMovieId( movie.getMovieId() );
+        movieDto.setName( movie.getName() );
+        movieDto.setReleaseDate( movie.getReleaseDate() );
+        movieDto.setDuration( movie.getDuration() );
+//        movieDto.setCasts( castListToCastDtoList( movie.getCasts() ) );
+        List<Cast> casts = movie.getCasts();
+        List<CastDto> castsDto = new ArrayList<>();
+        for(Cast cast : casts) {
+            CastDto castDto = new CastDto();
+            if(cast != null) {
+                if(cast.getCastId() != 0) {
+                    castDto.setCastId(cast.getCastId());
+                }
+                castDto.setName(cast.getName());
+            }
+            castsDto.add(castDto);
+        }
+        movieDto.setCasts(castsDto);
+//        movieDto.setLanguages( languageListToLanguageDtoList( movie.getLanguages() ) );
+        List<Language> languages = movie.getLanguages();
+        List<LanguageDto> languagesDto = new ArrayList<>();
+        for(Language language : languages) {
+            LanguageDto languageDto = new LanguageDto();
+            if(language != null) {
+                if(language.getLanguageId() != 0) {
+                    languageDto.setLanguageId(language.getLanguageId());
+                }
+                languageDto.setName(language.getName());
+            }
+            languagesDto.add(languageDto);
+        }
+        movieDto.setLanguages(languagesDto);
+        List<Genre> genres = movie.getGenres();
+        List<GenreDto> genresDto = new ArrayList<>();
+        for(Genre genre : genres) {
+            GenreDto genreDto = new GenreDto();
+            if(genre != null) {
+                if(genre.getGenreId() != 0) {
+                    genreDto.setGenreId(genre.getGenreId());
+                }
+                genreDto.setName(genre.getName());
+            }
+            genresDto.add(genreDto);
+        }
+        movieDto.setGenres(genresDto);
+        movieDto.setStatus( movie.getStatus() );
+        movieDto.setCreatedDate( movie.getCreatedDate() );
+        movieDto.setModifiedDate( movie.getModifiedDate() );
 
         return movieDto;
     }
@@ -322,7 +376,38 @@ public class MapStructMapperImpl implements MapStructMapper {
         Language language = new Language();
 
         language.setName( languageDto.getName() );
-        language.setMovies( movieDtoListToMovieList( languageDto.getMovies() ) );
+//        language.setMovies( movieDtoListToMovieList( languageDto.getMovies() ) );
+        List<MovieDto> moviesDto = languageDto.getMovies();
+        List<Movie> movies = new ArrayList<>();
+        for (MovieDto movieDto : moviesDto) {
+            Movie movie = new Movie();
+            if (movieDto != null) {
+                if (movieDto.getMovieId() != 0) {
+                    movie.setMovieId(movieDto.getMovieId());
+                }
+                movie.setName(movieDto.getName());
+                movie.setReleaseDate(movieDto.getReleaseDate());
+                movie.setDuration(movieDto.getDuration());
+//               movie.setLanguages(movieDto.getLanguages());
+                List<LanguageDto> languagesDto = movieDto.getLanguages();
+                List<Language> languages = new ArrayList<>();
+                for(LanguageDto languageDto1 : languagesDto) {
+                    Language language1 = new Language();
+                    if(languageDto1 != null) {
+                        if(languageDto1.getLanguageId() != 0) {
+                            language1.setLanguageId(languageDto1.getLanguageId());
+                        }
+                        language1.setName(languageDto1.getName());
+                    }
+                    languages.add(language1);
+                }
+                movie.setLanguages(languages);
+
+
+            }
+            movies.add(movie);
+        }
+        language.setMovies(movies);
 
         return language;
     }
@@ -336,7 +421,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         LanguageDto languageDto = new LanguageDto();
 
         languageDto.setName( language.getName() );
-        languageDto.setMovies( movieListToMovieDtoList( language.getMovies() ) );
+       languageDto.setMovies( movieListToMovieDtoList( language.getMovies() ) );
 
         return languageDto;
     }
@@ -379,26 +464,54 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         cast.setName( castDto.getName() );
         cast.setRole( castDto.getRole() );
-        cast.setMovies( movieDtoListToMovieList( castDto.getMovies() ) );
-
+//        cast.setMovies( movieDtoListToMovieList( castDto.getMovies() ) );
+        List<MovieDto> moviesDto = castDto.getMovies();
+        List<Movie> movies = new ArrayList<>();
+        for (MovieDto movieDto : moviesDto) {
+            Movie movie = new Movie();
+            if (movieDto != null) {
+                if (movieDto.getMovieId() != 0) {
+                    movie.setMovieId(movieDto.getMovieId());
+                }
+                movie.setName(movieDto.getName());
+                movie.setReleaseDate(movieDto.getReleaseDate());
+                movie.setDuration(movieDto.getDuration());
+            }
+            movies.add(movie);
+        }
+        cast.setMovies(movies);
         return cast;
     }
 
     @Override
     public CastDto castToCastDto(Cast cast) {
-        if ( cast == null ) {
+        if (cast == null) {
             return null;
         }
 
         CastDto castDto = new CastDto();
 
-        castDto.setName( cast.getName() );
-        castDto.setRole( cast.getRole() );
-        castDto.setMovies( movieListToMovieDtoList( cast.getMovies() ) );
+        castDto.setName(cast.getName());
+        castDto.setRole(cast.getRole());
+//      castDto.setMovies( movieListToMovieDtoList( cast.getMovies() ) );
+        List<Movie> movies = cast.getMovies();
+        List<MovieDto> moviesDto = new ArrayList<>();
+        for (Movie movie : movies) {
+            MovieDto movieDto = new MovieDto();
+            if (movie != null) {
+                if (movie.getMovieId() != 0) {
+                    movieDto.setMovieId(movie.getMovieId());
+                }
+                movieDto.setName(movie.getName());
+                movieDto.setReleaseDate(movie.getReleaseDate());
+                movieDto.setDuration(movie.getDuration());
 
+            }
+            moviesDto.add(movieDto);
+        }
+        castDto.setMovies(moviesDto);
         return castDto;
     }
-
     @Override
     public Booking bookingDtoToBooking(BookingDto bookingDto) {
         if ( bookingDto == null ) {
@@ -412,7 +525,19 @@ public class MapStructMapperImpl implements MapStructMapper {
             booking.setSeatNo( new ArrayList<String>( list ) );
         }
         booking.setBookingDate( bookingDto.getBooking_date() );
-        booking.setBookedSeats( bookedSeatDtoListToBookedSeatList( bookingDto.getBookedSeats() ) );
+//        booking.setBookedSeats( bookedSeatDtoListToBookedSeatList( bookingDto.getBookedSeats() ) );
+        List<BookedSeatDto> bookedseatsDto = bookingDto.getBookedSeats();
+        List<BookedSeat> bookedSeats = new ArrayList<>();
+        for (BookedSeatDto bookedSeatDto : bookedseatsDto) {
+            BookedSeat bookedSeat = new BookedSeat();
+            if (bookedSeatDto != null) {
+                if (bookedSeatDto.getBookedSeatId() != 0) {
+                    bookedSeat.setBookedSeatId(bookedSeatDto.getBookedSeatId());
+                }
+
+            }
+            bookedSeats.add(bookedSeat);
+        }
         booking.setCreationDate( bookingDto.getCreationDate() );
         booking.setModifiedDate( bookingDto.getModifiedDate() );
         booking.setStatus( bookingDto.isStatus() );
@@ -433,7 +558,21 @@ public class MapStructMapperImpl implements MapStructMapper {
             bookingDto.setSeatNo( new ArrayList<String>( list ) );
         }
         bookingDto.setBooking_date( booking.getBookingDate() );
-        bookingDto.setBookedSeats( bookedSeatListToBookedSeatDtoList( booking.getBookedSeats() ) );
+//        bookingDto.setBookedSeats( bookedSeatListToBookedSeatDtoList( booking.getBookedSeats() ) );
+        List<BookedSeat> bookedseats = booking.getBookedSeats();
+        List<BookedSeatDto> bookedSeatsDto = new ArrayList<>();
+        for (BookedSeat bookedSeat : bookedseats) {
+            BookedSeatDto bookedSeatDto = new BookedSeatDto();
+            if (bookedSeat != null) {
+                if (bookedSeat.getBookedSeatId() != 0) {
+                    bookedSeatDto.setBookedSeatId(bookedSeat.getBookedSeatId());
+                }
+
+            }
+            bookedSeatsDto.add(bookedSeatDto);
+        }
+        bookingDto.setBookedSeats(bookedSeatsDto);
+
         bookingDto.setCreationDate( booking.getCreationDate() );
         bookingDto.setModifiedDate( booking.getModifiedDate() );
         bookingDto.setStatus( booking.isStatus() );

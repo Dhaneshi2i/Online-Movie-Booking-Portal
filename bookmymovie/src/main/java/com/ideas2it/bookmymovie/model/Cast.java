@@ -1,6 +1,8 @@
 package com.ideas2it.bookmymovie.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +27,8 @@ import java.util.List;
 @Entity
 @Component
 @Table(name = "cast")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "castId")
+
 public class Cast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

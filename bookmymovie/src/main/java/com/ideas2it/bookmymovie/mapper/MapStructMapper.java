@@ -29,4 +29,6 @@ public interface MapStructMapper {
     Booking bookingDtoToBooking(BookingDto bookingDto);
     BookingDto bookingToBookingDto(Booking booking);
 
+    BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat);
+
 }
