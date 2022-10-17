@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class Movie {
     private String name;
 
     @Column(name = "release_date")
-    private LocalDate releaseDate;
+    private ZonedDateTime releaseDate;
 
     @Column
     private String duration;
@@ -48,7 +47,7 @@ public class Movie {
                     @JoinColumn(name = "cast_id")
             }
     )
-    private List<Cast> cast = new ArrayList<>();
+    private List<Cast> casts = new ArrayList<>();
     @ManyToMany(cascade = {
             CascadeType.ALL
     })

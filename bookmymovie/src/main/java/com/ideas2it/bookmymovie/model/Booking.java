@@ -9,12 +9,14 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Component
 @Table(name = "booking")
+
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,7 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users users;
+
     @ManyToOne
     @JoinColumn(name = "screening_id", referencedColumnName = "id")
     private Screening screening;

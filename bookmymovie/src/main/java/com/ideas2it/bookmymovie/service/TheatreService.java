@@ -31,7 +31,7 @@ public interface TheatreService {
      * @param theatreId is passed as argument to update those value to the database.
      * @return String
      */
-    TheatreDto updateTheatreStatusDetail(int theatreId) throws NotFoundException;
+    TheatreDto updateTheatreStatusDetail(int theatreId,boolean status) throws NotFoundException;
 
     /**
      * This method List all the Theatre Details by City Name that are present in Database

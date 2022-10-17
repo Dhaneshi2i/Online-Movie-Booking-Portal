@@ -14,7 +14,9 @@ import java.time.LocalDate;
 public class BookedSeatDto {
     private int bookedSeatId;
     private SeatDto seat;
+
     private BookingDto booking;
+
     private ScreeningDto screening;
     private LocalDate creationDate;
     private LocalDate modifiedDate;

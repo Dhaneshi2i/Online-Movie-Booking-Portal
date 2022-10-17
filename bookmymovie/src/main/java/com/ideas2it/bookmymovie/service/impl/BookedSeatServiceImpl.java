@@ -1,36 +1,32 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.BookedSeatDto;
-import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.BookedSeat;
-import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.repository.BookedSeatRepository;
 import com.ideas2it.bookmymovie.service.BookedSeatService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 public class BookedSeatServiceImpl implements BookedSeatService {
-
-
-    public  BookedSeatRepository bookedSeatRepository;
-
-    private ModelMapper mapper;
-
+    private final BookedSeatRepository bookedSeatRepository;
+    private final MapStructMapper mapper;
     public BookedSeat bookedSeat;
-
     public BookedSeatDto bookedSeatDto;
-
-
+    public BookedSeatServiceImpl(BookedSeatRepository bookedSeatRepository, MapStructMapper mapper, BookedSeat bookedSeat, BookedSeatDto bookedSeatDto) {
+        this.bookedSeatRepository = bookedSeatRepository;
+        this.mapper = mapper;
+        this.bookedSeat = bookedSeat;
+        this.bookedSeatDto = bookedSeatDto;
+    }
 
     @Override
     public void createBookedSeat(BookedSeatDto bookedSeatDto) {
-        BookedSeat bookedSeat = mapper.map(bookedSeatDto , BookedSeat.class);
+        //BookedSeat bookedSeat = mapper.map(bookedSeatDto , BookedSeat.class);
         bookedSeatRepository.save(bookedSeat);
     }
 
@@ -40,7 +36,7 @@ public class BookedSeatServiceImpl implements BookedSeatService {
         if (bookedSeats.isEmpty()) {
             throw new NotFoundException("No seats booked");
         }
-        return bookedSeats.stream().map(bookedSeat -> mapper.map(bookedSeat, BookedSeatDto.class))
+        return bookedSeats.stream().map(bookedSeat -> mapper.bookedSeatToBookedSeatDto(bookedSeat))
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +46,7 @@ public class BookedSeatServiceImpl implements BookedSeatService {
         if (null == bookedSeat) {
             throw new NotFoundException("No seats booked");
         }
-        return mapper.map(bookedSeat, BookedSeatDto.class);
+        return mapper.bookedSeatToBookedSeatDto(bookedSeat);
     }
 
     @Override
@@ -58,7 +54,7 @@ public class BookedSeatServiceImpl implements BookedSeatService {
         bookedSeat = bookedSeatRepository.findById(id);
         bookedSeat.setModifiedDate(LocalDate.now());
         bookedSeat.setStatus(status);
-        return mapper.map(bookedSeatRepository.save(bookedSeat),BookedSeatDto.class);
+        return mapper.bookedSeatToBookedSeatDto(bookedSeatRepository.save(bookedSeat));
     }
 
     @Override
@@ -66,6 +62,5 @@ public class BookedSeatServiceImpl implements BookedSeatService {
         /*bookedSeat = bookedSeatRepository.findBYId(id);
         bookedSeat.setModifiedDate(LocalDate.now());
         bookedSeat.setStatus(status);*/
-
     }
 }

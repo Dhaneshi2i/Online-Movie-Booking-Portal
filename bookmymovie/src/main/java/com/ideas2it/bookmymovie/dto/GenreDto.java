@@ -12,10 +12,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Component
+
 public class GenreDto {
     private int genreId;
 
     private String name;
 
-    private List<MovieDto> moviesDto = new ArrayList<>();
+    private List<MovieDto> movies = new ArrayList<>();
 }

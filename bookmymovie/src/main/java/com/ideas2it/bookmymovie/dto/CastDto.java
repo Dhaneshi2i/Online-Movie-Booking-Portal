@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,5 +18,5 @@ public class CastDto {
 
     private String role;
 
-    private List<MovieDto> moviesDto = new ArrayList<>();
+    private List<MovieDto> movies = new ArrayList<>();
 }

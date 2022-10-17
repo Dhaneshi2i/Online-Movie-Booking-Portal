@@ -22,6 +22,7 @@ public class BookingDto{
     private LocalDate bookingDate;
     private UsersDto users;
     private ScreeningDto screening;
+    private LocalDate booking_date;
     private List<BookedSeatDto> bookedSeats = new ArrayList<>();
     private LocalDate creationDate;
     private LocalDate modifiedDate;

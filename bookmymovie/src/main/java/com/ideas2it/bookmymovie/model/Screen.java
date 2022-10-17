@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +23,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "screen")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "screenId")
+
 public class Screen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +39,9 @@ public class Screen {
 
     @Column(name = "no_of_columns")
     private int noOfColumns;
+
     @ManyToOne
-    @JoinColumn(name = "theatre_id")
+    @JoinColumn(name = "theatre_id", referencedColumnName = "id")
     private Theatre theatre;
 
     @OneToMany(mappedBy = "screen")
