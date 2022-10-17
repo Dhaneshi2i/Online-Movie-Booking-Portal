@@ -33,6 +33,15 @@ public class Movie {
     @Column
     private LocalTime duration;
 
+    @Column
+    private Boolean Status;
+
+    @Column
+    private LocalDate createdDate;
+
+    @Column
+    private LocalDate modifiedDate;
+
     @Column(name = " screening_id")
     @OneToMany(mappedBy = "movie")
     private List<Screening> screening = new ArrayList<>();
@@ -76,14 +85,4 @@ public class Movie {
             }
     )
     private List<Genre> genres = new ArrayList<>();
-
-    @Column
-    private Boolean Status;
-
-    @Column
-    private LocalDate createdDate;
-
-    @Column
-    private LocalDate modifiedDate;
-
 }

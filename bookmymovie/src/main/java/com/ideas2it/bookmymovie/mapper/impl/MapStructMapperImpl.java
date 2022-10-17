@@ -432,7 +432,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         if ( list != null ) {
             booking.setSeatNo( new ArrayList<String>( list ) );
         }
-        booking.setBooking_date( bookingDto.getBooking_date() );
+        booking.setBookingDate( bookingDto.getBooking_date() );
         booking.setBookedSeats( bookedSeatDtoListToBookedSeatList( bookingDto.getBookedSeats() ) );
         booking.setCreationDate( bookingDto.getCreationDate() );
         booking.setModifiedDate( bookingDto.getModifiedDate() );
@@ -453,7 +453,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         if ( list != null ) {
             bookingDto.setSeatNo( new ArrayList<String>( list ) );
         }
-        bookingDto.setBooking_date( booking.getBooking_date() );
+        bookingDto.setBooking_date( booking.getBookingDate() );
         bookingDto.setBookedSeats( bookedSeatListToBookedSeatDtoList( booking.getBookedSeats() ) );
         bookingDto.setCreationDate( booking.getCreationDate() );
         bookingDto.setModifiedDate( booking.getModifiedDate() );
@@ -495,7 +495,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         BookedSeat bookedSeat = new BookedSeat();
 
-        bookedSeat.setBookedSeatId( (long) bookedSeatDto.getBookedSeatId() );
+        bookedSeat.setBookedSeatId( bookedSeatDto.getBookedSeatId() );
         bookedSeat.setSeat( seatDtoToSeat( bookedSeatDto.getSeat() ) );
         bookedSeat.setBooking( bookingDtoToBooking( bookedSeatDto.getBooking() ) );
         bookedSeat.setScreening( screeningDtoToScreening( bookedSeatDto.getScreening() ) );
@@ -523,8 +523,8 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         BookedSeatDto bookedSeatDto = new BookedSeatDto();
 
-        if ( bookedSeat.getBookedSeatId() != null ) {
-            bookedSeatDto.setBookedSeatId( bookedSeat.getBookedSeatId().intValue() );
+        if ( bookedSeat.getBookedSeatId() != 0 ) {
+            bookedSeatDto.setBookedSeatId( bookedSeat.getBookedSeatId() );
         }
         bookedSeatDto.setSeat( seatToSeatDto( bookedSeat.getSeat() ) );
         bookedSeatDto.setBooking( bookingToBookingDto( bookedSeat.getBooking() ) );

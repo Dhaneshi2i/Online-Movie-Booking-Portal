@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     public List<MovieDto> getMovies() throws NotFoundException {
-        List<Movie> movies = (List<Movie>) movieRepository.findAll();
+        List<Movie> movies =  movieRepository.findAll();
 
         if(movies.isEmpty()) {
             throw new NotFoundException("No Movie Found");

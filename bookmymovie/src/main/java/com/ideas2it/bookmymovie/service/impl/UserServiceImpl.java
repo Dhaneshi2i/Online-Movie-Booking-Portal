@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         if (null == user) {
             throw new NotFoundException("No user found");
         }
-        return mapper.map(user, UsersDto.class);
+        return mapper.usersToUsersDto(user);
     }
 
     @Override
