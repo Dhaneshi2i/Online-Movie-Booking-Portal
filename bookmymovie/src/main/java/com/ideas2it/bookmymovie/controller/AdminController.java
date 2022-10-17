@@ -22,6 +22,7 @@ import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,10 +63,10 @@ public class AdminController {
         return new ResponseEntity<>(castService.addCast(castDto), HttpStatus.OK);
     }
 
-    /*@GetMapping("/getCast/{name}")
+    @GetMapping("/getCast/{name}")
     public ResponseEntity<CastDto> getCast(@PathVariable String name) throws NotFoundException {
         return new ResponseEntity<>(castService.getCastByName(name), HttpStatus.OK);
-    }*/
+    }
 
     @PostMapping("/addLanguage")
     public ResponseEntity<LanguageDto> addLanguage(@RequestBody LanguageDto languageDto) {
@@ -92,10 +93,6 @@ public class AdminController {
         return new ResponseEntity<>(roleService.saveRole(roleDto), HttpStatus.OK);
     }
 
-    /*@GetMapping("/getRoleById")
-    public ResponseEntity<SeatDto> getSeatById(@PathVariable int id) throws NotFoundException {
-        return new ResponseEntity<>(seatService.getSeatById(id), HttpStatus.OK);
-    }*/
     // Seat operations
     @PostMapping("/addSeat")
     public ResponseEntity<SeatDto> createSeat(@RequestBody SeatDto seatDto) {
@@ -112,11 +109,11 @@ public class AdminController {
         return new ResponseEntity<>(seatService.getSeatById(id), HttpStatus.OK);
     }
 
-    /*@PatchMapping("/updateSeat")
+    @PatchMapping("/updateSeat")
     public ResponseEntity<SeatDto> updateSeat (@PathVariable int id) throws NotFoundException {
         SeatDto seatDto = seatService.getSeatById(id);
         return new ResponseEntity<>(seatService.cancelSeat(seatDto), HttpStatus.OK);
-    }*/
+    }
 
     // Theatre operations for admin
     @PostMapping("/addTheatre")
@@ -138,6 +135,12 @@ public class AdminController {
     public ResponseEntity<List<TheatreDto>> getTheatreByCityName(@PathVariable("cityName") String cityName)
             throws NotFoundException {
         return new ResponseEntity<>(theatreService.ListTheatreByCityName(cityName), HttpStatus.OK);
+    }
+
+    @PatchMapping("/updateTheatre/{theatreId}/{status}")
+    public ResponseEntity<TheatreDto> updateTheatreStatus(@PathVariable("theatreId") int theatreId, @PathVariable
+            ("status") Boolean status) throws NotFoundException {
+        return new ResponseEntity<>(theatreService.updateTheatreStatusDetail(theatreId, status), HttpStatus.OK);
     }
 
     // Movie operations by admin

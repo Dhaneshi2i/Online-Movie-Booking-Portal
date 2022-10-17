@@ -11,8 +11,8 @@ import java.util.List;
 
 @Generated(
         value = "org.mapstruct.ap.MappingProcessor",
-        date = "2022-10-16T23:35:18+0530",
-        comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
+        date = "2022-10-17T14:36:37+0530",
+        comments = "version: 1.5.3.Final, compiler: javac, environment: Java 1.8.0_251 (Oracle Corporation)"
 )
 @Component
 public class MapStructMapperImpl implements MapStructMapper {
@@ -51,10 +51,10 @@ public class MapStructMapperImpl implements MapStructMapper {
         usersDto.setEmailId( users.getEmailId() );
         usersDto.setContactNumber( users.getContactNumber() );
         usersDto.setPassword( users.getPassword() );
-        usersDto.setRole( roleToRoleDto( users.getRole() ) );
         usersDto.setCreationDate( users.getCreationDate() );
         usersDto.setModifiedDate( users.getModifiedDate() );
         usersDto.setStatus( users.isStatus() );
+        usersDto.setRole( roleToRoleDto( users.getRole() ) );
 
         return usersDto;
     }
@@ -70,21 +70,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         theatre.setTheatreId( theatreDto.getTheatreId() );
         theatre.setName( theatreDto.getName() );
         theatre.setCityName( theatreDto.getCityName() );
-        List<Screen> screens = new ArrayList<>();
-        List<ScreenDto> screenDtos = theatreDto.getScreensDto();
-        for(ScreenDto screenDto : screenDtos){
-            Screen screen = new Screen();
-            if(screenDto != null){
-                if (screenDto.getScreenId() != 0) {
-                    screen.setScreenId(screenDto.getScreenId());
-                }
-                screen.setNoOfSeats(screenDto.getNoOfSeats());
-                screen.setNoOfRows(screenDto.getNoOfRows());
-                screen.setNoOfColumns(screenDto.getNoOfColumns());
-                screens.add(screen);
-            }
-            theatre.setScreens(screens);
-        }
+        theatre.setModifiedDate( theatreDto.getModifiedDate() );
 
         return theatre;
     }
@@ -100,21 +86,8 @@ public class MapStructMapperImpl implements MapStructMapper {
         theatreDto.setTheatreId( theatre.getTheatreId() );
         theatreDto.setName( theatre.getName() );
         theatreDto.setCityName( theatre.getCityName() );
-        List<Screen> screens = theatre.getScreens();
-        List<ScreenDto> screenDtos = new ArrayList<>();
-        for(Screen screen : screens){
-          ScreenDto screenDto = new ScreenDto();
-          if(screen != null){
-              if (screen.getScreenId() != 0) {
-                  screenDto.setScreenId(screen.getScreenId());
-              }
-              screenDto.setNoOfSeats(screen.getNoOfSeats());
-              screenDto.setNoOfRows(screen.getNoOfRows());
-              screenDto.setNoOfColumns(screen.getNoOfColumns());
-              screenDtos.add(screenDto);
-          }
-          theatreDto.setScreensDto(screenDtos);
-        }
+        theatreDto.setModifiedDate( theatre.getModifiedDate() );
+
         return theatreDto;
     }
 
@@ -128,6 +101,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         seat.setSeatId( seatDto.getSeatId() );
         seat.setSeatNo( seatDto.getSeatNo() );
+        seat.setSeatType( seatDto.getSeatType() );
         seat.setScreen( screenDtoToScreen( seatDto.getScreen() ) );
         seat.setBookedSeats( bookedSeatDtoListToBookedSeatList( seatDto.getBookedSeats() ) );
 
@@ -144,6 +118,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         seatDto.setSeatId( seat.getSeatId() );
         seatDto.setSeatNo( seat.getSeatNo() );
+        seatDto.setSeatType( seat.getSeatType() );
         seatDto.setScreen( screenToScreenDto( seat.getScreen() ) );
         seatDto.setBookedSeats( bookedSeatListToBookedSeatDtoList( seat.getBookedSeats() ) );
 
@@ -155,23 +130,16 @@ public class MapStructMapperImpl implements MapStructMapper {
         if ( screenDto == null ) {
             return null;
         }
+
         Screen screen = new Screen();
+
         screen.setScreenId( screenDto.getScreenId() );
         screen.setNoOfSeats( screenDto.getNoOfSeats() );
         screen.setNoOfRows( screenDto.getNoOfRows() );
         screen.setNoOfColumns( screenDto.getNoOfColumns() );
-        TheatreDto theatreDto = screenDto.getTheatreDto();
-        if(theatreDto !=null){
-            Theatre theatre = new Theatre();
-            if(theatreDto.getTheatreId() != 0){
-                theatre.setTheatreId(theatreDto.getTheatreId());
-            }
-            theatre.setName(theatreDto.getName());
-            theatre.setCityName(theatreDto.getCityName());
-            screen.setTheatre(theatre);
-        }
-        //screen.setSeats( seatDtoListToSeatList( screenDto.getSeats() ) );
-        //screen.setScreenings( screeningDtoListToScreeningList( screenDto.getScreenings() ) );
+        screen.setSeats( seatDtoListToSeatList( screenDto.getSeats() ) );
+        screen.setScreenings( screeningDtoListToScreeningList( screenDto.getScreenings() ) );
+
         return screen;
     }
 
@@ -180,24 +148,16 @@ public class MapStructMapperImpl implements MapStructMapper {
         if ( screen == null ) {
             return null;
         }
+
         ScreenDto screenDto = new ScreenDto();
 
         screenDto.setScreenId( screen.getScreenId() );
         screenDto.setNoOfSeats( screen.getNoOfSeats() );
         screenDto.setNoOfRows( screen.getNoOfRows() );
         screenDto.setNoOfColumns( screen.getNoOfColumns() );
-        Theatre theatre = screen.getTheatre();
-        if(theatre !=null){
-            TheatreDto theatreDto = new TheatreDto();
-            if(theatre.getTheatreId() != 0){
-                theatreDto.setTheatreId(theatre.getTheatreId());
-            }
-            theatreDto.setName(theatre.getName());
-            theatreDto.setCityName(theatre.getCityName());
-            screenDto.setTheatreDto(theatreDto);
-        }
-        //screenDto.setSeats( seatListToSeatDtoList( screen.getSeats() ) );
-        //screenDto.setScreenings( screeningListToScreeningDtoList( screen.getScreenings() ) );
+        screenDto.setSeats( seatListToSeatDtoList( screen.getSeats() ) );
+        screenDto.setScreenings( screeningListToScreeningDtoList( screen.getScreenings() ) );
+
         return screenDto;
     }
 
@@ -281,12 +241,12 @@ public class MapStructMapperImpl implements MapStructMapper {
         movie.setName( movieDto.getName() );
         movie.setReleaseDate( movieDto.getReleaseDate() );
         movie.setDuration( movieDto.getDuration() );
-        movie.setCasts( castDtoListToCastList( movieDto.getCasts() ) );
-        movie.setLanguages( languageDtoListToLanguageList( movieDto.getLanguages() ) );
-        movie.setGenres( genreDtoListToGenreList( movieDto.getGenres() ) );
         movie.setStatus( movieDto.getStatus() );
         movie.setCreatedDate( movieDto.getCreatedDate() );
         movie.setModifiedDate( movieDto.getModifiedDate() );
+        movie.setCasts( castDtoListToCastList( movieDto.getCasts() ) );
+        movie.setLanguages( languageDtoListToLanguageList( movieDto.getLanguages() ) );
+        movie.setGenres( genreDtoListToGenreList( movieDto.getGenres() ) );
 
         return movie;
     }
@@ -321,6 +281,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         Language language = new Language();
 
+        language.setLanguageId( languageDto.getLanguageId() );
         language.setName( languageDto.getName() );
         language.setMovies( movieDtoListToMovieList( languageDto.getMovies() ) );
 
@@ -335,6 +296,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         LanguageDto languageDto = new LanguageDto();
 
+        languageDto.setLanguageId( language.getLanguageId() );
         languageDto.setName( language.getName() );
         languageDto.setMovies( movieListToMovieDtoList( language.getMovies() ) );
 
@@ -349,6 +311,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         Genre genre = new Genre();
 
+        genre.setGenreId( genreDto.getGenreId() );
         genre.setName( genreDto.getName() );
         genre.setMovies( movieDtoListToMovieList( genreDto.getMovies() ) );
 
@@ -363,6 +326,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         GenreDto genreDto = new GenreDto();
 
+        genreDto.setGenreId( genre.getGenreId() );
         genreDto.setName( genre.getName() );
         genreDto.setMovies( movieListToMovieDtoList( genre.getMovies() ) );
 
@@ -377,6 +341,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         Cast cast = new Cast();
 
+        cast.setCastId( castDto.getCastId() );
         cast.setName( castDto.getName() );
         cast.setRole( castDto.getRole() );
         cast.setMovies( movieDtoListToMovieList( castDto.getMovies() ) );
@@ -392,6 +357,7 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         CastDto castDto = new CastDto();
 
+        castDto.setCastId( cast.getCastId() );
         castDto.setName( cast.getName() );
         castDto.setRole( cast.getRole() );
         castDto.setMovies( movieListToMovieDtoList( cast.getMovies() ) );
@@ -411,7 +377,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         if ( list != null ) {
             booking.setSeatNo( new ArrayList<String>( list ) );
         }
-        booking.setBookingDate( bookingDto.getBooking_date() );
+        booking.setBookingDate( bookingDto.getBookingDate() );
+        booking.setUsers( usersDtoToUsers( bookingDto.getUsers() ) );
+        booking.setScreening( screeningDtoToScreening( bookingDto.getScreening() ) );
         booking.setBookedSeats( bookedSeatDtoListToBookedSeatList( bookingDto.getBookedSeats() ) );
         booking.setCreationDate( bookingDto.getCreationDate() );
         booking.setModifiedDate( bookingDto.getModifiedDate() );
@@ -432,7 +400,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         if ( list != null ) {
             bookingDto.setSeatNo( new ArrayList<String>( list ) );
         }
-        bookingDto.setBooking_date( booking.getBookingDate() );
+        bookingDto.setBookingDate( booking.getBookingDate() );
+        bookingDto.setUsers( usersToUsersDto( booking.getUsers() ) );
+        bookingDto.setScreening( screeningToScreeningDto( booking.getScreening() ) );
         bookingDto.setBookedSeats( bookedSeatListToBookedSeatDtoList( booking.getBookedSeats() ) );
         bookingDto.setCreationDate( booking.getCreationDate() );
         bookingDto.setModifiedDate( booking.getModifiedDate() );
@@ -441,32 +411,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return bookingDto;
     }
 
-    protected List<Screen> screenDtoListToScreenList(List<ScreenDto> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<Screen> list1 = new ArrayList<Screen>( list.size() );
-        for ( ScreenDto screenDto : list ) {
-            list1.add( screenDtoToScreen( screenDto ) );
-        }
-
-        return list1;
-    }
-
-    protected List<ScreenDto> screenListToScreenDtoList(List<Screen> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<ScreenDto> list1 = new ArrayList<ScreenDto>( list.size() );
-        for ( Screen screen : list ) {
-            list1.add( screenToScreenDto( screen ) );
-        }
-
-        return list1;
-    }
-
+    @Override
     public BookedSeat bookedSeatDtoToBookedSeat(BookedSeatDto bookedSeatDto) {
         if ( bookedSeatDto == null ) {
             return null;
@@ -478,11 +423,33 @@ public class MapStructMapperImpl implements MapStructMapper {
         bookedSeat.setSeat( seatDtoToSeat( bookedSeatDto.getSeat() ) );
         bookedSeat.setBooking( bookingDtoToBooking( bookedSeatDto.getBooking() ) );
         bookedSeat.setScreening( screeningDtoToScreening( bookedSeatDto.getScreening() ) );
+        bookedSeat.setCreationDate( bookedSeatDto.getCreationDate() );
+        bookedSeat.setModifiedDate( bookedSeatDto.getModifiedDate() );
+        bookedSeat.setStatus( bookedSeatDto.isStatus() );
 
         return bookedSeat;
     }
 
-    public List<BookedSeat> bookedSeatDtoListToBookedSeatList(List<BookedSeatDto> list) {
+    @Override
+    public BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat) {
+        if ( bookedSeat == null ) {
+            return null;
+        }
+
+        BookedSeatDto bookedSeatDto = new BookedSeatDto();
+
+        bookedSeatDto.setBookedSeatId( bookedSeat.getBookedSeatId() );
+        bookedSeatDto.setSeat( seatToSeatDto( bookedSeat.getSeat() ) );
+        bookedSeatDto.setBooking( bookingToBookingDto( bookedSeat.getBooking() ) );
+        bookedSeatDto.setScreening( screeningToScreeningDto( bookedSeat.getScreening() ) );
+        bookedSeatDto.setCreationDate( bookedSeat.getCreationDate() );
+        bookedSeatDto.setModifiedDate( bookedSeat.getModifiedDate() );
+        bookedSeatDto.setStatus( bookedSeat.isStatus() );
+
+        return bookedSeatDto;
+    }
+
+    protected List<BookedSeat> bookedSeatDtoListToBookedSeatList(List<BookedSeatDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -493,25 +460,6 @@ public class MapStructMapperImpl implements MapStructMapper {
         }
 
         return list1;
-    }
-
-    public BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat) {
-        if ( bookedSeat == null ) {
-            return null;
-        }
-
-        BookedSeatDto bookedSeatDto = new BookedSeatDto();
-
-
-        if ( bookedSeat.getBookedSeatId() != 0 ) {
-
-            bookedSeatDto.setBookedSeatId( bookedSeat.getBookedSeatId() );
-        }
-        bookedSeatDto.setSeat( seatToSeatDto( bookedSeat.getSeat() ) );
-        bookedSeatDto.setBooking( bookingToBookingDto( bookedSeat.getBooking() ) );
-        bookedSeatDto.setScreening( screeningToScreeningDto( bookedSeat.getScreening() ) );
-
-        return bookedSeatDto;
     }
 
     protected List<BookedSeatDto> bookedSeatListToBookedSeatDtoList(List<BookedSeat> list) {
@@ -527,7 +475,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Seat> seatDtoListToSeatList(List<SeatDto> list) {
+    protected List<Seat> seatDtoListToSeatList(List<SeatDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -540,7 +488,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Screening> screeningDtoListToScreeningList(List<ScreeningDto> list) {
+    protected List<Screening> screeningDtoListToScreeningList(List<ScreeningDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -553,7 +501,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<SeatDto> seatListToSeatDtoList(List<Seat> list) {
+    protected List<SeatDto> seatListToSeatDtoList(List<Seat> list) {
         if ( list == null ) {
             return null;
         }
@@ -566,7 +514,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<ScreeningDto> screeningListToScreeningDtoList(List<Screening> list) {
+    protected List<ScreeningDto> screeningListToScreeningDtoList(List<Screening> list) {
         if ( list == null ) {
             return null;
         }
@@ -579,7 +527,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Booking> bookingDtoListToBookingList(List<BookingDto> list) {
+    protected List<Booking> bookingDtoListToBookingList(List<BookingDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -592,7 +540,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<BookingDto> bookingListToBookingDtoList(List<Booking> list) {
+    protected List<BookingDto> bookingListToBookingDtoList(List<Booking> list) {
         if ( list == null ) {
             return null;
         }
@@ -605,7 +553,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Users> usersDtoListToUsersList(List<UsersDto> list) {
+    protected List<Users> usersDtoListToUsersList(List<UsersDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -618,7 +566,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<UsersDto> usersListToUsersDtoList(List<Users> list) {
+    protected List<UsersDto> usersListToUsersDtoList(List<Users> list) {
         if ( list == null ) {
             return null;
         }
@@ -631,7 +579,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Cast> castDtoListToCastList(List<CastDto> list) {
+    protected List<Cast> castDtoListToCastList(List<CastDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -644,7 +592,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Language> languageDtoListToLanguageList(List<LanguageDto> list) {
+    protected List<Language> languageDtoListToLanguageList(List<LanguageDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -657,7 +605,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Genre> genreDtoListToGenreList(List<GenreDto> list) {
+    protected List<Genre> genreDtoListToGenreList(List<GenreDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -670,7 +618,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<CastDto> castListToCastDtoList(List<Cast> list) {
+    protected List<CastDto> castListToCastDtoList(List<Cast> list) {
         if ( list == null ) {
             return null;
         }
@@ -683,7 +631,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<LanguageDto> languageListToLanguageDtoList(List<Language> list) {
+    protected List<LanguageDto> languageListToLanguageDtoList(List<Language> list) {
         if ( list == null ) {
             return null;
         }
@@ -696,7 +644,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<GenreDto> genreListToGenreDtoList(List<Genre> list) {
+    protected List<GenreDto> genreListToGenreDtoList(List<Genre> list) {
         if ( list == null ) {
             return null;
         }
@@ -709,7 +657,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<Movie> movieDtoListToMovieList(List<MovieDto> list) {
+    protected List<Movie> movieDtoListToMovieList(List<MovieDto> list) {
         if ( list == null ) {
             return null;
         }
@@ -722,7 +670,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    public List<MovieDto> movieListToMovieDtoList(List<Movie> list) {
+    protected List<MovieDto> movieListToMovieDtoList(List<Movie> list) {
         if ( list == null ) {
             return null;
         }

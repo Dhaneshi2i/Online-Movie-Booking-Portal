@@ -6,7 +6,7 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import java.util.List;
 
 public interface BookedSeatService {
-    void createBookedSeat(BookedSeatDto bookedSeatDto);
+    BookedSeatDto createBookedSeat(BookedSeatDto bookedSeatDto);
     List<BookedSeatDto> getAllBookedSeats() throws NotFoundException;
     BookedSeatDto getBookedSeatById(int id) throws NotFoundException;
     BookedSeatDto updateBookedSeat(int id, boolean status);

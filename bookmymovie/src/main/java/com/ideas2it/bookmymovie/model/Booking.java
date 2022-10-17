@@ -21,7 +21,9 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int bookingId;
+    private String bookingId;
+    @Column(name = "no_of_seats")
+    private int noOfSeats;
 
     @ElementCollection
     private List<String> seatNo;
@@ -38,7 +40,7 @@ public class Booking {
     private Screening screening;
 
     @OneToMany(mappedBy = "booking")
-    private List<BookedSeat> bookedSeats = new ArrayList<>();
+    private List<BookedSeat> bookedSeats = new ArrayList<>(); //
 
     @Column(name = "created_date")
     private LocalDate creationDate;

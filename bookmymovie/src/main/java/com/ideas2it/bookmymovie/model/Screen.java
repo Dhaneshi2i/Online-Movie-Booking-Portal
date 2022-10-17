@@ -24,7 +24,6 @@ import java.util.List;
 @Entity
 @Table(name = "screen")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "screenId")
-
 public class Screen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
