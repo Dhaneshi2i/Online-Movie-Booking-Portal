@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CastRepository extends JpaRepository<Cast,Integer> {
-    Cast findCastByCastId(int id);
     Cast findCastByName(String name);
 }

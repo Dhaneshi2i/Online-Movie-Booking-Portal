@@ -1,17 +1,6 @@
 package com.ideas2it.bookmymovie.mapper.impl;
 
-import com.ideas2it.bookmymovie.dto.BookedSeatDto;
-import com.ideas2it.bookmymovie.dto.BookingDto;
-import com.ideas2it.bookmymovie.dto.CastDto;
-import com.ideas2it.bookmymovie.dto.GenreDto;
-import com.ideas2it.bookmymovie.dto.LanguageDto;
-import com.ideas2it.bookmymovie.dto.MovieDto;
-import com.ideas2it.bookmymovie.dto.RoleDto;
-import com.ideas2it.bookmymovie.dto.ScreenDto;
-import com.ideas2it.bookmymovie.dto.ScreeningDto;
-import com.ideas2it.bookmymovie.dto.SeatDto;
-import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.dto.UsersDto;
+import com.ideas2it.bookmymovie.dto.*;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.BookedSeat;
 import com.ideas2it.bookmymovie.model.Booking;
@@ -31,6 +20,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.springframework.stereotype.Component;
+
 
 @Generated(
         value = "org.mapstruct.ap.MappingProcessor",
@@ -591,7 +581,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return bookingDto;
     }
 
-    protected List<Screen> screenDtoListToScreenList(List<ScreenDto> list) {
+    public List<Screen> screenDtoListToScreenList(List<ScreenDto> list) {
         if (list == null) {
             return null;
         }
@@ -604,7 +594,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<ScreenDto> screenListToScreenDtoList(List<Screen> list) {
+    public List<ScreenDto> screenListToScreenDtoList(List<Screen> list) {
         if (list == null) {
             return null;
         }
@@ -617,8 +607,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected BookedSeat bookedSeatDtoToBookedSeat(BookedSeatDto bookedSeatDto) {
-        if (bookedSeatDto == null) {
+
+    public BookedSeat bookedSeatDtoToBookedSeat(BookedSeatDto bookedSeatDto) {
+        if ( bookedSeatDto == null ) {
             return null;
         }
 
@@ -632,8 +623,10 @@ public class MapStructMapperImpl implements MapStructMapper {
         return bookedSeat;
     }
 
-    protected List<BookedSeat> bookedSeatDtoListToBookedSeatList(List<BookedSeatDto> list) {
-        if (list == null) {
+
+    public List<BookedSeat> bookedSeatDtoListToBookedSeatList(List<BookedSeatDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -645,15 +638,16 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat) {
-        if (bookedSeat == null) {
+    public BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat) {
+        if ( bookedSeat == null ) {
             return null;
         }
 
         BookedSeatDto bookedSeatDto = new BookedSeatDto();
 
-        if (bookedSeat.getBookedSeatId() != 0) {
-            bookedSeatDto.setBookedSeatId(bookedSeat.getBookedSeatId());
+        if ( bookedSeat.getBookedSeatId() != 0 ) {
+
+            bookedSeatDto.setBookedSeatId( bookedSeat.getBookedSeatId() );
         }
         bookedSeatDto.setSeat(seatToSeatDto(bookedSeat.getSeat()));
         bookedSeatDto.setBooking(bookingToBookingDto(bookedSeat.getBooking()));
@@ -675,8 +669,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Seat> seatDtoListToSeatList(List<SeatDto> list) {
-        if (list == null) {
+    public List<Seat> seatDtoListToSeatList(List<SeatDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -688,8 +683,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Screening> screeningDtoListToScreeningList(List<ScreeningDto> list) {
-        if (list == null) {
+    public List<Screening> screeningDtoListToScreeningList(List<ScreeningDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -701,8 +697,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<SeatDto> seatListToSeatDtoList(List<Seat> list) {
-        if (list == null) {
+    public List<SeatDto> seatListToSeatDtoList(List<Seat> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -714,8 +711,10 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<ScreeningDto> screeningListToScreeningDtoList(List<Screening> list) {
-        if (list == null) {
+
+    public List<ScreeningDto> screeningListToScreeningDtoList(List<Screening> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -727,8 +726,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Booking> bookingDtoListToBookingList(List<BookingDto> list) {
-        if (list == null) {
+    public List<Booking> bookingDtoListToBookingList(List<BookingDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -740,8 +740,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<BookingDto> bookingListToBookingDtoList(List<Booking> list) {
-        if (list == null) {
+    public List<BookingDto> bookingListToBookingDtoList(List<Booking> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -753,8 +754,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Users> usersDtoListToUsersList(List<UsersDto> list) {
-        if (list == null) {
+    public List<Users> usersDtoListToUsersList(List<UsersDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -766,8 +768,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<UsersDto> usersListToUsersDtoList(List<Users> list) {
-        if (list == null) {
+    public List<UsersDto> usersListToUsersDtoList(List<Users> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -779,8 +782,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Cast> castDtoListToCastList(List<CastDto> list) {
-        if (list == null) {
+    public List<Cast> castDtoListToCastList(List<CastDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -792,8 +796,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Language> languageDtoListToLanguageList(List<LanguageDto> list) {
-        if (list == null) {
+    public List<Language> languageDtoListToLanguageList(List<LanguageDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -805,8 +810,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Genre> genreDtoListToGenreList(List<GenreDto> list) {
-        if (list == null) {
+    public List<Genre> genreDtoListToGenreList(List<GenreDto> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -818,8 +824,10 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<CastDto> castListToCastDtoList(List<Cast> list) {
-        if (list == null) {
+
+    public List<CastDto> castListToCastDtoList(List<Cast> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -831,8 +839,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<LanguageDto> languageListToLanguageDtoList(List<Language> list) {
-        if (list == null) {
+    public List<LanguageDto> languageListToLanguageDtoList(List<Language> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -844,8 +853,10 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<GenreDto> genreListToGenreDtoList(List<Genre> list) {
-        if (list == null) {
+
+    public List<GenreDto> genreListToGenreDtoList(List<Genre> list) {
+        if ( list == null ) {
+
             return null;
         }
 
@@ -857,8 +868,8 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<Movie> movieDtoListToMovieList(List<MovieDto> list) {
-        if (list == null) {
+    public List<Movie> movieDtoListToMovieList(List<MovieDto> list) {
+        if ( list == null ) {
             return null;
         }
 
@@ -870,8 +881,9 @@ public class MapStructMapperImpl implements MapStructMapper {
         return list1;
     }
 
-    protected List<MovieDto> movieListToMovieDtoList(List<Movie> list) {
-        if (list == null) {
+
+    public List<MovieDto> movieListToMovieDtoList(List<Movie> list) {
+        if ( list == null ) {
             return null;
         }
 
