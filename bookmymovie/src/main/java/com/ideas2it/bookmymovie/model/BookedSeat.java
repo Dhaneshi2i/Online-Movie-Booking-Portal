@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -38,4 +39,10 @@ public class BookedSeat {
     @ManyToOne
     @JoinColumn(name = "screening_id")
     private Screening screening;
+    @Column(name = "created_on")
+    private LocalDate creationDate;
+    @Column(name = "modified_on")
+    private LocalDate modifiedDate;
+    @Column(name = "status")
+    private boolean status;
 }

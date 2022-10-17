@@ -22,7 +22,6 @@ import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +42,20 @@ public class AdminController {
     public SeatService seatService;
     public TheatreService theatreService;
     public MovieService movieService;
+
+    public AdminController(GenreService genreService, CastService castService, LanguageService languageService,
+                           RoleService roleService, ScreeningService screeningService, ScreenService screenService,
+                           SeatService seatService, TheatreService theatreService, MovieService movieService) {
+        this.genreService = genreService;
+        this.castService = castService;
+        this.languageService = languageService;
+        this.roleService = roleService;
+        this.screeningService = screeningService;
+        this.screenService = screenService;
+        this.seatService = seatService;
+        this.theatreService = theatreService;
+        this.movieService = movieService;
+    }
 
     @PostMapping("/addCast")
     public ResponseEntity<CastDto> addCast(@RequestBody CastDto castDto) {
@@ -99,11 +112,11 @@ public class AdminController {
         return new ResponseEntity<>(seatService.getSeatById(id), HttpStatus.OK);
     }
 
-    @PatchMapping("/updateSeat")
+    /*@PatchMapping("/updateSeat")
     public ResponseEntity<SeatDto> updateSeat (@PathVariable int id) throws NotFoundException {
         SeatDto seatDto = seatService.getSeatById(id);
         return new ResponseEntity<>(seatService.cancelSeat(seatDto), HttpStatus.OK);
-    }
+    }*/
 
     // Theatre operations for admin
     @PostMapping("/addTheatre")
@@ -130,7 +143,7 @@ public class AdminController {
     // Movie operations by admin
 
     @PostMapping("/addMovie")
-    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto  movieDto) {
         return new ResponseEntity<>(movieService.addMovie(movieDto), HttpStatus.OK);
     }
 

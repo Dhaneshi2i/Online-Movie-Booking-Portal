@@ -2,12 +2,11 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.repository.CustomerRepository;
 import com.ideas2it.bookmymovie.service.CustomerService;
 import com.ideas2it.bookmymovie.service.UserService;
-
-import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
