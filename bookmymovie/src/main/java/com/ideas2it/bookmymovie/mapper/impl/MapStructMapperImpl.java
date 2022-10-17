@@ -258,6 +258,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         }
         //screen.setSeats( seatDtoListToSeatList( screenDto.getSeats() ) );
         //screen.setScreenings( screeningDtoListToScreeningList( screenDto.getScreenings() ) );
+        //comment
         return screen;
     }
 
