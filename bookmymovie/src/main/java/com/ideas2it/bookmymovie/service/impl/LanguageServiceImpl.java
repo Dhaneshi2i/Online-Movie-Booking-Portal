@@ -5,14 +5,18 @@ import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Language;
 import com.ideas2it.bookmymovie.repository.LanguageRepository;
 import com.ideas2it.bookmymovie.service.LanguageService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
     private final LanguageRepository languageRepository;
     private final MapStructMapper mapper;
+
+    public LanguageServiceImpl(LanguageRepository languageRepository, MapStructMapper mapper) {
+        this.languageRepository = languageRepository;
+        this.mapper = mapper;
+    }
+
     public LanguageDto getLanguageByName(String name) {
         Language language = languageRepository.findLanguageByName(name);
 
@@ -21,6 +25,6 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public LanguageDto addLanguage(LanguageDto languageDto) {
-        return mapper.map(languageRepository.save(mapper.map(languageDto, Language.class)), LanguageDto.class);
+        return mapper.languageToLanguageDto(languageRepository.save(mapper.languageDtoToLanguage(languageDto)));
     }
 }

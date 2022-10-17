@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class Movie {
     private ZonedDateTime releaseDate;
 
     @Column
-    private LocalTime duration;
+    private String duration;
 
     @Column(name = " screening_id")
     @OneToMany(mappedBy = "movie")

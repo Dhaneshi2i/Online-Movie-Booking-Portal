@@ -6,7 +6,12 @@ import com.ideas2it.bookmymovie.model.Cast;
 import com.ideas2it.bookmymovie.repository.CastRepository;
 import com.ideas2it.bookmymovie.service.CastService;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
 public class CastServiceImpl implements CastService {
     public ModelMapper mapper;
     public CastRepository castRepository;
@@ -30,5 +35,15 @@ public class CastServiceImpl implements CastService {
             throw new NotFoundException("No cast found");
         }
         return mapper.map(cast, CastDto.class);
+    }
+
+    @Override
+    public List<CastDto> getAllCast() throws NotFoundException {
+        List<Cast> casts = castRepository.findAll();
+        if (casts.isEmpty()) {
+            throw new NotFoundException("No casts found");
+        }
+        return casts.stream().map(cast -> mapper.map(cast, CastDto.class))
+                .collect(Collectors.toList());
     }
 }

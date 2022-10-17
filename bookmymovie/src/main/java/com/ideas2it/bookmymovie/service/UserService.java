@@ -18,11 +18,9 @@ public interface UserService {
      * @return List<UsersDto> which will have all the Users Details which are present in
      * the database.
      */
-    public List<UsersDto> getAllUsers() throws NotFoundException;
-    public UsersDto getUserById(int id) throws NotFoundException;
+    List<UsersDto> getAllUsers() throws NotFoundException;
+    UsersDto getUserById(int id) throws NotFoundException;
     UsersDto getUserByName(String name) throws NotFoundException;
-
     UsersDto updateUser(UsersDto usersDto);
-
-    public void deleteUser(int id);
+    void deleteUser(int id);
 }

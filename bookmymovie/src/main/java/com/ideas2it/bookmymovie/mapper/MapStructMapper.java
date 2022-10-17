@@ -4,10 +4,6 @@ import com.ideas2it.bookmymovie.dto.*;
 import com.ideas2it.bookmymovie.model.*;
 import org.mapstruct.Mapper;
 
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface MapStructMapper {
     Users usersDtoToUsers(UsersDto usersDto);
@@ -32,4 +28,6 @@ public interface MapStructMapper {
     CastDto castToCastDto (Cast cast);
     Booking bookingDtoToBooking(BookingDto bookingDto);
     BookingDto bookingToBookingDto(Booking booking);
+    BookedSeat bookedSeatDtoToBookedSeat(BookedSeatDto bookedSeatDto);
+    BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat);
 }

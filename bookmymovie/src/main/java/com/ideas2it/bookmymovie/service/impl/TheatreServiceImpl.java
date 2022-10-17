@@ -9,7 +9,6 @@ import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
