@@ -18,11 +18,13 @@ import java.util.List;
 @Component
 public class SeatDto {
     private int seatId;
+
     private int seatNo;
+
     private String seatType;
-    @JsonBackReference
+
     private ScreenDto screen;
-    @JsonManagedReference
+
     private List<BookedSeatDto> bookedSeats = new ArrayList<>();
 }
 

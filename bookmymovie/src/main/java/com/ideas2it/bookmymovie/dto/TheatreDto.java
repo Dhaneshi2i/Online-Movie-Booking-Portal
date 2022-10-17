@@ -17,8 +17,10 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "theatreId")
 public class TheatreDto {
     private int theatreId;
+
     private String name;
+
     private String cityName;
+
     private List<ScreenDto> screensDto = new ArrayList<>();
-    private LocalDate modifiedDate;
 }

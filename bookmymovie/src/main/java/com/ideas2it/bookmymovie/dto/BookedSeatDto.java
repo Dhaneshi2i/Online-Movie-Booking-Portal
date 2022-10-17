@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookedSeatDto {
     private int bookedSeatId;
+
     private SeatDto seat;
 
     private BookingDto booking;

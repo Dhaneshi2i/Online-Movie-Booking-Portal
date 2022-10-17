@@ -16,10 +16,16 @@ import java.util.List;
 @NoArgsConstructor
 public class ScreeningDto {
     private int ScreeningId;
+
     private MovieDto movie;
+
     private LocalDate showDate;
+
     private LocalTime startTime;
+
     private List<BookedSeatDto> bookedSeats = new ArrayList<>();
+
     private List<BookingDto> bookings = new ArrayList<>();
+
     private ScreenDto screen;
 }
