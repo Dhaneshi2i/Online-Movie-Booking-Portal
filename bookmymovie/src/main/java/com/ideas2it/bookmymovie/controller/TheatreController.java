@@ -54,15 +54,15 @@ public class TheatreController {
         return new ResponseEntity<>(theatreService.ListTheatreByCityName(cityName), HttpStatus.OK);
     }
 
-    @PatchMapping("/{theatreId}")
-    public ResponseEntity<TheatreDto> updateTheatreStatus(@PathVariable("theatreId")
-                                                              int theatreId) throws NotFoundException{
-        return new ResponseEntity<>(theatreService.updateTheatreStatusDetail(theatreId), HttpStatus.OK);
+    @PatchMapping("/{theatreId}/{status}")
+    public ResponseEntity<TheatreDto> updateTheatreStatus(@PathVariable("theatreId") int theatreId, @PathVariable
+            ("status") Boolean status) throws NotFoundException {
+        return new ResponseEntity<>(theatreService.updateTheatreStatusDetail(theatreId, status), HttpStatus.OK);
     }
 
     @PatchMapping("/screen/{screenId}/{status}")
-    public ResponseEntity<ScreenDto> updateScreenStatus(@PathVariable("screenId") int screenId,
-                                                       @PathVariable("status") Boolean status) throws NotFoundException{
-        return new ResponseEntity<>(screenService.updateScreenStatusDetail(screenId,status), HttpStatus.OK);
+    public ResponseEntity<ScreenDto> updateScreenStatus(@PathVariable("screenId") int screenId, @PathVariable
+            ("status") Boolean status) throws NotFoundException {
+        return new ResponseEntity<>(screenService.updateScreenStatusDetail(screenId, status), HttpStatus.OK);
     }
 }

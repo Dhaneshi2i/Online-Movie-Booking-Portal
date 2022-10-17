@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,24 +18,23 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class MovieDto {
 
     private int movieId;
 
     private String name;
 
-    private LocalDate releaseDate;
+    private ZonedDateTime releaseDate;
 
     private LocalTime duration;
 
-    private List<ScreeningDto> screeningsDto = new ArrayList<>();
+    private List<ScreeningDto> screenings = new ArrayList<>();
 
-    private List<CastDto> castDto = new ArrayList<>();
+    private List<CastDto> casts = new ArrayList<>();
 
-    private List<LanguageDto> languagesDto = new ArrayList<>();
+    private List<LanguageDto> languages = new ArrayList<>();
 
-    private List<GenreDto> genresDto = new ArrayList<>();
+    private List<GenreDto> genres = new ArrayList<>();
 
     private Boolean Status;
 

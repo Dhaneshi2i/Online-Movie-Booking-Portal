@@ -2,10 +2,10 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.UsersDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Users;
 import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final ModelMapper mapper;
+    private final MapStructMapper mapper;
     private Users user;
     private UsersDto usersDto;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper mapper, Users user, UsersDto usersDto) {
+    public UserServiceImpl(UserRepository userRepository, MapStructMapper mapper, Users user, UsersDto usersDto) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.user = user;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UsersDto createUser(UsersDto usersDto) {
         usersDto.setCreationDate(LocalDate.now());
-        return mapper.map(userRepository.save(mapper.map(usersDto,Users.class)), UsersDto.class);
+        return mapper.usersToUsersDto(userRepository.save(mapper.usersDtoToUsers(usersDto)));
     }
     /**
      * This method List all the User Details that are present in Database
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundException("No users found");
         }
         return users.stream()
-                .map(user -> mapper.map(user, UsersDto.class))
+                .map(user -> mapper.usersToUsersDto(user))
                 .collect(Collectors.toList());
     }
 
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         if (null == user) {
             throw new NotFoundException("No user found");
         }
-        return mapper.map(user , UsersDto.class);
+        return mapper.usersToUsersDto(user);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UsersDto updateUser(UsersDto usersDto){
         usersDto.setModifiedDate(LocalDate.now());
-        return mapper.map(userRepository.save(mapper.map(usersDto, Users.class)), UsersDto.class);
+        return mapper.usersToUsersDto(userRepository.save(mapper.usersDtoToUsers(usersDto)));
     }
 
     @Override
