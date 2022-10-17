@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ScreenRepository extends JpaRepository<Screen,Integer> {
     List<Screen> findAllByStatus(Boolean status);
+    Screen findByScreenId(int id);
 }

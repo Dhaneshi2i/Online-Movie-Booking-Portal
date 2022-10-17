@@ -25,9 +25,9 @@ public class BookedSeatServiceImpl implements BookedSeatService {
     }
 
     @Override
-    public void createBookedSeat(BookedSeatDto bookedSeatDto) {
-        //BookedSeat bookedSeat = mapper.map(bookedSeatDto , BookedSeat.class);
-        bookedSeatRepository.save(bookedSeat);
+    public BookedSeatDto createBookedSeat(BookedSeatDto bookedSeatDto) {
+        return mapper.bookedSeatToBookedSeatDto(bookedSeatRepository.
+                save(mapper.bookedSeatDtoToBookedSeat(bookedSeatDto)));
     }
 
     @Override

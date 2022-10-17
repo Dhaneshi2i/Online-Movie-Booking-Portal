@@ -33,11 +33,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto getSeatById(int id) throws NotFoundException {
-        seat = seatRepository.findById(id);
-        if (null == seat) {
-            throw new NotFoundException("No seat found");
-        }
-        return mapper.seatToSeatDto(seat);
+        return seatRepository.findById(id).map(mapper::seatToSeatDto).orElseThrow(() -> new NotFoundException("No seat found"));
     }
 
     @Override

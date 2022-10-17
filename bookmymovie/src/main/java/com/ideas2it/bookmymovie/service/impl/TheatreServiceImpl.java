@@ -56,10 +56,9 @@ public class TheatreServiceImpl implements TheatreService {
      */
     public TheatreDto updateTheatreStatusDetail(int theatreId, boolean status) throws NotFoundException {
         if (theatreRepository.existsById(theatreId)) {
-            Theatre theatre = theatreRepository.findById(theatreId).get();
             theatre.setStatus(status);
-            theatreRepository.save(theatre);
-            return mapper.theatreToTheatreDto(theatre);
+            //theatreRepository.save(theatre);
+            return mapper.theatreToTheatreDto(theatreRepository.save(theatre));
         }
         throw new NotFoundException("No Details are found for this id");
     }

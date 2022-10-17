@@ -5,12 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, Integer> {
-    Users findById(int id);
-    Users findByName(String name);
+    Optional<Users> findById(int id);
+    Optional<Users> findByName(String name);
     List<Users> getAllUsersByStatus(boolean status);
+    //Optional<List<Users>> getAllUsersByStatus(boolean status);
 
 }
 

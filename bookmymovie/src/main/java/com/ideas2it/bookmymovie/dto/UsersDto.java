@@ -33,13 +33,9 @@ public class UsersDto {
     @Size(max = 20, message = "Must be only between 20 characters")
     @Pattern(regexp = "[a-z0-9_-]+", message = "only number are allowed and they must have 10 numbers")
     private String password;
-
     private LocalDate creationDate;
-
     private LocalDate modifiedDate;
-
     private boolean status;
-
     private RoleDto role;
 
 }

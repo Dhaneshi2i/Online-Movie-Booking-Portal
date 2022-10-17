@@ -50,26 +50,20 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundException("No users found");
         }
         return users.stream()
-                .map(user -> mapper.usersToUsersDto(user))
+                .map(mapper::usersToUsersDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UsersDto getUserById(int id) throws NotFoundException {
-        user = userRepository.findById(id);
-        if (null == user || user.isStatus() == true) {
-            throw new NotFoundException("No user found");
-        }
-        return mapper.usersToUsersDto(user);
+        return userRepository.findById(id).map(mapper::usersToUsersDto)
+                .orElseThrow(() ->new NotFoundException("No user found"));
     }
 
     @Override
     public UsersDto getUserByName(String name) throws NotFoundException {
-        user = userRepository.findByName(name);
-        if (null == user) {
-            throw new NotFoundException("No user found");
-        }
-        return mapper.usersToUsersDto(user);
+        return userRepository.findByName(name).map(mapper::usersToUsersDto)
+                .orElseThrow(() ->new NotFoundException("No user found"));
     }
 
     @Override

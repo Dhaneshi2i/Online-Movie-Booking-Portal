@@ -7,6 +7,7 @@ import com.ideas2it.bookmymovie.model.Cast;
 import com.ideas2it.bookmymovie.repository.CastRepository;
 import com.ideas2it.bookmymovie.service.CastService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,7 @@ public class CastServiceImpl implements CastService {
         if (casts.isEmpty()) {
             throw new NotFoundException("No casts found");
         }
-        return casts.stream().map(cast -> mapper.map(cast, CastDto.class))
+        return casts.stream().map(cast -> mapper.castToCastDto(cast))
                 .collect(Collectors.toList());
     }
 }

@@ -4,8 +4,9 @@ import com.ideas2it.bookmymovie.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Integer> {
-//    Role findRoleById(int id);
-    Role findRoleByRoleType(String roleType);
+    Optional<Role> findRoleByRoleType(String roleType);
 }

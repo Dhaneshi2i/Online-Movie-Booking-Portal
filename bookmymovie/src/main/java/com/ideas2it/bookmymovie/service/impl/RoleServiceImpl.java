@@ -43,11 +43,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDto getRoleByName(String roleType) throws NotFoundException {
-        role = roleRepository.findRoleByRoleType(roleType);
-        if (null == role) {
-            throw new NotFoundException("No role found");
-        }
-        return mapper.roleToRoleDto(role);
+        return roleRepository.findRoleByRoleType(roleType).map(mapper::roleToRoleDto)
+                .orElseThrow(() ->new NotFoundException("No role found"));
     }
 
     @Override

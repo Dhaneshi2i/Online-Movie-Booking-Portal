@@ -20,9 +20,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final MapStructMapper mapper;
 
-    private final BookingDto bookingDto;
+    private BookingDto bookingDto;
 
-    private final Booking booking;
+    private Booking booking;
 
     public UserService userService;
 
@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public BookingDto createBooking(BookingDto bookingDto) {
+    public BookingDto createBooking(BookingDto bookMovie) {
         bookingDto.setCreationDate(LocalDate.now());
         return mapper.bookingToBookingDto(customerRepository.save(mapper.bookingDtoToBooking(bookingDto)));
     }
@@ -53,6 +53,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public BookingDto getBookingById(int id) {
-        return mapper.bookingToBookingDto(customerRepository.findById(id).get());
+        return mapper.bookingToBookingDto(customerRepository.findById(id));
     }
+
+    @Override
+    public BookingDto updateBooking(int id, boolean status) throws NotFoundException {
+        booking = customerRepository.findById(id);
+        if (null == booking) {
+            throw new NotFoundException("No bookings found");
+        }
+        return mapper.bookingToBookingDto(customerRepository.save(booking));
+    }
+
 }
