@@ -19,7 +19,6 @@ public class LanguageServiceImpl implements LanguageService {
 
     public LanguageDto getLanguageByName(String name) {
         Language language = languageRepository.findLanguageByName(name);
-
         return mapper.languageToLanguageDto(language);
     }
 

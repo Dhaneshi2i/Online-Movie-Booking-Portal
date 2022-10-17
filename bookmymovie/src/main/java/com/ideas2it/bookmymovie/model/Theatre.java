@@ -25,7 +25,6 @@ import java.util.List;
 @Component
 @Table(name = "theatre")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "theatreId")
-
 public class Theatre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

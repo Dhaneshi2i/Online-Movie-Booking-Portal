@@ -28,6 +28,5 @@ public interface MapStructMapper {
     CastDto castToCastDto (Cast cast);
     Booking bookingDtoToBooking(BookingDto bookingDto);
     BookingDto bookingToBookingDto(Booking booking);
-    BookedSeat bookedSeatDtoToBookedSeat(BookedSeatDto bookedSeatDto);
-    BookedSeatDto bookedSeatToBookedSeatDto(BookedSeat bookedSeat);
+
 }

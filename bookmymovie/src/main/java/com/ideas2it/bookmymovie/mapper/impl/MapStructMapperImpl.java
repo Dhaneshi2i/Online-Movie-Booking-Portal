@@ -502,7 +502,9 @@ public class MapStructMapperImpl implements MapStructMapper {
 
         BookedSeatDto bookedSeatDto = new BookedSeatDto();
 
-        if ( bookedSeat.getBookedSeatId() != 0) {
+
+        if ( bookedSeat.getBookedSeatId() != 0 ) {
+
             bookedSeatDto.setBookedSeatId( bookedSeat.getBookedSeatId() );
         }
         bookedSeatDto.setSeat( seatToSeatDto( bookedSeat.getSeat() ) );
