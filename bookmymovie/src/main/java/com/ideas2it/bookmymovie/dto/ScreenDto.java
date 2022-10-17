@@ -19,10 +19,16 @@ import java.util.List;
  */
 public class ScreenDto {
     private int screenId;
+
     private int noOfSeats;
+
     private int noOfRows;
+
     private int noOfColumns;
+
     private TheatreDto theatreDto;
+
     private List<SeatDto> seats = new ArrayList<>();
+
     private List<ScreeningDto> screenings = new ArrayList<>();
 }

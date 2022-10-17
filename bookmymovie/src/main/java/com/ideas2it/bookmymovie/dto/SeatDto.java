@@ -14,9 +14,13 @@ import java.util.List;
 @Component
 public class SeatDto {
     private int seatId;
+
     private int seatNo;
+
     private String seatType;
+
     private ScreenDto screen;
+    
     private List<BookedSeatDto> bookedSeats = new ArrayList<>();
 }
 

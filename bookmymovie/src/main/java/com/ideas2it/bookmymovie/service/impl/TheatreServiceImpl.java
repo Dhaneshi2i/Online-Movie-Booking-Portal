@@ -57,7 +57,6 @@ public class TheatreServiceImpl implements TheatreService {
     public TheatreDto updateTheatreStatusDetail(int theatreId, boolean status) throws NotFoundException {
         if (theatreRepository.existsById(theatreId)) {
             Theatre theatre = theatreRepository.findById(theatreId).get();
-            theatre.setModifiedDate(LocalDate.now());
             theatre.setStatus(status);
             theatreRepository.save(theatre);
             return mapper.theatreToTheatreDto(theatre);

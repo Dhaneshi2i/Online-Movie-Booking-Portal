@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -14,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +42,14 @@ public class Theatre {
     @OneToMany(mappedBy = "theatre")
     private List<Screen> screens = new ArrayList<>();
 
-    @Column(name = "status")
-    private Boolean status;
+    @Column(name = "status",columnDefinition = "tinyint(1) default true")
+    private Boolean status = true;
 
     @Column(name="modified_date")
-    private LocalDate modifiedDate;
+    @UpdateTimestamp
+    private Timestamp modifiedDate;
 
+    @Column(name = "created_date")
+    @CreationTimestamp
+    private Timestamp createdDate;
 }
