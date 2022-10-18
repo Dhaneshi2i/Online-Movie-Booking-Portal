@@ -22,7 +22,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bookmymovie" target="1.8" />
+      <module name="bookmymovie" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
