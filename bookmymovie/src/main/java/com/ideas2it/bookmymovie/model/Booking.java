@@ -33,7 +33,7 @@ public class Booking {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users users;
 
-    
+     
 
     @ManyToOne
     @JoinColumn(name = "screening_id", referencedColumnName = "id")
