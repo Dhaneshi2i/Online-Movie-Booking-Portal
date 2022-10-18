@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
-
+//screendto
     private int screenId;
 
     private TheatreDto theatre;
