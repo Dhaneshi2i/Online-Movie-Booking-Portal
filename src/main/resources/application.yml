@@ -14,8 +14,9 @@ spring:
     username: root
     password: siva2001
 
-
-
+# Redis configuration
+  spring.redis.host: localhost
+  spring.redis.port: 8020
 
 
 
