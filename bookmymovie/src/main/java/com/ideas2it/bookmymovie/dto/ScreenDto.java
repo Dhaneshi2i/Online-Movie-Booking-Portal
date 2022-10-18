@@ -1,35 +1,32 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ideas2it.bookmymovie.model.Theatre;
+import com.ideas2it.bookmymovie.slimdto.TheatreSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "screenId")
+@Component
 /**
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
+
     private int screenId;
 
-    private int noOfSeats;
+    private TheatreDto theatre;
 
-    private int noOfRows;
+    private List<ShowDto> show;
 
-    private int noOfColumns;
+    private String screenName;
 
-    private TheatreDto theatreDto;
+    private int rows;
 
-    private List<SeatDto> seats = new ArrayList<>();
-
-    private List<ScreeningDto> screenings = new ArrayList<>();
+    private int columns;
 }

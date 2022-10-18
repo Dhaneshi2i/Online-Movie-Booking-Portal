@@ -1,19 +1,16 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,23 +19,34 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Component
-@Table(name = "seat")
+@Table
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int seatId;
+    private BigDecimal seatId;
 
-    @Column(name = "seat_no")
-    private int seatNo;
+    private String seatNumber;
 
-    @Column(name = "seat_type")
-    private String seatType;
+    private String type;
+
+    private double price;
+
+    @Enumerated(EnumType.STRING)
+    private SeatTypeEnum seatStatus;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "screen_id")
-    private Screen screen;
+    private Ticket ticket;
 
-    @OneToMany(mappedBy = "seat")
-    private List<BookedSeat> bookedSeats = new ArrayList<>();
+    @Column(name = "status", columnDefinition = "tinyint(1) default true")
+    private Boolean status = true;
+
+    @CreationTimestamp
+    @Column(name = "created_date")
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "modified_date")
+    private Timestamp modifiedDate;
 
 }

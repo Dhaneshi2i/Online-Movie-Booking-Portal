@@ -1,9 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
-import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.service.CustomerService;
-import com.ideas2it.bookmymovie.service.impl.CustomerServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,9 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
-import com.ideas2it.bookmymovie.dto.UsersDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.service.impl.RoleServiceImpl;
-import com.ideas2it.bookmymovie.service.impl.UserServiceImpl;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;

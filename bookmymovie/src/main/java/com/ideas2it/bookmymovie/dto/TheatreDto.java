@@ -1,12 +1,12 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ideas2it.bookmymovie.model.Screen;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,13 +14,22 @@ import java.util.List;
  */
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "theatreId")
+@NoArgsConstructor
+@AllArgsConstructor
+@Component
 public class TheatreDto {
+
     private int theatreId;
 
-    private String name;
+    private String theatreName;
 
-    private String cityName;
+    private String theatreCity;
 
-    private List<ScreenDto> screensDto = new ArrayList<>();
+    private String managerName;
+
+    private String managerContact;
+
+    private List<ScreenDto> screen;
+
+    private List<ShowDto> show;
 }

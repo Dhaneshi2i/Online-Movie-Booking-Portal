@@ -1,22 +1,10 @@
 package com.ideas2it.bookmymovie.controller;
 
-import com.ideas2it.bookmymovie.dto.CastDto;
-import com.ideas2it.bookmymovie.dto.GenreDto;
-import com.ideas2it.bookmymovie.dto.LanguageDto;
-import com.ideas2it.bookmymovie.dto.MovieDto;
-import com.ideas2it.bookmymovie.dto.RoleDto;
 import com.ideas2it.bookmymovie.dto.ScreenDto;
-import com.ideas2it.bookmymovie.dto.ScreeningDto;
 import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.service.CastService;
-import com.ideas2it.bookmymovie.service.GenreService;
-import com.ideas2it.bookmymovie.service.LanguageService;
-import com.ideas2it.bookmymovie.service.MovieService;
-import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.ScreenService;
-import com.ideas2it.bookmymovie.service.ScreeningService;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.http.HttpStatus;
