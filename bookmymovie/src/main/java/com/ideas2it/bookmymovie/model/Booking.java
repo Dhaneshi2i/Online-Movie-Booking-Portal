@@ -33,8 +33,26 @@ public class Booking {
     private double totalCost;
     @JsonIgnore
     @ManyToOne
-    private Customer customer;
-    @JsonIgnore
-    @OneToOne(mappedBy = "booking")
-    private Ticket ticket;
+
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Users users;
+
+     
+
+    @ManyToOne
+    @JoinColumn(name = "screening_id", referencedColumnName = "id")
+    private Screening screening;
+
+    @OneToMany(mappedBy = "booking")
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
+
+    @Column(name = "created_date")
+    private LocalDate creationDate;
+
+    @Column(name = "modified_date")
+    private LocalDate modifiedDate;
+
+    @Column(name = "status")
+    private boolean status;
+
 }
