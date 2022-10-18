@@ -1,76 +1,34 @@
 package com.ideas2it.bookmymovie.model;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
 @Table(name = "movie")
+@DynamicUpdate
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int movieId;
-
-    @Column(name = "movie_name")
-    private String name;
-
-    @Column(name = "release_date")
-    private ZonedDateTime releaseDate;
-
-    @Column
-    private String duration;
-
-    @Column
-    private Boolean Status;
-
-    @Column
-    private LocalDate createdDate;
-
-    @Column
-    private LocalDate modifiedDate;
-
-    @Column(name = " screening_id")
-    @OneToMany(mappedBy = "movie")
-    private List<Screening> screening = new ArrayList<>();
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(
-            name = "movie_cast",
-            joinColumns = {
-                    @JoinColumn(name = "movie_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "cast_id")
-            }
-    )
-    private List<Cast> casts = new ArrayList<>();
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(
-            name = "movie_language",
-            joinColumns = {
-                    @JoinColumn(name = "movie_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "language_id")
-            }
-    )
-    private List<Language> languages = new ArrayList<>();
-
+    private String movieName;
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
@@ -84,4 +42,40 @@ public class Movie {
             }
     )
     private List<Genre> genres = new ArrayList<>();
+    private String duration;
+    @ManyToMany(cascade = {
+            CascadeType.ALL
+    })
+    @JoinTable(
+            name = "movie_language",
+            joinColumns = {
+                    @JoinColumn(name = "movie_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "language_id")
+            }
+    )
+    private List<Language> languages = new ArrayList<>();
+    @ManyToMany(cascade = {
+            CascadeType.ALL
+    })
+    @JoinTable(
+            name = "movie_cast",
+            joinColumns = {
+                    @JoinColumn(name = "movie_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "cast_id")
+            }
+    )
+    private List<Cast> casts = new ArrayList<>();
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate movieDate;
+    @JsonIgnore
+    @OneToOne
+    private Show show;
+
 }
+
