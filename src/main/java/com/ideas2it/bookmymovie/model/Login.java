@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Login {
-    private User user;
+    private Users user;
     private boolean loginStatus;
 
 }

@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,11 +18,13 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
 @Table(name = "cast")
 public class Cast {
     @Id
@@ -36,7 +39,7 @@ public class Cast {
     private String role;
 
 
-    @ManyToMany(mappedBy = "casts", cascade = { CascadeType.ALL })
+    @ManyToMany(targetEntity=Movie.class, mappedBy = "casts", cascade = { CascadeType.ALL })
     private List<Movie> movies = new ArrayList<>();
 
 }
