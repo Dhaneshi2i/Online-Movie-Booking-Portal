@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,12 +28,10 @@ public class Ticket {
 
     private boolean ticketStatus;
 
-<<<<<<< HEAD:bookmymovie/src/main/java/com/ideas2it/bookmymovie/model/Language.java
-=======
     @OneToMany
     private List<Seat> seats;
 
     @OneToOne
     private Booking booking;
->>>>>>> 2390fc0 (Online-Movie-Booking:):src/main/java/com/ideas2it/bookmymovie/model/Ticket.java
+
 }
