@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,16 +18,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
-@Table
 public class Theatre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal theatreId;
+    private int theatreId;
 
     private String theatreName;
 

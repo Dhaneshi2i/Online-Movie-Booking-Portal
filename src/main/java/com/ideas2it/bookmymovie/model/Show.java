@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
 public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigDecimal showId;
+    private int showId;
     private LocalDateTime showStartTime;
     private LocalDateTime showEndTime;
     @OneToOne(mappedBy = "show")

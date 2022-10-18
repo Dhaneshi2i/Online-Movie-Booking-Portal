@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class CustomerDto {
-    private BigDecimal customerId;
+    private int customerId;
     private String customerName;
     private String mobileNumber;
     private String emailId;

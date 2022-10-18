@@ -1,62 +1,41 @@
 package com.ideas2it.bookmymovie.model;
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
 @Table(name = "movie")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int movieId;
-
-    @Column(name = "movie_name")
-    private String name;
-
-    @Column(name = "release_date")
-    private ZonedDateTime releaseDate;
-
-    @Column
+    private String movieName;
     private String duration;
 
     @Column
-    private Boolean Status;
-
-    @Column
-    private LocalDate createdDate;
-
-    @Column
-    private LocalDate modifiedDate;
-
-    @Column(name = " screening_id")
-    @OneToMany(mappedBy = "movie")
-    private List<Screening> screening = new ArrayList<>();
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
     @JoinTable(
-            name = "movie_cast",
+            name = "movie_genre",
             joinColumns = {
                     @JoinColumn(name = "movie_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "cast_id")
-            }
-    )
-    private List<Cast> casts = new ArrayList<>();
+            }, inverseJoinColumns = {@JoinColumn(name = "genre_id")})
+    private List<Genre> genres = new ArrayList<>();
+
+    @Column
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
@@ -71,17 +50,25 @@ public class Movie {
     )
     private List<Language> languages = new ArrayList<>();
 
+    @Column
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
     @JoinTable(
-            name = "movie_genre",
+            name = "movie_cast",
             joinColumns = {
                     @JoinColumn(name = "movie_id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "genre_id")
+                    @JoinColumn(name = "cast_id")
             }
     )
-    private List<Genre> genres = new ArrayList<>();
+    private List<Cast> casts = new ArrayList<>();
+
+    private String movieRating;
+
+    private LocalDate movieDate;
+    @JsonIgnore
+    @OneToOne
+    private Show show;
 }

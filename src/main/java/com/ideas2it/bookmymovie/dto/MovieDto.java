@@ -1,5 +1,8 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.ideas2it.bookmymovie.model.Cast;
+import com.ideas2it.bookmymovie.model.Genre;
+import com.ideas2it.bookmymovie.model.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,23 +22,14 @@ public class MovieDto {
 
     private int movieId;
 
-    private String name;
-
-    private ZonedDateTime releaseDate;
-
-    private String duration;
-
-    private List<ScreeningDto> screenings = new ArrayList<>();
+    private String movieName;
 
     private List<CastDto> casts = new ArrayList<>();
 
     private List<LanguageDto> languages = new ArrayList<>();
 
     private List<GenreDto> genres = new ArrayList<>();
+    private LocalDate movieDate;
+    private ShowDto show;
 
-    private Boolean Status;
-
-    private LocalDate createdDate;
-
-    private LocalDate modifiedDate;
 }
