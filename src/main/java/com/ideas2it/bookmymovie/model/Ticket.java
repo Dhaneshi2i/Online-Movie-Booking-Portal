@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -26,15 +26,13 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private BigDecimal ticketId;
-
+    private int ticketId;
     private int noOfSeats;
-
-    private boolean ticketStatus;
-
+    private boolean ticketStatus = false;
+    @JsonIgnore
     @OneToMany
     private List<Seat> seats;
-
+    @JsonIgnore
     @OneToOne
     private Booking booking;
 

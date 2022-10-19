@@ -9,11 +9,16 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -21,12 +26,11 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Component
-@Table
+@Table(name = "seats")
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal seatId;
-
+    private int seatId;
     private String seatNumber;
 
     private String type;
@@ -36,12 +40,11 @@ public class Seat {
     @Enumerated(EnumType.STRING)
     private SeatTypeEnum seatStatus;
 
-    @JsonIgnore
     @ManyToOne
     private Ticket ticket;
 
     @Column(name = "status", columnDefinition = "tinyint(1) default true")
-    private Boolean status = true;
+    private Boolean status = false;
 
     @CreationTimestamp
     @Column(name = "created_date")

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,8 +37,8 @@ public class Cast {
     @Column(name = "cast_role")
     private String role;
 
-
     @ManyToMany(targetEntity=Movie.class, mappedBy = "casts", cascade = { CascadeType.ALL })
     private List<Movie> movies = new ArrayList<>();
 
 }
+

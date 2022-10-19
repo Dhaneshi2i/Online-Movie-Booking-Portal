@@ -37,15 +37,13 @@ public class Booking {
 
     private String transactionMode;
 
-    private String transactionStatus;
+    private boolean transactionStatus = false;
 
     private double totalCost;
 
-    @JsonIgnore
     @ManyToOne
-    private Customer customer;
+    private User user;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "booking")
     private Ticket ticket;
 }

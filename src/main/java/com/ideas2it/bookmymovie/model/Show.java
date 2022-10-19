@@ -16,33 +16,29 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "show")
-@DynamicUpdate
+@Table(name = "shows")
 public class Show {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int showId;
-    private LocalDateTime showStartTime;
-    private LocalDateTime showEndTime;
-    @OneToOne(mappedBy = "show")
-    private Movie movie;
-    @JsonIgnore
-    @ManyToOne
-    private Screen screen;
-    @JsonIgnore
-    @ManyToOne
-    private Theatre theatre;
-    @JsonIgnore
-    @OneToOne
-    private Booking booking;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id", nullable = false)
+   private int showId;
+   private LocalTime showStartTime;
+   private LocalTime showEndTime;
+   @OneToOne(mappedBy = "show")
+   private Movie movie;
+   @ManyToOne
+   private Screen screen;
+   @ManyToOne
+   private Theatre theatre;
+   @OneToOne
+   private Booking booking;
    private LocalDate showDate;
 }

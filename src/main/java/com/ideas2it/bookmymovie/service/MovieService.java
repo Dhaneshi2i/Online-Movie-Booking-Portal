@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.service;
 
+
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Movie;
 

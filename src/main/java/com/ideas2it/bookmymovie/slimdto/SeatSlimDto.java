@@ -17,5 +17,5 @@ public class SeatSlimDto {
 
     private double price;
 
-    private SeatTypeEnum status;
+    private SeatTypeEnum seatStatus;
 }

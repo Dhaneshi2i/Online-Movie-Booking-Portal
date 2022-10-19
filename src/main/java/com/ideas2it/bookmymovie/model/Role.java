@@ -25,7 +25,6 @@ import java.util.List;
 @Entity
 @Component
 @Table(name = "roles")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "roleId")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +35,5 @@ public class Role {
     private String roleType;
 
     @OneToMany(mappedBy = "role")
-    private List<Users> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 }

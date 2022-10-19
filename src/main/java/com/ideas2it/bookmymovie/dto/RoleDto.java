@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.ideas2it.bookmymovie.slimdto.UserSlimDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +15,6 @@ import java.util.List;
 @Component
 public class RoleDto {
     private int roleId;
-
     private String roleType;
-
-    private List<UsersDto> users = new ArrayList<>();
+    private List<UserSlimDto> users = new ArrayList<>();
 }
