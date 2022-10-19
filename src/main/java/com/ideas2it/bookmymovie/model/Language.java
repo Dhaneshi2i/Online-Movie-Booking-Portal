@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.model;
 
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,5 @@ public class Language {
 
     @ManyToMany(mappedBy = "languages", cascade = {CascadeType.ALL})
     private List<Movie> movies = new ArrayList<>();
+
 }

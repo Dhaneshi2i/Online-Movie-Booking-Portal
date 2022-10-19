@@ -22,7 +22,7 @@ public class SeatDto {
 
     private double price;
 
-    private SeatTypeEnum status;
+    private SeatTypeEnum seatStatus;
 
     private TicketDto ticket;
 }

@@ -19,4 +19,5 @@ public class GenreDto {
     private String name;
 
     private List<MovieDto> movies = new ArrayList<>();
+
 }

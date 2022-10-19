@@ -19,4 +19,5 @@ public class CastDto {
     private String role;
 
     private List<MovieDto> movies = new ArrayList<>();
+
 }

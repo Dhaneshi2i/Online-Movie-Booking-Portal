@@ -1,12 +1,15 @@
 package com.ideas2it.bookmymovie.model;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,15 @@ public class Movie {
     private String duration;
 
     @Column
+    private Boolean Status = false;
+    @CreationTimestamp
+    @Column
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    @Column
+    private Timestamp modifiedDate;
+    @JsonIgnore
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
@@ -35,7 +47,7 @@ public class Movie {
             }, inverseJoinColumns = {@JoinColumn(name = "genre_id")})
     private List<Genre> genres = new ArrayList<>();
 
-    @Column
+    @JsonIgnore
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
@@ -50,7 +62,7 @@ public class Movie {
     )
     private List<Language> languages = new ArrayList<>();
 
-    @Column
+    @JsonIgnore
     @ManyToMany(cascade = {
             CascadeType.ALL
     })
@@ -68,7 +80,7 @@ public class Movie {
     private String movieRating;
 
     private LocalDate movieDate;
-    @JsonIgnore
+
     @OneToOne
     private Show show;
 }

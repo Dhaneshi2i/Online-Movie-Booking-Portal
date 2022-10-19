@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.model.Screen;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
