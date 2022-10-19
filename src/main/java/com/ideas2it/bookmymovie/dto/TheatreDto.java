@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.ideas2it.bookmymovie.slimdto.ScreenSlimDto;
+import com.ideas2it.bookmymovie.slimdto.ShowSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,11 +26,8 @@ public class TheatreDto {
 
     private String theatreCity;
 
-    private String managerName;
+    private List<ScreenSlimDto> screen;
 
-    private String managerContact;
+    private List<ShowSlimDto> show;
 
-    private List<ScreenDto> screen;
-
-    private List<ShowDto> show;
 }
