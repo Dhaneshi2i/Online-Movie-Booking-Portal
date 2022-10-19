@@ -13,21 +13,11 @@ public class AdminController {
     private final GenreService genreService;
     private final CastService castService;
     private final LanguageService languageService;
-    private final RoleService roleService;
-    private final SeatService seatService;
-    private final TheatreService theatreService;
-    private final MovieService movieService;
 
-    public AdminController(GenreService genreService, CastService castService, LanguageService languageService,
-                           RoleService roleService, SeatService seatService, TheatreService theatreService,
-                           MovieService movieService) {
+    public AdminController(GenreService genreService, CastService castService, LanguageService languageService) {
         this.genreService = genreService;
         this.castService = castService;
         this.languageService = languageService;
-        this.roleService = roleService;
-        this.seatService = seatService;
-        this.theatreService = theatreService;
-        this.movieService = movieService;
     }
 
     @PostMapping("/Cast")
@@ -60,17 +50,12 @@ public class AdminController {
         return genreService.getGenreByName(name);
     }
 
-    
+
     // old entries
    /* @PostMapping("/addScreen")
     public ResponseEntity<ScreenDto> addScreen(@RequestBody ScreenDto screenDto) {
         return new ResponseEntity<>(screenService.createScreenDetails(screenDto), HttpStatus.OK);
     }
-
-    @PostMapping("/addScreening")
-    public ResponseEntity<ScreeningDto>  addScreening(@RequestBody ScreeningDto screeningDto) {
-        return new ResponseEntity<>(screeningService.addScreening(screeningDto), HttpStatus.OK);
-    }*/
 
     // Seat operations
     /*@PostMapping("/addSeat")

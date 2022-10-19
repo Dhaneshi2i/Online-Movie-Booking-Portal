@@ -17,7 +17,7 @@ public class BookingController {
         this.bookingDto = bookingDto;
     }
 
-    @PostMapping("/")
+    @PostMapping("/{showId}/{userId}")
     public BookingDto bookTickets(@RequestBody BookingDto bookingDto, @RequestParam int showId,
                                   @RequestParam int userId){
         return bookingService.createBooking(bookingDto, userId, showId);

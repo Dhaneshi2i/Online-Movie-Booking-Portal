@@ -6,13 +6,16 @@ import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepository userRepository;
     private MapStructMapper mapper;
 
@@ -44,5 +47,14 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userDto.getUserId()).get();
         user.setStatus(userDto.isStatus());
         return mapper.userToUserDto(userRepository.save(user));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findUserByName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("The user name is not found for this id");
+        }
+        return null;
     }
 }
