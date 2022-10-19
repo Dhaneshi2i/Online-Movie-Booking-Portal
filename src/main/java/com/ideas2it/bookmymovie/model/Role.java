@@ -34,5 +34,5 @@ public class Role {
     private String roleType;
 
     @OneToMany(mappedBy = "role")
-    private List<Users> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 }

@@ -13,6 +13,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class Screen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal screenId;
+    private int screenId;
 
     @JsonIgnore
     @ManyToOne

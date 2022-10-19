@@ -23,7 +23,7 @@ import java.util.List;
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal seatId;
+    private int seatId;
 
     private String seatNumber;
 

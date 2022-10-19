@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,15 +24,11 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private BigDecimal ticketId;
-
+    private int ticketId;
     private int noOfSeats;
-
     private boolean ticketStatus;
-
     @OneToMany
     private List<Seat> seats;
-
     @OneToOne
     private Booking booking;
 

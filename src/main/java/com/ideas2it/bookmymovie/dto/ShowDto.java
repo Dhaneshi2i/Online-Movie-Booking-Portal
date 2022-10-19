@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShowDto {
-    private BigDecimal showId;
+    private int showId;
     private LocalTime showStartTime;
     private LocalTime showEndTime;
     private TheatreDto theatre;

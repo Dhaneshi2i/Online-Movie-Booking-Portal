@@ -1,7 +1,10 @@
 package com.ideas2it.bookmymovie.controller;
 
-import com.ideas2it.bookmymovie.dto.UsersDto;
+import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.model.User;
+import com.ideas2it.bookmymovie.service.RoleService;
+import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,37 +23,43 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
 
+
     public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
-    @PostMapping("customer")
-    public UsersDto createCustomer(@Valid @RequestBody UsersDto usersDto) throws NotFoundException {
-        usersDto.setRole(roleService.getRoleByName("Customer"));
-        return userService.createUser(usersDto);
+    /*@PostMapping("/customer")
+    public User createCustomer(@RequestBody User user ) {
+        user.setRole(null);
+        return userService.createUser(user);
+    }*/
+    @PostMapping("/customer")
+    public UserDto createCustomer(@Valid @RequestBody UserDto userDto) throws NotFoundException {
+        userDto.setRole(roleService.getRoleByRoleType("Customer"));
+        return userService.createUser(userDto);
     }
 
-    @PostMapping("admin")
-    public UsersDto createAdmin(@Valid @RequestBody UsersDto usersDto) throws NotFoundException {
-        usersDto.setRole(roleService.getRoleByName("Admin"));
-        return userService.createUser(usersDto);
+    @PostMapping("/admin")
+    public UserDto createAdmin(@Valid @RequestBody UserDto userDto) throws NotFoundException {
+        userDto.setRole(roleService.getRoleByRoleType("Admin"));
+        return userService.createUser(userDto);
     }
     @GetMapping("/getAllUsers")
-    public List<UsersDto> getAllUsers() throws NotFoundException {
+    public List<UserDto> getAllUsers() throws NotFoundException {
         return userService.getAllUsers();
     }
-    @GetMapping("/viewUserById/{id}")
-    public UsersDto getUserById(@PathVariable("id") int id) throws NotFoundException {
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable("id") int id) throws NotFoundException {
         return userService.getUserById(id);
     }
-    @PatchMapping("updateUser/{id}/{status}")
-    public UsersDto updateUser(@PathVariable("id") int id,@PathVariable boolean status) throws NotFoundException {
-        UsersDto userDto = userService.getUserById(id);
+    @PatchMapping("/{id}/{status}")
+    public UserDto updateUser(@PathVariable("id") int id, @PathVariable boolean status) throws NotFoundException {
+        UserDto userDto = userService.getUserById(id);
         userDto.setStatus(status);
         return userService.updateUser(userDto);
     }
-    @DeleteMapping("deleteUser/{id}")
+    /*@DeleteMapping("deleteUser/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
-    }
+    }*/
 }

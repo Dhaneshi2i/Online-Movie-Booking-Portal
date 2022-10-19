@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Component;
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
-//screendto
+
     private int screenId;
 
     private TheatreDto theatre;
@@ -29,4 +31,5 @@ public class ScreenDto {
     private int rows;
 
     private int columns;
+    private boolean status;
 }

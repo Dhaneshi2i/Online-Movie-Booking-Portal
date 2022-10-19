@@ -12,7 +12,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/ticket_booking
     username: root
-    password: siva2001
+    password: dhanesh@22
 
 # Redis configuration
   spring.redis.host: localhost

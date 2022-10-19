@@ -14,8 +14,6 @@ import java.util.List;
 @Component
 public class RoleDto {
     private int roleId;
-
     private String roleType;
-
-    private List<UsersDto> users = new ArrayList<>();
+    private List<UserDto> users = new ArrayList<>();
 }

@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -29,12 +30,17 @@ import java.time.LocalDateTime;
 @DynamicUpdate
 public class Show {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigDecimal showId;
-    private LocalDateTime showStartTime;
-    private LocalDateTime showEndTime;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private int showId;
+
+    private LocalTime showStartTime;
+
+    private LocalTime showEndTime;
+
     @OneToOne(mappedBy = "show")
     private Movie movie;
+
     @JsonIgnore
     @ManyToOne
     private Screen screen;

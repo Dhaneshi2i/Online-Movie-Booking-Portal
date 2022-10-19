@@ -25,8 +25,6 @@ public class MovieDto {
 
     private String duration;
 
-    private List<ScreeningDto> screenings = new ArrayList<>();
-
     private List<CastDto> casts = new ArrayList<>();
 
     private List<LanguageDto> languages = new ArrayList<>();

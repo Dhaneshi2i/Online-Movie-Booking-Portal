@@ -41,7 +41,7 @@ public class Booking {
 
     @JsonIgnore
     @ManyToOne
-    private Customer customer;
+    private User user;
 
     @JsonIgnore
     @OneToOne(mappedBy = "booking")

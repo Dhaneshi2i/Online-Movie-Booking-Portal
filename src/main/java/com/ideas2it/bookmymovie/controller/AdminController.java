@@ -1,7 +1,17 @@
 package com.ideas2it.bookmymovie.controller;
 
+import com.ideas2it.bookmymovie.dto.CastDto;
+import com.ideas2it.bookmymovie.dto.GenreDto;
+import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.RoleDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.service.CastService;
+import com.ideas2it.bookmymovie.service.GenreService;
+import com.ideas2it.bookmymovie.service.LanguageService;
+import com.ideas2it.bookmymovie.service.MovieService;
+import com.ideas2it.bookmymovie.service.RoleService;
+import com.ideas2it.bookmymovie.service.SeatService;
+import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,47 +31,54 @@ public class AdminController {
     private final CastService castService;
     private final LanguageService languageService;
     private final RoleService roleService;
-    private final ScreeningService screeningService;
-    private final ScreenService screenService;
     private final SeatService seatService;
     private final TheatreService theatreService;
     private final MovieService movieService;
 
     public AdminController(GenreService genreService, CastService castService, LanguageService languageService,
-                           RoleService roleService, ScreeningService screeningService, ScreenService screenService,
-                           SeatService seatService, TheatreService theatreService, MovieService movieService) {
+                           RoleService roleService, SeatService seatService, TheatreService theatreService,
+                           MovieService movieService) {
         this.genreService = genreService;
         this.castService = castService;
         this.languageService = languageService;
         this.roleService = roleService;
-        this.screeningService = screeningService;
-        this.screenService = screenService;
         this.seatService = seatService;
         this.theatreService = theatreService;
         this.movieService = movieService;
     }
 
-    @PostMapping("/addCast")
-    public ResponseEntity<CastDto> addCast(@RequestBody CastDto castDto) {
-        return new ResponseEntity<>(castService.addCast(castDto), HttpStatus.OK);
+    @PostMapping("/Cast")
+    public CastDto addCast(@RequestBody CastDto castDto) {
+        return castService.addCast(castDto);
     }
 
-    @GetMapping("/getCast/{name}")
-    public ResponseEntity<CastDto> getCast(@PathVariable String name) throws NotFoundException {
-        return new ResponseEntity<>(castService.getCastByName(name), HttpStatus.OK);
+    @GetMapping("/cast/{name}")
+    public CastDto getCast(@PathVariable String name) throws NotFoundException {
+        return castService.getCastByName(name);
     }
 
-    @PostMapping("/addLanguage")
-    public ResponseEntity<LanguageDto> addLanguage(@RequestBody LanguageDto languageDto) {
-        return new ResponseEntity<>(languageService.addLanguage(languageDto), HttpStatus.OK);
+    @PostMapping("/Language")
+    public LanguageDto addLanguage(@RequestBody LanguageDto languageDto) {
+        return languageService.addLanguage(languageDto);
     }
 
-    @PostMapping("/addGenre")
-    public ResponseEntity<GenreDto> addGenre(@RequestBody GenreDto genreDto) {
-        return new ResponseEntity<>(genreService.addGenre(genreDto), HttpStatus.OK);
+    @GetMapping("/language/{name}")
+    public LanguageDto getLanguage(@PathVariable String name) {
+        return languageService.getLanguageByName(name);
     }
 
-    @PostMapping("/addScreen")
+    @PostMapping("/Genre")
+    public GenreDto addGenre(@RequestBody GenreDto genreDto) {
+        return genreService.addGenre(genreDto);
+    }
+
+    @GetMapping("/genre/{name}")
+    public GenreDto getGenre(@PathVariable String name) {
+        return genreService.getGenreByName(name);
+    }
+
+    // old entries
+   /* @PostMapping("/addScreen")
     public ResponseEntity<ScreenDto> addScreen(@RequestBody ScreenDto screenDto) {
         return new ResponseEntity<>(screenService.createScreenDetails(screenDto), HttpStatus.OK);
     }
@@ -69,15 +86,10 @@ public class AdminController {
     @PostMapping("/addScreening")
     public ResponseEntity<ScreeningDto>  addScreening(@RequestBody ScreeningDto screeningDto) {
         return new ResponseEntity<>(screeningService.addScreening(screeningDto), HttpStatus.OK);
-    }
-
-    @PostMapping("/addRole")
-    public ResponseEntity<RoleDto> createRoles(@RequestBody RoleDto roleDto) {
-        return new ResponseEntity<>(roleService.saveRole(roleDto), HttpStatus.OK);
-    }
+    }*/
 
     // Seat operations
-    @PostMapping("/addSeat")
+    /*@PostMapping("/addSeat")
     public ResponseEntity<SeatDto> createSeat(@RequestBody SeatDto seatDto) {
         return new ResponseEntity<>(seatService.createSeat(seatDto), HttpStatus.OK);
     }
@@ -149,5 +161,5 @@ public class AdminController {
     public ResponseEntity<List<MovieDto>> getMovieByLanguage(@PathVariable("language") String language) throws NotFoundException {
 
         return new ResponseEntity<List<MovieDto>>(movieService.getMovieByLanguage(language), HttpStatus.OK);
-    }
+    }*/
 }

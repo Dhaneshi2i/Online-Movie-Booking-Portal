@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class TicketDto {
-    private BigDecimal ticketId;
+    private int ticketId;
     private int noOfSeats;
     private boolean ticketStatus;
     private List<SeatDto> seats;

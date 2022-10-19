@@ -43,7 +43,8 @@ public class Movie {
 
     @Column(name = " screening_id")
     @OneToMany(mappedBy = "movie")
-    private List<Screening> screening = new ArrayList<>();
+    private List<Show> shows = new ArrayList<>();
+
     @ManyToMany(cascade = {
             CascadeType.ALL
     })

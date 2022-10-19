@@ -2,6 +2,7 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.RoleDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.service.RoleService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ public class RoleController {
 
     private RoleService roleService;
 
-    public RoleController(RoleServiceImpl roleService) {
+    public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
 
@@ -33,8 +34,8 @@ public class RoleController {
     }
 
 
-    @DeleteMapping("/deleteRole/{id}")
+    /*@DeleteMapping("/deleteRole/{id}")
     public void deleteRole(@PathVariable int id) {
         roleService.deleteRole(id);
-    }
+    }*/
 }
