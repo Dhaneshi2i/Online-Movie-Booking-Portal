@@ -26,19 +26,22 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "shows")
 public class Show {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "id", nullable = false)
-   private int showId;
-   private LocalTime showStartTime;
-   private LocalTime showEndTime;
-   @OneToOne(mappedBy = "show")
-   private Movie movie;
-   @ManyToOne
-   private Screen screen;
-   @ManyToOne
-   private Theatre theatre;
-   @OneToOne
-   private Booking booking;
-   private LocalDate showDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int showId;
+    private LocalTime showStartTime;
+    private LocalTime showEndTime;
+    @OneToOne(mappedBy = "show")
+    private Movie movie;
+
+    @ManyToOne
+    private Screen screen;
+
+    @ManyToOne
+    private Theatre theatre;
+
+    @OneToOne
+    private Booking booking;
+    private LocalDate showDate;
+
 }

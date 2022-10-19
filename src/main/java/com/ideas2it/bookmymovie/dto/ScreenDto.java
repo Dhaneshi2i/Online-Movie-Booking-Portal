@@ -17,7 +17,6 @@ import java.util.List;
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
-
     private int screenId;
 
     private TheatreDto theatre;

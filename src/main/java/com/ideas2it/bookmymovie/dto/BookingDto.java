@@ -20,6 +20,7 @@ public class BookingDto {
     private String transactionMode;
     private boolean transactionStatus;
     private double totalCost;
+
     private UserDto user;
     private TicketDto ticket;
 
