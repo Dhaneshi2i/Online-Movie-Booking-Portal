@@ -21,12 +21,12 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public RoleDto createRoles(@RequestBody RoleDto roleDto) {
         return roleService.saveRole(roleDto);
     }
 
-    @GetMapping("/getRoles")
+    @GetMapping("/")
     public List<RoleDto> getAllRoles() throws NotFoundException {
         return roleService.getAllRoles();
     }
