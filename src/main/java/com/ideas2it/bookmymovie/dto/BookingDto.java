@@ -22,5 +22,4 @@ public class BookingDto {
     private double totalCost;
     private UserDto user;
     private TicketDto ticket;
-
 }
