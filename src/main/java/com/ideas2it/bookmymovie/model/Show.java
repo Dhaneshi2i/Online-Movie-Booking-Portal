@@ -1,12 +1,10 @@
 package com.ideas2it.bookmymovie.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
