@@ -7,10 +7,13 @@ import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.model.Ticket;
+import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repoImpl.QueryClass;
 import com.ideas2it.bookmymovie.repository.BookingRepository;
+import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.repository.TicketRepository;
+import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +24,11 @@ import java.util.stream.Collectors;
 @Service
 public class BookingServiceImpl implements BookingService {
     private BookingRepository bookingRepository;
+    private MovieRepository movieRepository;
+    private UserRepository userRepository;
     private ShowRepository showRepository;
     private TicketRepository ticketRepository;
+    private User user;
     private Booking booking;
     private Show show;
     private final MapStructMapper mapper;
@@ -38,10 +44,15 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto createBooking(BookingDto bookMovie, int userId, int showId) {
         if (showId != 0) {
             show = showRepository.findById(showId).get();
+            show.setBooking(mapper.bookingDtoToBooking(bookMovie));
             booking.setShow(show);
         }
-        showRepository.save(show);
-        bookingRepository.save(booking);
+        if (userId != 0) {
+            user = userRepository.findById(userId).get();
+            booking.setUser(user);
+        }
+        showRepository.saveAndFlush(show);
+        bookingRepository.saveAndFlush(booking);
         return mapper.bookingToBookingDto(bookingRepository.findById(bookMovie.getTransactionId()).get());
     }
 
@@ -52,7 +63,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingDto updateBookings(BookingDto bookingDto) throws NotFoundException{
-        return mapper.bookingToBookingDto(bookingRepository.save(mapper.bookingDtoToBooking(bookingDto)));
+        bookingRepository.saveAndFlush(mapper.bookingDtoToBooking(bookingDto));
+        return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getTransactionId()).get());
+        //return mapper.bookingToBookingDto(bookingRepository.save(mapper.bookingDtoToBooking(bookingDto)));
         //return null;
     }
 

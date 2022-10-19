@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,12 +22,12 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping
-    public TicketDto addTicket(@RequestBody TicketDto ticketDto) {
-        return ticketService.addTicket(ticketDto);
+    @PostMapping("/")
+    public TicketDto addTicket(@RequestBody TicketDto ticketDto, @RequestParam int transactionId) {
+        return ticketService.addTicket(ticketDto,transactionId);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<TicketDto> getAllTickets() {
         return ticketService.viewTickets();
     }

@@ -37,7 +37,7 @@ public class Booking {
 
     private String transactionMode;
 
-    private boolean transactionStatus = false;
+    private String transactionStatus;
 
     private double totalCost;
 

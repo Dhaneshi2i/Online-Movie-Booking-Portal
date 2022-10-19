@@ -4,7 +4,7 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repoImpl.QueryClass;
-import com.ideas2it.bookmymovie.repository.MoviesRepository;
+import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
@@ -22,7 +22,7 @@ import java.util.Set;
     public class MovieServiceImpl implements MovieService {
 
         @Autowired
-        private MoviesRepository moviesrepository;
+        private MovieRepository moviesrepository;
         @Autowired
         TheatreRepository theatreRepository;
         @Autowired

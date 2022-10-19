@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface MoviesRepository extends JpaRepository<Movie, Integer> {
+public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> getAllBymovieDate(LocalDate date);
 
