@@ -31,6 +31,7 @@ import java.util.List;
 @Entity
 @Component
 @Table(name = "screens")
+
 public class Screen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,4 +61,5 @@ public class Screen {
     @UpdateTimestamp
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
+
 }

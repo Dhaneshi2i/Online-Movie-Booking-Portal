@@ -21,14 +21,23 @@ import java.util.Set;
     @Service
     public class MovieServiceImpl implements MovieService {
 
+
         @Autowired
         private MoviesRepository moviesrepository;
-        @Autowired
+
         TheatreRepository theatreRepository;
-        @Autowired
+
         ShowRepository showrepository;
-        @Autowired
-        QueryClass query;
+
+        private QueryClass query;
+
+        public MovieServiceImpl(MoviesRepository moviesrepository, TheatreRepository theatreRepository, ShowRepository showrepository, QueryClass query) {
+
+            this.moviesrepository = moviesrepository;
+            this.theatreRepository = theatreRepository;
+            this.showrepository = showrepository;
+            this.query = query;
+        }
 
         @Override
         public Movie addMovie(Movie movie) throws NotFoundException {
@@ -115,10 +124,10 @@ import java.util.Set;
         public List<Movie> viewMovieList(LocalDate date) {
             List<Movie> mvList = new ArrayList<>();
             for (Movie movie : moviesrepository.findAll()) {
-                if (movie.getMovieDate() != null && movie.getMovieDate().isEqual(date)) {
+//                if (movie.getMovieDate() != null && movie.getMovieDate().isEqual(date)) {
                     mvList.add(movie);
                 }
-            }
+//            }
             return mvList;
         }
 

@@ -27,6 +27,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int ticketId;
+
     private int noOfSeats;
     private boolean ticketStatus = false;
     @JsonIgnore

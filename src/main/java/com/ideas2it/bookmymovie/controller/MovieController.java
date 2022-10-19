@@ -91,7 +91,7 @@ public class MovieController {
      * @return List<Movie>
      * @throws NotFoundException
      */
-    @GetMapping("/findall")
+    @GetMapping
     public ResponseEntity<List<Movie>> viewMovieList() throws NotFoundException {
 
         logger.info("-------Movie List Fetched---------");
