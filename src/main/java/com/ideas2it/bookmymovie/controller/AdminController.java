@@ -3,21 +3,9 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
-import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.service.CastService;
-import com.ideas2it.bookmymovie.service.GenreService;
-import com.ideas2it.bookmymovie.service.LanguageService;
-import com.ideas2it.bookmymovie.service.MovieService;
-import com.ideas2it.bookmymovie.service.RoleService;
-import com.ideas2it.bookmymovie.service.SeatService;
-import com.ideas2it.bookmymovie.service.TheatreService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ideas2it.bookmymovie.service.*;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/V1/admin")

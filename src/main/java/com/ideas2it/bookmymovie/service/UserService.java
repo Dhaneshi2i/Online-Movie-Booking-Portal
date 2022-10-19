@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
-import com.ideas2it.bookmymovie.model.User;
 
 import java.util.List;
 
