@@ -72,6 +72,7 @@ public class AdminController {
         return genreService.getGenreByName(name);
     }
 
+    
     // old entries
    /* @PostMapping("/addScreen")
     public ResponseEntity<ScreenDto> addScreen(@RequestBody ScreenDto screenDto) {
