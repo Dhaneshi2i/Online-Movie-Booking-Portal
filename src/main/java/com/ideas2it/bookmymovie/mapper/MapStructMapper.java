@@ -39,4 +39,6 @@ public interface MapStructMapper {
     Cast castDtoToCast(CastDto castDto);
     CastDto castToCastDto(Cast cast);
     List<BookingDto> bookingListToBookingDtoList(List<Booking> bookings);
+    List<Ticket> ticketsDtoListToTicketsList(List<TicketDto> tickets);
+    List<TicketDto> ticketsListToTicketsDtoList(List<Ticket> tickets);
 }

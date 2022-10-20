@@ -15,6 +15,10 @@ import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.repository.TicketRepository;
 import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
+import com.ideas2it.bookmymovie.service.MovieService;
+import com.ideas2it.bookmymovie.service.ShowService;
+import com.ideas2it.bookmymovie.service.TicketService;
+import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,35 +27,42 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-    private BookingRepository bookingRepository;
-    private MovieRepository movieRepository;
-    private UserRepository userRepository;
-    private ShowRepository showRepository;
-    private TicketRepository ticketRepository;
+    private final BookingRepository bookingRepository;
+    private final UserService userService;
+    private final ShowService showService;
+    private final TicketService ticketService;
     private User user;
     private Booking booking;
-    private Show show;
     private final MapStructMapper mapper;
     private QueryClass queryClass;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, Booking booking, MapStructMapper mapper) {
+    public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, ShowService showService,
+                              TicketService ticketService, User user, Booking booking,
+                              MapStructMapper mapper, QueryClass queryClass) {
         this.bookingRepository = bookingRepository;
+        this.userService = userService;
+        this.showService = showService;
+        this.ticketService = ticketService;
+        this.user = user;
         this.booking = booking;
         this.mapper = mapper;
+        this.queryClass = queryClass;
     }
+
 
     @Override
     public BookingDto createBooking(BookingDto bookMovie, int userId, int showId) {
+        Show show = new Show();
         if (showId != 0) {
-            show = showRepository.findById(showId).get();
+            //show = mapper.showDtoToShow(showService.getshowById(showId));
             show.setBooking(mapper.bookingDtoToBooking(bookMovie));
             booking.setShow(show);
         }
         if (userId != 0) {
-            user = userRepository.findById(userId).get();
+            user = mapper.userDtoToUser(userService.getUserById(userId));
             booking.setUser(user);
         }
-        showRepository.saveAndFlush(show);
+        //showService.createShow(mapper.showToShowDto(show));
         bookingRepository.saveAndFlush(booking);
         return mapper.bookingToBookingDto(bookingRepository.findById(bookMovie.getTransactionId()).get());
     }
@@ -65,8 +76,6 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto updateBookings(BookingDto bookingDto) throws NotFoundException{
         bookingRepository.saveAndFlush(mapper.bookingDtoToBooking(bookingDto));
         return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getTransactionId()).get());
-        //return mapper.bookingToBookingDto(bookingRepository.save(mapper.bookingDtoToBooking(bookingDto)));
-        //return null;
     }
 
     @Override
@@ -89,7 +98,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public double calculateTotalCost(int bookingId) {
-        List<Ticket> tickets = ticketRepository.findAll();
+        List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.viewTickets());
         List<Seat> seats = new ArrayList<>();
         for (Ticket ticket : tickets) {
             if (bookingId == ticket.getBooking().getTransactionId()) {
