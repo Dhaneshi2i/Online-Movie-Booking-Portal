@@ -31,13 +31,13 @@ public class ScreenController {
      * @return addedScreen
      * @throws NotFoundException
      */
-    @PostMapping("/add")
-    public ResponseEntity<ScreenDto> addAScreen(@RequestBody ScreenDto screen,
+    @PostMapping
+    public ScreenDto addAScreen(@RequestBody ScreenDto screen,
                                              @RequestParam(required = false) int theatreId)
             throws NotFoundException {
 
         logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
-        return ResponseEntity.ok(screenService.addScreen(screen, theatreId));
+        return screenService.addScreen(screen, theatreId);
     }
 
     /**
@@ -45,19 +45,23 @@ public class ScreenController {
      * @return screenList
      * @throws NotFoundException
      */
-    @GetMapping("/findall")
-    public ResponseEntity<List<ScreenDto>> viewScreenList() throws  NotFoundException {
+
+    @GetMapping
+    public List<ScreenDto> viewScreenList() throws  ScreenNotFoundException {
+
 
         logger.info("-------List Of Screens Fetched Successfully---------");
-        return ResponseEntity.ok(screenService.viewScreenList());
+        return screenService.viewScreenList();
     }
 
     @GetMapping("/theatre/{screenId}")
-    public ResponseEntity<TheatreDto>  getTheatreById(@PathVariable int screenId) throws NotFoundException {
-        ResponseEntity<TheatreDto> response = null;
+
+    public TheatreDto  getTheatreById(@PathVariable int screenId) throws ScreenNotFoundException {
+
+
         try {
             TheatreDto theatre = screenService.getTheatre(screenId);
-            response = new ResponseEntity<>(theatre, HttpStatus.OK);
+
         } catch (Exception e) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

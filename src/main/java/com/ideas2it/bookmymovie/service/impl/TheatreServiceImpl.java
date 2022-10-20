@@ -42,8 +42,11 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     @Override
-    public TheatreDto findTheatreById(int theatreId) {
-        // TODO Auto-generated method stub
+
+    public TheatreDto findTheatres(int theatreId) {
+
+
+
         if (theatreRepository.existsById(theatreId)) {
             return mapper.theatreToTheatreDto(theatreRepository.findById(theatreId).get());
         } else
@@ -56,7 +59,9 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     @Override
+
     public List<TheatreDto> updateTheatreById(int theatreId) {
+
         Theatre theatre = theatreRepository.findById(theatreId).get();
         theatre.setStatus(false);
         theatreRepository.saveAndFlush(theatre);
@@ -68,6 +73,28 @@ public class TheatreServiceImpl implements TheatreService {
         theatreRepository.deleteById(theatreId);
         return mapper.theatreListToTheatreDtoList(theatreRepository.findAll());
     }
+
+    public  Theatre findTheatreById(int theatreId) {
+        return theatreRepository.findById(theatreId).get();
+    }
+
+//    @Override
+//    public List<TheatreDto> findTheatresByMovie(BigDecimal movieId) throws TheatreNotFoundException {
+//        List<Theatre> theatreList = new ArrayList<>();
+//        Movie movie = movieRepository.findById(movieId).get();
+//        BigDecimal showID = movie.getShow().getShowId();
+//        List<Theatre> theatres = theatreRepository.findAll();
+//        for (Theatre theatre : theatres) {
+//            List<Show> shows = theatre.getShow();
+//            for (Show show : shows) {
+//                //if (show.getShowId() == showID) {
+//                    theatreList.add(theatre);
+//                }
+//            }
+//        }
+//        return mapper.theatreListToTheatreDtoList(theatreList);
+//    }
+
 
     @Override
     public List<TheatreDto> findTheatresByMovie(int movieId) throws NotFoundException {
@@ -85,4 +112,5 @@ public class TheatreServiceImpl implements TheatreService {
         }
         return mapper.theatreListToTheatreDtoList(theatreList);
     }
+
 }

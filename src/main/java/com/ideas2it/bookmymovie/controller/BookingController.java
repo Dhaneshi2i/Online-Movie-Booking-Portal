@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/V1/booking")
 public class BookingController {
-    private final BookingService bookingService;
+    private BookingService bookingService;
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
@@ -17,11 +17,11 @@ public class BookingController {
 
     @PostMapping("/{showId}/{userId}")
     public BookingDto bookTickets(@RequestBody BookingDto bookingDto, @RequestParam int showId,
-                                  @RequestParam int userId){
+                                  @RequestParam int userId) {
         return bookingService.createBooking(bookingDto, userId, showId);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<BookingDto> getAllBookings() {
         return bookingService.getAllBookings();
     }
@@ -31,7 +31,7 @@ public class BookingController {
         return bookingService.viewByBookingId(bookingId);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public BookingDto updateTicketBooking(@RequestBody BookingDto bookingDto) {
         return bookingService.updateBookings(bookingDto);
     }

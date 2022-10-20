@@ -39,7 +39,7 @@ public class ScreenServiceImpl implements ScreenService {
     public ScreenDto addScreen(ScreenDto screenDto, int theatreId) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
         if (theatreId != 0) {
-            Theatre theatre = theatreRepository.findById(theatreId).get();
+            Theatre theatre = threa.findById(theatreId).get();
             screen.setTheatre(theatre);
         }
         return mapper.screenToScreenDto(screenRepository.save(screen));
@@ -88,5 +88,9 @@ public class ScreenServiceImpl implements ScreenService {
             return mapper.theatreToTheatreDto(theatre);
         }
         throw new NotFoundException("Screen Id not found");
+    }
+
+    public Screen findScreenById(int screenId) {
+        return screenRepository.findById(screenId).get();
     }
 }
