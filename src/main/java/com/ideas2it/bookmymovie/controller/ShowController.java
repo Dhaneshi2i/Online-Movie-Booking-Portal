@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
+import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.service.ShowService;
@@ -24,19 +25,19 @@ public class ShowController {
     /**
      * Stores a Show object in the Database.
      *
-     * @param show
+     * @param showDto
      * @param theatreId
      * @param screenId
      * @return Show
 
      */
     @PostMapping
-    public Show addShow(@RequestBody Show show, @RequestParam(required = false) Integer theatreId,
-                                        @RequestParam(required = false) Integer screenId) {
+    public ShowDto addShow(@RequestBody ShowDto showDto, @RequestParam(required = false) Integer theatreId,
+                           @RequestParam(required = false) Integer screenId) {
 
-        showService.addShow(show, theatreId, screenId);
+        showService.addShow(showDto, theatreId, screenId);
         logger.info("-------Show Added Succesfully--------");
-        return show;
+        return showDto;
     }
 
     /**
@@ -46,8 +47,8 @@ public class ShowController {
      * @return Show
      */
     @DeleteMapping("/delete/{showId}")
-    public Show removeShow(@PathVariable int showId) {
-        return showService.getShowById(showId);
+    public void removeShow(@PathVariable int showId) {
+         showService.getShowById(showId);
 
     }
 
@@ -60,11 +61,11 @@ public class ShowController {
      * @return Show
      */
     @PutMapping("/update")
-    public Show updateShow(@RequestBody Show show, @RequestParam(required = false) Integer theatreId,
+    public ShowDto updateShow(@RequestBody ShowDto showDto, @RequestParam(required = false) Integer theatreId,
                                            @RequestParam(required = false) Integer screenId) {
 
 
-            return showService.updateShow(show, theatreId, screenId);
+            return showService.updateShow(showDto, theatreId, screenId);
 
     }
 
@@ -76,7 +77,7 @@ public class ShowController {
      * @throws NotFoundException
      */
     @GetMapping("/{showId}")
-    public Show getShowById(@PathVariable int showId) {
+    public ShowDto getShowById(@PathVariable int showId) {
             return showService.getShowById(showId);
 
     }
@@ -88,7 +89,7 @@ public class ShowController {
 
      */
     @GetMapping
-    public List<Show> getAllShow() {
+    public List<ShowDto> getAllShow() {
 
         return showService.getAllShow();
     }
@@ -98,18 +99,18 @@ public class ShowController {
      * @return Show
      */
     @GetMapping("/show_theatre/{theatreId}")
-    public List<Show> getShowByTheatreId(@PathVariable int theatreId) {
+    public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
 
         return showService.getShowByThreatre(theatreId);
     }
 
     /**
      * @param date
-     * @return List<Show>
+     * @return List<showDto>
      */
-    @GetMapping("/date/{date}")
-    public List<Show> getShowByDate(@PathVariable LocalDate date) {
-
-        return showService.getShowByDate(date);
-    }
+//    @GetMapping("/date/{date}")
+//    public List<Show> getShowByDate(@PathVariable LocalDate date) {
+//
+//        return showService.getShowByDate(date);
+//    }
 }

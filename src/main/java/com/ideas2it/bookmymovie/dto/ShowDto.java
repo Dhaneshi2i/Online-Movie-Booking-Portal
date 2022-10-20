@@ -17,6 +17,7 @@ public class ShowDto {
     private LocalTime showStartTime;
     private LocalTime showEndTime;
     private TheatreDto theatre;
+    private ScreenDto screen;
     private BookingDto booking;
     private LocalDate showDate;
 }

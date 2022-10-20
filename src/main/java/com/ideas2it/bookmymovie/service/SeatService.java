@@ -6,6 +6,7 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import java.util.List;
 
 public interface SeatService {
+
     /**
      * This method gets seatDto object as parameter to create Seat Details
      *

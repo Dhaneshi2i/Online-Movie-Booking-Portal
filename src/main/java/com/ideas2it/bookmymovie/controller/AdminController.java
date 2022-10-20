@@ -17,7 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * <p>
+ * AdminController class  will create the new cast, language,
+ *
+ *
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @RestController
 @RequestMapping("/api/V1/admin")
 public class AdminController {
@@ -34,7 +43,7 @@ public class AdminController {
         this.seatService = seatService;
     }
 
-    @PostMapping("/Cast")
+    @PostMapping
     public CastDto addCast(@RequestBody CastDto castDto) {
         return castService.addCast(castDto);
     }

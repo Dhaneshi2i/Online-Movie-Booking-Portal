@@ -1,12 +1,13 @@
 package com.ideas2it.bookmymovie.service.impl;
 
-import com.ideas2it.bookmymovie.model.Screen;
+import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Show;
-import com.ideas2it.bookmymovie.model.Theatre;
-import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
-import com.ideas2it.bookmymovie.repository.TheatreRepository;
+import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.ShowService;
+import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,80 +18,82 @@ import java.util.List;
 public class ShowServiceImpl implements ShowService {
     private ShowRepository showrepository;
 
-    private TheatreRepository theatreRepository;
+    private TheatreService theatreService;
 
-    private ScreenRepository screenRepository;
+    private ScreenService screenService;
+    private MapStructMapper mapper;
 
-    public ShowServiceImpl(ShowRepository showrepository, TheatreRepository theatreRepository, ScreenRepository screenRepository) {
+    public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService, ScreenService screenService, MapStructMapper mapper) {
         this.showrepository = showrepository;
-        this.theatreRepository = theatreRepository;
-        this.screenRepository = screenRepository;
+        this.theatreService = theatreService;
+        this.screenService = screenService;
+        this.mapper = mapper;
     }
 
     @Override
-    public Show addShow(Show show, Integer theatreId, Integer screenId) {
+    public ShowDto addShow(ShowDto showDto, Integer theatreId, Integer screenId) {
 
         if (theatreId != null) {
-            Theatre theatre = theatreRepository.findById(theatreId).get();
-            show.setTheatre(theatre);
+
+            showDto.setTheatre(mapper.theatreToTheatreDto(theatreService.findTheatreById(theatreId)));
         }
         if (screenId != null) {
-            Screen screen = screenRepository.findById(screenId).get();
-            show.setScreen(screen);
+            showDto.setScreen(mapper.screenToScreenDto(screenService.findScreenById(screenId)));
         }
-        showrepository.saveAndFlush(show);
-        return show;
+        Show show = mapper.showDtoToShow(showDto);
+        showDto = mapper.showToShowDto(showrepository.saveAndFlush(show));
+        return showDto;
     }
 
     @Override
-    public Show updateShow(Show show, Integer theatreId, Integer screenId) {
-        Theatre theatre = new Theatre();
-        Screen screen = new Screen();
+    public ShowDto updateShow(ShowDto showDto, Integer theatreId, Integer screenId) {
+
         if (theatreId != null) {
-            theatre = theatreRepository.findById(theatreId).get();
-            show.setTheatre(theatre);
+            showDto.setTheatre(mapper.theatreToTheatreDto(theatreService.findTheatreById(theatreId)));
         }
         if (screenId != null) {
-            screen = screenRepository.findById(screenId).get();
-            show.setScreen(screen);
+            showDto.setScreen(mapper.screenToScreenDto(screenService.findScreenById(screenId)));
         }
-        showrepository.saveAndFlush(show);
-        return show;
+
+        Show show = mapper.showDtoToShow(showDto);
+        showDto = mapper.showToShowDto(showrepository.saveAndFlush(show));
+        return showDto;
     }
 
     @Override
-    public Show removeShow(int showid) {
+    public void removeShow(int showid) {
         Show show = showrepository.findById(showid).get();
         show.setStatus(true);
-        return show;
-    }
-
-    @Override
-    public Show getShowById(int showid) {
-        return showrepository.findById(showid).get();
-    }
-
-    @Override
-    public List<Show> getAllShow() {
-        return showrepository.findAll();
-    }
-
-    @Override
-    public List<Show> getShowByThreatre(int theatreid) {
-        return showrepository.getAllByTheatreId(theatreid);
 
     }
 
     @Override
-    public List<Show> getShowByDate(LocalDate date) {
-        List<Show> shows = new ArrayList<>();
-        for (Show show : showrepository.findAll()) {
-            if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
-                shows.add(show);
-            }
-        }
-        return shows;
+    public ShowDto getShowById(int showid) {
+        return mapper.showToShowDto(showrepository.findById(showid).get());
     }
+
+    @Override
+    public List<ShowDto> getAllShow() {
+
+        return mapper.showListToShowDtoList(showrepository.findAll());
+    }
+
+    @Override
+    public List<ShowDto> getShowByThreatre(int theatreid) {
+        return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreid));
+
+    }
+
+//    @Override
+//    public List<ShowDto> getShowByDate(LocalDate date) {
+//        List<Show> shows = new ArrayList<>();
+//        for (Show show : showrepository.findAll()) {
+//            if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
+//                shows.add(show);
+//            }
+//        }
+//        return showsDto;
+//    }
 
 }
 

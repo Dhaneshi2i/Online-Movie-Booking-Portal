@@ -38,5 +38,4 @@ public class UserDto {
 
 }
 
-//[6-9][0-9]{9}
 

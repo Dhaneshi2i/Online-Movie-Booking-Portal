@@ -10,4 +10,6 @@ import java.util.List;
 public interface ShowRepository extends JpaRepository<Show, Integer> {
 	@Query("select s from Show s where s.theatre.theatreId = :id")
 	List<Show> getAllByTheatreId(@Param("id") int id);
+
+
 }

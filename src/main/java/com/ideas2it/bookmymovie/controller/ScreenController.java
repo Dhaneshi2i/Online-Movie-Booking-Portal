@@ -28,12 +28,14 @@ public class ScreenController {
      * @return addedScreen
      * @throws NotFoundException
      */
-    @PostMapping("/add")
+
+    @PostMapping
     public ScreenDto addScreen(@RequestBody ScreenDto screen, @RequestParam int theatreId)
             throws NotFoundException {
 
         logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
         return screenService.createScreen(screen, theatreId);
+
     }
 
     /**
