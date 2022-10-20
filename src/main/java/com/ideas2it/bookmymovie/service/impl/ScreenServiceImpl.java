@@ -46,7 +46,6 @@ public class ScreenServiceImpl implements ScreenService {
         if (0 != theatreId) {
             Optional<Theatre> theatre = theatreRepository.findById(theatreId);
             theatre.ifPresent(screen::setTheatre);
-
         }
         return mapper.screenToScreenDto(screenRepository.save(screen));
     }
@@ -58,7 +57,7 @@ public class ScreenServiceImpl implements ScreenService {
      * the database.
      */
     @Override
-    public List<ScreenDto> viewScreenList() throws NotFoundException {
+    public List<ScreenDto> getAllScreen() throws NotFoundException {
         List<Screen> screens = screenRepository.findAllByStatus(true);
         if (screens.isEmpty()) {
             throw new NotFoundException("No Details Present Here");

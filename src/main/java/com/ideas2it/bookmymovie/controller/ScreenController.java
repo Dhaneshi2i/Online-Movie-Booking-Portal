@@ -30,13 +30,30 @@ public class ScreenController {
 
     /**
      *
+     * @param screen
+     * @param theatreId
+     * @return addedScreen
+     * @throws NotFoundException
+     */
+    @PostMapping
+    public ScreenDto addScreen(@RequestBody ScreenDto screen, @RequestParam int theatreId)
+            throws NotFoundException {
+
+        logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
+        return screenService.createScreen(screen, theatreId);
+
+    }
+
+    /**
+     *
      * @return screenList
      * @throws NotFoundException
      */
     @GetMapping
     public List<ScreenDto> viewScreenList() throws  NotFoundException {
+
         logger.info("-------List Of Screens Fetched Successfully---------");
-        return screenService.viewScreenList();
+        return screenService.getAllScreen();
     }
 
     @GetMapping("/theatre/{screenId}")

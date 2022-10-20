@@ -33,6 +33,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/admin")
 public class AdminController {
+
 //    private final GenreService genreService;
 //    private final CastService castService;
 //    private final LanguageService languageService;
@@ -50,7 +51,6 @@ public class AdminController {
         this.movieService = movieService;
         this.screenService = screenService;
         this.showService = showService;
-        this.seatService = seatService;
     }
 
     /*@PostMapping("/role")
