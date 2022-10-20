@@ -5,7 +5,6 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Ticket;
-import com.ideas2it.bookmymovie.repository.BookingRepository;
 import com.ideas2it.bookmymovie.repository.TicketRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
 import com.ideas2it.bookmymovie.service.TicketService;
