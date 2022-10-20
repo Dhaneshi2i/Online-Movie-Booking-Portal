@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.service;
 
+import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.model.Show;
 
 import java.time.LocalDate;
@@ -7,17 +8,17 @@ import java.util.List;
 
 public interface ShowService {
 
-    Show addShow(Show show, Integer theatreId, Integer screenId);
+    ShowDto addShow(ShowDto show, Integer theatreId, Integer screenId);
 
-    Show updateShow(Show show, Integer theatreId, Integer screenId);
+    ShowDto updateShow(ShowDto show, Integer theatreId, Integer screenId);
 
-    Show removeShow(int showId);
+    void removeShow(int showId);
 
-    Show getShowById(int showId);
+    ShowDto getShowById(int showId);
 
-    List<Show> getAllShow();
+    List<ShowDto> getAllShow();
 
-    List<Show> getShowByThreatre(int theatreId);
+    List<ShowDto> getShowByThreatre(int theatreId);
 
-    List<Show> getShowByDate(LocalDate date);
+//    List<ShowDto> getShowByDate(LocalDate date);
 }

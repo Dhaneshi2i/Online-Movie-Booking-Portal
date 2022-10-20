@@ -72,6 +72,7 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     public  Theatre findTheatreById(int theatreId) {
+
         return theatreRepository.findById(theatreId).get();
     }
 

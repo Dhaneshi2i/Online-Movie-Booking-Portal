@@ -14,6 +14,7 @@ import com.ideas2it.bookmymovie.service.BookingService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.TicketService;
 import com.ideas2it.bookmymovie.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class BookingServiceImpl implements BookingService {
     private QueryClass queryClass;
 
     public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, ShowService showService,
-                              TicketService ticketService, User user, Booking booking,
+                              @Lazy TicketService ticketService, User user, Booking booking,
                               MapStructMapper mapper, QueryClass queryClass) {
         this.bookingRepository = bookingRepository;
         this.userService = userService;
@@ -93,7 +94,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public double calculateTotalCost(int bookingId) {
-        List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.viewTickets());
+        List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.getAllTickets());
         List<Seat> seats = new ArrayList<>();
         for (Ticket ticket : tickets) {
             if (bookingId == ticket.getBooking().getTransactionId()) {

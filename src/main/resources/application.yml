@@ -6,6 +6,8 @@ spring:
     url: jdbc:mysql://localhost/ticket_booking
     username: root
     password: siva2001
+  main:
+    allow-circular-reference: true
 
     database-platform=org:
       hibernate:

@@ -39,7 +39,7 @@ public class ScreenServiceImpl implements ScreenService {
     public ScreenDto addScreen(ScreenDto screenDto, int theatreId) throws ScreenNotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
         if (theatreId != 0) {
-            Theatre theatre = threa.findById(theatreId).get();
+            Theatre theatre = theatreRepository.findById(theatreId).get();
             screen.setTheatre(theatre);
         }
         return mapper.screenToScreenDto(screenRepository.save(screen));

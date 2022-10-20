@@ -53,11 +53,11 @@ public class ScreenController {
     }
 
     @GetMapping("/theatre/{screenId}")
-    public TheatreDto  getTheatreById(@PathVariable int screenId) throws ScreenNotFoundException {
-
+    public ResponseEntity<TheatreDto>  getTheatreById(@PathVariable int screenId) throws ScreenNotFoundException {
+        ResponseEntity<TheatreDto> response = null;
         try {
             TheatreDto theatre = screenService.getTheatre(screenId);
-
+            response = new ResponseEntity<>(theatre, HttpStatus.OK);
         } catch (Exception e) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -49,5 +49,9 @@ public interface MapStructMapper {
 
     MovieSlimDto movieToMovieSlimDto(Movie movie);
 
+    List<ShowDto> showListToShowDtoList(List<Show> show);
+    List<Show> showDtoListToShowList(List<ShowDto> showDto);
+
+
 
 }

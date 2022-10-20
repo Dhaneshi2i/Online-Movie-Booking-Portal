@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 public class UserDto {
     private int userId;
     @Pattern(regexp = "([A-Z][a-z]{2,30}\\s*)+", message = "Only letter are valid")
-    private String name;
+    private String userName;
     @Email
     private String emailId;
     //@NotNull
