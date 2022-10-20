@@ -44,7 +44,7 @@ public class TheatreServiceImpl implements TheatreService {
 
     @Override
     public TheatreDto findTheatres(int theatreId) {
-        // TODO Auto-generated method stub
+
         if (theatreRepository.existsById(theatreId)) {
             return mapper.theatreToTheatreDto(theatreRepository.findById(theatreId).get());
         } else
@@ -58,7 +58,7 @@ public class TheatreServiceImpl implements TheatreService {
 
     @Override
     public List<TheatreDto> updateTheatre(int theatreId) {
-        // TODO Auto-generated method stub
+
         Theatre theatre = theatreRepository.findById(theatreId).get();
         theatre.setStatus(false);
         theatreRepository.saveAndFlush(theatre);
@@ -69,6 +69,10 @@ public class TheatreServiceImpl implements TheatreService {
     public List<TheatreDto> deleteTheatreById(int theatreId) {
         theatreRepository.deleteById(theatreId);
         return mapper.theatreListToTheatreDtoList(theatreRepository.findAll());
+    }
+
+    public  Theatre findTheatreById(int theatreId) {
+        return theatreRepository.findById(theatreId).get();
     }
 
 //    @Override

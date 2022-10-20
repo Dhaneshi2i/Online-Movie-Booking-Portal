@@ -3,6 +3,7 @@ package com.ideas2it.bookmymovie.service;
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.exception.ScreenNotFoundException;
+import com.ideas2it.bookmymovie.model.Screen;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface ScreenService {
     public ScreenDto updateScreen(int screenId);
     public ScreenDto viewScreen(int screenId) throws ScreenNotFoundException;
     public TheatreDto getTheatre(int screenId) throws ScreenNotFoundException;
+
+    Screen findScreenById(int screenId);
 }

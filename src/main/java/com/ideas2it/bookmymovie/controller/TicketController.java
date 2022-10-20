@@ -33,7 +33,7 @@ public class TicketController {
 
     @GetMapping("/")
     public List<TicketDto> getAllTickets() {
-        return ticketService.viewTickets();
+        return ticketService.getAllTickets();
     }
 
     @GetMapping("/{ticketId}")

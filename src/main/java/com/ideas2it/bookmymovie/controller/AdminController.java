@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api/V1/admin")
 public class AdminController {
@@ -31,7 +30,7 @@ public class AdminController {
         this.languageService = languageService;
     }
 
-    @PostMapping("/Cast")
+    @PostMapping
     public CastDto addCast(@RequestBody CastDto castDto) {
         return castService.addCast(castDto);
     }

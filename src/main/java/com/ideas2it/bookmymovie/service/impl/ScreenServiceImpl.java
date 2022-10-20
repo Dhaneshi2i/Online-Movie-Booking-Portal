@@ -89,4 +89,8 @@ public class ScreenServiceImpl implements ScreenService {
         }
         throw new ScreenNotFoundException("Screen Id not found");
     }
+
+    public Screen findScreenById(int screenId) {
+        return screenRepository.findById(screenId).get();
+    }
 }
