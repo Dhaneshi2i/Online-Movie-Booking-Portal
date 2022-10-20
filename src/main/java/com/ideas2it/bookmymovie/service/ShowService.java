@@ -13,11 +13,11 @@ public interface ShowService {
 
     Show removeShow(int showId);
 
-    Show viewShow(int showId);
+    Show getShowById(int showId);
 
-    List<Show> viewAllShows();
+    List<Show> getAllShow();
 
-    List<Show> viewShowList(int theatreId);
+    List<Show> getShowByThreatre(int theatreId);
 
-    List<Show> viewShowList(LocalDate date);
+    List<Show> getShowByDate(LocalDate date);
 }

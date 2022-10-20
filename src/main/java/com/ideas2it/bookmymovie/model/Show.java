@@ -35,5 +35,7 @@ public class Show {
     @JoinColumn(name = "booking_id")
     private Booking booking;
     private LocalDate showDate;
+    @Column
+    private Boolean Status = false;
 
 }

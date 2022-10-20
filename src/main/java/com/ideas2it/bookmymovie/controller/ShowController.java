@@ -5,14 +5,13 @@ import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/shows")
+@RequestMapping("/api/V1/show")
 public class ShowController {
     Logger logger = LoggerFactory.getLogger(ShowController.class);
 
@@ -31,13 +30,13 @@ public class ShowController {
      * @return Show
 
      */
-    @PostMapping("/add")
-    public ResponseEntity<Show> addShow(@RequestBody Show show, @RequestParam(required = false) Integer theatreId,
+    @PostMapping
+    public Show addShow(@RequestBody Show show, @RequestParam(required = false) Integer theatreId,
                                         @RequestParam(required = false) Integer screenId) {
 
         showService.addShow(show, theatreId, screenId);
         logger.info("-------Show Added Succesfully--------");
-        return new ResponseEntity<>(show, HttpStatus.CREATED);
+        return show;
     }
 
     /**
@@ -47,18 +46,9 @@ public class ShowController {
      * @return Show
      */
     @DeleteMapping("/delete/{showId}")
-    public ResponseEntity<Show> removeShow(@PathVariable int showId) {
+    public Show removeShow(@PathVariable int showId) {
+        return showService.getShowById(showId);
 
-        ResponseEntity<Show> response = null;
-        Show show = showService.viewShow(showId);
-        if (show == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            showService.removeShow(showId);
-            response = new ResponseEntity<>(show, HttpStatus.OK);
-            logger.info("-------Show with ShowId " + showId + " Deleted Successfully---------");
-        }
-        return response;
     }
 
     /**
@@ -70,18 +60,12 @@ public class ShowController {
      * @return Show
      */
     @PutMapping("/update")
-    public ResponseEntity<Show> updateShow(@RequestBody Show show, @RequestParam(required = false) Integer theatreId,
+    public Show updateShow(@RequestBody Show show, @RequestParam(required = false) Integer theatreId,
                                            @RequestParam(required = false) Integer screenId) {
 
-        ResponseEntity<Show> response = null;
-        if (show == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            showService.updateShow(show, theatreId, screenId);
-            response = new ResponseEntity<>(show, HttpStatus.OK);
-            logger.info("-------Show Updated Successfully---------");
-        }
-        return response;
+
+            return showService.updateShow(show, theatreId, screenId);
+
     }
 
     /**
@@ -91,20 +75,10 @@ public class ShowController {
      * @return Show
      * @throws NotFoundException
      */
-    @GetMapping("/view/{showId}")
-    public ResponseEntity<Show> viewShow(@PathVariable int showId)
-            throws NotFoundException {
+    @GetMapping("/{showId}")
+    public Show getShowById(@PathVariable int showId) {
+            return showService.getShowById(showId);
 
-        ResponseEntity<Show> response = null;
-        try {
-            Show show = showService.viewShow(showId);
-            response = new ResponseEntity<>(show, HttpStatus.OK);
-            logger.info("-------Show with ShowId " + showId + " Found Successfully---------");
-        } catch (Exception e) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw new NotFoundException("Show with " + showId + " id dosen't exist");
-        }
-        return response;
     }
 
     /**
@@ -113,11 +87,10 @@ public class ShowController {
      * @return List<Show>
 
      */
-    @GetMapping("/findall")
-    public ResponseEntity<List<Show>> viewShowList() {
+    @GetMapping
+    public List<Show> getAllShow() {
 
-        logger.info("-------List Of Shows Fetched Successfully---------");
-        return ResponseEntity.ok(showService.viewAllShows());
+        return showService.getAllShow();
     }
 
     /**
@@ -125,10 +98,9 @@ public class ShowController {
      * @return Show
      */
     @GetMapping("/show_theatre/{theatreId}")
-    public ResponseEntity<List<Show>> viewShowByTheatreId(@PathVariable int theatreId) {
+    public List<Show> getShowByTheatreId(@PathVariable int theatreId) {
 
-        logger.info("-------List Of Shows With TheatreId " + theatreId + " Fetched Successfully---------");
-        return ResponseEntity.ok(showService.viewShowList(theatreId));
+        return showService.getShowByThreatre(theatreId);
     }
 
     /**
@@ -136,9 +108,8 @@ public class ShowController {
      * @return List<Show>
      */
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<Show>> viewShowByLocalDate(@PathVariable int date) {
+    public List<Show> getShowByDate(@PathVariable LocalDate date) {
 
-        logger.info("-------List Of Shows With Date " + date + " Fetched Successfully---------");
-        return ResponseEntity.ok(showService.viewShowList(date));
+        return showService.getShowByDate(date);
     }
 }

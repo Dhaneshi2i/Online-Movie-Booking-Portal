@@ -7,7 +7,6 @@ import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.ShowService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,23 +15,27 @@ import java.util.List;
 
 @Service
 public class ShowServiceImpl implements ShowService {
-    @Autowired
     private ShowRepository showrepository;
-    @Autowired
+
     private TheatreRepository theatreRepository;
-    @Autowired
+
     private ScreenRepository screenRepository;
+
+    public ShowServiceImpl(ShowRepository showrepository, TheatreRepository theatreRepository, ScreenRepository screenRepository) {
+        this.showrepository = showrepository;
+        this.theatreRepository = theatreRepository;
+        this.screenRepository = screenRepository;
+    }
 
     @Override
     public Show addShow(Show show, Integer theatreId, Integer screenId) {
-        Theatre theatre = new Theatre();
-        Screen screen = new Screen();
+
         if (theatreId != null) {
-            theatre = theatreRepository.getOne(theatreId);
+            Theatre theatre = theatreRepository.findById(theatreId).get();
             show.setTheatre(theatre);
         }
         if (screenId != null) {
-            screen = screenRepository.getOne(screenId);
+            Screen screen = screenRepository.findById(screenId).get();
             show.setScreen(screen);
         }
         showrepository.saveAndFlush(show);
@@ -44,11 +47,11 @@ public class ShowServiceImpl implements ShowService {
         Theatre theatre = new Theatre();
         Screen screen = new Screen();
         if (theatreId != null) {
-            theatre = theatreRepository.getOne(theatreId);
+            theatre = theatreRepository.findById(theatreId).get();
             show.setTheatre(theatre);
         }
         if (screenId != null) {
-            screen = screenRepository.getOne(screenId);
+            screen = screenRepository.findById(screenId).get();
             show.setScreen(screen);
         }
         showrepository.saveAndFlush(show);
@@ -57,36 +60,36 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public Show removeShow(int showid) {
-        Show s = showrepository.findById(showid).get();
-        showrepository.delete(s);
-        return s;
+        Show show = showrepository.findById(showid).get();
+        show.setStatus(true);
+        return show;
     }
 
     @Override
-    public Show viewShow(int showid) {
+    public Show getShowById(int showid) {
         return showrepository.findById(showid).get();
     }
 
     @Override
-    public List<Show> viewAllShows() {
+    public List<Show> getAllShow() {
         return showrepository.findAll();
     }
 
     @Override
-    public List<Show> viewShowList(int theatreid) {
+    public List<Show> getShowByThreatre(int theatreid) {
         return showrepository.getAllByTheatreId(theatreid);
-        // return null;
+
     }
 
     @Override
-    public List<Show> viewShowList(LocalDate date) {
-        List<Show> shList = new ArrayList<>();
+    public List<Show> getShowByDate(LocalDate date) {
+        List<Show> shows = new ArrayList<>();
         for (Show show : showrepository.findAll()) {
             if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
-                shList.add(show);
+                shows.add(show);
             }
         }
-        return shList;
+        return shows;
     }
 
 }
