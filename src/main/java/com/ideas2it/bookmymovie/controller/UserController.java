@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/V1/users")
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;

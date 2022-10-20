@@ -5,8 +5,8 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Ticket;
-import com.ideas2it.bookmymovie.repository.BookingRepository;
 import com.ideas2it.bookmymovie.repository.TicketRepository;
+import com.ideas2it.bookmymovie.service.BookingService;
 import com.ideas2it.bookmymovie.service.TicketService;
 import org.springframework.stereotype.Service;
 
@@ -15,24 +15,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class TicketServiceImpl implements TicketService {
-    private TicketRepository ticketRepository;
-    private BookingRepository bookingRepository;
-    private MapStructMapper mapper;
-    private Booking booking;
+    private final TicketRepository ticketRepository;
+    private final BookingService bookingService;
+    private final MapStructMapper mapper;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, BookingRepository bookingRepository,
-                             MapStructMapper mapper, Booking booking) {
+    public TicketServiceImpl(TicketRepository ticketRepository, BookingService bookingService, MapStructMapper mapper) {
         this.ticketRepository = ticketRepository;
-        this.bookingRepository = bookingRepository;
+        this.bookingService = bookingService;
         this.mapper = mapper;
-        this.booking = booking;
     }
 
 
     @Override
     public TicketDto addTicket(TicketDto ticketDto, int transactionId) {
+        Booking booking = new Booking();
         if (transactionId != 0) {
-            booking = bookingRepository.findById(transactionId).get();
+            booking = mapper.bookingDtoToBooking(bookingService.viewByBookingId(transactionId));
             booking.setTransactionStatus("Completed");
             Ticket ticket = mapper.ticketDtoToTicket(ticketDto);
             ticket.setBooking(booking);
