@@ -32,7 +32,7 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     @Override
-    public List<TheatreDto> getAllTheatres() throws NotFoundException {
+    public List<TheatreDto> getAllTheatre() throws NotFoundException {
         List<Theatre> theatres = theatreRepository.findAllByStatus(true);
         if (theatres.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
@@ -42,7 +42,7 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     @Override
-    public TheatreDto findTheatres(int theatreId) {
+    public TheatreDto findTheatreById(int theatreId) {
         // TODO Auto-generated method stub
         if (theatreRepository.existsById(theatreId)) {
             return mapper.theatreToTheatreDto(theatreRepository.findById(theatreId).get());
@@ -51,7 +51,7 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     @Override
-    public TheatreDto addTheatre(TheatreDto theatreDto) throws NotFoundException {
+    public TheatreDto createTheatre(TheatreDto theatreDto) throws NotFoundException {
         return mapper.theatreToTheatreDto(theatreRepository.save(mapper.theatreDtoToTheatre(theatreDto)));
     }
 

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This Class is to create,get,update and delete theatre Details
+ */
 @RestController
 @RequestMapping("/theatre")
 public class TheatreController {
@@ -24,15 +27,15 @@ public class TheatreController {
 
 
     /**
-     *
+     * This method is to get a list of theatre details.
      * @return listOfTheatres
      * @throws NotFoundException
      */
     @GetMapping
-    public ResponseEntity<List<TheatreDto>> getAllTheatres() throws NotFoundException {
+    public List<TheatreDto> getAllTheatres() throws NotFoundException {
 
         logger.info("-------Theatre List Fetched---------");
-        return ResponseEntity.ok(theatreService.getAllTheatres());
+        return theatreService.getAllTheatre();
     }
 
     /**
@@ -42,11 +45,11 @@ public class TheatreController {
      * @throws NotFoundException
      */
     @PostMapping
-    public ResponseEntity<TheatreDto> addTheatre(@RequestBody TheatreDto theatreDto)
+    public TheatreDto addTheatre(@RequestBody TheatreDto theatreDto)
             throws NotFoundException {
 
         logger.info("-------Theatre Added Successfully---------");
-        return new ResponseEntity<>(theatreService.addTheatre(theatreDto), HttpStatus.CREATED);
+        return theatreService.createTheatre(theatreDto);
     }
 
     /**
@@ -70,11 +73,11 @@ public class TheatreController {
      * @throws NotFoundException
      */
     @GetMapping("/find/{theatreId}")
-    public ResponseEntity<TheatreDto> findTheatre(@PathVariable int theatreId)
+    public TheatreDto findTheatre(@PathVariable int theatreId)
             throws  NotFoundException {
 
         logger.info("-------Theatre Found with Theatre id" + theatreId + "---------");
-        return ResponseEntity.ok(theatreService.findTheatres(theatreId));
+        return theatreService.findTheatreById(theatreId);
     }
 
     /**
@@ -92,8 +95,8 @@ public class TheatreController {
     }
 
     @GetMapping("/findbyMovie/{movieId}")
-    public ResponseEntity<List<TheatreDto>> findTheatreByMovieId(@PathVariable int movieId)
+    public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId)
             throws  NotFoundException {
-        return ResponseEntity.ok(theatreService.findTheatresByMovie(movieId));
+        return theatreService.findTheatresByMovie(movieId);
     }
 }

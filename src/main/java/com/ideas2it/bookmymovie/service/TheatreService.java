@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 
 public interface TheatreService {
-    List<TheatreDto> getAllTheatres() throws NotFoundException;
+    List<TheatreDto> getAllTheatre() throws NotFoundException;
 
-    TheatreDto findTheatres(int theatreId);
+    TheatreDto findTheatreById(int theatreId);
 
-    TheatreDto addTheatre(TheatreDto theatreDto) throws NotFoundException;
+    TheatreDto createTheatre(TheatreDto theatreDto) throws NotFoundException;
 
     List<TheatreDto> updateTheatreById(int theatreId );
 
