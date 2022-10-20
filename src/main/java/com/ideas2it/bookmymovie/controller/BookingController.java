@@ -9,12 +9,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/V1/booking")
 public class BookingController {
-    private BookingService bookingService;
-    private BookingDto bookingDto;
+    private final BookingService bookingService;
 
-    public BookingController(BookingService bookingService, BookingDto bookingDto) {
+    public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
-        this.bookingDto = bookingDto;
     }
 
     @PostMapping("/{showId}/{userId}")

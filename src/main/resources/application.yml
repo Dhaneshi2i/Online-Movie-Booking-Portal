@@ -1,5 +1,5 @@
 
-server.port: 8090
+server.port: 8020
 
 spring.mvc.pathmatch.matching-strategy: ant-path-matcher
 
@@ -13,6 +13,10 @@ spring:
     database-platform=org:
       hibernate:
         dialect: MySQL5InnoDBDialect
+        
+    main:
+    allow-circular-references: true
+
 
 
 

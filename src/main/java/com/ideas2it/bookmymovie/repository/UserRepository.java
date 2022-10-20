@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAllByStatus(boolean status);
-    User findUserByName(String name);
+    User findByUserName(String username);
 }
