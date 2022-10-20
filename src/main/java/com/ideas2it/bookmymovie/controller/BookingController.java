@@ -52,7 +52,7 @@ public class BookingController {
         return bookingService.calculateTotalCost(bookingId);
     }
 */
-       /* @PutMapping
+    /* @PutMapping
     public BookingDto updateTicketBooking(@RequestBody BookingDto bookingDto) {
         return bookingService.updateBookings(bookingDto);
     }*/
