@@ -1,4 +1,4 @@
-package com.ideas2it.bookmymovie.slimdto;
+package com.ideas2it.bookmymovie.dto.responseDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class BookingSlimDto {
     private int transactionId;
-    private ShowSlimDto show;
     private LocalDate bookingDate;
     private String transactionMode;
     private boolean transactionStatus;

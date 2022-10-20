@@ -1,23 +1,26 @@
 
-server.port: 8020
-
-spring.mvc.pathmatch.matching-strategy: ant-path-matcher
+spring.mvc.pathmatch.matching-strategy: ant_path_matcher
+server.port: 2022
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost/ticket_booking
+    url: jdbc:mysql://localhost/booking
     username: root
-    password: siva2001
-  main:
-    allow-circular-reference: true
+    password: dhanesh@22
+
   jpa:
+    hibernate.ddl-auto: update
+    show_sql: true
+    use_sql_comments: true
+    format_sql: true
+    event:
+      merge:
+        entity_copy_observer: allow
     database-platform=org:
       hibernate:
         dialect: MySQL5InnoDBDialect
-        
     main:
     allow-circular-references: true
-
 
 
 

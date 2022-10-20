@@ -2,6 +2,7 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.model.Seat;
 
 import java.util.List;
 
@@ -31,21 +32,22 @@ public interface SeatService {
      */
     public SeatDto updateSeatById(int seatId) throws NotFoundException;
 
+
     /**
      * This method gets SeatDto object as parameter to create Seat Details
      *
      * @param seatDto is passed as argument to add these value to the database..
      * @return SeatDto which return the Seat Details with seat Status
      */
-    public SeatDto bookSeat(SeatDto seatDto);
-
+    public Seat bookSeat(Seat seat);
+ 
     /**
      * This method gets SeatDto object as parameter to create Seat Details
      *
      * @param seatDto is passed as argument to add these value to the database.
      * @return SeatDto which return the Seat Details with seat Status
      */
-    public SeatDto cancelSeatBooking(SeatDto seatDto);
+    public Seat cancelSeatBooking(Seat seat);
 
     /**
      * This method gets screenDto object as parameter to create Screen Details
@@ -54,4 +56,5 @@ public interface SeatService {
      * @return SeatDto which return the Seat Details with seat Status
      */
     public SeatDto blockSeat(SeatDto seatDto);
+
 }

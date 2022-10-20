@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Movie;
@@ -65,11 +66,11 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto which is fetched from database with the param
      */
     @Override
-    public TheatreDto findTheatreById(int theatreId) throws NotFoundException{
+    public TheatreSlimDto findTheatreById(int theatreId) throws NotFoundException{
         if (theatreRepository.existsById(theatreId)) {
             Optional<Theatre> theatre = theatreRepository.findById(theatreId);
             if(theatre.isPresent()){
-                return mapper.theatreToTheatreDto(theatre.get());
+                return mapper.theatreToTheatreSlimDto(theatre.get());
             }
         }
         throw new NotFoundException("Theatre details with the given id is not found");

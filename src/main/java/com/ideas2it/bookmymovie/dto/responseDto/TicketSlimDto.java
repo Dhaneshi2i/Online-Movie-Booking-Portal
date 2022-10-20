@@ -1,4 +1,4 @@
-package com.ideas2it.bookmymovie.slimdto;
+package com.ideas2it.bookmymovie.dto.responseDto;
 
 public class TicketSlimDto {
     private int ticketId;

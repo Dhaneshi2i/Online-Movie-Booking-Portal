@@ -5,19 +5,13 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Seat;
-import com.ideas2it.bookmymovie.model.Show;
-import com.ideas2it.bookmymovie.model.Ticket;
-import com.ideas2it.bookmymovie.model.User;
-import com.ideas2it.bookmymovie.repoImpl.QueryClass;
 import com.ideas2it.bookmymovie.repository.BookingRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
+import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
-import com.ideas2it.bookmymovie.service.TicketService;
 import com.ideas2it.bookmymovie.service.UserService;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,41 +20,34 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final UserService userService;
     private final ShowService showService;
-    private final TicketService ticketService;
-    private User user;
-    private Booking booking;
     private final MapStructMapper mapper;
-    private QueryClass queryClass;
+
+    private SeatService seatService;
 
     public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, ShowService showService,
-                              @Lazy TicketService ticketService, User user, Booking booking,
-                              MapStructMapper mapper, QueryClass queryClass) {
+                                              MapStructMapper mapper, SeatService seatService) {
         this.bookingRepository = bookingRepository;
         this.userService = userService;
         this.showService = showService;
-        this.ticketService = ticketService;
-        this.user = user;
-        this.booking = booking;
         this.mapper = mapper;
-        this.queryClass = queryClass;
+        this.seatService = seatService;
     }
 
 
     @Override
-    public BookingDto createBooking(BookingDto bookMovie, int userId, int showId) {
-        Show show = new Show();
-        if (showId != 0) {
-            //show = mapper.showDtoToShow(showService.getByShowId(showId));
-            show.setBooking(mapper.bookingDtoToBooking(bookMovie));
-            booking.setShow(show);
+    public BookingDto createBooking(BookingDto bookingDto) {
+        Booking booking = new Booking();
+        if (null != bookingDto) {
+            booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
+            booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
+            List<Seat> seats = mapper.seatDtoListToSeatList(bookingDto.getSeats());
+            for(Seat seat :seats) {
+                seatService.bookSeat(seat);
+            }
+            booking.setSeats(seats);
         }
-        if (userId != 0) {
-            user = mapper.userDtoToUser(userService.getUserById(userId));
-            booking.setUser(user);
-        }
-        //showService.createShow(mapper.showToShowDto(show));
-        bookingRepository.saveAndFlush(booking);
-        return mapper.bookingToBookingDto(bookingRepository.findById(bookMovie.getTransactionId()).get());
+        bookingRepository.save(booking);
+        return mapper.bookingToBookingDto(bookingRepository.findById(booking.getBookingId()).get());
     }
 
     @Override
@@ -68,12 +55,12 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.findAll().stream().map(mapper::bookingToBookingDto).collect(Collectors.toList());
     }
 
-    @Override
+   /* @Override
     public BookingDto updateBookings(BookingDto bookingDto) throws NotFoundException{
         bookingRepository.saveAndFlush(mapper.bookingDtoToBooking(bookingDto));
-        return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getTransactionId()).get());
+        return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getBookingId()).get());
     }
-
+*/
     @Override
     public BookingDto viewByBookingId(int bookingId) throws NotFoundException {
         return mapper.bookingToBookingDto(bookingRepository.findById(bookingId).get());
@@ -81,18 +68,23 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingDto cancelBooking(int bookingId) throws NotFoundException {
-        booking = bookingRepository.findById(bookingId).get();
-        bookingRepository.delete(booking);
+        Booking booking = bookingRepository.findById(bookingId).get();
+        List<Seat> seats = booking.getSeats();
+        for (Seat seat : seats) {
+            seatService.cancelSeatBooking(seat);
+        }
+        booking.setSeats(seats);
+        bookingRepository.save(booking);
         return mapper.bookingToBookingDto(booking);
     }
 
-    @Override
+    /*@Override
     public List<BookingDto> getAllBookingsByMovieId(int movieId) {
         List<Booking> bookings = queryClass.getAllByMovieId(movieId);
         return mapper.bookingListToBookingDtoList(bookings);
-    }
+    }*/
 
-    @Override
+ /*   @Override
     public double calculateTotalCost(int bookingId) {
         List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.getAllTickets());
         List<Seat> seats = new ArrayList<>();
@@ -109,6 +101,6 @@ public class BookingServiceImpl implements BookingService {
         booking.setTotalCost(amount);
         bookingRepository.save(booking);
         return amount;
-    }
+    }*/
 
 }

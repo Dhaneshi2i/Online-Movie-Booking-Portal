@@ -35,12 +35,15 @@ public class Seat {
     @Column(name = "seat_status")
     private SeatStatus seatStatus;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "ticket_id")
-    private Ticket ticket;
+    private Ticket ticket;*/
+    @ManyToOne
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
-    @Column(name = "status", columnDefinition = "tinyint(1) default true")
-    private Boolean status = false;
+    @Column(name = "status")
+    private Boolean status;
 
     @CreationTimestamp
     @Column(name = "created_date")

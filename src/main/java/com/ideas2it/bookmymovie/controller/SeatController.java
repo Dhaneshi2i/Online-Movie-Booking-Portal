@@ -5,7 +5,13 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.SeatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -63,7 +69,6 @@ public class SeatController {
      * @param seatDto
      * @return booked seat
      * @throws NotFoundException
-     */
     @PutMapping("/book")
     public SeatDto BookASeat(@RequestBody SeatDto seatDto)
             throws NotFoundException {
@@ -71,13 +76,12 @@ public class SeatController {
         seatDto = seatService.bookSeat(seatDto);
         logger.info("-------Seat booking Successful---------");
         return seatDto;
-    }
+    }*/
 
     /**
      * @param seatDto
      * @return cancelled seat
      * @throws NotFoundException
-     */
     @PutMapping("/cancel")
     public SeatDto CancelASeat(@RequestBody SeatDto seatDto)
             throws NotFoundException {
@@ -85,14 +89,14 @@ public class SeatController {
         seatDto = seatService.cancelSeatBooking(seatDto);
         logger.info("-------Seat Cancellation Successfull---------");
         return seatDto;
-    }
+    }*/
 
     /**
      * @param seat
      * @return blocked seat
      * @throws NotFoundException
      */
-    @PutMapping("/block")
+   /* @PutMapping("/block")
     public SeatDto BlockSeat(@RequestBody SeatDto seat)
             throws NotFoundException {
 
@@ -100,5 +104,5 @@ public class SeatController {
         logger.info("-------Seat blocking Successfull---------");
         return seat;
 
-    }
+    }*/
 }

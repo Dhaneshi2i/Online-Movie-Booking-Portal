@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +18,17 @@ import java.util.List;
 public class MovieDto {
 
     private int movieId;
+    @NotNull
     private String movieName;
-    private String duration;
+    @NotNull
+    private LocalTime duration;
+    @NotNull
     private List<CastDto> casts = new ArrayList<>();
+    @NotNull
     private List<LanguageDto> languages = new ArrayList<>();
+    @NotNull
     private List<GenreDto> genres = new ArrayList<>();
-    private String movieRating;
+    @NotNull
     private LocalDate movieDate;
-    private ShowDto show;
-
+    //private ShowDto show;
 }

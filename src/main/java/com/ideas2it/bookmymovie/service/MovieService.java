@@ -2,8 +2,7 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.model.Movie;
-import com.ideas2it.bookmymovie.slimdto.MovieSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 
 import java.util.List;
 

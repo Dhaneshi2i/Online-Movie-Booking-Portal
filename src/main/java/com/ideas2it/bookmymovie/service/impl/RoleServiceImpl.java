@@ -5,7 +5,7 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.repository.RoleRepository;
 import com.ideas2it.bookmymovie.service.RoleService;
-import com.ideas2it.bookmymovie.slimdto.RoleSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.RoleSlimDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public RoleDto saveRole(RoleDto roleDto) {
+    public RoleDto createRole(RoleDto roleDto) {
         return mapper.roleToRoleDto(roleRepository.save(mapper.roleDtoToRole(roleDto)));
     }
 
