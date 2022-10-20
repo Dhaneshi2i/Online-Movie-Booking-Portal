@@ -1,5 +1,8 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.ideas2it.bookmymovie.slimdto.ShowSlimDto;
+import com.ideas2it.bookmymovie.slimdto.TicketSlimDto;
+import com.ideas2it.bookmymovie.slimdto.UserSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +18,12 @@ import java.time.LocalDate;
 @Component
 public class BookingDto {
     private int transactionId;
-    private ShowDto show;
+    private ShowSlimDto show;
     private LocalDate bookingDate;
     private String transactionMode;
     private boolean transactionStatus;
     private double totalCost;
-    private UserDto user;
-    private TicketDto ticket;
+    private UserSlimDto user;
+    private TicketSlimDto ticket;
 
 }

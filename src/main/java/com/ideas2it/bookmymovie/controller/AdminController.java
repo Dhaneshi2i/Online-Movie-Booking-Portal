@@ -14,12 +14,12 @@ public class AdminController {
     private final CastService castService;
     private final LanguageService languageService;
     private final RoleService roleService;
-    private final SeatService seatService;
+    private final SeatController seatService;
     private final TheatreService theatreService;
     private final MovieService movieService;
 
     public AdminController(GenreService genreService, CastService castService, LanguageService languageService,
-                           RoleService roleService, SeatService seatService, TheatreService theatreService,
+                           RoleService roleService, SeatController seatService, TheatreService theatreService,
                            MovieService movieService) {
         this.genreService = genreService;
         this.castService = castService;

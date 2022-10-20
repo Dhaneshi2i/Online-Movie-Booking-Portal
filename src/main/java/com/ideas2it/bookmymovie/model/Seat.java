@@ -33,7 +33,7 @@ public class Seat {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "seat_status")
-    private SeatTypeEnum seatStatus;
+    private SeatStatus seatStatus;
 
     @ManyToOne
     @JoinColumn(name = "ticket_id")

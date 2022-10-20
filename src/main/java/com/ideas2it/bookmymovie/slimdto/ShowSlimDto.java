@@ -6,13 +6,14 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ShowSlimDto {
     private int showId;
-    private LocalDateTime showStartTime;
-    private LocalDateTime showEndTime;
+    private LocalTime showStartTime;
+    private LocalTime showEndTime;
     private LocalDate showDate;
 }
