@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +31,15 @@ import java.util.List;
 @Entity
 @Component
 @Table(name = "screens")
+
 public class Screen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int screenId;
 
     @ManyToOne
+    @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
     @OneToMany(mappedBy = "screen", cascade = CascadeType.ALL)
@@ -48,6 +53,7 @@ public class Screen {
     @Column(name = "no_of_columns")
     private int noOfColumns;
 
+
     @Column(name = "status", columnDefinition = "tinyint(1) default true")
     private Boolean status = false;
 
@@ -58,4 +64,5 @@ public class Screen {
     @UpdateTimestamp
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
+
 }

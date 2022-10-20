@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Component
-
 public class GenreDto {
     private int genreId;
 

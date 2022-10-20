@@ -1,5 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.ideas2it.bookmymovie.slimdto.ShowSlimDto;
+import com.ideas2it.bookmymovie.slimdto.TheatreSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +19,11 @@ import java.util.List;
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
-
     private int screenId;
 
-    private TheatreDto theatre;
+    private TheatreSlimDto theatre;
 
-    private List<ShowDto> show;
+    private List<ShowSlimDto> show;
 
     private String screenName;
 
