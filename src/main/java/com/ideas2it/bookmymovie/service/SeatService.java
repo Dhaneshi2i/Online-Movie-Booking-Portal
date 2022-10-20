@@ -6,15 +6,51 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import java.util.List;
 
 public interface SeatService {
-    public SeatDto addSeat(SeatDto seat) throws NotFoundException;
+    /**
+     * This method gets seatDto object as parameter to create Seat Details
+     *
+     * @param seatDto is passed as argument to add these value to the database.
+     * @return SeatDto which return the created Seat Details
+     */
+    public SeatDto createSeat(SeatDto seatDto) throws NotFoundException;
 
-    public List<SeatDto> viewSeatList() throws NotFoundException;
+    /**
+     * This method List all the Seat Details that are present in Database
+     *
+     * @return List<SeatDto> which will have all the Seat Details which are present in
+     * the database.
+     */
+    public List<SeatDto> getAllSeat() throws NotFoundException;
 
-    public SeatDto updateSeat(int seatId) throws NotFoundException;
+    /**
+     * This method gets seatId as parameter and update the Seat Details
+     *
+     * @param seatId is passed as argument to get those value from the database.
+     * @return List of seat details after update
+     */
+    public SeatDto updateSeatById(int seatId) throws NotFoundException;
 
-    public SeatDto bookSeat(SeatDto seat);
+    /**
+     * This method gets SeatDto object as parameter to create Seat Details
+     *
+     * @param seatDto is passed as argument to add these value to the database..
+     * @return SeatDto which return the Seat Details with seat Status
+     */
+    public SeatDto bookSeat(SeatDto seatDto);
 
-    public SeatDto cancelSeatBooking(SeatDto seat);
+    /**
+     * This method gets SeatDto object as parameter to create Seat Details
+     *
+     * @param seatDto is passed as argument to add these value to the database.
+     * @return SeatDto which return the Seat Details with seat Status
+     */
+    public SeatDto cancelSeatBooking(SeatDto seatDto);
 
-    public SeatDto blockSeat(SeatDto seat); // not available for any booking
+    /**
+     * This method gets screenDto object as parameter to create Screen Details
+     *
+     * @param seatDto is passed as argument to add these value to the database.
+     * @return SeatDto which return the Seat Details with seat Status
+     */
+    public SeatDto blockSeat(SeatDto seatDto);
 }
