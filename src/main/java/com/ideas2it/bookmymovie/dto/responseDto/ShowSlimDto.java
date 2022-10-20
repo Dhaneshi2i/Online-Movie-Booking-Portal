@@ -1,11 +1,10 @@
-package com.ideas2it.bookmymovie.slimdto;
+package com.ideas2it.bookmymovie.dto.responseDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter

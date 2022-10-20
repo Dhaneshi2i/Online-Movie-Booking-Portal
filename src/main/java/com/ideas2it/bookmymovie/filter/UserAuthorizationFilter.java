@@ -1,3 +1,4 @@
+/*
 package com.ideas2it.bookmymovie.filter;
 
 import com.auth0.jwt.JWT;
@@ -52,6 +53,7 @@ public class UserAuthorizationFilter extends OncePerRequestFilter {
                     response.setContentType(APPLICATION_JSON_VALUE);
                     new ObjectMapper().writeValue(response.getOutputStream(), error);
                 }
+*/
 /*                    throw new RuntimeException(e);
                 } catch (JWTVerificationException e) {
                     throw new RuntimeException(e);
@@ -59,10 +61,12 @@ public class UserAuthorizationFilter extends OncePerRequestFilter {
                     throw new RuntimeException(e);
                 } catch (ServletException e) {
                     throw new RuntimeException(e);
-                }*/
+                }*//*
+
             } else {
                 filterChain.doFilter(request,response);
             }
         }
     }
 }
+*/

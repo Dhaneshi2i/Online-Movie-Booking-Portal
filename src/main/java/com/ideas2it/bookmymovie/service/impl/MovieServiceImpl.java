@@ -10,7 +10,7 @@ import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
-import com.ideas2it.bookmymovie.slimdto.MovieSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

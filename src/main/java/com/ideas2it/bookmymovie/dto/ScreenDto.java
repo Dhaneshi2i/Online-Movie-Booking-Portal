@@ -1,14 +1,12 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.slimdto.ShowSlimDto;
-import com.ideas2it.bookmymovie.slimdto.TheatreSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -20,15 +18,16 @@ import java.util.List;
  */
 public class ScreenDto {
     private int screenId;
-
-    private TheatreSlimDto theatre;
-
-    private List<ShowSlimDto> show;
-
+    @NotNull
     private String screenName;
+    @NotNull
+    private int noOfRows;
+    @NotNull
+    private int noOfColumns;
 
-    private int rows;
+    private TheatreDto theatre;
+    //private boolean status;
 
-    private int columns;
-    private boolean status;
+    //private List<ShowSlimDto> show;
+
 }

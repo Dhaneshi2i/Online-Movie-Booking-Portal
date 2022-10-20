@@ -1,11 +1,8 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-
-import com.ideas2it.bookmymovie.model.Theatre;
-
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-
 
 import java.util.List;
 
@@ -36,7 +33,7 @@ public interface TheatreService {
      * @param theatreId is passed as argument to fetch those from the database.
      * @return TheatreDto which is fetched from database with the param
      */
-    TheatreDto findTheatreById(int theatreId);
+    TheatreSlimDto findTheatreById(int theatreId);
 
     /**
      * This method gets TheatreId as parameter and update the Theatre Details

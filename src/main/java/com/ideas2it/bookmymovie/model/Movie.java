@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,12 @@ import java.util.List;
 @Entity
 @Table(name = "movie")
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieId;
     private String movieName;
-    private String duration;
+    private LocalTime duration;
 
     @Column
     private Boolean Status = false;
@@ -77,11 +79,9 @@ public class Movie {
     )
     private List<Cast> casts = new ArrayList<>();
 
-    private String movieRating;
 
     private LocalDate movieDate;
-
-
+    @JsonIgnore
     @OneToOne
     private Show show;
 }

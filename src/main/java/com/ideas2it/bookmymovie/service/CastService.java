@@ -4,5 +4,5 @@ import com.ideas2it.bookmymovie.dto.CastDto;
 
 public interface CastService {
     CastDto addCast(CastDto castDto);
-    CastDto getCastByName(String name);
+    CastDto getByCastId(int castId);
 }

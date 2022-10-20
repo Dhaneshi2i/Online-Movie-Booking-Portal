@@ -2,11 +2,18 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
@@ -19,22 +26,6 @@ public class ScreenController {
 
     public ScreenController(ScreenService screenService) {
         this.screenService = screenService;
-    }
-
-    /**
-     *
-     * @param screen
-     * @param theatreId
-     * @return addedScreen
-     * @throws NotFoundException
-     */
-    @PostMapping
-    public ScreenDto addAScreen(@RequestBody ScreenDto screen,
-                                             @RequestParam(required = false) int theatreId)
-            throws NotFoundException {
-
-        logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
-        return screenService.addScreen(screen, theatreId);
     }
 
     /**
@@ -54,8 +45,8 @@ public class ScreenController {
     }
 
     @GetMapping("/viewScreen/{screenId}")
-    public ScreenDto viewScreen(@PathVariable int screenId) throws NotFoundException {
-        ScreenDto screenDto = screenService.getScreenById(screenId);
+    public ScreenSlimDto viewScreen(@PathVariable int screenId) throws NotFoundException {
+        ScreenSlimDto screenDto = screenService.getScreenById(screenId);
         logger.info("-------Screen Found---------");
         return screenDto;
     }

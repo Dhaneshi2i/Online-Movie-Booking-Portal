@@ -2,13 +2,19 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,23 +28,6 @@ public class ShowController {
         this.showService = showService;
     }
 
-    /**
-     * Stores a Show object in the Database.
-     *
-     * @param showDto
-     * @param theatreId
-     * @param screenId
-     * @return Show
-
-     */
-    @PostMapping
-    public ShowDto addShow(@RequestBody ShowDto showDto, @RequestParam(required = false) Integer theatreId,
-                           @RequestParam(required = false) Integer screenId) {
-
-        showService.addShow(showDto, theatreId, screenId);
-        logger.info("-------Show Added Succesfully--------");
-        return showDto;
-    }
 
     /**
      * Removes persisted Show instance from the Database.
@@ -55,7 +44,6 @@ public class ShowController {
     /**
      * Updates a existing Show record in the database.
      *
-     * @param show
      * @param theatreId
      * @param screenId
      * @return Show
@@ -101,7 +89,7 @@ public class ShowController {
     @GetMapping("/show_theatre/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
 
-        return showService.getShowByThreatre(theatreId);
+        return showService.getShowByThreatreId(theatreId);
     }
 
     /**

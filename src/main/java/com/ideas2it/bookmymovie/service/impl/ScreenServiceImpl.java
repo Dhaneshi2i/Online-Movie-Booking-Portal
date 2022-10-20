@@ -2,6 +2,7 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
@@ -36,14 +37,13 @@ public class ScreenServiceImpl implements ScreenService {
      * This method gets screenDto object as parameter to create Screen Details
      *
      * @param screenDto is passed as argument to add these value to the database.
-     * @param theatreId is passed as an argument to associate screen with screen.
      *
      * @return ScreenDto which return the created Screen Details
      */
     @Override
     public ScreenDto createScreen(ScreenDto screenDto, int theatreId) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
-        if (theatreId != 0) {
+        if (0 != theatreId) {
             Optional<Theatre> theatre = theatreRepository.findById(theatreId);
             theatre.ifPresent(screen::setTheatre);
 
@@ -91,10 +91,10 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto which is fetched from database with the param
      */
     @Override
-    public ScreenDto getScreenById(int screenId) throws NotFoundException {
+    public ScreenSlimDto getScreenById(int screenId) throws NotFoundException {
         Optional<Screen> screen = screenRepository.findById(screenId);
         if(screen.isPresent()){
-            return mapper.screenToScreenDto(screen.get());
+            return mapper.screenToScreenSlimDto(screen.get());
         }
         throw new NotFoundException("Screen Id not found");
     }

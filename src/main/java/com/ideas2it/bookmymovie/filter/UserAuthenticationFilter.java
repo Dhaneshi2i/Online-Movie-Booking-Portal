@@ -1,3 +1,4 @@
+/*
 package com.ideas2it.bookmymovie.filter;
 
 import com.auth0.jwt.JWT;
@@ -35,6 +36,7 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
                                             Authentication authResult) throws IOException, ServletException {
         User user = (User) attemptAuthentication(request, response).getPrincipal();
         Algorithm algorithm = Algorithm.HMAC384("secret".getBytes());
+
         String accessToken = JWT.create().withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10*60*1000))
                 .withIssuer(request.getRequestURI().toString())
@@ -62,3 +64,4 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
         return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
     }
 }
+*/

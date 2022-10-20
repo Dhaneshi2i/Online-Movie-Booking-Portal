@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.ideas2it.bookmymovie.model.SeatStatus;
-import com.ideas2it.bookmymovie.slimdto.TicketSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,6 @@ public class SeatDto {
 
     private SeatStatus seatStatus;
 
-    private TicketSlimDto ticket;
+    //private TicketSlimDto ticket;
 }
 

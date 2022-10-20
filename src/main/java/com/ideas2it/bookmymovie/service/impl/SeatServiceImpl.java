@@ -7,7 +7,6 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,22 +25,21 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto createSeat(SeatDto seatDto) throws NotFoundException {
-        Seat seat = mapper.seatDtoToSeat(seatDto);
-        if (seatDto != null) {
-            if (seatRepository.existsById(seat.getSeatId())) {
-                throw new NotFoundException("Seat with this id already exists");
+        if (null != seatDto) {
+            if (seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType())) {
+                throw new NotFoundException("Seat number already exists");
             } else {
-                seatRepository.saveAndFlush(seat);
+                seatRepository.saveAndFlush(mapper.seatDtoToSeat(seatDto));
             }
         }
-        return mapper.seatToSeatDto(seat);
+        return seatDto;
     }
 
     @Override
     public List<SeatDto> getAllSeat() throws NotFoundException {
-        List<Seat> seats = seatRepository.findAll();
+        List<Seat> seats = seatRepository.findBySeatStatus("Available");
 
-        if (seats.size() == 0) throw new NotFoundException("No seats found");
+        if (0 == seats.size()) throw new NotFoundException("No seats found");
 
         return mapper.seatListToSeatDtoList(seats);
     }
@@ -57,23 +55,21 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto bookSeat(SeatDto seatDto) {
-        Seat seat = mapper.seatDtoToSeat(seatDto);
+    public Seat bookSeat(Seat seat) {
         seat.setSeatStatus(SeatStatus.BOOKED);
-        return mapper.seatToSeatDto(seatRepository.save(seat));
+        return seatRepository.save(seat);
     }
 
     @Override
-    public SeatDto cancelSeatBooking(SeatDto seatDto) {
-        Seat seat = mapper.seatDtoToSeat(seatDto);
-        seat.setSeatStatus(SeatStatus.CANCELLED);
-        return mapper.seatToSeatDto(seatRepository.save(seat));
+    public Seat cancelSeatBooking(Seat seat) {
+        seat.setSeatStatus(SeatStatus.AVAILABLE);
+        return seatRepository.save(seat);
     }
 
-    @Override
-    public SeatDto blockSeat(SeatDto seatDto) {
-        Seat seat = mapper.seatDtoToSeat(seatDto);
-        seatDto.setSeatStatus(SeatStatus.BLOCKED);
-        return mapper.seatToSeatDto(seatRepository.save(seat));
-    }
+//    @Override
+//    public SeatDto blockSeat(SeatDto seatDto) {
+//        Seat seat = mapper.seatDtoToSeat(seatDto);
+//        seatDto.setSeatStatus(SeatStatus.BLOCKED);
+//        return mapper.seatToSeatDto(seatRepository.save(seat));
+//    }
 }

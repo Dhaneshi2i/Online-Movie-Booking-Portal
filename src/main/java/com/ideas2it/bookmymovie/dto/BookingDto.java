@@ -1,15 +1,13 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.slimdto.ShowSlimDto;
-import com.ideas2it.bookmymovie.slimdto.TicketSlimDto;
-import com.ideas2it.bookmymovie.slimdto.UserSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,12 +15,26 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Component
 public class BookingDto {
-    private int transactionId;
-    private ShowSlimDto show;
-    private LocalDate bookingDate;
-    private String transactionMode;
-    private String transactionStatus;
-    private double totalCost;
-    private UserSlimDto user;
-    private TicketSlimDto ticket;
+
+    private int bookingId;
+    @NotNull
+    private UserDto user;
+    @NotNull
+    private ShowDto show;
+    @NotNull
+    private String bookingStatus;
+    @NotNull
+    private List<SeatDto> seats;
+
+    //private int noOfSeats;
+
+    //private LocalDate bookingDate;
+
+    //private String transactionMode;
+
+    //private String transactionStatus;
+
+    //private double totalCost;
+
+    //private TicketDto ticket;
 }

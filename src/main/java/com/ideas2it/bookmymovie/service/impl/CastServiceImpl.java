@@ -23,7 +23,7 @@ public class CastServiceImpl implements CastService {
     }
 
     @Override
-    public CastDto getCastByName(String name) {
-        return castRepository.findCastByName(name).map(cast -> mapper.castToCastDto(cast)).orElseThrow(() -> new NotFoundException("No cast found"));
+    public CastDto getByCastId(int castId) {
+        return castRepository.findById(castId).map(cast -> mapper.castToCastDto(cast)).orElseThrow(() -> new NotFoundException("No cast found"));
     }
 }

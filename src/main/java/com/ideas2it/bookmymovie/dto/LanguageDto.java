@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
 
-import com.ideas2it.bookmymovie.slimdto.MovieSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

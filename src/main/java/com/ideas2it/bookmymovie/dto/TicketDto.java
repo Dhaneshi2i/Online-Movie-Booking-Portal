@@ -1,6 +1,6 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.slimdto.SeatSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
