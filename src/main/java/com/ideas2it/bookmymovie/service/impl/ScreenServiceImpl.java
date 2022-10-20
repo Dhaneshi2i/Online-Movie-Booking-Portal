@@ -46,6 +46,7 @@ public class ScreenServiceImpl implements ScreenService {
         if (theatreId != 0) {
             Optional<Theatre> theatre = theatreRepository.findById(theatreId);
             theatre.ifPresent(screen::setTheatre);
+
         }
         return mapper.screenToScreenDto(screenRepository.save(screen));
     }
