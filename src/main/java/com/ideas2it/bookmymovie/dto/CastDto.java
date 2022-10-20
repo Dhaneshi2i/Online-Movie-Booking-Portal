@@ -13,11 +13,7 @@ import java.util.List;
 @Component
 public class CastDto {
     private int castId;
-
     private String name;
-
     private String role;
-
     private List<MovieDto> movies = new ArrayList<>();
-
 }

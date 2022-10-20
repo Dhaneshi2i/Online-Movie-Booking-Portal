@@ -4,8 +4,19 @@ import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.service.*;
+
+import com.ideas2it.bookmymovie.service.CastService;
+import com.ideas2it.bookmymovie.service.GenreService;
+import com.ideas2it.bookmymovie.service.LanguageService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/V1/admin")
@@ -24,10 +35,9 @@ public class AdminController {
         this.genreService = genreService;
         this.castService = castService;
         this.languageService = languageService;
-        this.roleService = roleService;
+        this. roleService =  roleService;
         this.seatService = seatService;
         this.theatreService = theatreService;
-        this.movieService = movieService;
     }
 
     @PostMapping("/Cast")
@@ -60,17 +70,12 @@ public class AdminController {
         return genreService.getGenreByName(name);
     }
 
-    
+
     // old entries
    /* @PostMapping("/addScreen")
     public ResponseEntity<ScreenDto> addScreen(@RequestBody ScreenDto screenDto) {
         return new ResponseEntity<>(screenService.createScreenDetails(screenDto), HttpStatus.OK);
     }
-
-    @PostMapping("/addScreening")
-    public ResponseEntity<ScreeningDto>  addScreening(@RequestBody ScreeningDto screeningDto) {
-        return new ResponseEntity<>(screeningService.addScreening(screeningDto), HttpStatus.OK);
-    }*/
 
     // Seat operations
     /*@PostMapping("/addSeat")

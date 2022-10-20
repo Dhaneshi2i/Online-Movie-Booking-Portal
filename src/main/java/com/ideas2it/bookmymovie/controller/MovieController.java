@@ -1,81 +1,41 @@
 package com.ideas2it.bookmymovie.controller;
 
+import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.service.MovieService;
+import com.ideas2it.bookmymovie.slimdto.MovieSlimDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/movie")
+@RequestMapping("/api/V1/movie")
 public class MovieController {
 
     Logger logger = LoggerFactory.getLogger(MovieController.class);
-    @Autowired
-    private MovieService moviesService;
+
+    private MovieService movieService;
+
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
+    }
 
     /**
      * Stores a Movie object in the Database.
      *
-     * @param movie
-     * @return Movie
+     * @param movieDto
+     * @return MovieDto
      * @throws NotFoundException
      */
     @PostMapping
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie)
-            throws NotFoundException {
-        movie = moviesService.addMovie(movie);
-        logger.info("-------Movie Added Successfully---------");
-        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    public MovieDto addMovie(@RequestBody MovieDto movieDto) {
+        return movieService.addMovie(movieDto);
+
     }
-
-    /**
-     * Updates a existing Movie record in the database.
-     *
-     * @param movie
-     * @return Movie
-     * @throws NotFoundException
-     */
-    @PutMapping
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie)
-            throws NotFoundException {
-
-        ResponseEntity<Movie> response = null;
-        if (movie == null) {
-            response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            movie = moviesService.updateMovie(movie);
-            response = new ResponseEntity<>(movie, HttpStatus.OK);
-            logger.info("-------Movie Updated Successfully---------");
-        }
-        return response;
-    }
-
-    @PutMapping("/map")
-    public ResponseEntity<Movie> addToShow(@RequestBody Movie movie,@RequestParam(required = false) Integer showId)
-            throws NotFoundException {
-
-        ResponseEntity<Movie> response = null;
-        if (movie == null) {
-            response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            movie = moviesService.addMovieToShow(movie,showId);
-            response = new ResponseEntity<>(movie, HttpStatus.OK);
-            logger.info("-------Movie Updated Successfully---------");
-        }
-        return response;
-    }
-
-
-
-
     /**
      * Return's the List of Movies from the Database
      *
@@ -83,10 +43,10 @@ public class MovieController {
      * @throws NotFoundException
      */
     @GetMapping
-    public ResponseEntity<List<Movie>> viewMovieList() throws NotFoundException {
+    public List<MovieDto> getMovies() throws NotFoundException {
 
         logger.info("-------Movie List Fetched---------");
-        return ResponseEntity.ok(moviesService.viewMovieList());
+        return movieService.getMovies();
     }
 
     /**
@@ -96,69 +56,50 @@ public class MovieController {
      * @return Movie
      * @throws NotFoundException
      */
-    @GetMapping("/viewMovie/{movieId}")
-    public ResponseEntity<Movie> viewMovie(@PathVariable int movieId)
+    @GetMapping("{movieId}")
+    public MovieDto getMovieById(@PathVariable int movieId)
             throws NotFoundException {
 
-        ResponseEntity<Movie> response = null;
-        try {
-            Movie movie = moviesService.viewMovie(movieId);
-            response = new ResponseEntity<>(movie, HttpStatus.OK);
             logger.info("-------Movie With Movie id " + movieId + " Found---------");
-        } catch (Exception e) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw new NotFoundException("Movie with " + movieId + " id dosen't exist");
-        }
-        return response;
-        // return ResponseEntity.ok(moviesService.viewMovie(movieId));
+
+        return movieService.getMovieById(movieId);
     }
 
-    /**
-     * Removes persisted Movie instance from the Database.
-     *
-     * @param movieId
-     * @return Movie
-     * @throws NotFoundException
-     */
-    @DeleteMapping("/delete/{movieId}")
-    public ResponseEntity<Movie> removeMovie(@PathVariable int movieId)
-            throws NotFoundException {
 
-        ResponseEntity<Movie> response = null;
-        Movie movie = moviesService.viewMovie(movieId);
-        if (movie == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            moviesService.removeMovie(movieId);
-            response = new ResponseEntity<>(movie, HttpStatus.OK);
-            logger.info("-------Movie With Movie id " + movieId + " Deleted---------");
-        }
-        return response;
+//    @PatchMapping("/delete/{movieId}")
+//    public Movie removeMovie(@PathVariable int movieId)
+//            throws NotFoundException {
+//
+//        ResponseEntity<Movie> response = null;
+//        return movieService.viewMovie(movieId);
+//
+//    }
+
+
+//    @GetMapping("/byTheatre/{theatreId}")
+//    public List<Movie> viewMovieByTheatreId(@PathVariable int theatreId)  {
+//        logger.info("-------Movies With TheatreId " + theatreId + " Found---------");
+//        return movieService.viewMovieList(theatreId);
+//    }
+
+
+//    @GetMapping("/byDate/{date}")
+//    public List<Movie> viewMovieByLocalDate(
+//            @RequestParam("movieDate")  LocalDate date) {
+//        logger.info("-------Movies With Date " + date + " Found---------");
+//        return movieService.viewMovieList(date);
+//    }
+
+
+    @GetMapping("genre/{genre}")
+    public List<MovieSlimDto> getMovieByGenre(@PathVariable("genre") String genre) throws NotFoundException {
+
+        return movieService.getMovieByGenre(genre);
     }
 
-    /**
-     * Displays List of movies based on the TheatreId.
-     *
-     * @param theatreId
-     * @return Movie
-     */
-    @GetMapping("/byTheatre/{theatreId}")
-    public List<Movie> viewMovieByTheatreId(@PathVariable int theatreId)  {
-        logger.info("-------Movies With TheatreId " + theatreId + " Found---------");
-        return moviesService.viewMovieList(theatreId);
-    }
+    @GetMapping("language/{language}")
+    public List<MovieSlimDto> getMovieByLanguage(@PathVariable("language") String language) throws NotFoundException {
 
-    /**
-     * Returns the list of Movies based on the Date.
-     *
-     * @param date
-     * @return Movie
-     */
-    @GetMapping("/byDate/{date}")
-    public List<Movie> viewMovieByLocalDate(
-            @RequestParam("movieDate")  LocalDate date) {
-        logger.info("-------Movies With Date " + date + " Found---------");
-        return moviesService.viewMovieList(date);
+        return movieService.getMovieByLanguage(language);
     }
-
 }

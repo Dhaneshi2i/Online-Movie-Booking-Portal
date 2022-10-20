@@ -21,7 +21,7 @@ public class Ticket {
     @Column(name = "id", nullable = false)
     private int ticketId;
     private int noOfSeats;
-    private boolean ticketStatus = false;
+    private boolean ticketStatus = true;
     @JsonIgnore
     @OneToMany
     private List<Seat> seats;

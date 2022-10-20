@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/V1/users")
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;
@@ -40,9 +40,7 @@ public class UserController {
         return userService.getUserById(id);
     }
     @PatchMapping("/{id}/{status}")
-    public UserDto updateUser(@PathVariable("id") int id, @PathVariable boolean status) throws NotFoundException {
-        UserDto userDto = userService.getUserById(id);
-        userDto.setStatus(status);
+    public UserDto updateUser(@RequestBody UserDto userDto) throws NotFoundException {
         return userService.updateUser(userDto);
     }
     /*@DeleteMapping("deleteUser/{id}")

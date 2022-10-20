@@ -21,9 +21,8 @@ public class BookingDto {
     private ShowSlimDto show;
     private LocalDate bookingDate;
     private String transactionMode;
-    private boolean transactionStatus;
+    private String transactionStatus;
     private double totalCost;
     private UserSlimDto user;
     private TicketSlimDto ticket;
-
 }

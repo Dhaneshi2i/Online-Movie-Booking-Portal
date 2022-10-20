@@ -1,3 +1,4 @@
+
 server.port: 8090
 
 spring.mvc.pathmatch.matching-strategy: ant-path-matcher
@@ -12,6 +13,7 @@ spring:
     database-platform=org:
       hibernate:
         dialect: MySQL5InnoDBDialect
+
 
 
 

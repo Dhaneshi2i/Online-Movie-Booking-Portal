@@ -15,17 +15,17 @@ import java.util.List;
 @Repository
 public class QueryClass {
 	@PersistenceContext
-	EntityManager eManager;
+	EntityManager entityManager;
 
 	public List<Booking> getAllByMovieId(int movieId) {
-		TypedQuery<Booking> qry = eManager
+		TypedQuery<Booking> qry = entityManager
 				.createQuery("select b from Booking b join b.show s where s.movie.movieId = :id", Booking.class);
 		qry.setParameter("id", movieId);
 		return qry.getResultList();
 	}
 
 	public User findByUserName(String username) throws NotFoundException {
-		TypedQuery<User> qry = eManager.createQuery("select u from User u where u.username like :name", User.class);
+		TypedQuery<User> qry = entityManager.createQuery("select u from User u where u.username like :name", User.class);
 		qry.setParameter("name", username);
 		List<User> user = qry.getResultList();
 		if (user.size() == 0)
