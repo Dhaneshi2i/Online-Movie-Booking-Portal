@@ -25,13 +25,12 @@ public class User {
     private int userId;
 
     @Column(name = "name")
-    private String name;
+    private String userName;
 
     @Column(name = "email_id")
     private String emailId;
 
     @Column(name = "contact_number")
-
     private long contactNumber;
 
     @Column(name = "password")

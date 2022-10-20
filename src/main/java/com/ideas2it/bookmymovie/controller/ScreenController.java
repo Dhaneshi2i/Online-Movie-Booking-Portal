@@ -2,7 +2,7 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.ScreenNotFoundException;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +29,12 @@ public class ScreenController {
      * @param screen
      * @param theatreId
      * @return addedScreen
-     * @throws ScreenNotFoundException
+     * @throws NotFoundException
      */
     @PostMapping
     public ScreenDto addAScreen(@RequestBody ScreenDto screen,
                                              @RequestParam(required = false) int theatreId)
-            throws ScreenNotFoundException {
+            throws NotFoundException {
 
         logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
         return screenService.addScreen(screen, theatreId);
@@ -43,17 +43,21 @@ public class ScreenController {
     /**
      *
      * @return screenList
-     * @throws ScreenNotFoundException
+     * @throws NotFoundException
      */
+
     @GetMapping
     public List<ScreenDto> viewScreenList() throws  ScreenNotFoundException {
+
 
         logger.info("-------List Of Screens Fetched Successfully---------");
         return screenService.viewScreenList();
     }
 
     @GetMapping("/theatre/{screenId}")
+
     public TheatreDto  getTheatreById(@PathVariable int screenId) throws ScreenNotFoundException {
+
 
         try {
             TheatreDto theatre = screenService.getTheatre(screenId);
@@ -66,7 +70,7 @@ public class ScreenController {
 
     @GetMapping("/viewScreen/{screenId}")
     public ResponseEntity<ScreenDto> viewScreen(@PathVariable int screenId)
-            throws ScreenNotFoundException {
+            throws NotFoundException {
         ResponseEntity<ScreenDto> response = null;
         try {
             ScreenDto screenDto = screenService.viewScreen(screenId);
@@ -74,18 +78,18 @@ public class ScreenController {
             logger.info("-------Screen Found---------");
         } catch (Exception e) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw new ScreenNotFoundException("Screen dosen't exist");
+            throw new NotFoundException("Screen dosen't exist");
         }
         return response;
     }
     /**
      *
      * @param screenId
-     * @throws ScreenNotFoundException
+     * @throws NotFoundException
      */
     @PatchMapping("/update")
     public ResponseEntity<ScreenDto> updateScreen(@RequestParam(required = false) Integer screenId)
-            throws ScreenNotFoundException {
+            throws NotFoundException {
         ResponseEntity<ScreenDto> response = null;
         ScreenDto screenDto = screenService.updateScreen(screenId);
         response = new ResponseEntity<>(screenDto, HttpStatus.OK);

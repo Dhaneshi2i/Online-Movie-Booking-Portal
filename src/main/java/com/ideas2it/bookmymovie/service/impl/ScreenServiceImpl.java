@@ -2,7 +2,7 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.ScreenNotFoundException;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Theatre;
@@ -36,7 +36,7 @@ public class ScreenServiceImpl implements ScreenService {
      * @return screen
      */
     @Override
-    public ScreenDto addScreen(ScreenDto screenDto, int theatreId) throws ScreenNotFoundException {
+    public ScreenDto addScreen(ScreenDto screenDto, int theatreId) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
         if (theatreId != 0) {
             Theatre theatre = threa.findById(theatreId).get();
@@ -49,22 +49,22 @@ public class ScreenServiceImpl implements ScreenService {
      * @return screenList
      */
     @Override
-    public List<ScreenDto> viewScreenList() throws ScreenNotFoundException {
+    public List<ScreenDto> viewScreenList() throws NotFoundException {
         List<Screen> screens = screenRepository.findAllByStatus(true);
         if (screens.isEmpty()) {
-            throw new ScreenNotFoundException("No Details Present Here");
+            throw new NotFoundException("No Details Present Here");
         }
         return screens.stream().
                 map(screen -> mapper.screenToScreenDto(screen)).collect(Collectors.toList());
     }
 
     @Override
-    public ScreenDto viewScreen(int screenId) throws ScreenNotFoundException {
+    public ScreenDto viewScreen(int screenId) throws NotFoundException {
         Optional<Screen> screen = screenRepository.findById(screenId);
         if(screen.isPresent()){
             return mapper.screenToScreenDto(screen.get());
         }
-        throw new ScreenNotFoundException("Screen Id not found");
+        throw new NotFoundException("Screen Id not found");
     }
 
     /**
@@ -81,13 +81,13 @@ public class ScreenServiceImpl implements ScreenService {
     }
 
     @Override
-    public TheatreDto getTheatre(int screenId) throws ScreenNotFoundException {
+    public TheatreDto getTheatre(int screenId) throws NotFoundException {
         Optional<Screen> screen =screenRepository.findById(screenId);
         if(screen.isPresent()) {
             Theatre theatre = screen.get().getTheatre();
             return mapper.theatreToTheatreDto(theatre);
         }
-        throw new ScreenNotFoundException("Screen Id not found");
+        throw new NotFoundException("Screen Id not found");
     }
 
     public Screen findScreenById(int screenId) {

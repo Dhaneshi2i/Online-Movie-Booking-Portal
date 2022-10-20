@@ -1,10 +1,5 @@
 package com.ideas2it.bookmymovie.service;
 
-import com.ideas2it.bookmymovie.model.Show;
-
-import java.time.LocalDate;
-import java.util.List;
-
 public interface ShowService {
 
     Show addShow(Show show, Integer theatreId, Integer screenId);

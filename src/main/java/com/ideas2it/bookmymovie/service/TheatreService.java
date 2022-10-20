@@ -1,24 +1,31 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.TheatreNotFoundException;
+
 import com.ideas2it.bookmymovie.model.Theatre;
+
+import com.ideas2it.bookmymovie.exception.NotFoundException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 
 import java.util.List;
 
 public interface TheatreService {
-    List<TheatreDto> getAllTheatres() throws TheatreNotFoundException;
+    List<TheatreDto> getAllTheatre() throws NotFoundException;
 
-    TheatreDto findTheatres(int theatreId);
+    TheatreDto findTheatreById(int theatreId);
 
-    TheatreDto addTheatre(TheatreDto t) throws TheatreNotFoundException;
+    TheatreDto createTheatre(TheatreDto theatreDto) throws NotFoundException;
 
-    List<TheatreDto> updateTheatre(int theatreId );
+    List<TheatreDto> updateTheatreById(int theatreId );
 
     List<TheatreDto> deleteTheatreById(int theatreId);
 
+
     Theatre findTheatreById(int theatreId);
 
-//    List<TheatreDto> findTheatresByMovie(BigDecimal movieId) throws TheatreNotFoundException;
+
+    List<TheatreDto> findTheatresByMovie(int movieId) throws NotFoundException;
+
 
 }
