@@ -30,7 +30,7 @@ public class SeatController {
     public SeatDto addASeat(@RequestBody SeatDto seatDto)
             throws NotFoundException {
 
-        seatDto = seatService.addSeat(seatDto);
+        seatDto = seatService.createSeat(seatDto);
         logger.info("-------Seat Added Successfully---------");
         return seatDto;
     }
@@ -43,7 +43,7 @@ public class SeatController {
     public List<SeatDto> viewSeatList() throws NotFoundException {
 
         logger.info("-------List of Seats Fetched Successfully---------");
-        return seatService.viewSeatList();
+        return seatService.getAllSeat();
     }
 
     /**
@@ -54,7 +54,7 @@ public class SeatController {
     @PutMapping("/{seatId}")
     public SeatDto updateSeat(@PathVariable("seatId") int seatId)
             throws NotFoundException {
-        SeatDto seatDto = seatService.updateSeat(seatId);
+        SeatDto seatDto = seatService.updateSeatById(seatId);
         logger.info("-------Seat Updated Successfully---------");
         return seatDto;
     }
