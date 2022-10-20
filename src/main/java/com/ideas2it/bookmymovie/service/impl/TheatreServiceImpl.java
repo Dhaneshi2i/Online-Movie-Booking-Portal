@@ -1,15 +1,17 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.TheatreNotFoundException;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Movie;
+import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.model.Theatre;
-import com.ideas2it.bookmymovie.repository.MovieRepository;
-import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
+import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,25 +20,22 @@ public class TheatreServiceImpl implements TheatreService {
 
     private final TheatreRepository theatreRepository;
 
-    private final ScreenRepository screenRepository;
-
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
     private final MapStructMapper mapper;
 
-    public TheatreServiceImpl(TheatreRepository theatreRepository, ScreenRepository screenRepository,
-                              MovieRepository movieRepository, MapStructMapper mapper) {
+    public TheatreServiceImpl(TheatreRepository theatreRepository,
+                              MovieService movieService, MapStructMapper mapper) {
         this.theatreRepository = theatreRepository;
-        this.screenRepository = screenRepository;
-        this.movieRepository = movieRepository;
+        this.movieService = movieService;
         this.mapper = mapper;
     }
 
     @Override
-    public List<TheatreDto> getAllTheatres() throws TheatreNotFoundException {
+    public List<TheatreDto> getAllTheatres() throws NotFoundException {
         List<Theatre> theatres = theatreRepository.findAllByStatus(true);
         if (theatres.isEmpty()) {
-            throw new TheatreNotFoundException("No Details Present Here");
+            throw new NotFoundException("No Details Present Here");
         }
         return theatres.stream().
                 map(theatre -> mapper.theatreToTheatreDto(theatre)).collect(Collectors.toList());
@@ -52,13 +51,12 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     @Override
-    public TheatreDto addTheatre(TheatreDto theatreDto) throws TheatreNotFoundException {
+    public TheatreDto addTheatre(TheatreDto theatreDto) throws NotFoundException {
         return mapper.theatreToTheatreDto(theatreRepository.save(mapper.theatreDtoToTheatre(theatreDto)));
     }
 
     @Override
-    public List<TheatreDto> updateTheatre(int theatreId) {
-        // TODO Auto-generated method stub
+    public List<TheatreDto> updateTheatreById(int theatreId) {
         Theatre theatre = theatreRepository.findById(theatreId).get();
         theatre.setStatus(false);
         theatreRepository.saveAndFlush(theatre);
@@ -71,21 +69,20 @@ public class TheatreServiceImpl implements TheatreService {
         return mapper.theatreListToTheatreDtoList(theatreRepository.findAll());
     }
 
-//    @Override
-//    public List<TheatreDto> findTheatresByMovie(BigDecimal movieId) throws TheatreNotFoundException {
-//        List<Theatre> theatreList = new ArrayList<>();
-//        Movie movie = movieRepository.findById(movieId).get();
-//        BigDecimal showID = movie.getShow().getShowId();
-//        List<Theatre> theatres = theatreRepository.findAll();
-//        for (Theatre theatre : theatres) {
-//            List<Show> shows = theatre.getShow();
-//            for (Show show : shows) {
-//                //if (show.getShowId() == showID) {
-//                    theatreList.add(theatre);
-//                }
-//            }
-//        }
-//        return mapper.theatreListToTheatreDtoList(theatreList);
-//    }
-
+    @Override
+    public List<TheatreDto> findTheatresByMovie(int movieId) throws NotFoundException {
+        List<Theatre> theatreList = new ArrayList<>();
+        Movie movie = movieService.viewMovie(movieId);
+        int showId = movie.getShow().getShowId();
+        List<Theatre> theatres = theatreRepository.findAll();
+        for (Theatre theatre : theatres) {
+            List<Show> shows = theatre.getShow();
+            for (Show show : shows) {
+                if (show.getShowId() == showId) {
+                    theatreList.add(theatre);
+                }
+            }
+        }
+        return mapper.theatreListToTheatreDtoList(theatreList);
+    }
 }

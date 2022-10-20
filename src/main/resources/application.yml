@@ -1,25 +1,18 @@
+
+server.port: 8090
+
 spring.mvc.pathmatch.matching-strategy: ant-path-matcher
-server.port: 8020
 
 spring:
   datasource:
     url: jdbc:mysql://localhost/ticket_booking
     username: root
-    password: siva2001
+    password: harini@04
 
+  jpa:
     database-platform=org:
       hibernate:
-        dialect: MySQL5Dialect
-
-
-
-#    hibernate.ddl-auto: update
-#    show_sql: true
-#    use_sql_comments: true
-#    format_sql: true
-#    event:
-#      merge:
-#        entity_copy_observer: allow
+        dialect: MySQL5InnoDBDialect
 
 
 

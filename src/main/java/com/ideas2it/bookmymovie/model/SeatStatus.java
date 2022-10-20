@@ -6,7 +6,7 @@ import lombok.Setter;
 
 
 @AllArgsConstructor
-public enum SeatTypeEnum {
+public enum SeatStatus {
     AVAILABLE("Available"), BLOCKED("Blocked"), BOOKED("Booked"), CANCELLED("Cancelled");
 
     @Setter
