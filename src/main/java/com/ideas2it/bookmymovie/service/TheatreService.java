@@ -6,7 +6,6 @@ import com.ideas2it.bookmymovie.model.Theatre;
 
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 
-
 import java.util.List;
 
 

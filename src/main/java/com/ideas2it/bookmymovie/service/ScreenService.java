@@ -30,7 +30,8 @@ public interface ScreenService {
      * @return List<ScreenDto> which will have all the Screen Details which are present in
      * the database.
      */
-    List<ScreenDto> viewScreenList() throws NotFoundException;
+
+    List<ScreenDto> getAllScreen() throws NotFoundException;
 
     /**
      * This method gets screenId as parameter and update the Screen Details
