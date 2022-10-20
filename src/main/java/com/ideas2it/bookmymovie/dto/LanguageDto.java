@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
 
+import com.ideas2it.bookmymovie.slimdto.MovieSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,6 @@ public class LanguageDto {
 
     private String name;
 
-    private List<MovieDto> movies = new ArrayList<>();
+    private List<MovieSlimDto> movies = new ArrayList<>();
 
 }

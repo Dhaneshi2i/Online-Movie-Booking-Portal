@@ -8,15 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter
@@ -29,7 +21,10 @@ import java.sql.Timestamp;
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int seatId;
+
+    @Column(name = "seat_number")
     private String seatNumber;
 
     private String type;
@@ -37,9 +32,11 @@ public class Seat {
     private double price;
 
     @Enumerated(EnumType.STRING)
-    private SeatTypeEnum seatStatus;
+    @Column(name = "seat_status")
+    private SeatStatus seatStatus;
 
     @ManyToOne
+    @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 
     @Column(name = "status", columnDefinition = "tinyint(1) default true")

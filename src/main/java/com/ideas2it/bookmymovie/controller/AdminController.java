@@ -4,6 +4,7 @@ import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+
 import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
@@ -14,17 +15,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.*;
+
+
 @RestController
 @RequestMapping("/api/V1/admin")
 public class AdminController {
     private final GenreService genreService;
     private final CastService castService;
     private final LanguageService languageService;
+    private final RoleService roleService;
+    private final SeatController seatService;
+    private final TheatreService theatreService;
+    private final MovieService movieService;
 
-    public AdminController(GenreService genreService, CastService castService, LanguageService languageService) {
+    public AdminController(GenreService genreService, CastService castService, LanguageService languageService,
+                           RoleService roleService, SeatController seatService, TheatreService theatreService,
+                           MovieService movieService) {
         this.genreService = genreService;
         this.castService = castService;
         this.languageService = languageService;
+        this. roleService =  roleService;
+        this.seatService = seatService;
+        this.theatreService = theatreService;
     }
 
     @PostMapping("/Cast")

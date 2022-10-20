@@ -2,11 +2,7 @@ package com.ideas2it.bookmymovie.mapper;
 
 import com.ideas2it.bookmymovie.dto.*;
 import com.ideas2it.bookmymovie.model.*;
-import com.ideas2it.bookmymovie.slimdto.RoleSlimDto;
-import com.ideas2it.bookmymovie.slimdto.ScreenSlimDto;
-import com.ideas2it.bookmymovie.slimdto.SeatSlimDto;
-import com.ideas2it.bookmymovie.slimdto.TheatreSlimDto;
-import com.ideas2it.bookmymovie.slimdto.UserSlimDto;
+import com.ideas2it.bookmymovie.slimdto.*;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -16,9 +12,11 @@ public interface MapStructMapper {
     TheatreSlimDto theatreToTheatreSlimDto(Theatre theatre);
     Theatre theatreDtoToTheatre(TheatreDto theatreDto);
     TheatreDto theatreToTheatreDto(Theatre theatre);
+    List<TheatreDto> theatreListToTheatreDtoList(List<Theatre> theatres);
     SeatSlimDto seatToSeatSlimDto(Seat seat);
     Seat seatDtoToSeat(SeatDto seatDto);
     SeatDto seatToSeatDto(Seat seat);
+    List<SeatDto> seatListToSeatDtoList(List<Seat> seats);
     ScreenSlimDto screenToScreenSlimDto(Screen screen);
     Screen screenDtoToScreen(ScreenDto screenDto);
     ScreenDto screenToScreenDto(Screen screen);
@@ -39,6 +37,18 @@ public interface MapStructMapper {
     Cast castDtoToCast(CastDto castDto);
     CastDto castToCastDto(Cast cast);
     List<BookingDto> bookingListToBookingDtoList(List<Booking> bookings);
+
     List<Ticket> ticketsDtoListToTicketsList(List<TicketDto> tickets);
     List<TicketDto> ticketsListToTicketsDtoList(List<Ticket> tickets);
+    ShowSlimDto showToShowSlimDto(Show show);
+
+    Movie movieDtoToMovie(MovieDto movieDto);
+    MovieDto movieToMovieDto(Movie movie);
+
+    Show showDtoToShow(ShowDto showDto);
+    ShowDto showToShowDto(Show show);
+
+    MovieSlimDto movieToMovieSlimDto(Movie movie);
+
+
 }

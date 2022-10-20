@@ -81,6 +81,9 @@ public class Movie {
 
     private LocalDate movieDate;
 
+
     @OneToOne
     private Show show;
 }
+
+

@@ -1,6 +1,6 @@
 package com.ideas2it.bookmymovie.slimdto;
 
-import com.ideas2it.bookmymovie.model.SeatTypeEnum;
+import com.ideas2it.bookmymovie.model.SeatStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -17,5 +17,5 @@ public class SeatSlimDto {
 
     private double price;
 
-    private SeatTypeEnum seatStatus;
+    private SeatStatus seatStatus;
 }

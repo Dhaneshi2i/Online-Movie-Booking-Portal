@@ -1,16 +1,23 @@
-spring.mvc.pathmatch.matching-strategy: ant_path_matcher
+
 server.port: 8020
+
+spring.mvc.pathmatch.matching-strategy: ant-path-matcher
 
 spring:
   datasource:
     url: jdbc:mysql://localhost/ticket_booking
     username: root
-    password: dhanesh@22
+    password: harini@04
+
+  jpa:
     database-platform=org:
       hibernate:
-        dialect: MySQL5Dialect
-  main:
+        dialect: MySQL5InnoDBDialect
+        
+    main:
     allow-circular-references: true
+
+
 
 
 
