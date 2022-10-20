@@ -31,7 +31,6 @@ public class User {
     private String emailId;
 
     @Column(name = "contact_number")
-
     private long contactNumber;
 
     @Column(name = "password")

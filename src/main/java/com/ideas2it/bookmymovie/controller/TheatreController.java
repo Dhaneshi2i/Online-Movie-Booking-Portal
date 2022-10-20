@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.TheatreNotFoundException;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This Class is to create,get,update and delete theatre Details
+ */
 @RestController
 @RequestMapping("/theatre")
 public class TheatreController {
@@ -24,76 +27,76 @@ public class TheatreController {
 
 
     /**
-     *
+     * This method is to get a list of theatre details.
      * @return listOfTheatres
-     * @throws TheatreNotFoundException
+     * @throws NotFoundException
      */
     @GetMapping
-    public ResponseEntity<List<TheatreDto>> getAllTheatres() throws TheatreNotFoundException {
+    public List<TheatreDto> getAllTheatres() throws NotFoundException {
 
         logger.info("-------Theatre List Fetched---------");
-        return ResponseEntity.ok(theatreService.getAllTheatres());
+        return theatreService.getAllTheatre();
     }
 
     /**
      *
      * @param theatreDto
      * @return inserted theatre
-     * @throws TheatreNotFoundException
+     * @throws NotFoundException
      */
     @PostMapping
-    public ResponseEntity<TheatreDto> addTheatre(@RequestBody TheatreDto theatreDto)
-            throws TheatreNotFoundException {
+    public TheatreDto addTheatre(@RequestBody TheatreDto theatreDto)
+            throws NotFoundException {
 
         logger.info("-------Theatre Added Successfully---------");
-        return new ResponseEntity<>(theatreService.addTheatre(theatreDto), HttpStatus.CREATED);
+        return theatreService.createTheatre(theatreDto);
     }
 
     /**
      *
      * @param theatreId,theatreDto
      * @return updated theatre
-     * @throws TheatreNotFoundException
+     * @throws NotFoundException
      */
     @PatchMapping("/{theatreId}")
     public List<TheatreDto> updateTheatre(@PathVariable("theatreId") int theatreId)
-            throws  TheatreNotFoundException {
+            throws  NotFoundException {
 
         logger.info("-------Theatre Updated Successfully---------");
-        return theatreService.updateTheatre(theatreId);
+        return theatreService.updateTheatreById(theatreId);
     }
 
     /**
      *
      * @param theatreId
      * @return theatre by theatreId
-     * @throws TheatreNotFoundException
+     * @throws NotFoundException
      */
     @GetMapping("/find/{theatreId}")
-    public ResponseEntity<TheatreDto> findTheatre(@PathVariable int theatreId)
-            throws  TheatreNotFoundException {
+    public TheatreDto findTheatre(@PathVariable int theatreId)
+            throws  NotFoundException {
 
         logger.info("-------Theatre Found with Theatre id" + theatreId + "---------");
-        return ResponseEntity.ok(theatreService.findTheatres(theatreId));
+        return theatreService.findTheatreById(theatreId);
     }
 
     /**
      *
      * @param theatreId
      * @return deleted theatre
-     * @throws TheatreNotFoundException
+     * @throws NotFoundException
      */
     @DeleteMapping("/delete/{theatreId}")
     public List<TheatreDto> deleteMoviesById(@PathVariable int theatreId)
-            throws TheatreNotFoundException {
+            throws NotFoundException {
 
         logger.info("-------Theatre Deleted with Theatre id" + theatreId + "---------");
         return theatreService.deleteTheatreById(theatreId);
     }
 
-//    @GetMapping("/findbyMovie/{movieId}")
-//    public ResponseEntity<List<TheatreDto>> findTheatreByMovieId(@PathVariable int movieId)
-//            throws  TheatreNotFoundException {
-//        return ResponseEntity.ok(theatreService.findTheatresByMovie(movieId));
-//    }
+    @GetMapping("/findbyMovie/{movieId}")
+    public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId)
+            throws  NotFoundException {
+        return theatreService.findTheatresByMovieId(movieId);
+    }
 }

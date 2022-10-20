@@ -50,7 +50,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto createBooking(BookingDto bookMovie, int userId, int showId) {
         Show show = new Show();
         if (showId != 0) {
-            //show = mapper.showDtoToShow(showService.getshowById(showId));
+            //show = mapper.showDtoToShow(showService.getByShowId(showId));
             show.setBooking(mapper.bookingDtoToBooking(bookMovie));
             booking.setShow(show);
         }

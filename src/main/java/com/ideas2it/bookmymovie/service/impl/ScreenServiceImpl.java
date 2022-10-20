@@ -2,7 +2,7 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.ScreenNotFoundException;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Theatre;
@@ -33,61 +33,87 @@ public class ScreenServiceImpl implements ScreenService {
 
 
     /**
-     * @return screen
+     * This method gets screenDto object as parameter to create Screen Details
+     *
+     * @param screenDto is passed as argument to add these value to the database.
+     * @param theatreId is passed as an argument to associate screen with screen.
+     *
+     * @return ScreenDto which return the created Screen Details
      */
     @Override
-    public ScreenDto addScreen(ScreenDto screenDto, int theatreId) throws ScreenNotFoundException {
+    public ScreenDto createScreen(ScreenDto screenDto, int theatreId) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
         if (theatreId != 0) {
-            Theatre theatre = theatreRepository.findById(theatreId).get();
-            screen.setTheatre(theatre);
+            Optional<Theatre> theatre = theatreRepository.findById(theatreId);
+            theatre.ifPresent(screen::setTheatre);
+
         }
         return mapper.screenToScreenDto(screenRepository.save(screen));
     }
 
     /**
-     * @return screenList
+     * This method List all the Screen Details that are present in Database
+     *
+     * @return List<ScreenDto> which will have all the Screen Details which are present in
+     * the database.
      */
     @Override
-    public List<ScreenDto> viewScreenList() throws ScreenNotFoundException {
+    public List<ScreenDto> viewScreenList() throws NotFoundException {
         List<Screen> screens = screenRepository.findAllByStatus(true);
         if (screens.isEmpty()) {
-            throw new ScreenNotFoundException("No Details Present Here");
+            throw new NotFoundException("No Details Present Here");
         }
         return screens.stream().
-                map(screen -> mapper.screenToScreenDto(screen)).collect(Collectors.toList());
+                map(mapper::screenToScreenDto).collect(Collectors.toList());
     }
 
+    /**
+     * This method gets screenId as parameter and update the Screen Details
+     *
+     * @param screenId is passed as argument to get those value from the database.
+     * @return List of screen details after update
+     */
     @Override
-    public ScreenDto viewScreen(int screenId) throws ScreenNotFoundException {
+    public ScreenDto updateScreenById(int screenId) throws NotFoundException {
+        Optional<Screen> screen = screenRepository.findById(screenId);
+        if (screen.isPresent()) {
+            screen.get().setStatus(false);
+            screenRepository.saveAndFlush(screen.get());
+            return mapper.screenToScreenDto(screen.get());
+        }
+        throw new NotFoundException("Screen with the given id is not present");
+    }
+
+    /**
+     * This method gets screenId as parameter and get the Screen Details which matches the id
+     *
+     * @param screenId is passed as argument to fetch those from the database.
+     * @return ScreenDto which is fetched from database with the param
+     */
+    @Override
+    public ScreenDto getScreenById(int screenId) throws NotFoundException {
         Optional<Screen> screen = screenRepository.findById(screenId);
         if(screen.isPresent()){
             return mapper.screenToScreenDto(screen.get());
         }
-        throw new ScreenNotFoundException("Screen Id not found");
+        throw new NotFoundException("Screen Id not found");
     }
 
     /**
-     * @return updatedScreen
+     * This method List all the Theatre Details by screen that are present in Database
+     *
+     * @param screenId is passed to categorize the screen Details by Movie
+     * @return TheatreDto which will have the details of theatre
+     * which was categorized by screen
      */
     @Override
-    public ScreenDto updateScreen(int screenId) {
-        Optional<Screen> screen = screenRepository.findById(screenId);
-        if (screen != null) {
-            screen.get().setStatus(false);
-            screenRepository.saveAndFlush(screen.get());
-        }
-        return mapper.screenToScreenDto(screen.get());
-    }
-
-    @Override
-    public TheatreDto getTheatre(int screenId) throws ScreenNotFoundException {
+    public TheatreDto getTheatreByScreenId(int screenId) throws NotFoundException {
         Optional<Screen> screen =screenRepository.findById(screenId);
         if(screen.isPresent()) {
             Theatre theatre = screen.get().getTheatre();
             return mapper.theatreToTheatreDto(theatre);
         }
-        throw new ScreenNotFoundException("Screen Id not found");
+        throw new NotFoundException("Screen Id not found");
     }
 
     public Screen findScreenById(int screenId) {

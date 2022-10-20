@@ -16,6 +16,7 @@ public interface MapStructMapper {
     SeatSlimDto seatToSeatSlimDto(Seat seat);
     Seat seatDtoToSeat(SeatDto seatDto);
     SeatDto seatToSeatDto(Seat seat);
+    List<SeatDto> seatListToSeatDtoList(List<Seat> seats);
     ScreenSlimDto screenToScreenSlimDto(Screen screen);
     Screen screenDtoToScreen(ScreenDto screenDto);
     ScreenDto screenToScreenDto(Screen screen);

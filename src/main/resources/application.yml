@@ -1,5 +1,7 @@
-spring.mvc.pathmatch.matching-strategy: ant-path-matcher
+
 server.port: 8020
+
+spring.mvc.pathmatch.matching-strategy: ant-path-matcher
 
 spring:
   datasource:
@@ -8,20 +10,14 @@ spring:
     password: siva2001
   main:
     allow-circular-reference: true
-
+  jpa:
     database-platform=org:
       hibernate:
-        dialect: MySQL5Dialect
+        dialect: MySQL5InnoDBDialect
+        
+    main:
+    allow-circular-references: true
 
-
-
-#    hibernate.ddl-auto: update
-#    show_sql: true
-#    use_sql_comments: true
-#    format_sql: true
-#    event:
-#      merge:
-#        entity_copy_observer: allow
 
 
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -19,13 +20,16 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class UserDto {
     private int userId;
+    @NotNull
     @Pattern(regexp = "([A-Z][a-z]{2,30}\\s*)+", message = "Only letter are valid")
     private String userName;
+    @NotNull
     @Email
     private String emailId;
-    //@NotNull
-    //@Pattern(regexp = "[6-9][0-9]{9}", message = "only number are allowed and they must have 10 numbers")
+    @NotNull
+    @Pattern(regexp = "^(0/91)?[7-9][0-9]{9}$", message = "only number are allowed and they must have 10 numbers")
     private long contactNumber;
+    @NotNull
     @Size(max = 20, message = "Must be only between 20 characters")
     @Pattern(regexp = "[a-z0-9_-]+", message = "only number are allowed and they must have 10 numbers")
     private String password;
@@ -33,4 +37,5 @@ public class UserDto {
     private RoleSlimDto role;
 
 }
+
 
