@@ -39,7 +39,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<TicketDto> viewTickets() {
+    public List<TicketDto> getAllTickets() {
         return ticketRepository.findAll().stream()
                 .map(ticket -> mapper.ticketToTicketDto(ticket)).collect(Collectors.toList());
     }
