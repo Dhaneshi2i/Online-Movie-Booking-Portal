@@ -12,6 +12,10 @@ public class GenreServiceImpl implements GenreService {
     private GenreRepository genreRepository;
     private MapStructMapper mapper;
 
+    public GenreServiceImpl(GenreRepository genreRepository, MapStructMapper mapper) {
+        this.genreRepository = genreRepository;
+        this.mapper = mapper;
+    }
 
 
     @Override
@@ -21,7 +25,8 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public GenreDto getGenreByName(String name) {
-        return genreRepository.findGenreByName(name).map(genre -> mapper.genreToGenreDto(genre))
+        return genreRepository.findGenreByName(name)
+                .map(genre -> mapper.genreToGenreDto(genre))
                 .orElseThrow(() -> new NotFoundException("No genre found by name: " + name ));
     }
 }

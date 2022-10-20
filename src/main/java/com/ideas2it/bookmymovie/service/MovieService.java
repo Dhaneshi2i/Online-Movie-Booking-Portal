@@ -1,28 +1,28 @@
 package com.ideas2it.bookmymovie.service;
 
-
+import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Movie;
+import com.ideas2it.bookmymovie.slimdto.MovieSlimDto;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface MovieService {
+    MovieDto addMovie(MovieDto movieDto);
 
-    Movie addMovie(Movie movie) throws NotFoundException;
+    List<MovieDto> getMovies() throws NotFoundException;
 
-     Movie removeMovie(int movieId) throws NotFoundException;
+    MovieDto getMovieById(int id);
 
-     Movie updateMovie(Movie movie) throws NotFoundException;
 
-    Movie addMovieToShow(Movie movie, Integer showId) throws NotFoundException;
+    List<MovieSlimDto> getMovieByLanguage(String language) throws NotFoundException;
 
-     Movie viewMovie(int movieId) throws NotFoundException;
 
-     List<Movie> viewMovieList() throws NotFoundException;
+    List<MovieSlimDto> getMovieByGenre(String genre) throws  NotFoundException;
 
-     List<Movie> viewMovieList(int theatreId);
+//    MovieDto updateMovie(MovieDto movieDto);
+//
+//    MovieDto deleteMovie(int id, Boolean status);
 
-     List<Movie> viewMovieList(LocalDate date);
+
 }
-

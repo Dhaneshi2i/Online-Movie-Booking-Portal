@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 public class LanguageServiceImpl implements LanguageService {
     private LanguageRepository languageRepository;
     private MapStructMapper mapper;
+
+    public LanguageServiceImpl(LanguageRepository languageRepository, MapStructMapper mapper) {
+        this.languageRepository = languageRepository;
+        this.mapper = mapper;
+    }
+
     @Override
     public LanguageDto addLanguage(LanguageDto languageDto) {
         return mapper.languageToLanguageDto(languageRepository.save(mapper.languageDtoToLanguage(languageDto)));
@@ -18,7 +24,8 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public LanguageDto getLanguageByName(String name) {
-        return languageRepository.findLanguageByName(name).map(language -> mapper.languageToLanguageDto(language))
+        return languageRepository.findLanguageByName(name)
+                .map(language -> mapper.languageToLanguageDto(language))
                 .orElseThrow(() ->new NotFoundException("No language found by name:" + name));
     }
 }
