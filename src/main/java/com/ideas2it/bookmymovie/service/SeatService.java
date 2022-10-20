@@ -6,11 +6,11 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import java.util.List;
 
 public interface SeatService {
-    public SeatDto addSeat(SeatDto seat) throws NotFoundException;
+    public SeatDto createSeat(SeatDto seat) throws NotFoundException;
 
-    public List<SeatDto> viewSeatList() throws NotFoundException;
+    public List<SeatDto> getAllSeat() throws NotFoundException;
 
-    public SeatDto updateSeat(int seatId) throws NotFoundException;
+    public SeatDto updateSeatById(int seatId) throws NotFoundException;
 
     public SeatDto bookSeat(SeatDto seat);
 

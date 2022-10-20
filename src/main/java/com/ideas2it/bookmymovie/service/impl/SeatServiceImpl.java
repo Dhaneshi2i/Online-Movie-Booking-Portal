@@ -25,7 +25,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto addSeat(SeatDto seatDto) throws NotFoundException {
+    public SeatDto createSeat(SeatDto seatDto) throws NotFoundException {
         Seat seat = mapper.seatDtoToSeat(seatDto);
         if (seatDto != null) {
             if (seatRepository.existsById(seat.getSeatId())) {
@@ -34,11 +34,11 @@ public class SeatServiceImpl implements SeatService {
                 seatRepository.saveAndFlush(seat);
             }
         }
-        return mapper.seatToSeatDto(seatRepository.findById(seat.getSeatId()).get());
+        return mapper.seatToSeatDto(seat);
     }
 
     @Override
-    public List<SeatDto> viewSeatList() throws NotFoundException {
+    public List<SeatDto> getAllSeat() throws NotFoundException {
         List<Seat> seats = seatRepository.findAll();
 
         if (seats.size() == 0) throw new NotFoundException("No seats found");
@@ -47,7 +47,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto updateSeat(int seatId) throws NotFoundException{
+    public SeatDto updateSeatById(int seatId) throws NotFoundException{
         Optional<Seat> seat = seatRepository.findById(seatId);
         if(seat.isPresent()) {
             seat.get().setStatus(false);
