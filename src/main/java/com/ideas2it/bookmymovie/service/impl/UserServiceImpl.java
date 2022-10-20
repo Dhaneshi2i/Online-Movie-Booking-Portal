@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
-    private UserRepository userRepository;
-    private MapStructMapper mapper;
+    private final UserRepository userRepository;
+    private final MapStructMapper mapper;
 
     public UserServiceImpl(UserRepository userRepository, MapStructMapper mapper) {
         this.userRepository = userRepository;
@@ -36,12 +36,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findAllByStatus(false).stream().
-                map(user ->mapper.userToUserDto(user)).collect(Collectors.toList());
+                map(mapper::userToUserDto).collect(Collectors.toList());
     }
 
     @Override
     public UserDto getUserById(int id) {
-        return userRepository.findById(id).map(user -> mapper.userToUserDto(user))
+        return userRepository.findById(id).map(mapper::userToUserDto)
                 .orElseThrow(() ->new NotFoundException("No user found"));
 
     }
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByName(username);
+        User user = userRepository.findByUserName(username);
         Role role = new Role();
         if (user == null) {
             log.error("User not found in the database");
@@ -63,8 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         } else {
             log.info("User found in the database: {}",username);
         }
-        //return new org.springframework.security.core.userdetails.User(user.getName(),user.getPassword(),)
         SimpleGrantedAuthority authorities = new SimpleGrantedAuthority(role.getRoleType());
-        return new org.springframework.security.core.userdetails.User(user.getName(),user.getPassword(), Collections.singleton(authorities));
+        return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(), Collections.singleton(authorities));
     }
 }

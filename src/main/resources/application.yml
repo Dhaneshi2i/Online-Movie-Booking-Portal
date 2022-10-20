@@ -9,6 +9,8 @@ spring:
     database-platform=org:
       hibernate:
         dialect: MySQL5Dialect
+  main:
+    allow-circular-references: true
 
 
 
