@@ -53,15 +53,6 @@ public class UserAuthorizationFilter extends OncePerRequestFilter {
                     response.setContentType(APPLICATION_JSON_VALUE);
                     new ObjectMapper().writeValue(response.getOutputStream(), error);
                 }
-*/
-/*                    throw new RuntimeException(e);
-                } catch (JWTVerificationException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (ServletException e) {
-                    throw new RuntimeException(e);
-                }*//*
 
             } else {
                 filterChain.doFilter(request,response);

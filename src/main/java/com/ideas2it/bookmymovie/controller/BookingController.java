@@ -1,13 +1,16 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
+import com.ideas2it.bookmymovie.dto.TicketDto;
 import com.ideas2it.bookmymovie.service.BookingService;
+import com.ideas2it.bookmymovie.service.TicketService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,14 +19,22 @@ import java.util.List;
 @RequestMapping("/api/v1/booking")
 public class BookingController {
     private final BookingService bookingService;
+    private final TicketService ticketService;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, TicketService ticketService) {
         this.bookingService = bookingService;
+        this.ticketService = ticketService;
     }
 
-    @PostMapping
-    public BookingDto bookTickets(@RequestBody BookingDto bookingDto) {
-        return bookingService.createBooking(bookingDto);
+
+    @PostMapping("/bookTicket")
+    public BookingDto bookTicket(@RequestBody BookingDto bookingDto , @RequestParam int userId, @RequestParam int showId ) {
+        return bookingService.createBooking(bookingDto, userId, showId);
+    }
+
+    @PostMapping("/payment")
+    public TicketDto ticketPayment(@RequestBody TicketDto ticketDto) {
+        return ticketService.ticketPayment(ticketDto);
     }
 
     @GetMapping

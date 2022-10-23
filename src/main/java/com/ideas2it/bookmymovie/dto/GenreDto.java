@@ -1,23 +1,19 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@Component
 public class GenreDto {
     private int genreId;
-
+    @NotBlank
     private String name;
-
-    private List<MovieSlimDto> movies = new ArrayList<>();
-
 }

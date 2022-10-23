@@ -1,19 +1,21 @@
 package com.ideas2it.bookmymovie.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@Component
 public class CastDto {
     private int castId;
+    @NotBlank
     private String name;
+    @NotBlank
     private String role;
-    private List<MovieDto> movies = new ArrayList<>();
 }

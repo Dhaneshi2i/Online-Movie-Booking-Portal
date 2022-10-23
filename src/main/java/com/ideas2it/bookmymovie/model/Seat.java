@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,7 +15,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
 @Table(name = "seats")
 public class Seat {
     @Id

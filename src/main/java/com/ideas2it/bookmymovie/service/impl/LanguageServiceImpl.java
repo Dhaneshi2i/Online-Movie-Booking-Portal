@@ -23,9 +23,9 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public LanguageDto getLanguageByName(String name) {
-        return languageRepository.findLanguageByName(name)
+    public LanguageDto getByLanguageId(int languageId) {
+        return languageRepository.findByLanguageId(languageId)
                 .map(language -> mapper.languageToLanguageDto(language))
-                .orElseThrow(() ->new NotFoundException("No language found by name:" + name));
+                .orElseThrow(() ->new NotFoundException("No language found by name:" + languageId));
     }
 }

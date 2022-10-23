@@ -3,8 +3,6 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.SeatService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/seat")
+@RequestMapping("api/v1/seat")
 public class SeatController {
-    Logger logger = LoggerFactory.getLogger(SeatController.class);
 
     private final SeatService seatService;
 
@@ -32,13 +30,10 @@ public class SeatController {
      * @return seatDetails
      * @throws NotFoundException
      */
-    @PostMapping
-    public SeatDto addASeat(@RequestBody SeatDto seatDto)
-            throws NotFoundException {
 
-        seatDto = seatService.createSeat(seatDto);
-        logger.info("-------Seat Added Successfully---------");
-        return seatDto;
+    @PostMapping
+    public SeatDto addSeat(@Valid @RequestBody SeatDto seatDto) {
+        return seatService.createSeat(seatDto);
     }
 
     /**
@@ -47,8 +42,6 @@ public class SeatController {
      */
     @GetMapping
     public List<SeatDto> viewSeatList() throws NotFoundException {
-
-        logger.info("-------List of Seats Fetched Successfully---------");
         return seatService.getAllSeat();
     }
 
@@ -61,7 +54,6 @@ public class SeatController {
     public SeatDto updateSeat(@PathVariable("seatId") int seatId)
             throws NotFoundException {
         SeatDto seatDto = seatService.updateSeatById(seatId);
-        logger.info("-------Seat Updated Successfully---------");
         return seatDto;
     }
 

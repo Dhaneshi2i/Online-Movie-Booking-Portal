@@ -1,21 +1,11 @@
 package com.ideas2it.bookmymovie.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +13,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
 @Entity
 @Table(name = "booking")
 public class Booking {
@@ -31,16 +20,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int bookingId;
-    @JsonIgnore
     @ManyToOne
     private User user;
-    @JsonIgnore
     @OneToOne(mappedBy = "booking")
     private Show show;
     private LocalDate bookingDate;
-    private String bookingStatus;
-    @JsonIgnore
+    @Enumerated(EnumType.STRING)
+    private BookingStatus bookingStatus;
+    private double totalCost;
     @OneToMany
     private List<Seat> seats;
-
 }

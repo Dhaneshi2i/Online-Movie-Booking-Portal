@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,17 +20,17 @@ import java.util.List;
 public class MovieDto {
 
     private int movieId;
-    @NotNull
+    @NotBlank
     private String movieName;
-    @NotNull
+    @NotNull(message = "Enter the movie duration in correct format")
     private LocalTime duration;
-    @NotNull
+    @NotEmpty(message = "cast is blank")
     private List<CastDto> casts = new ArrayList<>();
-    @NotNull
+    @NotEmpty(message = "language is empty")
     private List<LanguageDto> languages = new ArrayList<>();
-    @NotNull
+    @NotEmpty
     private List<GenreDto> genres = new ArrayList<>();
     @NotNull
-    private LocalDate movieDate;
+    private LocalDate releaseDate;
     //private ShowDto show;
 }

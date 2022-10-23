@@ -4,5 +4,5 @@ import com.ideas2it.bookmymovie.dto.GenreDto;
 
 public interface GenreService {
     GenreDto addGenre(GenreDto genreDto);
-    GenreDto getGenreByName(String name);
+    GenreDto getByGenreId(int genreId);
 }

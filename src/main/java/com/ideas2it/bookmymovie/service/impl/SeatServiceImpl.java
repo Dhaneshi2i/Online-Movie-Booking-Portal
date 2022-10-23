@@ -26,7 +26,8 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public SeatDto createSeat(SeatDto seatDto) throws NotFoundException {
         if (null != seatDto) {
-            if (seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType())) {
+            System.out.println(seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()));
+            if ( seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()).isPresent()){
                 throw new NotFoundException("Seat number already exists");
             } else {
                 seatRepository.saveAndFlush(mapper.seatDtoToSeat(seatDto));

@@ -1,11 +1,9 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ShowService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,19 +13,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/V1/show")
+@RequestMapping("/api/v1/shows")
 public class ShowController {
-    Logger logger = LoggerFactory.getLogger(ShowController.class);
 
-    private ShowService showService;
+    private final ShowService showService;
 
     public ShowController(ShowService showService) {
         this.showService = showService;
     }
 
+    /**
+     * Stores a Show object in the Database.
+     *
+     * @param showDto
+     * @param theatreId
+     * @param screenId
+     * @return ShowSlimDto
+
+     */
+    @PostMapping
+    public ShowSlimDto createShow(@Valid @RequestBody ShowDto showDto,
+                                  @RequestParam int theatreId, @RequestParam int screenId) {
+        return showService.createShow(showDto, theatreId, screenId);
+    }
 
     /**
      * Removes persisted Show instance from the Database.
@@ -35,26 +47,23 @@ public class ShowController {
      * @param showId
      * @return Show
      */
-    @DeleteMapping("/delete/{showId}")
-    public void removeShow(@PathVariable int showId) {
-         showService.getShowById(showId);
-
-    }
+//    @DeleteMapping("/delete/{showId}")
+//    public void removeShow(@PathVariable int showId) {
+//         showService.getShowById(showId);
+//
+//    }
 
     /**
-     * Updates a existing Show record in the database.
+     * Updates an existing Show record in the database.
      *
      * @param theatreId
      * @param screenId
      * @return Show
      */
-    @PutMapping("/update")
-    public ShowDto updateShow(@RequestBody ShowDto showDto, @RequestParam(required = false) Integer theatreId,
-                                           @RequestParam(required = false) Integer screenId) {
-
-
+    @PutMapping
+    public ShowDto updateShow(@RequestBody ShowDto showDto, @RequestParam int theatreId,
+                                           @RequestParam int screenId) {
             return showService.updateShow(showDto, theatreId, screenId);
-
     }
 
     /**
@@ -67,7 +76,6 @@ public class ShowController {
     @GetMapping("/{showId}")
     public ShowDto getShowById(@PathVariable int showId) {
             return showService.getShowById(showId);
-
     }
 
     /**
@@ -78,7 +86,6 @@ public class ShowController {
      */
     @GetMapping
     public List<ShowDto> getAllShow() {
-
         return showService.getAllShow();
     }
 
@@ -88,7 +95,6 @@ public class ShowController {
      */
     @GetMapping("/show_theatre/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
-
         return showService.getShowByThreatreId(theatreId);
     }
 
