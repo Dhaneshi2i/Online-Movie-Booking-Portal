@@ -5,11 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat,Integer> {
-
-    Boolean findBySeatNumberAndType(String seatNumber, String type);
-
+    Optional<Seat> findBySeatNumberAndType(String seatNumber, String type);
     List<Seat> findBySeatStatus(String seatStatus);
 }

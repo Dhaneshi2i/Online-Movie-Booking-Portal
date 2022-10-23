@@ -1,14 +1,12 @@
 package com.ideas2it.bookmymovie.mapper;
 
 import com.ideas2it.bookmymovie.dto.*;
-import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
-import com.ideas2it.bookmymovie.model.*;
 import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.RoleSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
+import com.ideas2it.bookmymovie.model.*;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public interface MapStructMapper {
     TheatreDto theatreToTheatreDto(Theatre theatre);
 
     List<TheatreDto> theatreListToTheatreDtoList(List<Theatre> theatres);
-
+    
     SeatSlimDto seatToSeatSlimDto(Seat seat);
 
     Seat seatDtoToSeat(SeatDto seatDto);
@@ -44,6 +42,10 @@ public interface MapStructMapper {
     RoleSlimDto roleToRoleSlimDto(Role role);
 
     RoleDto roleToRoleDto(Role role);
+
+    Role roleDtoToRole(RoleDto roleDto);
+    
+    BookingDto bookingToBookingDto(Booking booking);
 
     UserSlimDto userToUserSlimDto(User user);
 
@@ -85,6 +87,8 @@ public interface MapStructMapper {
 
     ShowDto showToShowDto(Show show);
     
+    List<ShowDto> showListToShowDtoList(List<Show> show);
+    
     MovieSlimDto movieToMovieSlimDto(Movie movie);
     
     List<ShowDto> showListToShowDtoList(List<Show> show);
@@ -92,10 +96,10 @@ public interface MapStructMapper {
     List<Show> showDtoListToShowList(List<ShowDto> showDto);
 
     List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
-
+    
     ShowSlimDto showToShowSlimDto(Show show);
-
-    TheatreSlimDto theatreDtoToTheatreSlimDto(TheatreDto theatreDto);
-
+    
     MovieSlimDto movieDtoToMovieSlimDto(MovieDto movieDto);
+    BookingDto bookingToBookingSlimDto(Booking booking);
+    List<MovieDto> movieListToMovieDtoList(List<Movie> mvList);
 }

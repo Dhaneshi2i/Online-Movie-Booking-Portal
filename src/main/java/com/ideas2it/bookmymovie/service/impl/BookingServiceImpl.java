@@ -12,6 +12,7 @@ import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,19 +36,25 @@ public class BookingServiceImpl implements BookingService {
 
 
     @Override
-    public BookingDto createBooking(BookingDto bookingDto) {
+    public BookingDto createBooking(BookingDto bookingDto, int userId, int showId) {
         Booking booking = new Booking();
         if (null != bookingDto) {
-            booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
-            booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
+            //booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
+            //booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
+            booking.setUser(mapper.userDtoToUser(userService.getUserById(userId)));
+            booking.setShow(mapper.showDtoToShow(showService.getShowById(showId)));
             List<Seat> seats = mapper.seatDtoListToSeatList(bookingDto.getSeats());
             for(Seat seat :seats) {
+                System.out.println("s2 : " + seat.getPrice());
                 seatService.bookSeat(seat);
             }
             booking.setSeats(seats);
+            booking.setBookingDate(LocalDate.now());
+            booking.setTotalCost(calculateTotalCost(seats));
+            System.out.println("seat price: " + booking.getTotalCost());
         }
-        bookingRepository.save(booking);
-        return mapper.bookingToBookingDto(bookingRepository.findById(booking.getBookingId()).get());
+
+        return mapper.bookingToBookingSlimDto(bookingRepository.save(booking));
     }
 
     @Override
@@ -55,12 +62,6 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.findAll().stream().map(mapper::bookingToBookingDto).collect(Collectors.toList());
     }
 
-   /* @Override
-    public BookingDto updateBookings(BookingDto bookingDto) throws NotFoundException{
-        bookingRepository.saveAndFlush(mapper.bookingDtoToBooking(bookingDto));
-        return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getBookingId()).get());
-    }
-*/
     @Override
     public BookingDto viewByBookingId(int bookingId) throws NotFoundException {
         return mapper.bookingToBookingDto(bookingRepository.findById(bookingId).get());
@@ -78,29 +79,38 @@ public class BookingServiceImpl implements BookingService {
         return mapper.bookingToBookingDto(booking);
     }
 
-    /*@Override
+    @Override
+    public double calculateTotalCost(List<Seat> seats) {
+       // List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.getAllTickets());
+//        List<Seat> seats = new ArrayList<>();
+//        for (Ticket ticket : tickets) {
+//            if (bookingId == ticket.getBooking().getTransactionId()) {
+//                seats.addAll(ticket.getSeats());
+//            }
+//        }
+        double amount = 0;
+        for (Seat seat : seats) {
+            amount = amount + seat.getPrice();
+            System.out.println("s1 price:" + seat.getPrice());
+        }
+        //booking = bookingRepository.findById(bookingId).get();
+        //booking.setTotalCost(amount);
+        //bookingRepository.save(booking);
+        System.out.println("seats price: " + amount);
+        return amount;
+    }
+
+}
+
+
+   /* @Override
+    public BookingDto updateBookings(BookingDto bookingDto) throws NotFoundException{
+        bookingRepository.saveAndFlush(mapper.bookingDtoToBooking(bookingDto));
+        return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getBookingId()).get());
+    }
+
+    @Override
     public List<BookingDto> getAllBookingsByMovieId(int movieId) {
         List<Booking> bookings = queryClass.getAllByMovieId(movieId);
         return mapper.bookingListToBookingDtoList(bookings);
     }*/
-
- /*   @Override
-    public double calculateTotalCost(int bookingId) {
-        List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.getAllTickets());
-        List<Seat> seats = new ArrayList<>();
-        for (Ticket ticket : tickets) {
-            if (bookingId == ticket.getBooking().getTransactionId()) {
-                seats.addAll(ticket.getSeats());
-            }
-        }
-        double amount = 0;
-        for (Seat seat : seats) {
-            amount = amount + seat.getPrice();
-        }
-        booking = bookingRepository.findById(bookingId).get();
-        booking.setTotalCost(amount);
-        bookingRepository.save(booking);
-        return amount;
-    }*/
-
-}

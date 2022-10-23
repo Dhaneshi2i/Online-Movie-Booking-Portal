@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,10 +28,8 @@ public class Ticket {
     private int ticketId;
     private int noOfSeats;
     private boolean ticketStatus = true;
-    @JsonIgnore
     @OneToMany
     private List<Seat> seats;
-    @JsonIgnore
     @OneToOne
     private Booking booking;
 }

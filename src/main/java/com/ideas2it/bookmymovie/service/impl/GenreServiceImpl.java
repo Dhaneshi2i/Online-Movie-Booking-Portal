@@ -24,9 +24,9 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public GenreDto getGenreByName(String name) {
-        return genreRepository.findGenreByName(name)
+    public GenreDto  getByGenreId (int genreId) {
+        return genreRepository.findByGenreId(genreId)
                 .map(genre -> mapper.genreToGenreDto(genre))
-                .orElseThrow(() -> new NotFoundException("No genre found by name: " + name ));
+                .orElseThrow(() -> new NotFoundException("No genre found by name: " + genreId ));
     }
 }

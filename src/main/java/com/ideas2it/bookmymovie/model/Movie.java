@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "movie")
+@Table(name = "movies")
 public class Movie {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieId;
@@ -38,9 +36,9 @@ public class Movie {
     @UpdateTimestamp
     @Column
     private Timestamp modifiedDate;
-    @JsonIgnore
+
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.MERGE
     })
     @JoinTable(
             name = "movie_genre",
@@ -49,9 +47,8 @@ public class Movie {
             }, inverseJoinColumns = {@JoinColumn(name = "genre_id")})
     private List<Genre> genres = new ArrayList<>();
 
-    @JsonIgnore
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.MERGE
     })
     @JoinTable(
             name = "movie_language",
@@ -64,9 +61,8 @@ public class Movie {
     )
     private List<Language> languages = new ArrayList<>();
 
-    @JsonIgnore
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.MERGE
     })
     @JoinTable(
             name = "movie_cast",
@@ -79,9 +75,8 @@ public class Movie {
     )
     private List<Cast> casts = new ArrayList<>();
 
+    private LocalDate releaseDate;
 
-    private LocalDate movieDate;
-    @JsonIgnore
     @OneToOne
     private Show show;
 }

@@ -1,15 +1,12 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 /**
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Theatre} entity
@@ -18,17 +15,16 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TheatreDto {
-
     private int theatreId;
-    @NotNull
+    @NotBlank(message = "Theatre name should not be empty")
     private String theatreName;
-    @NotNull
+    @NotBlank(message = "Theatre location should not empty")
     private String theatreCity;
 
-    private List<ScreenSlimDto> screen;
+    //private List<ScreenSlimDto> screen;
 
-    private List<ShowSlimDto> show;
+    //private List<ShowSlimDto> show;
 
 }

@@ -1,13 +1,11 @@
 package com.ideas2it.bookmymovie.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,7 +19,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 @Getter
 @Setter
 @AllArgsConstructor
@@ -34,10 +31,10 @@ public class Theatre {
     private int theatreId;
     private String theatreName;
     private String theatreCity;
-    @JsonIgnore
+
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
     private List<Screen> screen = new ArrayList<>();
-    @JsonIgnore
+
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
     private List<Show> show = new ArrayList<>();
     @Column(name = "status")

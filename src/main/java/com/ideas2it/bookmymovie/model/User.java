@@ -51,7 +51,6 @@ public class User {
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
 
-
     @Column(name = "status")
     private boolean status = false;
     @ManyToOne

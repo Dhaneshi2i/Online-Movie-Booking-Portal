@@ -5,14 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class BookingSlimDto {
-    private int transactionId;
+    private int bookingId;
     private LocalDate bookingDate;
-    private String transactionMode;
-    private boolean transactionStatus;
+    private MovieSlimDto movieSlimDto;
+    private List<SeatSlimDto> seats;
     private double totalCost;
 }

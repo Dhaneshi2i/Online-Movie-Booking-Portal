@@ -1,14 +1,12 @@
 package com.ideas2it.bookmymovie.dto;
 
 
-import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -16,9 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class LanguageDto {
     private int languageId;
-
+    @NotBlank
     private String name;
-
-    private List<MovieSlimDto> movies = new ArrayList<>();
 
 }

@@ -4,27 +4,25 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
 /**
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
     private int screenId;
-    @NotNull
+    @NotBlank
     private String screenName;
-    @NotNull
+    @NotBlank
     private int noOfRows;
-    @NotNull
+    @NotBlank
     private int noOfColumns;
-
+    @NotBlank
     private TheatreDto theatre;
     //private boolean status;
 

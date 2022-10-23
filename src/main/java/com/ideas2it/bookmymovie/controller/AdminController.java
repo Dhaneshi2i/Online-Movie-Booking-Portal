@@ -120,23 +120,3 @@ public class AdminController {
 
 
 
-
-
-
-
-
-
-    /*@GetMapping("/cast/{id}")
-    public CastDto getCast(@PathVariable String name) throws NotFoundException {
-        return castService.getCastByName(name);
-    }*/
-
-/*    @GetMapping("/language/{name}")
-    public LanguageDto getLanguage(@PathVariable String name) {
-        return languageService.getLanguageByName(name);
-    }
-
-    @GetMapping("/genre/{name}")
-    public GenreDto getGenre(@PathVariable String name) {
-        return genreService.getGenreByName(name);
-    }*/

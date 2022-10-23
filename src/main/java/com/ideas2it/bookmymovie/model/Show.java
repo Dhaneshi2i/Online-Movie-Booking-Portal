@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,18 +30,18 @@ public class Show {
     private int showId;
     private LocalTime showStartTime;
     private LocalTime showEndTime;
-    @JsonIgnore
+
     @OneToOne(mappedBy = "show")
     private Movie movie;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "screen_id")
     private Screen screen;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name="theatre_id")
     private Theatre theatre;
-    @JsonIgnore
+
     @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
