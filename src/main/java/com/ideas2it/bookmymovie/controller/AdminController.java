@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
+
 import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
@@ -9,6 +10,12 @@ import com.ideas2it.bookmymovie.service.LanguageService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -26,6 +33,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/admin")
 public class AdminController {
+
     private GenreService genreService;
     private CastService castService;
     private LanguageService languageService;
@@ -35,6 +43,7 @@ public class AdminController {
         this.castService = castService;
         this.languageService = languageService;
     }
+
 
     @PostMapping("/cast")
     public CastDto createCast(@Valid @RequestBody CastDto castDto) {
@@ -55,23 +64,3 @@ public class AdminController {
 
 
 
-
-
-
-
-
-
-    /*@GetMapping("/cast/{id}")
-    public CastDto getCast(@PathVariable String name) throws NotFoundException {
-        return castService.getCastByName(name);
-    }*/
-
-/*    @GetMapping("/language/{name}")
-    public LanguageDto getLanguage(@PathVariable String name) {
-        return languageService.getLanguageByName(name);
-    }
-
-    @GetMapping("/genre/{name}")
-    public GenreDto getGenre(@PathVariable String name) {
-        return genreService.getGenreByName(name);
-    }*/
