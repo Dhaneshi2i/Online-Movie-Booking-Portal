@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class SeatDto {
     private String seatNumber;
     @NotBlank
     private String type;
-    @NotBlank
+    @NotNull
     private double price;
 
     //private SeatStatus seatStatus;

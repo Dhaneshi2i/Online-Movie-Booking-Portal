@@ -33,7 +33,7 @@ public interface TheatreService {
      * @param theatreId is passed as argument to fetch those from the database.
      * @return TheatreDto which is fetched from database with the param
      */
-    TheatreSlimDto findTheatreById(int theatreId);
+    TheatreDto findTheatreById(int theatreId);
 
     /**
      * This method gets TheatreId as parameter and update the Theatre Details

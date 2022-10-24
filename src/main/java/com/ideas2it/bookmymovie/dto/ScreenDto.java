@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -18,11 +19,10 @@ public class ScreenDto {
     private int screenId;
     @NotBlank
     private String screenName;
-    @NotBlank
+    @NotNull
     private int noOfRows;
-    @NotBlank
+    @NotNull
     private int noOfColumns;
-    @NotBlank
     private TheatreDto theatre;
     //private boolean status;
 

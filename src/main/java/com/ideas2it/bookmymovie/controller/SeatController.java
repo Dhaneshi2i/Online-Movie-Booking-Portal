@@ -28,7 +28,6 @@ public class SeatController {
     /**
      * @param seatDto
      * @return seatDetails
-     * @throws NotFoundException
      */
 
     @PostMapping

@@ -51,12 +51,12 @@ public class TheatreServiceImpl implements TheatreService {
      */
     @Override
     public List<TheatreDto> getAllTheatre() throws NotFoundException {
-        List<Theatre> theatres = theatreRepository.findAllByStatus(true);
+        List<Theatre> theatres = theatreRepository.findAllByStatus(false);
         if (theatres.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
         }
         return theatres.stream().
-                map(theatre -> mapper.theatreToTheatreDto(theatre)).collect(Collectors.toList());
+                map(mapper::theatreToTheatreDto).collect(Collectors.toList());
     }
 
     /**
@@ -66,11 +66,11 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto which is fetched from database with the param
      */
     @Override
-    public TheatreSlimDto findTheatreById(int theatreId) throws NotFoundException{
+    public TheatreDto findTheatreById(int theatreId) throws NotFoundException{
         if (theatreRepository.existsById(theatreId)) {
             Optional<Theatre> theatre = theatreRepository.findById(theatreId);
             if(theatre.isPresent()){
-                return mapper.theatreToTheatreSlimDto(theatre.get());
+                return mapper.theatreToTheatreDto(theatre.get());
             }
         }
         throw new NotFoundException("Theatre details with the given id is not found");
@@ -86,7 +86,7 @@ public class TheatreServiceImpl implements TheatreService {
     public List<TheatreDto> updateTheatreById(int theatreId) {
         Optional<Theatre> theatre = theatreRepository.findById(theatreId);
         if(theatre.isPresent()) {
-            theatre.get().setStatus(false);
+            theatre.get().setStatus(true);
             theatreRepository.save(theatre.get());
         }
         return mapper.theatreListToTheatreDtoList(theatreRepository.findAllByStatus(true));

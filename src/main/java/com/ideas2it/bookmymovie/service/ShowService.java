@@ -8,7 +8,7 @@ import java.util.List;
 public interface ShowService {
 
 //    ShowDto addShow(ShowDto show, Integer theatreId, Integer screenId);
-    ShowSlimDto createShow(ShowDto showDto, int theatreId, int screenId);
+    ShowSlimDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId);
     ShowDto updateShow(ShowDto show, Integer theatreId, Integer screenId);
 
     void removeShow(int showId);
@@ -17,7 +17,7 @@ public interface ShowService {
 
     List<ShowDto> getAllShow();
 
-    List<ShowDto> getShowByThreatreId(int theatreId);
+    List<ShowDto> getShowByTheatreId(int theatreId);
 
 //    List<ShowDto> getShowByDate(LocalDate date);
 }

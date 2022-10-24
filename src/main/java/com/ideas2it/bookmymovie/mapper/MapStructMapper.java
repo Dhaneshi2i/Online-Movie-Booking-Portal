@@ -13,7 +13,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapStructMapper {
-    TheatreSlimDto theatreToTheatreSlimDto(Theatre theatre);
 
     Theatre theatreDtoToTheatre(TheatreDto theatreDto);
 
@@ -88,7 +87,9 @@ public interface MapStructMapper {
     ShowDto showToShowDto(Show show);
     
     List<ShowDto> showListToShowDtoList(List<Show> show);
-    
+
+    ShowSlimDto showToShowSlimDto(Show show);
+   
     MovieSlimDto movieToMovieSlimDto(Movie movie);
     
     List<ShowDto> showListToShowDtoList(List<Show> show);
@@ -100,6 +101,7 @@ public interface MapStructMapper {
     ShowSlimDto showToShowSlimDto(Show show);
     
     MovieSlimDto movieDtoToMovieSlimDto(MovieDto movieDto);
+
     BookingDto bookingToBookingSlimDto(Booking booking);
-    List<MovieDto> movieListToMovieDtoList(List<Movie> mvList);
+    List<ShowDto> showListToShowSlimDtoList(List<Show> shows);
 }

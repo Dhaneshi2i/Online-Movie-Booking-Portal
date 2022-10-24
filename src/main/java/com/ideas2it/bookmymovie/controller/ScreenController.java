@@ -55,7 +55,6 @@ public class ScreenController {
      */
     @GetMapping
     public List<ScreenDto> viewScreenList() throws  NotFoundException {
-        //log.info("-------List Of Screens Fetched Successfully---------");
         return screenService.viewScreenList();
 
     }

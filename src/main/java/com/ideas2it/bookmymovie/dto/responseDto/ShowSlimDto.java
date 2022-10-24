@@ -15,4 +15,5 @@ public class ShowSlimDto {
     private LocalTime showStartTime;
     private LocalTime showEndTime;
     private LocalDate showDate;
+    private MovieSlimDto movie;
 }

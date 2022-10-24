@@ -6,12 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,12 +25,11 @@ public class Cast {
     @Column(name = "cast_name")
     private String name;
 
-    @Column(name = "cast_role")
+    @Column
     private String role;
 
-//    @JsonIgnore
-//    @ManyToMany(targetEntity=Movie.class, mappedBy = "casts", cascade = { CascadeType.ALL })
-//    private List<Movie> movies = new ArrayList<>();
+    @ManyToMany(targetEntity=Movie.class, mappedBy = "casts", cascade = { CascadeType.ALL })
+    private List<Movie> movies = new ArrayList<>();
 
 }
 

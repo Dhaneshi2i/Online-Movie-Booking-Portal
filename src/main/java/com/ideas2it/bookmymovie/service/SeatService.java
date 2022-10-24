@@ -48,6 +48,7 @@ public interface SeatService {
      * @return SeatDto which return the Seat Details with seat Status
      */
     public Seat cancelSeatBooking(Seat seat);
+    Seat getSeatBYId(int seatId);
 
     /**
      * This method gets screenDto object as parameter to create Screen Details

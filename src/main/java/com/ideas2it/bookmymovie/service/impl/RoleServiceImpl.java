@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.RoleDto;
-import com.ideas2it.bookmymovie.dto.responseDto.RoleSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.repository.RoleRepository;
@@ -33,8 +32,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleSlimDto getRoleByRoleType(String roleType) throws NotFoundException {
-        return roleRepository.findUserByRoleType(roleType).map(role ->mapper.roleToRoleSlimDto(role))
+    public RoleDto getRoleByRoleType(String roleType) throws NotFoundException {
+        return roleRepository.findUserByRoleType(roleType).map(role ->mapper.roleToRoleDto(role))
                 .orElseThrow(() ->new NotFoundException("No role found"));
     }
 }

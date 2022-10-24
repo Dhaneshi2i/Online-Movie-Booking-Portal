@@ -41,7 +41,6 @@ public class TheatreController {
      */
     @GetMapping
     public List<TheatreDto> getAllTheatres() throws NotFoundException {
-        //log.info("-------Theatre List Fetched---------");
         return theatreService.getAllTheatre();
     }
 
@@ -80,9 +79,8 @@ public class TheatreController {
      * @throws NotFoundException
      */
     @GetMapping("/{theatreId}")
-    public TheatreSlimDto findTheatre(@PathVariable int theatreId)
+    public TheatreDto findTheatre(@PathVariable int theatreId)
             throws  NotFoundException {
-        //log.info("-------Theatre Found with Theatre id" + theatreId + "---------");
         return theatreService.findTheatreById(theatreId);
     }
 

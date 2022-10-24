@@ -30,28 +30,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int userId;
-
-    @Column(name = "name")
     private String userName;
-
-    @Column(name = "email_id")
     private String emailId;
-
-    @Column(name = "contact_number")
     private long contactNumber;
-
-    @Column(name = "password")
     private String password;
-
     @CreationTimestamp
-    @Column(name = "created_date")
     private Timestamp creationDate;
-
     @UpdateTimestamp
-    @Column(name = "modified_date")
     private Timestamp modifiedDate;
-
-    @Column(name = "status")
     private boolean status = false;
     @ManyToOne
     @JoinColumn(name = "role_id")
