@@ -10,5 +10,4 @@ import lombok.Setter;
 public class MovieSlimDto {
     private int movieId;
     private String movieName;
-
 }

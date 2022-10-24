@@ -26,16 +26,7 @@ public class Movie {
     private int movieId;
     private String movieName;
     private LocalTime duration;
-
-    @Column
-    private Boolean Status = false;
-    @CreationTimestamp
-    @Column
-    private Timestamp createdDate;
-
-    @UpdateTimestamp
-    @Column
-    private Timestamp modifiedDate;
+    private LocalDate releaseDate;
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
@@ -74,11 +65,19 @@ public class Movie {
             }
     )
     private List<Cast> casts = new ArrayList<>();
-
-    private LocalDate releaseDate;
-
     @OneToOne
     private Show show;
+
+    @Column
+    private Boolean status = false;
+    @CreationTimestamp
+    @Column
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    @Column
+    private Timestamp modifiedDate;
+
 }
 
 

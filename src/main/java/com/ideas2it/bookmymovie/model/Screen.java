@@ -40,7 +40,7 @@ public class Screen {
     private int noOfColumns;
 
     @Column(name = "status")
-    private Boolean status;
+    private boolean status;
 
     @CreationTimestamp
     @Column(name = "created_date")
@@ -49,5 +49,4 @@ public class Screen {
     @UpdateTimestamp
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
-
 }

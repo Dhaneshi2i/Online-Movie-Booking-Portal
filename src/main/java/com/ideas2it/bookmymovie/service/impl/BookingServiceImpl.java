@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
+import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
@@ -13,6 +14,7 @@ import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,14 +41,14 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto createBooking(BookingDto bookingDto, int userId, int showId) {
         Booking booking = new Booking();
         if (null != bookingDto) {
-            //booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
-            //booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
             booking.setUser(mapper.userDtoToUser(userService.getUserById(userId)));
             booking.setShow(mapper.showDtoToShow(showService.getShowById(showId)));
-            List<Seat> seats = mapper.seatDtoListToSeatList(bookingDto.getSeats());
-            for(Seat seat :seats) {
-                System.out.println("s2 : " + seat.getPrice());
-                seatService.bookSeat(seat);
+            List<Seat> seats = new ArrayList<>();
+            for(SeatDto seatDto : bookingDto.getSeats()) {
+                System.out.println("s2 : " + seatDto.getPrice());
+                Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
+                seatService.bookSeat(selectedSeat);
+                seats.add(selectedSeat);
             }
             booking.setSeats(seats);
             booking.setBookingDate(LocalDate.now());

@@ -25,15 +25,12 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto createSeat(SeatDto seatDto) throws NotFoundException {
-        if (null != seatDto) {
             System.out.println(seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()));
             if ( seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()).isPresent()){
                 throw new NotFoundException("Seat number already exists");
             } else {
-                seatRepository.saveAndFlush(mapper.seatDtoToSeat(seatDto));
+                return mapper.seatToSeatDto(seatRepository.save(mapper.seatDtoToSeat(seatDto)));
             }
-        }
-        return seatDto;
     }
 
     @Override
@@ -65,6 +62,11 @@ public class SeatServiceImpl implements SeatService {
     public Seat cancelSeatBooking(Seat seat) {
         seat.setSeatStatus(SeatStatus.AVAILABLE);
         return seatRepository.save(seat);
+    }
+
+    @Override
+    public Seat getSeatBYId(int seatId) {
+        return seatRepository.findById(seatId).get();
     }
 
 //    @Override

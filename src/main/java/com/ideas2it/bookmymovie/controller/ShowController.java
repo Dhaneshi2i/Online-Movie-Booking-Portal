@@ -37,8 +37,8 @@ public class ShowController {
      */
     @PostMapping
     public ShowSlimDto createShow(@Valid @RequestBody ShowDto showDto,
-                                  @RequestParam int theatreId, @RequestParam int screenId) {
-        return showService.createShow(showDto, theatreId, screenId);
+                                  @RequestParam int theatreId, @RequestParam int screenId, @RequestParam int movieId) {
+        return showService.createShow(showDto, theatreId, screenId, movieId);
     }
 
     /**
@@ -95,7 +95,7 @@ public class ShowController {
      */
     @GetMapping("/show_theatre/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
-        return showService.getShowByThreatreId(theatreId);
+        return showService.getShowByTheatreId(theatreId);
     }
 
     /**

@@ -28,6 +28,7 @@ public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int showId;
+    private LocalDate showDate;
     private LocalTime showStartTime;
     private LocalTime showEndTime;
 
@@ -45,7 +46,6 @@ public class Show {
     @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
-    private LocalDate showDate;
     @Column
     private Boolean Status = false;
 

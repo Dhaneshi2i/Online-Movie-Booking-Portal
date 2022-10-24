@@ -16,6 +16,7 @@ public interface SeatService {
     public Seat bookSeat(Seat seat);
 
     public Seat cancelSeatBooking(Seat seat);
+    Seat getSeatBYId(int seatId);
 
 //    public SeatDto blockSeat(SeatDto seat); // not available for any booking
 

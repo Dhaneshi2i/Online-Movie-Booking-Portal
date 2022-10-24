@@ -59,7 +59,7 @@ public class ScreenServiceImpl implements ScreenService {
      */
     @Override
     public List<ScreenDto> viewScreenList() throws NotFoundException {
-        List<Screen> screens = screenRepository.findAllByStatus(true);
+        List<Screen> screens = screenRepository.findAllByStatus(false);
         if (screens.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
         }

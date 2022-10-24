@@ -33,31 +33,16 @@ public class ShowServiceImpl implements ShowService {
     }
 
 
-    /*@Override
-    public ShowDto addShow(ShowDto showDto, Integer theatreId, Integer screenId) {
-
-        if (theatreId != null) {
-            showDto.setTheatre(theatreService.findTheatreById(theatreId));
-        }
-        if (screenId != null) {
-            showDto.setScreen(screenService.getScreenById(screenId));
-        }
-        Show show = mapper.showDtoToShow(showDto);
-        showDto = mapper.showToShowDto(showrepository.saveAndFlush(show));
-        return showDto;
-    }*/
-
     @Override
-    public ShowSlimDto createShow(ShowDto showDto, int theatreId, int screenId)  {
-       // Show show = new Show();
-        if (null != showDto) {
-            showDto.setScreen(screenService.getScreenById(screenId));
-            showDto.setTheatre(theatreService.findTheatreById(theatreId));
-            showDto.setMovie(mapper.movieDtoToMovieSlimDto(movieService.getMovieById(showDto.getMovie().getMovieId())));
-        }
+    public ShowSlimDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId)  {
+        showDto.setScreen(screenService.getScreenById(screenId));
+        showDto.setTheatre(theatreService.findTheatreById(theatreId));
+        showDto.setMovie(movieService.getMovieById(movieId));
+        System.out.println(movieService.getMovieById(movieId).getMovieName());
+        //System.out.println(showDto.getMovie().getMovieId());
+        //System.out.println(movieService.getMovieById(showDto.getMovie().getMovieId()));
+        //showDto.setMovie(mapper.movieDtoToMovieSlimDto(movieService.getMovieById(showDto.getMovie().getMovieId())));
         return mapper.showToShowSlimDto(showrepository.save(mapper.showDtoToShow(showDto)));
-
-
     }
 
     @Override
@@ -76,8 +61,9 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public void removeShow(int showid) {
-        Show show = showrepository.findById(showid).get();
+    public void removeShow(int showId) {
+        Show show = showrepository.findById(showId).get();
+
         show.setStatus(true);
 
     }
@@ -89,11 +75,11 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public List<ShowDto> getAllShow() {
-        return mapper.showListToShowDtoList(showrepository.findAll());
+        return mapper.showListToShowSlimDtoList(showrepository.findAll());
     }
 
     @Override
-    public List<ShowDto> getShowByThreatreId(int theatreid) {
+    public List<ShowDto> getShowByTheatreId(int theatreid) {
         return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreid));
 
     }

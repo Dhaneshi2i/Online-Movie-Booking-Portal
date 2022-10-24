@@ -33,9 +33,6 @@ public class Seat {
     @Column(name = "seat_status")
     private SeatStatus seatStatus;
 
-    /*@ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket ticket;*/
     @ManyToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;

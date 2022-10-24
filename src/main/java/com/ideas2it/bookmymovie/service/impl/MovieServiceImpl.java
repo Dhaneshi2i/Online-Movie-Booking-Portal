@@ -6,6 +6,8 @@ import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Cast;
+import com.ideas2it.bookmymovie.model.Language;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.service.CastService;
@@ -38,16 +40,16 @@ import java.util.stream.Collectors;
          this.castService = castService;
      }
 
-
      public MovieDto addMovie(MovieDto movieDto) {
          Movie movie = new Movie();
          if (null != movieDto) {
              List<CastDto> casts = new ArrayList<>();
              for (CastDto cast : movieDto.getCasts()) {
                  casts.add(castService.getByCastId(cast.getCastId()));
+                 System.out.println(castService.getByCastId(cast.getCastId()).getName());
              }
              movieDto.setCasts(casts);
-
+             Language currentLanguage = new Language();
              List<LanguageDto> languages = new ArrayList<>();
              for (LanguageDto language : movieDto.getLanguages()) {
                  languages.add(languageService.getByLanguageId(language.getLanguageId()));
@@ -60,10 +62,8 @@ import java.util.stream.Collectors;
              }
              movieDto.setGenres(genres);
              movie = mapper.movieDtoToMovie(movieDto);
-           //  movieRepository.save(mapper.movieDtoToMovie(movieDto));
          }
 
-        // return  movieRepository.save(mapper.movieDtoToMovie(movieDto));
          return mapper.movieToMovieDto(movieRepository.save(movie));
      }
 
@@ -83,16 +83,6 @@ import java.util.stream.Collectors;
          return movieRepository.findById(id).map(mapper::movieToMovieDto)
                  .orElseThrow(() -> new NotFoundException("No movie found"));
      }
-
-//     public List<MovieSlimDto> getMovieByLanguage(int languageId) throws NotFoundException {
-//         LanguageDto movieByLanguage = languageService.getByLanguageId(languageId);
-//         return movieByLanguage.getMovies();
-//     }
-
-//     public List<MovieSlimDto> getMovieByGenre(int genreId) throws NotFoundException {
-//         GenreDto movieByGenre = genreService.getByGenreId(genreId);
-//         return movieByGenre.getMovies();
-//     }
 
      /*public List<MovieDto> viewMovieList(LocalDate date) {
          List<Movie> movies = new ArrayList<>();

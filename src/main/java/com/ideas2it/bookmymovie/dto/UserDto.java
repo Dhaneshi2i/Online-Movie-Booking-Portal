@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ideas2it.bookmymovie.dto.responseDto.RoleSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +36,7 @@ public class UserDto {
     @Pattern(regexp = "[a-z0-9_-]+", message = "only number are allowed and they must have 10 numbers")
     private String password;
     private boolean status;
-    private RoleSlimDto role;
+    private RoleDto role;
 
 }
 

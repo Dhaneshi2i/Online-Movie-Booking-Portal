@@ -22,9 +22,4 @@ public class TheatreDto {
     private String theatreName;
     @NotBlank(message = "Theatre location should not empty")
     private String theatreCity;
-
-    //private List<ScreenSlimDto> screen;
-
-    //private List<ShowSlimDto> show;
-
 }
