@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("api/v1/seat")
 public class SeatController {
 
-    private final SeatService seatService;
+    private SeatService seatService;
 
     public SeatController(SeatService seatService) {
         this.seatService = seatService;
@@ -49,51 +49,11 @@ public class SeatController {
      * @return updated seat
      * @throws NotFoundException
      */
-    @PutMapping("/{seatId}")
-    public SeatDto updateSeat(@PathVariable("seatId") int seatId)
+    @PutMapping("/{seatId}/{status}")
+    public SeatDto updateSeat(@PathVariable("seatId") int seatId, @PathVariable("status") String status)
             throws NotFoundException {
         SeatDto seatDto = seatService.updateSeatById(seatId);
         return seatDto;
     }
 
-    /**
-     * @param seatDto
-     * @return booked seat
-     * @throws NotFoundException
-    @PutMapping("/book")
-    public SeatDto BookASeat(@RequestBody SeatDto seatDto)
-            throws NotFoundException {
-
-        seatDto = seatService.bookSeat(seatDto);
-        logger.info("-------Seat booking Successful---------");
-        return seatDto;
-    }*/
-
-    /**
-     * @param seatDto
-     * @return cancelled seat
-     * @throws NotFoundException
-    @PutMapping("/cancel")
-    public SeatDto CancelASeat(@RequestBody SeatDto seatDto)
-            throws NotFoundException {
-
-        seatDto = seatService.cancelSeatBooking(seatDto);
-        logger.info("-------Seat Cancellation Successfull---------");
-        return seatDto;
-    }*/
-
-    /**
-     * @param seat
-     * @return blocked seat
-     * @throws NotFoundException
-     */
-   /* @PutMapping("/block")
-    public SeatDto BlockSeat(@RequestBody SeatDto seat)
-            throws NotFoundException {
-
-        seat = seatService.blockSeat(seat);
-        logger.info("-------Seat blocking Successfull---------");
-        return seat;
-
-    }*/
 }

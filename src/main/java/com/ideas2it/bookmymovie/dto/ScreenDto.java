@@ -24,8 +24,5 @@ public class ScreenDto {
     @NotNull
     private int noOfColumns;
     private TheatreDto theatre;
-    //private boolean status;
-
-    //private List<ShowSlimDto> show;
 
 }

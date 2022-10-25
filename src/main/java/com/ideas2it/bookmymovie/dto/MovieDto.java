@@ -35,5 +35,4 @@ public class MovieDto {
     @NotEmpty
     private List<GenreDto> genres = new ArrayList<>();
 
-    //private ShowDto show;
 }

@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("api/v1/theatre")
 public class TheatreController {
 
-    private final TheatreService theatreService;
+    private TheatreService theatreService;
 
     public TheatreController(TheatreService theatreService) {
         this.theatreService = theatreService;;
@@ -46,34 +46,6 @@ public class TheatreController {
 
     /**
      *
-     * @param theatreDto
-     * @return inserted theatre
-     * @throws NotFoundException
-     */
-   /* @PostMapping
-    public TheatreDto addTheatre(@RequestBody TheatreDto theatreDto)
-            throws NotFoundException {
-
-        logger.info("-------Theatre Added Successfully---------");
-        return theatreService.createTheatre(theatreDto);
-    }
-*/
-    /**
-     *
-     * @param theatreId,theatreDto
-     * @return updated theatre
-     * @throws NotFoundException
-     */
-//    @PatchMapping("/{theatreId}")
-//    public List<TheatreDto> updateTheatre(@PathVariable("theatreId") int theatreId)
-//            throws  NotFoundException {
-//
-//        //log.info("-------Theatre Updated Successfully---------");
-//        return theatreService.updateTheatreById(theatreId);
-//    }
-
-    /**
-     *
      * @param theatreId
      * @return theatre by theatreId
      * @throws NotFoundException
@@ -83,20 +55,6 @@ public class TheatreController {
             throws  NotFoundException {
         return theatreService.findTheatreById(theatreId);
     }
-
-    /**
-     *
-
-     * @return deleted theatre
-     * @throws NotFoundException
-     */
-//    @DeleteMapping("/delete/{theatreId}")
-//    public List<TheatreDto> deleteMoviesById(@PathVariable int theatreId)
-//            throws NotFoundException {
-//
-//        logger.info("-------Theatre Deleted with Theatre id" + theatreId + "---------");
-//        return theatreService.deleteTheatreById(theatreId);
-//    }
 
     @GetMapping("/findbyMovie/{movieId}")
     public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId)

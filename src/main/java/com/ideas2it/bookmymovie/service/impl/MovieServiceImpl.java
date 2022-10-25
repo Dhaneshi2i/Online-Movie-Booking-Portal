@@ -91,26 +91,5 @@ import java.util.stream.Collectors;
          throw new NotFoundException("Theatre details with the given id is not found");
      }
 
-     /*public List<MovieDto> viewMovieList(LocalDate date) {
-         List<Movie> movies = new ArrayList<>();
-         for (Movie movie : movieRepository.findAll()) {
-             if (movie.getSDate() != null && movie.getMovieDate().isEqual(date))  { movie.getShow().getShowDate();
-                 movies.add(movie);
-             }
-         }
-         return mapper.movieListToMovieDtoList(movies);
-     }*/
-
-
-//        public MovieDto updateMovie(MovieDto movieDto) {
-//            Movie movie = movieRepository.save(mapper.movieDtoToMovie(movieDto));
-//            return mapper.movieToMovieDto(movie);
-//        }
-
-//        public MovieDto deleteMovie(int id, Boolean status) {
-//            Movie movie = movieRepository.findById(id);
-//            movie.setStatus(status);
-//            return mapper.movieToMovieDto(movieRepository.save(movie));
-//        }
- }
+  }
 

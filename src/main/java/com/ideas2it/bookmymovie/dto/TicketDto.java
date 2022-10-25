@@ -15,10 +15,7 @@ import javax.validation.constraints.NotBlank;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TicketDto {
     private int transactionId;
-    //private int noOfSeats;
-    //private boolean transactionStatus;
+
     @NotBlank(message = "Please enter the mode of transaction")
     private String transactionMode;
-    //private List<SeatSlimDto> seats;
-    //private BookingSlimDto booking;
 }

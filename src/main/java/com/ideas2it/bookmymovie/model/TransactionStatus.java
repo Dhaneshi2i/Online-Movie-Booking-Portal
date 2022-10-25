@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @AllArgsConstructor
 public enum TransactionStatus {
-    SUCCESSFULL("Successfull"), ONPROCESS("Onprocess"), FAILED("Failed") , CANCELLED("Cancelled");
+    SUCCESSFULL("Successfully"), ONPROCESS("Onprocess"), FAILED("Failed") , CANCELLED("Cancelled");
 
     @Getter
     @Setter

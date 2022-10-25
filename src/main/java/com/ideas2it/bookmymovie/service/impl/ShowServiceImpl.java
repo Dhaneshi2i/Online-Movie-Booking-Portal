@@ -17,13 +17,11 @@ import java.util.List;
 
 @Service
 public class ShowServiceImpl implements ShowService {
-    private final ShowRepository showrepository;
-
-    private final TheatreService theatreService;
-
-    private final ScreenService screenService;
-    private final MovieService movieService;
-    private final MapStructMapper mapper;
+    private ShowRepository showrepository;
+    private TheatreService theatreService;
+    private ScreenService screenService;
+    private MovieService movieService;
+    private MapStructMapper mapper;
 
     public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService, ScreenService screenService,
                            MovieService movieService, MapStructMapper mapper) {
@@ -36,15 +34,10 @@ public class ShowServiceImpl implements ShowService {
 
 
     @Override
-    public ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId)  {
+    public ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId) {
         showDto.setScreen(screenService.getScreenById(screenId));
         showDto.setTheatre(theatreService.findTheatreById(theatreId));
         showDto.setMovie(movieService.getMovieById(movieId));
-        //System.out.println(movieService.getMovieById(movieId).getMovieName());
-        //System.out.println("@@@@@@@@@@@@@");
-        //System.out.println("******" + showDto.getMovie().getMovieId() +"*******");
-        //System.out.println(movieService.getMovieById(showDto.getMovie().getMovieId()));
-        //showDto.setMovie(mapper.movieDtoToMovieSlimDto(movieService.getMovieById(showDto.getMovie().getMovieId())));
         return mapper.showToShowDto(showrepository.save(mapper.showDtoToShow(showDto)));
     }
 

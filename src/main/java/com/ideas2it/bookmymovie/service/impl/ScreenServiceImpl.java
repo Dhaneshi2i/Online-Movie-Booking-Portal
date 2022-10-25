@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 @Service
 public class ScreenServiceImpl implements ScreenService {
 
-    private final ScreenRepository screenRepository;
+    private ScreenRepository screenRepository;
 
-    private final TheatreService theatreService;
+    private TheatreService theatreService;
 
-    private final MapStructMapper mapper;
+    private MapStructMapper mapper;
 
     public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService,
                              MapStructMapper mapper) {

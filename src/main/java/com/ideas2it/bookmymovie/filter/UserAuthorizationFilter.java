@@ -1,4 +1,3 @@
-/*
 package com.ideas2it.bookmymovie.filter;
 
 import com.auth0.jwt.JWT;
@@ -60,4 +59,3 @@ public class UserAuthorizationFilter extends OncePerRequestFilter {
         }
     }
 }
-*/

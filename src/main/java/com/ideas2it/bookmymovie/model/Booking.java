@@ -20,14 +20,20 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int bookingId;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-    @OneToOne(mappedBy = "booking")
+
+    @OneToOne(mappedBy = "booking", fetch = FetchType.EAGER)
     private Show show;
+
     private LocalDate bookingDate;
+
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
+
     private double totalCost;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Seat> seats;
 }

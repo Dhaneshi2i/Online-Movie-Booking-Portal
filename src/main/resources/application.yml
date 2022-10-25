@@ -4,9 +4,9 @@ server.port: 2022
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost/ticket_booking
+    url: jdbc:mysql://localhost/booking
     username: root
-    password: harini@04
+    password: siva2001
 
   jpa:
     hibernate.ddl-auto: update
@@ -19,7 +19,8 @@ spring:
     database-platform=org:
       hibernate:
         dialect: MySQL5InnoDBDialect
-    main:
+
+  main:
     allow-circular-references: true
 
 

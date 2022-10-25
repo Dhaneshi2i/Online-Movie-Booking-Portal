@@ -32,9 +32,4 @@ public class RoleController {
         return roleService.getAllRoles();
     }
 
-
-    /*@DeleteMapping("/deleteRole/{id}")
-    public void deleteRole(@PathVariable int id) {
-        roleService.deleteRole(id);
-    }*/
 }

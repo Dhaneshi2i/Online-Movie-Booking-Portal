@@ -8,5 +8,4 @@ public interface RoleService {
     RoleDto createRole(RoleDto roleDto);
     List<RoleDto> getAllRoles();
     RoleDto getRoleByRoleType(String roleType);
-//    void deleteRole(int id);
 }

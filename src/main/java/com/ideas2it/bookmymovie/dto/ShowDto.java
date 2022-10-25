@@ -35,11 +35,13 @@ public class ShowDto {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private LocalDate showDate;
+
     @NotNull
     @JsonDeserialize(using = LocalTimeDeserializer.class)
     @JsonSerialize(using = LocalTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime showStartTime;
+
     @NotNull
     @JsonDeserialize(using = LocalTimeDeserializer.class)
     @JsonSerialize(using = LocalTimeSerializer.class)
@@ -48,5 +50,4 @@ public class ShowDto {
     private MovieDto movie;
     private TheatreDto theatre;
     private ScreenSlimDto screen;
-    //private BookingDto booking;
 }

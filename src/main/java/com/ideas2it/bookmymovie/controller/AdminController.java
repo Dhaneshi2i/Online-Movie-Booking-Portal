@@ -24,7 +24,6 @@ import javax.validation.Valid;
  * <p>
  * AdminController class  will create the new cast, language,
  *
- *
  * </p>
  *
  * @author Dhanesh kumar, Harini, sivadharshini
@@ -43,7 +42,6 @@ public class AdminController {
         this.castService = castService;
         this.languageService = languageService;
     }
-
 
     @PostMapping("/cast")
     public CastDto createCast(@Valid @RequestBody CastDto castDto) {

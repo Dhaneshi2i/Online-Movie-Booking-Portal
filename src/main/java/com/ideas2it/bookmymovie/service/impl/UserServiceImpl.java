@@ -7,13 +7,16 @@ import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 @Slf4j
 @Service
-public class UserServiceImpl implements UserService {  //, UserDetailsService
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final MapStructMapper mapper;
 
@@ -46,18 +49,30 @@ public class UserServiceImpl implements UserService {  //, UserDetailsService
         user.setStatus(userDto.isStatus());
         return mapper.userToUserDto(userRepository.save(user));
     }
+//  @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findByUserName(username);
+//        Role role = new Role();
+//        if (user == null) {
+//            log.error("User not found in the database");
+//            throw new UsernameNotFoundException("The user name is not found for this id");
+//        } else {
+//            log.info("User found in the database: {}",username);
+//        }
+//        //List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+//        //System.out.println(user.getRole().getRoleType());
+//        //grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRoleType()));
+//        //SimpleGrantedAuthority authorities = new SimpleGrantedAuthority(role.getRoleType());
+//        //return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(), grantedAuthorities);
+//   return (UserDetails) user;
+//    }
 
-   /* @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
-        Role role = new Role();
-        if (user == null) {
-            log.error("User not found in the database");
-            throw new UsernameNotFoundException("The user name is not found for this id");
-        } else {
-            log.info("User found in the database: {}",username);
-        }
-        SimpleGrantedAuthority authorities = new SimpleGrantedAuthority(role.getRoleType());
-        return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(), Collections.singleton(authorities));
-    }*/
-}
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findByUserName(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("No user found for "+ username + ".");
+//        }
+//       return user;
+    }
+
+
