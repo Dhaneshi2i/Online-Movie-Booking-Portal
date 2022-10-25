@@ -65,7 +65,7 @@ public class Movie {
             }
     )
     private List<Cast> casts = new ArrayList<>();
-    @OneToOne
+    @OneToOne(mappedBy = "movie")
     private Show show;
 
     @Column

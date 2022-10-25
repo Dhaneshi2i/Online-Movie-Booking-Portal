@@ -9,6 +9,7 @@ import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Cast;
 import com.ideas2it.bookmymovie.model.Language;
 import com.ideas2it.bookmymovie.model.Movie;
+import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
  @Service
@@ -79,9 +81,14 @@ import java.util.stream.Collectors;
                          .collect(Collectors.toList());
      }
 
-     public MovieDto getMovieById(int id) {
-         return movieRepository.findById(id).map(mapper::movieToMovieDto)
-                 .orElseThrow(() -> new NotFoundException("No movie found"));
+     public MovieDto getMovieById(int movieId) {
+         if (movieRepository.existsById(movieId)) {
+             Optional<Movie> movie = movieRepository.findById(movieId);
+             if(movie.isPresent()){
+                 return mapper.movieToMovieDto(movie.get());
+             }
+         }
+         throw new NotFoundException("Theatre details with the given id is not found");
      }
 
      /*public List<MovieDto> viewMovieList(LocalDate date) {

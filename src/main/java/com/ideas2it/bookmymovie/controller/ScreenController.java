@@ -27,10 +27,10 @@ public class ScreenController {
         this.screenService = screenService;
     }
 
-    @PostMapping
-    public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto, @RequestParam int theatreId) {
-        return screenService.createScreen(screenDto, theatreId);
-    }
+//    @PostMapping
+//    public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto, @RequestParam int theatreId) {
+//        return screenService.createScreen(screenDto, theatreId);
+//    }
 
     /**
      *
@@ -43,7 +43,7 @@ public class ScreenController {
     public ScreenDto addScreen(@RequestBody ScreenDto screen, @RequestParam int theatreId)
             throws NotFoundException {
 
-        logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
+        //logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
         return screenService.createScreen(screen, theatreId);
 
     }
@@ -55,7 +55,7 @@ public class ScreenController {
      */
     @GetMapping
     public List<ScreenDto> viewScreenList() throws  NotFoundException {
-        return screenService.viewScreenList();
+        return screenService.getAllScreen();
 
     }
 

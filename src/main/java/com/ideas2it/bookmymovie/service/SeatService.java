@@ -50,12 +50,12 @@ public interface SeatService {
     public Seat cancelSeatBooking(Seat seat);
     Seat getSeatBYId(int seatId);
 
-    /**
-     * This method gets screenDto object as parameter to create Screen Details
-     *
-     * @param seatDto is passed as argument to add these value to the database.
-     * @return SeatDto which return the Seat Details with seat Status
-     */
-    public SeatDto blockSeat(SeatDto seatDto);
+//    /**
+//     * This method gets screenDto object as parameter to create Screen Details
+//     *
+//     * @param seatDto is passed as argument to add these value to the database.
+//     * @return SeatDto which return the Seat Details with seat Status
+//     */
+//    public SeatDto blockSeat(SeatDto seatDto);
 
 }

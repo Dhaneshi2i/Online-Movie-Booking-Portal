@@ -32,7 +32,8 @@ public class Show {
     private LocalTime showStartTime;
     private LocalTime showEndTime;
 
-    @OneToOne(mappedBy = "show")
+    @OneToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @ManyToOne

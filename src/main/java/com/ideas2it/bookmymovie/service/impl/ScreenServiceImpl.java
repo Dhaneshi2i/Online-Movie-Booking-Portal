@@ -10,6 +10,7 @@ import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.ScreenService;
+import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,14 +22,14 @@ public class ScreenServiceImpl implements ScreenService {
 
     private final ScreenRepository screenRepository;
 
-    private final TheatreRepository theatreRepository;
+    private final TheatreService theatreService;
 
     private final MapStructMapper mapper;
 
-    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreRepository theatreRepository,
+    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService,
                              MapStructMapper mapper) {
         this.screenRepository = screenRepository;
-        this.theatreRepository = theatreRepository;
+        this.theatreService = theatreService;
         this.mapper = mapper;
     }
 
@@ -44,8 +45,8 @@ public class ScreenServiceImpl implements ScreenService {
     public ScreenDto createScreen(ScreenDto screenDto, int theatreId) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
         if (0 != theatreId) {
-            Optional<Theatre> theatre = theatreRepository.findById(theatreId);
-            theatre.ifPresent(screen::setTheatre);
+            Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(theatreId));
+            screen.setTheatre(theatre);
         }
         return mapper.screenToScreenDto(screenRepository.save(screen));
     }
@@ -58,7 +59,7 @@ public class ScreenServiceImpl implements ScreenService {
      */
     @Override
 
-    public List<ScreenDto> viewScreenList() throws NotFoundException {
+    public List<ScreenDto> getAllScreen() throws NotFoundException {
         List<Screen> screens = screenRepository.findAllByStatus(false);
 
         if (screens.isEmpty()) {
