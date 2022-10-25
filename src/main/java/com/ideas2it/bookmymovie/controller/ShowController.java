@@ -4,6 +4,7 @@ import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ShowService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -36,7 +38,7 @@ public class ShowController {
 
      */
     @PostMapping
-    public ShowSlimDto createShow(@Valid @RequestBody ShowDto showDto,
+    public ShowDto createShow(@Valid @RequestBody ShowDto showDto,
                                   @RequestParam int theatreId, @RequestParam int screenId, @RequestParam int movieId) {
         return showService.createShow(showDto, theatreId, screenId, movieId);
     }
@@ -102,9 +104,10 @@ public class ShowController {
      * @param date
      * @return List<showDto>
      */
-//    @GetMapping("/date/{date}")
-//    public List<Show> getShowByDate(@PathVariable LocalDate date) {
-//
-//        return showService.getShowByDate(date);
-//    }
+    @GetMapping("/date")
+    public List<ShowDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+
+        return showService.getShowsByDate(date);
+    }
+
 }

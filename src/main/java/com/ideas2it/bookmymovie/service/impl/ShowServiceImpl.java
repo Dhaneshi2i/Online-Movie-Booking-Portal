@@ -11,6 +11,8 @@ import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,15 +36,16 @@ public class ShowServiceImpl implements ShowService {
 
 
     @Override
-    public ShowSlimDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId)  {
+    public ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId)  {
         showDto.setScreen(screenService.getScreenById(screenId));
         showDto.setTheatre(theatreService.findTheatreById(theatreId));
         showDto.setMovie(movieService.getMovieById(movieId));
-        System.out.println(movieService.getMovieById(movieId).getMovieName());
-        //System.out.println(showDto.getMovie().getMovieId());
+        //System.out.println(movieService.getMovieById(movieId).getMovieName());
+        //System.out.println("@@@@@@@@@@@@@");
+        //System.out.println("******" + showDto.getMovie().getMovieId() +"*******");
         //System.out.println(movieService.getMovieById(showDto.getMovie().getMovieId()));
         //showDto.setMovie(mapper.movieDtoToMovieSlimDto(movieService.getMovieById(showDto.getMovie().getMovieId())));
-        return mapper.showToShowSlimDto(showrepository.save(mapper.showDtoToShow(showDto)));
+        return mapper.showToShowDto(showrepository.save(mapper.showDtoToShow(showDto)));
     }
 
     @Override
@@ -84,16 +87,15 @@ public class ShowServiceImpl implements ShowService {
 
     }
 
-//    @Override
-//    public List<ShowDto> getShowByDate(LocalDate date) {
-//        List<Show> shows = new ArrayList<>();
-//        for (Show show : showrepository.findAll()) {
-//            if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
-//                shows.add(show);
-//            }
-//        }
-//        return showsDto;
-//    }
-
+    @Override
+    public List<ShowDto> getShowsByDate(LocalDate date) {
+        List<Show> shows = new ArrayList<>();
+        for (Show show : showrepository.findAll()) {
+            if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
+                shows.add(show);
+            }
+        }
+        return mapper.showListToShowDtoList(shows);
+    }
 }
 

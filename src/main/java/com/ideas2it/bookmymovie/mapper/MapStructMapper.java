@@ -4,8 +4,10 @@ import com.ideas2it.bookmymovie.dto.*;
 import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.RoleSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
 import com.ideas2it.bookmymovie.model.*;
 import org.mapstruct.Mapper;
 
@@ -44,11 +46,11 @@ public interface MapStructMapper {
 
     Role roleDtoToRole(RoleDto roleDto);
     
-    BookingDto bookingToBookingDto(Booking booking);
+    //BookingDto bookingToBookingDto(Booking booking);
 
     UserSlimDto userToUserSlimDto(User user);
 
-    Role roleDtoToRole(RoleDto roleDto);
+    //Role roleDtoToRole(RoleDto roleDto);
 
     TicketDto ticketToTicketDto(Ticket ticket);
 
@@ -70,7 +72,7 @@ public interface MapStructMapper {
 
     CastDto castToCastDto(Cast cast);
 
-    List<BookingDto> bookingListToBookingDtoList(List<Booking> bookings);
+    //List<BookingDto> bookingListToBookingDtoList(List<Booking> bookings);
     
     List<Ticket> ticketsDtoListToTicketsList(List<TicketDto> tickets);
 
@@ -86,9 +88,9 @@ public interface MapStructMapper {
 
     ShowDto showToShowDto(Show show);
     
-    List<ShowDto> showListToShowDtoList(List<Show> show);
+    //List<ShowDto> showListToShowDtoList(List<Show> show);
 
-    ShowSlimDto showToShowSlimDto(Show show);
+    //ShowSlimDto showToShowSlimDto(Show show);
    
     MovieSlimDto movieToMovieSlimDto(Movie movie);
     
@@ -98,7 +100,7 @@ public interface MapStructMapper {
 
     List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
     
-    ShowSlimDto showToShowSlimDto(Show show);
+    //ShowSlimDto showToShowSlimDto(Show show);
     
     MovieSlimDto movieDtoToMovieSlimDto(MovieDto movieDto);
 
