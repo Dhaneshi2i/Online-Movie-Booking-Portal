@@ -30,7 +30,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    })
+    }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "movie_genre",
             joinColumns = {
@@ -40,7 +40,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    })
+    }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "movie_language",
             joinColumns = {
@@ -54,7 +54,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    })
+    }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "movie_cast",
             joinColumns = {
@@ -65,7 +65,7 @@ public class Movie {
             }
     )
     private List<Cast> casts = new ArrayList<>();
-    @OneToOne(mappedBy = "movie")
+    @OneToOne(mappedBy = "movie",fetch = FetchType.EAGER)
     private Show show;
 
     @Column

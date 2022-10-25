@@ -25,16 +25,5 @@ public class BookingDto {
     private String bookingStatus;
     @NotEmpty
     private List<SeatDto> seats;
-
-    //private int noOfSeats;
-
-    //private LocalDate bookingDate;
-
-    //private String transactionMode;
-
-    //private String transactionStatus;
-
-    //private double totalCost;
-
-    //private TicketDto ticket;
+    private double totalCost;
 }

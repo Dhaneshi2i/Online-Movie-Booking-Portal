@@ -16,53 +16,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-@Slf4j
+
 @RestController
 @RequestMapping("api/v1/screen")
 public class ScreenController {
 
-    private final ScreenService screenService;
+    private ScreenService screenService;
 
     public ScreenController(ScreenService screenService) {
         this.screenService = screenService;
     }
 
-//    @PostMapping
-//    public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto, @RequestParam int theatreId) {
-//        return screenService.createScreen(screenDto, theatreId);
-//    }
 
     /**
-     *
-     * @param screen
+     * @param screenDto
      * @param theatreId
      * @return addedScreen
      * @throws NotFoundException
      */
     @PostMapping
-    public ScreenDto addScreen(@RequestBody ScreenDto screen, @RequestParam int theatreId)
-            throws NotFoundException {
-
-        //logger.info("-------Screen Successfully added into Theatre " + theatreId + "---------");
-        return screenService.createScreen(screen, theatreId);
-
+    public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto, @RequestParam int theatreId) {
+        return screenService.createScreen(screenDto, theatreId);
     }
 
     /**
-     *
      * @return screenList
      * @throws NotFoundException
      */
     @GetMapping
-    public List<ScreenDto> viewScreenList() throws  NotFoundException {
+    public List<ScreenDto> viewScreenList() throws NotFoundException {
         return screenService.getAllScreen();
 
     }
-
-/*    @GetMapping("/theatre/{screenId}")
-    public TheatreDto getTheatreByScreenId(@PathVariable int screenId) throws NotFoundException {
-        return screenService.getTheatreByScreenId(screenId);
-    }*/
 
     @GetMapping("/{screenId}")
     public ScreenSlimDto viewScreen(@PathVariable int screenId) throws NotFoundException {
@@ -70,15 +55,14 @@ public class ScreenController {
         //log.info("-------Screen Found---------");
         return screenDto;
     }
+
     /**
-     *
      * @param screenId
      * @throws NotFoundException
      */
     @PatchMapping
     public ScreenDto updateScreen(@RequestParam Integer screenId) throws NotFoundException {
         ScreenDto screenDto = screenService.updateScreenById(screenId);
-        //log.info("-------Screen Updated Successfully---------");
         return screenDto;
     }
 }

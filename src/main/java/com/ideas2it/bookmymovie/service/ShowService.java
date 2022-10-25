@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface ShowService {
 
-//    ShowDto addShow(ShowDto show, Integer theatreId, Integer screenId);
     ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId);
     ShowDto updateShow(ShowDto show, Integer theatreId, Integer screenId);
 

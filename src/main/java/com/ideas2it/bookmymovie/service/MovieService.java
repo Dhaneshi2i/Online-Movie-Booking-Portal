@@ -9,17 +9,4 @@ public interface MovieService {
     MovieDto addMovie(MovieDto movieDto);
     List<MovieDto> getMovies() throws NotFoundException;
     MovieDto getMovieById(int id);
-
-
-   // List<MovieSlimDto> getMovieByLanguage(int languageId) throws NotFoundException;
-
-
-    //List<MovieSlimDto> getMovieByGenre(int genreId) throws  NotFoundException;
-//    List<MovieDto> viewMovieList(LocalDate date);
-
-//    MovieDto updateMovie(MovieDto movieDto);
-//
-//    MovieDto deleteMovie(int id, Boolean status);
-
-
 }

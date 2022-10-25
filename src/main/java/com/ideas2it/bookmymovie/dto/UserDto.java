@@ -29,7 +29,6 @@ public class UserDto {
     @Email
     private String emailId;
     @NotNull
-    //@Pattern(regexp = "^(0/91)?[7-9][0-9]{9}$", message = "only number are allowed and they must have 10 numbers")
     private long contactNumber;
     @NotBlank
     @Size(max = 20, message = "Must be only between 20 characters")

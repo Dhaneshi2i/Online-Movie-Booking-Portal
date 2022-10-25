@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/v1/shows")
 public class ShowController {
 
-    private final ShowService showService;
+    private ShowService showService;
 
     public ShowController(ShowService showService) {
         this.showService = showService;
@@ -42,18 +42,6 @@ public class ShowController {
                                   @RequestParam int theatreId, @RequestParam int screenId, @RequestParam int movieId) {
         return showService.createShow(showDto, theatreId, screenId, movieId);
     }
-
-    /**
-     * Removes persisted Show instance from the Database.
-     *
-     * @param showId
-     * @return Show
-     */
-//    @DeleteMapping("/delete/{showId}")
-//    public void removeShow(@PathVariable int showId) {
-//         showService.getShowById(showId);
-//
-//    }
 
     /**
      * Updates an existing Show record in the database.

@@ -15,8 +15,8 @@ import java.util.Optional;
 @Service
 public class SeatServiceImpl implements SeatService {
 
-    private final SeatRepository seatRepository;
-    private final MapStructMapper mapper;
+    private SeatRepository seatRepository;
+    private MapStructMapper mapper;
 
     public SeatServiceImpl(SeatRepository seatRepository, MapStructMapper mapper) {
         this.seatRepository = seatRepository;
@@ -25,7 +25,6 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto createSeat(SeatDto seatDto) throws NotFoundException {
-            System.out.println(seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()));
             if ( seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()).isPresent()){
                 throw new NotFoundException("Seat number already exists");
             } else {
@@ -69,10 +68,4 @@ public class SeatServiceImpl implements SeatService {
         return seatRepository.findById(seatId).get();
     }
 
-//    @Override
-//    public SeatDto blockSeat(SeatDto seatDto) {
-//        Seat seat = mapper.seatDtoToSeat(seatDto);
-//        seatDto.setSeatStatus(SeatStatus.BLOCKED);
-//        return mapper.seatToSeatDto(seatRepository.save(seat));
-//    }
 }

@@ -1,4 +1,3 @@
-/*
 package com.ideas2it.bookmymovie.config;
 
 import com.ideas2it.bookmymovie.filter.UserAuthenticationFilter;
@@ -10,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -35,14 +35,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf().disable();
+//        http.sessionManagement().sessionCreationPolicy(STATELESS);
+//        http.authorizeRequests().antMatchers("/login").permitAll();
+//        http.authorizeRequests().anyRequest().authenticated();
+//        http.addFilter(new UserAuthenticationFilter(authenticationManager));
+//        http.addFilterBefore(new UserAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        return http.build();
         http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/login").permitAll();
-        http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter(new UserAuthenticationFilter(authenticationManager));
-        http.addFilterBefore(new UserAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.authorizeRequests().anyRequest().permitAll();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 }
 
-*/

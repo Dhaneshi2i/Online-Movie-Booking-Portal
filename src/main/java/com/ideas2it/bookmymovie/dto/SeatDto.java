@@ -21,8 +21,5 @@ public class SeatDto {
     @NotNull
     private double price;
 
-    //private SeatStatus seatStatus;
-
-    //private TicketSlimDto ticket;
 }
 

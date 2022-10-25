@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-    private final BookingRepository bookingRepository;
-    private final UserService userService;
-    private final ShowService showService;
-    private final MapStructMapper mapper;
+    private BookingRepository bookingRepository;
+    private UserService userService;
+    private ShowService showService;
+    private MapStructMapper mapper;
 
     private SeatService seatService;
 
@@ -36,7 +36,6 @@ public class BookingServiceImpl implements BookingService {
         this.seatService = seatService;
     }
 
-
     @Override
     public BookingDto createBooking(BookingDto bookingDto, int userId, int showId) {
         Booking booking = new Booking();
@@ -45,15 +44,14 @@ public class BookingServiceImpl implements BookingService {
             booking.setShow(mapper.showDtoToShow(showService.getShowById(showId)));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
-                System.out.println("s2 : " + seatDto.getPrice());
                 Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
                 seatService.bookSeat(selectedSeat);
                 seats.add(selectedSeat);
             }
             booking.setSeats(seats);
             booking.setBookingDate(LocalDate.now());
-            booking.setTotalCost(calculateTotalCost(seats));
-            System.out.println("seat price: " + booking.getTotalCost());
+            double cost = calculateTotalCost(seats);
+            bookingDto.setTotalCost(cost);
         }
 
         return mapper.bookingToBookingSlimDto(bookingRepository.save(booking));
@@ -83,36 +81,19 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public double calculateTotalCost(List<Seat> seats) {
-       // List<Ticket> tickets = mapper.ticketsDtoListToTicketsList(ticketService.getAllTickets());
-//        List<Seat> seats = new ArrayList<>();
-//        for (Ticket ticket : tickets) {
-//            if (bookingId == ticket.getBooking().getTransactionId()) {
-//                seats.addAll(ticket.getSeats());
-//            }
-//        }
         double amount = 0;
         for (Seat seat : seats) {
-            amount = amount + seat.getPrice();
-            System.out.println("s1 price:" + seat.getPrice());
+            amount = seat.getPrice();
         }
-        //booking = bookingRepository.findById(bookingId).get();
-        //booking.setTotalCost(amount);
-        //bookingRepository.save(booking);
-        System.out.println("seats price: " + amount);
         return amount;
+
+    }
+    public Booking cancelSeatBooking(int bookingId, int seatId) {
+        Booking booking = bookingRepository.findById(bookingId).get();
+        Seat seats = seatService.getSeatBYId(seatId);
+        booking.getSeats().remove(seats);
+        return bookingRepository.save(booking);
+
     }
 
 }
-
-
-   /* @Override
-    public BookingDto updateBookings(BookingDto bookingDto) throws NotFoundException{
-        bookingRepository.saveAndFlush(mapper.bookingDtoToBooking(bookingDto));
-        return mapper.bookingToBookingDto(bookingRepository.findById(bookingDto.getBookingId()).get());
-    }
-
-    @Override
-    public List<BookingDto> getAllBookingsByMovieId(int movieId) {
-        List<Booking> bookings = queryClass.getAllByMovieId(movieId);
-        return mapper.bookingListToBookingDtoList(bookings);
-    }*/

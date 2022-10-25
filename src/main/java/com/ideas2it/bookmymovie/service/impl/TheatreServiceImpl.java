@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 @Service
 public class TheatreServiceImpl implements TheatreService {
 
-    private final TheatreRepository theatreRepository;
+    private TheatreRepository theatreRepository;
 
-    private final MovieService movieService;
+    private MovieService movieService;
 
-    private final MapStructMapper mapper;
+    private MapStructMapper mapper;
 
     public TheatreServiceImpl(TheatreRepository theatreRepository,
                               MovieService movieService, MapStructMapper mapper) {

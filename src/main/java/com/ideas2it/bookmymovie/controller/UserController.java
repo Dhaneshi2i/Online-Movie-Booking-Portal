@@ -37,6 +37,7 @@ public class UserController {
         userDto.setRole(roleService.getRoleByRoleType("Admin"));
         return userService.createUser(userDto);
     }
+
     @GetMapping
     public List<UserDto> getAllUsers() throws NotFoundException {
         return userService.getAllUsers();
@@ -53,8 +54,4 @@ public class UserController {
         return userService.updateUser(userDto);
     }
 
-    /*@DeleteMapping("deleteUser/{id}")
-    public void deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
-    }*/
 }

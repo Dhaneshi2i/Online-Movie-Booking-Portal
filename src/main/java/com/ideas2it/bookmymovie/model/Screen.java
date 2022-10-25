@@ -24,11 +24,11 @@ public class Screen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int screenId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
-    @OneToMany(mappedBy = "screen", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "screen", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Show> show = new ArrayList<>();
 
     private String screenName;

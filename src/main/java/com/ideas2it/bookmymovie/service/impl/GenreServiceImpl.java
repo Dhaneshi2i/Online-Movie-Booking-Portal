@@ -17,7 +17,6 @@ public class GenreServiceImpl implements GenreService {
         this.mapper = mapper;
     }
 
-
     @Override
     public GenreDto addGenre(GenreDto genreDto) {
         return mapper.genreToGenreDto(genreRepository.save(mapper.genreDtoToGenre(genreDto)));

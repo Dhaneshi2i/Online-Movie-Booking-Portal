@@ -31,9 +31,9 @@ public class Seat {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "seat_status")
-    private SeatStatus seatStatus;
+    private SeatStatus seatStatus = SeatStatus.AVAILABLE;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
