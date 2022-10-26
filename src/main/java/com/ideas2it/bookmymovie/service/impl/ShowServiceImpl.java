@@ -59,6 +59,10 @@ public class ShowServiceImpl implements ShowService {
         showDto = mapper.showToShowDto(showrepository.saveAndFlush(show));
         return showDto;
     }
+    @Override
+    public ShowDto updateShow(Show show) {
+        return mapper.showToShowDto(showrepository.save(show));
+    }
 
     @Override
     public void removeShow(int showId) {

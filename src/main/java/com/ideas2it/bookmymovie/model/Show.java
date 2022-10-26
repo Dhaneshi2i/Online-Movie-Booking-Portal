@@ -32,17 +32,15 @@ public class Show {
     private LocalTime showStartTime;
     private LocalTime showEndTime;
 
-    @OneToOne(mappedBy = "show")
+    @ManyToOne
+    @JoinColumn
     private Movie movie;
-
     @ManyToOne
     @JoinColumn(name = "screen_id")
     private Screen screen;
-
     @ManyToOne
     @JoinColumn(name="theatre_id")
     private Theatre theatre;
-
     @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;

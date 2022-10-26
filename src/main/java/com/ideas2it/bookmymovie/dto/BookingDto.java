@@ -1,6 +1,8 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -18,9 +21,9 @@ import java.util.List;
 public class BookingDto {
     private int bookingId;
     @NotBlank
-    private UserDto user;
+    private UserSlimDto user;
     @NotBlank
-    private ShowDto show;
+    private ShowSlimDto show;
     @NotBlank
     private String bookingStatus;
     @NotEmpty
@@ -28,13 +31,12 @@ public class BookingDto {
 
     //private int noOfSeats;
 
-    //private LocalDate bookingDate;
+    private LocalDate bookingDate;
 
     //private String transactionMode;
 
     //private String transactionStatus;
 
-    //private double totalCost;
+    private double totalCost;
 
-    //private TicketDto ticket;
 }

@@ -6,7 +6,6 @@ import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
-import com.ideas2it.bookmymovie.model.Cast;
 import com.ideas2it.bookmymovie.model.Language;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.repository.MovieRepository;

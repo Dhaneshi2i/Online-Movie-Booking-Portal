@@ -31,6 +31,13 @@ public class NotFoundExceptionHandler {
         return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UserNameAlreadyExistException.class)
+    public ResponseEntity<Map<String, String>> handleRegistrationException(UserNameAlreadyExistException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+    }
+
     //@ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler({ Exception.class })
     public ErrorMapper handleConflict(Exception ex, HttpServletRequest req) {
