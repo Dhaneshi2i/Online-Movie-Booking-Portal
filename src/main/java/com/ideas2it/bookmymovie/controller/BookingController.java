@@ -25,8 +25,6 @@ public class BookingController {
         this.bookingService = bookingService;
         this.ticketService = ticketService;
     }
-
-
     @PostMapping("/bookTicket")
     public BookingDto bookTicket(@RequestBody BookingDto bookingDto , @RequestParam int userId, @RequestParam int showId ) {
         return bookingService.createBooking(bookingDto, userId, showId);
@@ -51,21 +49,5 @@ public class BookingController {
     public BookingDto cancelBookingById(@PathVariable int bookingId) {
         return bookingService.cancelBooking(bookingId);
     }
-
-    /*@GetMapping("/{movieId}")
-    public List<BookingDto> viewMovieByMovieId(@PathVariable int movieId) {
-        return bookingService.getAllBookingsByMovieId(movieId);
-    }*/
-
-/*
-    @GetMapping("/cost/{bookingId}")
-    public double totalBookingCost(@PathVariable int bookingId) {
-        return bookingService.calculateTotalCost(bookingId);
-    }
-*/
-    /* @PutMapping
-    public BookingDto updateTicketBooking(@RequestBody BookingDto bookingDto) {
-        return bookingService.updateBookings(bookingDto);
-    }*/
 
 }
