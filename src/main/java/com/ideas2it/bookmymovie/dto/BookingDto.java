@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,7 @@ public class BookingDto {
     private UserDto user;
     @NotBlank
     private ShowDto show;
+    private LocalDate bookingDate;
     @NotBlank
     private String bookingStatus;
     @NotEmpty

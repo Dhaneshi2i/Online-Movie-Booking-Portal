@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserSlimDto {
-    private int userId;
-    private String name;
+    private String userName;
     private long contactNumber;
     private String emailId;
+    private RoleSlimDto role;
 }

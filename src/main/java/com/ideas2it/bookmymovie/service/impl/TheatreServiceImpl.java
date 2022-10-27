@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Movie;
@@ -126,5 +125,8 @@ public class TheatreServiceImpl implements TheatreService {
             }
         }
         return mapper.theatreListToTheatreDtoList(theatreList);
+    }
+    public List<TheatreDto> findTheatresByLocation(String city) throws NotFoundException{
+        return mapper.theatreListToTheatreDtoList(theatreRepository.findTheatreByTheatreCity(city));
     }
 }

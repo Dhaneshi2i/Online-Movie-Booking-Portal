@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
@@ -81,11 +81,13 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public List<ShowDto> getShowsByDate(LocalDate date) {
+    public List<ShowDto> getShowsByDate(LocalDate date) throws NotFoundException {
         List<Show> shows = new ArrayList<>();
         for (Show show : showrepository.findAll()) {
             if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
                 shows.add(show);
+            } else {
+                throw new NotFoundException("No shows were found for the respective date");
             }
         }
         return mapper.showListToShowDtoList(shows);

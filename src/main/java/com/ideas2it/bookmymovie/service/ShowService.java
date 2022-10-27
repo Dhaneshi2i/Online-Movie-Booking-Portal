@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
 
 import java.time.LocalDate;
 import java.util.List;

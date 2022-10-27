@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import lombok.extern.slf4j.Slf4j;
@@ -61,4 +60,10 @@ public class TheatreController {
             throws  NotFoundException {
         return theatreService.findTheatresByMovieId(movieId);
     }
+
+    @GetMapping("/city/{city}")
+    public List<TheatreDto> findTheatreByLocation(@PathVariable String city) {
+        return theatreService.findTheatresByLocation(city);
+    }
+
 }

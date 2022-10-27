@@ -1,14 +1,17 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
-import com.ideas2it.bookmymovie.dto.TicketDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.model.Booking;
-import com.ideas2it.bookmymovie.model.Seat;
-import com.ideas2it.bookmymovie.repository.BookingRepository;
-import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
-import com.ideas2it.bookmymovie.service.TicketService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,21 +19,14 @@ import java.util.List;
 @RequestMapping("/api/v1/booking")
 public class BookingController {
     private BookingService bookingService;
-    private TicketService ticketService;
 
-    public BookingController(BookingService bookingService, TicketService ticketService) {
+    public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
-        this.ticketService = ticketService;
     }
 
     @PostMapping("/bookTicket")
-    public BookingDto bookTicket(@RequestBody BookingDto bookingDto, @RequestParam int userId, @RequestParam int showId) {
-        return bookingService.createBooking(bookingDto, userId, showId);
-    }
-
-    @PostMapping("/payment")
-    public TicketDto ticketPayment(@RequestBody TicketDto ticketDto) {
-        return ticketService.ticketPayment(ticketDto);
+    public BookingResponseDto bookTicket(@RequestBody BookingDto bookingDto) {
+        return bookingService.createBooking(bookingDto);
     }
 
     @GetMapping
@@ -48,8 +44,8 @@ public class BookingController {
         return bookingService.cancelBooking(bookingId);
     }
 
-    @DeleteMapping("/{bookingId}/{seatId}")
+    /*@DeleteMapping("/{bookingId}/{seatId}")
     public Booking ticketCancel(@PathVariable int bookingId, @PathVariable int seatId) {
         return bookingService.cancelSeatBooking(bookingId, seatId);
-    }
+    }*/
 }

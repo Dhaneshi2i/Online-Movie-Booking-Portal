@@ -1,20 +1,19 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
+import com.ideas2it.bookmymovie.dto.SeatDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Seat;
 
 import java.util.List;
 
 public interface  BookingService {
-    BookingDto createBooking(BookingDto bookMovie, int userId, int showId);
-
+    BookingResponseDto createBooking(BookingDto bookMovie);
     List<BookingDto> getAllBookings();
-
     BookingDto viewByBookingId(int bookingId);
-
     BookingDto cancelBooking(int bookingId);
     double calculateTotalCost(List<Seat> seats);
 
-    Booking cancelSeatBooking(int bookingId, int seatId);
+    //Booking cancelSeatBooking(int bookingId, int seatId);
 }
