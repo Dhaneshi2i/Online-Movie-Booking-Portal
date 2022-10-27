@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
@@ -27,19 +28,19 @@ public class UserController {
     }
 
     @PostMapping("/customer")
-    public UserDto createCustomer(@Valid @RequestBody UserDto userDto) throws NotFoundException {
+    public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) throws NotFoundException {
         userDto.setRole(roleService.getRoleByRoleType("Customer"));
         return userService.createUser(userDto);
     }
 
     @PostMapping("/admin")
-    public UserDto createAdmin(@Valid @RequestBody UserDto userDto) throws NotFoundException {
+    public UserSlimDto createAdmin(@Valid @RequestBody UserDto userDto) throws NotFoundException {
         userDto.setRole(roleService.getRoleByRoleType("Admin"));
         return userService.createUser(userDto);
     }
 
     @GetMapping
-    public List<UserDto> getAllUsers() throws NotFoundException {
+    public List<UserSlimDto> getAllUsers() throws NotFoundException {
         return userService.getAllUsers();
     }
 

@@ -1,14 +1,32 @@
 package com.ideas2it.bookmymovie.mapper;
 
-import com.ideas2it.bookmymovie.dto.*;
+import com.ideas2it.bookmymovie.dto.BookingDto;
+import com.ideas2it.bookmymovie.dto.CastDto;
+import com.ideas2it.bookmymovie.dto.GenreDto;
+import com.ideas2it.bookmymovie.dto.LanguageDto;
+import com.ideas2it.bookmymovie.dto.MovieDto;
+import com.ideas2it.bookmymovie.dto.RoleDto;
+import com.ideas2it.bookmymovie.dto.ScreenDto;
+import com.ideas2it.bookmymovie.dto.SeatDto;
+import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.UserDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.RoleSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.TheatreSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
-import com.ideas2it.bookmymovie.model.*;
+import com.ideas2it.bookmymovie.model.Booking;
+import com.ideas2it.bookmymovie.model.Cast;
+import com.ideas2it.bookmymovie.model.Genre;
+import com.ideas2it.bookmymovie.model.Language;
+import com.ideas2it.bookmymovie.model.Movie;
+import com.ideas2it.bookmymovie.model.Role;
+import com.ideas2it.bookmymovie.model.Screen;
+import com.ideas2it.bookmymovie.model.Seat;
+import com.ideas2it.bookmymovie.model.Show;
+import com.ideas2it.bookmymovie.model.Theatre;
+import com.ideas2it.bookmymovie.model.User;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -44,10 +62,6 @@ public interface MapStructMapper {
 
     UserSlimDto userToUserSlimDto(User user);
 
-    TicketDto ticketToTicketDto(Ticket ticket);
-
-    Ticket ticketDtoToTicket(TicketDto ticketDto);
-
     BookingDto bookingToBookingDto(Booking booking);
 
     GenreDto genreToGenreDto(Genre genre);
@@ -74,9 +88,13 @@ public interface MapStructMapper {
 
     List<ShowDto> showListToShowDtoList(List<Show> show);
 
-    List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
-
-    BookingDto bookingToBookingSlimDto(Booking booking);
-
     List<ShowDto> showListToShowSlimDtoList(List<Show> shows);
+
+    CastResponseDto castToCastResponseDto(Cast cast);
+
+    BookingResponseDto bookingToBookingResponseDto(Booking save);
+
+    Booking bookingDtoToBooking(BookingDto bookingDto);
+
+    List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
 }

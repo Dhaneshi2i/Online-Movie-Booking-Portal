@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RoleSlimDto {
-    private String roleType;
+public class CastResponseDto {
+    private String name;
+    private String role;
 }

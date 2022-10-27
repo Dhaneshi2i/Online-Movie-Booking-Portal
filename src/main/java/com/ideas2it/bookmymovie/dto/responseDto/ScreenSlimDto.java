@@ -10,6 +10,4 @@ import org.springframework.stereotype.Component;
 public class ScreenSlimDto {
     private int screenId;
     private String screenName;
-    private int noOfRows;
-    private int noOfColumns;
 }

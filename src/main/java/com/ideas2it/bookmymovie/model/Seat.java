@@ -7,7 +7,14 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Getter
@@ -33,12 +40,9 @@ public class Seat {
     @Column(name = "seat_status")
     private SeatStatus seatStatus = SeatStatus.AVAILABLE;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+   /* @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id")
-    private Booking booking;
-
-    @Column(name = "status")
-    private Boolean status;
+    private Booking booking;*/
 
     @CreationTimestamp
     @Column(name = "created_date")
@@ -47,5 +51,4 @@ public class Seat {
     @UpdateTimestamp
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
-
 }

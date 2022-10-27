@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ShowSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -94,7 +93,6 @@ public class ShowController {
      */
     @GetMapping("/date")
     public List<ShowDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-
         return showService.getShowsByDate(date);
     }
 

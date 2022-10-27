@@ -34,18 +34,20 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public List<SeatDto> getAllSeat() throws NotFoundException {
-        List<Seat> seats = seatRepository.findBySeatStatus("Available");
+        List<Seat> seats = seatRepository.findBySeatStatus(SeatStatus.AVAILABLE); //
 
-        if (0 == seats.size()) throw new NotFoundException("No seats found");
-
-        return mapper.seatListToSeatDtoList(seats);
+        if (0 == seats.size()) {
+            throw new NotFoundException("No seats found");
+        } else {
+            return mapper.seatListToSeatDtoList(seats);
+        }
     }
 
     @Override
     public SeatDto updateSeatById(int seatId) throws NotFoundException{
         Optional<Seat> seat = seatRepository.findById(seatId);
         if(seat.isPresent()) {
-            seat.get().setStatus(false);
+            seat.get().setSeatStatus(SeatStatus.BLOCKED);
             return mapper.seatToSeatDto(seatRepository.save(seat.get()));
         }
         throw new NotFoundException("Seat with the given id is not present");

@@ -2,9 +2,11 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.dto.SeatDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
+import com.ideas2it.bookmymovie.model.BookingStatus;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.repository.BookingRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
@@ -24,7 +26,6 @@ public class BookingServiceImpl implements BookingService {
     private UserService userService;
     private ShowService showService;
     private MapStructMapper mapper;
-
     private SeatService seatService;
 
     public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, ShowService showService,
@@ -37,24 +38,36 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDto createBooking(BookingDto bookingDto, int userId, int showId) {
+    public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
         if (null != bookingDto) {
-            booking.setUser(mapper.userDtoToUser(userService.getUserById(userId)));
-            booking.setShow(mapper.showDtoToShow(showService.getShowById(showId)));
+            booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
+            booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
                 Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
-                seatService.bookSeat(selectedSeat);
+               // seatService.bookSeat(selectedSeat);
                 seats.add(selectedSeat);
             }
-            booking.setSeats(seats);
+            //booking.setSeats(seats);
             booking.setBookingDate(LocalDate.now());
-            double cost = calculateTotalCost(seats);
-            bookingDto.setTotalCost(cost);
+            booking.setTotalCost(calculateTotalCost(seats));
+            //booking.setBookingStatus(BookingStatus.COMPLETED);
+            //bookingRepository.save(booking);
+            boolean isPaymentSuccessful = completePayment(booking);
+            if (isPaymentSuccessful) {
+                for (Seat seat : seats) {
+                    seatService.bookSeat(seat);
+                }
+                booking.setSeats(seats);
+                booking.setBookingStatus(BookingStatus.COMPLETED);
+                bookingRepository.save(booking);
+            } else {
+                booking.setBookingStatus(BookingStatus.CANCELLED);
+                bookingRepository.save(booking);
+            }
         }
-
-        return mapper.bookingToBookingSlimDto(bookingRepository.save(booking));
+        return mapper.bookingToBookingResponseDto(bookingRepository.save(booking));
     }
 
     @Override
@@ -83,17 +96,21 @@ public class BookingServiceImpl implements BookingService {
     public double calculateTotalCost(List<Seat> seats) {
         double amount = 0;
         for (Seat seat : seats) {
-            amount = seat.getPrice();
+            amount = amount + seat.getPrice();
         }
         return amount;
 
     }
-    public Booking cancelSeatBooking(int bookingId, int seatId) {
+
+    public boolean completePayment(Booking booking) {
+//        booking.setBookingStatus(BookingStatus.COMPLETED);
+        return true;
+    }
+    /*public Booking cancelSeatBooking(int bookingId, int seatId) {
         Booking booking = bookingRepository.findById(bookingId).get();
         Seat seats = seatService.getSeatBYId(seatId);
         booking.getSeats().remove(seats);
         return bookingRepository.save(booking);
-
-    }
+    }*/
 
 }

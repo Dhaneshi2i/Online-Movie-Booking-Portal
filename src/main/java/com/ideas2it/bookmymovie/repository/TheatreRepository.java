@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface TheatreRepository extends JpaRepository<Theatre,Integer> {
     List<Theatre> findAllByStatus(Boolean status);
-
+    List<Theatre> findTheatreByTheatreCity(String cityName);
 }

@@ -1,5 +1,6 @@
 package com.ideas2it.bookmymovie.dto.responseDto;
 
+import com.ideas2it.bookmymovie.dto.ShowDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +11,11 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookingSlimDto {
+public class BookingResponseDto {
     private int bookingId;
+    private UserSlimDto user;
+    private ShowDto show;
     private LocalDate bookingDate;
-    private MovieSlimDto movieSlimDto;
     private List<SeatSlimDto> seats;
     private double totalCost;
 }

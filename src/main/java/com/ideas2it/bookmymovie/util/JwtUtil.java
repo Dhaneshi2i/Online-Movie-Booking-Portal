@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-    public class JwtUtil {
+public class JwtUtil {
      private String SECRET_KEY = "Secret";
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -35,9 +35,9 @@ import java.util.function.Function;
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDettails) {
+    public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDettails.getUsername());
+        return createToken(claims, userDetails.getUsername());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
