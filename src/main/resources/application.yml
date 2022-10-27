@@ -9,7 +9,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost/ticket_booking
     username: root
-    password: dhanesh@22
+    password: harini@04
   main:
     allow-circular-references: true
 
