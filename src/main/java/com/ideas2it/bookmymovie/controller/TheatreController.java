@@ -55,7 +55,7 @@ public class TheatreController {
         return theatreService.findTheatreById(theatreId);
     }
 
-    @GetMapping("/findbyMovie/{movieId}")
+    @GetMapping("/findByMovie/{movieId}")
     public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId)
             throws  NotFoundException {
         return theatreService.findTheatresByMovieId(movieId);

@@ -19,7 +19,7 @@ public interface ScreenService {
      *
      * @return ScreenDto which return the created Screen Details
      */
-    ScreenDto createScreen(ScreenDto screenDto, int theatreId) throws NotFoundException;
+    ScreenDto createScreen(ScreenDto screenDto) throws NotFoundException;
 
     /**
      * This method List all the Screen Details that are present in Database

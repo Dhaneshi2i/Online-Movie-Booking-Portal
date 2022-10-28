@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final MapStructMapper mapper;
+    private UserRepository userRepository;
+    private MapStructMapper mapper;
 
     public UserServiceImpl(UserRepository userRepository, MapStructMapper mapper) {
         this.userRepository = userRepository;
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto userDto) {
-        User user = userRepository.findById(userDto.getUserId()).get();
+        User user = userRepository.findByUserId(userDto.getUserId());
         user.setStatus(userDto.isStatus());
         return mapper.userToUserDto(userRepository.save(user));
     }
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);
         System.out.print(userRepository.findByUserName(username).getUserName());
-        Role role = new Role();
+        //Role role = new Role();
         if (user == null) {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("The user name is not found for this id");
