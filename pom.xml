@@ -107,7 +107,17 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			 <artifactId>flyway-core</artifactId>
+			 <!--<version>9.6.0</version>-->
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+		</dependency>
+
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>

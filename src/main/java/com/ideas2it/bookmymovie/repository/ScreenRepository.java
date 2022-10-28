@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ScreenRepository extends JpaRepository<Screen, Integer> {
+    Screen findByScreenId(int screenId);
     List<Screen> findAllByStatus(boolean status);
 }
 

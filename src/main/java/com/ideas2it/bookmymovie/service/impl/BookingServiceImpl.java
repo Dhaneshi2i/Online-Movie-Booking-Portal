@@ -46,14 +46,11 @@ public class BookingServiceImpl implements BookingService {
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
                 Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
-               // seatService.bookSeat(selectedSeat);
                 seats.add(selectedSeat);
             }
-            //booking.setSeats(seats);
             booking.setBookingDate(LocalDate.now());
             booking.setTotalCost(calculateTotalCost(seats));
-            //booking.setBookingStatus(BookingStatus.COMPLETED);
-            //bookingRepository.save(booking);
+
             boolean isPaymentSuccessful = completePayment(booking);
             if (isPaymentSuccessful) {
                 for (Seat seat : seats) {
@@ -103,14 +100,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public boolean completePayment(Booking booking) {
-//        booking.setBookingStatus(BookingStatus.COMPLETED);
-        return true;
+        return false;
     }
+
     /*public Booking cancelSeatBooking(int bookingId, int seatId) {
         Booking booking = bookingRepository.findById(bookingId).get();
         Seat seats = seatService.getSeatBYId(seatId);
         booking.getSeats().remove(seats);
         return bookingRepository.save(booking);
     }*/
-
 }

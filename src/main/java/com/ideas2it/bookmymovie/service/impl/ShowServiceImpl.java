@@ -34,7 +34,7 @@ public class ShowServiceImpl implements ShowService {
 
 
     @Override
-    public ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId) {
+    public ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId){
         showDto.setScreen(screenService.getScreenById(screenId));
         showDto.setTheatre(theatreService.findTheatreById(theatreId));
         showDto.setMovie(movieService.getMovieById(movieId));
@@ -58,7 +58,7 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public void removeShow(int showId) {
-        Show show = showrepository.findById(showId).get();
+        Show show = showrepository.findByShowId(showId);
 
         show.setStatus(true);
 
@@ -66,7 +66,7 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public ShowDto getShowById(int showId) {
-        return mapper.showToShowDto(showrepository.findById(showId).get());
+        return mapper.showToShowDto(showrepository.findByShowId(showId));
     }
 
     @Override
@@ -75,8 +75,8 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public List<ShowDto> getShowByTheatreId(int theatreid) {
-        return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreid));
+    public List<ShowDto> getShowByTheatreId(int theatreId) {
+        return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreId));
 
     }
 

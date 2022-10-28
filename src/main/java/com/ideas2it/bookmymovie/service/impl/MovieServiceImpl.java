@@ -49,7 +49,6 @@ import java.util.stream.Collectors;
                  System.out.println(castService.getByCastId(cast.getCastId()).getName());
              }
              movieDto.setCasts(casts);
-             Language currentLanguage = new Language();
              List<LanguageDto> languages = new ArrayList<>();
              for (LanguageDto language : movieDto.getLanguages()) {
                  languages.add(languageService.getByLanguageId(language.getLanguageId()));

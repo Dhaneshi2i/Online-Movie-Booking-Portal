@@ -41,8 +41,9 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto which return the created Screen Details
      */
     @Override
-    public ScreenDto createScreen(ScreenDto screenDto, int theatreId) throws NotFoundException {
+    public ScreenDto createScreen(ScreenDto screenDto) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
+        int theatreId = screenDto.getTheatre().getTheatreId();
         if (0 != theatreId) {
             Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(theatreId));
             screen.setTheatre(theatre);
@@ -118,6 +119,6 @@ public class ScreenServiceImpl implements ScreenService {
     }
 
     public Screen findScreenById(int screenId) {
-        return screenRepository.findById(screenId).get();
+        return screenRepository.findByScreenId(screenId);
     }
 }

@@ -29,13 +29,12 @@ public class ScreenController {
 
     /**
      * @param screenDto
-     * @param theatreId
      * @return addedScreen
      * @throws NotFoundException
      */
     @PostMapping
-    public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto, @RequestParam int theatreId) {
-        return screenService.createScreen(screenDto, theatreId);
+    public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto) {
+        return screenService.createScreen(screenDto);
     }
 
     /**

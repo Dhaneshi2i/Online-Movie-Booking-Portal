@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ShowRepository extends JpaRepository<Show, Integer> {
+	Show findByShowId(int showId);
 	@Query("select s from Show s where s.theatre.theatreId = :id")
 	List<Show> getAllByTheatreId(@Param("id") int id);
 

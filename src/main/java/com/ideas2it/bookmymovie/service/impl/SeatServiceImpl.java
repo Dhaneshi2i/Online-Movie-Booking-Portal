@@ -67,7 +67,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public Seat getSeatBYId(int seatId) {
-        return seatRepository.findById(seatId).get();
+        return seatRepository.findBySeatId(seatId);
     }
 
 }
