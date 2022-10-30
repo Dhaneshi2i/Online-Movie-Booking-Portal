@@ -11,11 +11,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -25,30 +28,38 @@ import java.sql.Timestamp;
 @Table(name = "seats")
 public class Seat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private int seatId;
 
     @Column(name = "seat_number")
     private String seatNumber;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "seat_type")
+    private SeatType seatType;
 
     private double price;
+
+    private LocalDate showDate;
+    private LocalTime showStartTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "screen_id_id")
+    private Screen screen;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "show_show_id")
+    private Show show;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "seat_status")
     private SeatStatus seatStatus = SeatStatus.AVAILABLE;
 
-   /* @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "booking_id")
-    private Booking booking;*/
-
     @CreationTimestamp
     @Column(name = "created_date")
-    private Timestamp createdDate;
+    private Timestamp createdOn;
 
     @UpdateTimestamp
     @Column(name = "modified_date")
-    private Timestamp modifiedDate;
+    private Timestamp updatedOn;
 }

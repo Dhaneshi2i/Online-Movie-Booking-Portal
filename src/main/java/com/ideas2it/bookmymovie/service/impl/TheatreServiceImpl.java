@@ -67,12 +67,11 @@ public class TheatreServiceImpl implements TheatreService {
     @Override
     public TheatreDto findTheatreById(int theatreId) throws NotFoundException{
         if (theatreRepository.existsById(theatreId)) {
-            Optional<Theatre> theatre = theatreRepository.findById(theatreId);
-            if(theatre.isPresent()){
-                return mapper.theatreToTheatreDto(theatre.get());
-            }
+            Theatre theatre = theatreRepository.findByTheatreId(theatreId);
+                return mapper.theatreToTheatreDto(theatre);
         }
-        throw new NotFoundException("Theatre details with the given id is not found");
+        return mapper.theatreToTheatreDto(theatreRepository.findByTheatreId(theatreId));
+//        throw new NotFoundException("Theatre details with the given id is not found");
     }
 
     /**

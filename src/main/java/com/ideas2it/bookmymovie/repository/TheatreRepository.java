@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface TheatreRepository extends JpaRepository<Theatre,Integer> {
+    Theatre findByTheatreId(int theatreId);
     List<Theatre> findAllByStatus(Boolean status);
     List<Theatre> findTheatreByTheatreCity(String cityName);
 }

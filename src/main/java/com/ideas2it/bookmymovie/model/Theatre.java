@@ -37,14 +37,16 @@ public class Theatre {
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Screen> screen = new ArrayList<>();
 
-    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Show> show = new ArrayList<>();
 
     private boolean status = false;
 
-    @UpdateTimestamp
-    private Timestamp modifiedDate;
-
     @CreationTimestamp
-    private Timestamp createdDate;
+    private Timestamp createdOn;
+
+    @UpdateTimestamp
+    private Timestamp updateOn;
+
+
 }

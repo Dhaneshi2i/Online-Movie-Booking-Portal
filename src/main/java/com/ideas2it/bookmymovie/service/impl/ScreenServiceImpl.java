@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
@@ -18,15 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class ScreenServiceImpl implements ScreenService {
-
     private ScreenRepository screenRepository;
-
     private TheatreService theatreService;
-
     private MapStructMapper mapper;
 
-    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService,
-                             MapStructMapper mapper) {
+    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService, MapStructMapper mapper) {
         this.screenRepository = screenRepository;
         this.theatreService = theatreService;
         this.mapper = mapper;
@@ -93,10 +88,10 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto which is fetched from database with the param
      */
     @Override
-    public ScreenSlimDto getScreenById(int screenId) throws NotFoundException {
+    public ScreenDto getScreenById(int screenId) throws NotFoundException {
         Optional<Screen> screen = screenRepository.findById(screenId);
         if(screen.isPresent()){
-            return mapper.screenToScreenSlimDto(screen.get());
+            return mapper.screenToScreenDto(screen.get());
         }
         throw new NotFoundException("Screen Id not found");
     }

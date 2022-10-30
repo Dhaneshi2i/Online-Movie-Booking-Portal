@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,11 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Getter
@@ -34,13 +30,9 @@ public class Screen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int screenId;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
-
-    @OneToMany(mappedBy = "screen", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Show> show = new ArrayList<>();
-
     private String screenName;
 
     @Column(name = "no_of_rows")
@@ -54,9 +46,10 @@ public class Screen {
 
     @CreationTimestamp
     @Column(name = "created_date")
-    private Timestamp createdDate;
+    private Timestamp createdOn;
 
     @UpdateTimestamp
     @Column(name = "modified_date")
-    private Timestamp modifiedDate;
+    private Timestamp updatedOn;
+
 }

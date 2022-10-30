@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
 @Table(name="users")
 public class User {
     @Id
@@ -41,11 +39,11 @@ public class User {
     private String password;
 
     @CreationTimestamp
-    private Timestamp creationDate;
+    private Timestamp createdDate;
 
     @UpdateTimestamp
-    private Timestamp modifiedDate;
-    private boolean status = false;
+    private Timestamp updatedDate;
+    private boolean status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
