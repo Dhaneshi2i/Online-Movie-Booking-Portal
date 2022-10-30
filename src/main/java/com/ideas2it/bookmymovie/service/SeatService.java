@@ -11,10 +11,10 @@ public interface SeatService {
     /**
      * This method gets seatDto object as parameter to create Seat Details
      *
-     * @param seatDto is passed as argument to add these value to the database.
-     * @return SeatDto which return the created Seat Details
+     * @param seat is passed as argument to add these value to the database.
+     * @return Seat which return the created Seat Details
      */
-     SeatDto createSeat(SeatDto seatDto) throws NotFoundException;
+     void createSeat(Seat seat) ;
 
     /**
      * This method List all the Seat Details that are present in Database
@@ -49,5 +49,7 @@ public interface SeatService {
      */
     Seat cancelSeatBooking(Seat seat);
     Seat getSeatBYId(int seatId);
+
+    List<SeatDto> getSeatByShowId(int showId);
 
 }

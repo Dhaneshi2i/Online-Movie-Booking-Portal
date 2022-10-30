@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,10 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,7 +33,6 @@ public class Show {
     private LocalDate showDate;
     private LocalTime showStartTime;
     private LocalTime showEndTime;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
@@ -41,11 +41,12 @@ public class Show {
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
+    /*@OneToMany(fetch = FetchType.LAZY)
+    private List<Seat> seats;*/
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="theatre_id")
     private Theatre theatre;
 
-    @Column
-    private Boolean Status = false;
-
+    private boolean Status;
 }

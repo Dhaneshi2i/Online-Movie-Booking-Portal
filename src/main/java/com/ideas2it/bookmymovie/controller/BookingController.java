@@ -2,9 +2,7 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
-import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.service.BookingService;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;

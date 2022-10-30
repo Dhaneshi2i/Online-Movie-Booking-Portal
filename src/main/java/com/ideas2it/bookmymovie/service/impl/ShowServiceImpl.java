@@ -3,10 +3,14 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Seat;
+import com.ideas2it.bookmymovie.model.SeatStatus;
+import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
+import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -21,25 +26,75 @@ public class ShowServiceImpl implements ShowService {
     private TheatreService theatreService;
     private ScreenService screenService;
     private MovieService movieService;
+    private SeatService seatService;
     private MapStructMapper mapper;
+    private int SEAT_ID = 1;
 
-    public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService, ScreenService screenService,
-                           MovieService movieService, MapStructMapper mapper) {
+    public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
+                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper) {
         this.showrepository = showrepository;
         this.theatreService = theatreService;
         this.screenService = screenService;
         this.movieService = movieService;
+        this.seatService = seatService;
         this.mapper = mapper;
     }
 
-
     @Override
-    public ShowDto createShow(ShowDto showDto, int theatreId, int screenId, int movieId){
-        showDto.setScreen(screenService.getScreenById(screenId));
-        showDto.setTheatre(theatreService.findTheatreById(theatreId));
-        showDto.setMovie(movieService.getMovieById(movieId));
-        return mapper.showToShowDto(showrepository.save(mapper.showDtoToShow(showDto)));
+    public ShowDto createShow(ShowDto showDto){
+        Show show = new Show();
+        show.setShowDate(showDto.getShowDate());
+        show.setShowStartTime(showDto.getShowStartTime());
+        show.setShowEndTime(showDto.getShowEndTime());
+        show.setScreen(mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId())));
+        show.setTheatre(mapper.theatreDtoToTheatre(theatreService.findTheatreById(showDto.getTheatre().getTheatreId())));
+        show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
+        showrepository.saveAndFlush(show);
+        createSeat(show);
+        //show.setSeats(seats);
+        return mapper.showToShowDto(show);
     }
+
+    private void createSeat(Show show) {
+        //List<Seat> seats = new ArrayList<>();
+        int row = show.getScreen().getNoOfRows();
+        int column = show.getScreen().getNoOfColumns();
+        //int row = screen.getNoOfRows();
+        //int column = screen.getNoOfColumns();
+        char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
+                                            'v','w','x','y','z'};
+//        int k = 0;
+        for (int i=0; i<row;i++) {
+            Seat seat = new Seat();
+            if (i <= 3) {
+                seat.setSeatType(SeatType.BALCONY);
+                seat.setPrice(200);
+            } else if (i < 7) {
+                seat.setSeatType(SeatType.GOLD);
+                seat.setPrice(170);
+            } else if (i < 11){
+                seat.setSeatType(SeatType.SILVER);
+                seat.setPrice(150);
+            } else {
+                seat.setSeatType(SeatType.PLATINUM);
+                seat.setPrice(120);
+            }
+            for (int j=1;j<=column;j++) {
+                Random random = new Random();
+                seat.setSeatId(SEAT_ID + random.nextInt() + show.getShowId());
+                seat.setSeatStatus(SeatStatus.AVAILABLE);
+                seat.setSeatNumber(alphabet[i]+""+j);
+                seat.setScreen(show.getScreen());
+                seat.setShow(show);
+                seat.setShowDate(show.getShowDate());
+                seat.setShowStartTime(show.getShowStartTime());
+                seatService.createSeat(seat);
+                //seats.add(seat);
+            }
+        }
+        //return seats;
+    }
+
 
     @Override
     public ShowDto updateShow(ShowDto showDto, Integer theatreId, Integer screenId) {
@@ -48,7 +103,7 @@ public class ShowServiceImpl implements ShowService {
             showDto.setTheatre(theatreService.findTheatreById(theatreId));
         }
         if (screenId != null) {
-            showDto.setScreen(screenService.getScreenById(screenId));
+            showDto.setScreen(mapper.screenDtoTOScreenSlimDto(screenService.getScreenById(screenId)));
         }
 
         Show show = mapper.showDtoToShow(showDto);
@@ -86,8 +141,6 @@ public class ShowServiceImpl implements ShowService {
         for (Show show : showrepository.findAll()) {
             if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
                 shows.add(show);
-            } else {
-                throw new NotFoundException("No shows were found for the respective date");
             }
         }
         return mapper.showListToShowDtoList(shows);

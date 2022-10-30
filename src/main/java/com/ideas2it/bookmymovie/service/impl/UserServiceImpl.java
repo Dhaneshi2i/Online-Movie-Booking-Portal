@@ -4,7 +4,6 @@ import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
-import com.ideas2it.bookmymovie.model.Role;
 import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.UserService;

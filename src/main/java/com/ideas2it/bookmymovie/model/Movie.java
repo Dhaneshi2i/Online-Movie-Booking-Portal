@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -76,18 +75,15 @@ public class Movie {
             }
     )
     private List<Cast> casts = new ArrayList<>();
-    @OneToOne(mappedBy = "movie",fetch = FetchType.LAZY)
+
+    @OneToOne(mappedBy = "movie")
     private Show show;
 
-    @Column
-    private Boolean status = false;
+    private boolean status;
     @CreationTimestamp
-    @Column
-    private Timestamp createdDate;
-
+    private Timestamp createDate;
     @UpdateTimestamp
-    @Column
-    private Timestamp modifiedDate;
+    private Timestamp updatedDate;
 
 }
 

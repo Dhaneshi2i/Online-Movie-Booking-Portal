@@ -97,4 +97,8 @@ public interface MapStructMapper {
     Booking bookingDtoToBooking(BookingDto bookingDto);
 
     List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
+
+    Screen screenSlimDtoToScreen(ScreenSlimDto screen);
+
+    ScreenSlimDto screenDtoTOScreenSlimDto(ScreenDto screenDto);
 }

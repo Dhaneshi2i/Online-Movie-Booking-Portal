@@ -5,13 +5,10 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.SeatService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,10 +27,10 @@ public class SeatController {
      * @return seatDetails
      */
 
-    @PostMapping
+    /*@PostMapping
     public SeatDto addSeat(@Valid @RequestBody SeatDto seatDto) {
         return seatService.createSeat(seatDto);
-    }
+    }*/
 
     /**
      * @return listOfSeats
@@ -56,4 +53,8 @@ public class SeatController {
         return seatDto;
     }
 
+    @GetMapping("/{showId}")
+    public List<SeatDto> getSeatsByShow(@PathVariable int showId) {
+        return seatService.getSeatByShowId(showId);
+    }
 }

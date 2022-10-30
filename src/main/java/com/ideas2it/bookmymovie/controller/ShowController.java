@@ -31,15 +31,11 @@ public class ShowController {
      * Stores a Show object in the Database.
      *
      * @param showDto
-     * @param theatreId
-     * @param screenId
      * @return ShowSlimDto
-
      */
     @PostMapping
-    public ShowDto createShow(@Valid @RequestBody ShowDto showDto,
-                                  @RequestParam int theatreId, @RequestParam int screenId, @RequestParam int movieId) {
-        return showService.createShow(showDto, theatreId, screenId, movieId);
+    public ShowDto createShow(@Valid @RequestBody ShowDto showDto) {
+        return showService.createShow(showDto);
     }
 
     /**

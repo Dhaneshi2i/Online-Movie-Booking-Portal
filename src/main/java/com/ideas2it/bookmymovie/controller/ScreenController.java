@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +47,9 @@ public class ScreenController {
     }
 
     @GetMapping("/{screenId}")
-    public ScreenSlimDto viewScreen(@PathVariable int screenId) throws NotFoundException {
-        ScreenSlimDto screenDto = screenService.getScreenById(screenId);
-        //log.info("-------Screen Found---------");
-        return screenDto;
+    public ScreenDto viewScreen(@PathVariable int screenId) throws NotFoundException {
+        //ScreenSlimDto screenDto = screenService.getScreenById(screenId);
+        return screenService.getScreenById(screenId);
     }
 
     /**

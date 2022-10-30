@@ -5,9 +5,13 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
+import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
+import com.ideas2it.bookmymovie.service.ShowService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,25 +20,24 @@ import java.util.Optional;
 public class SeatServiceImpl implements SeatService {
 
     private SeatRepository seatRepository;
+    private ShowService showService;
     private MapStructMapper mapper;
 
-    public SeatServiceImpl(SeatRepository seatRepository, MapStructMapper mapper) {
+    public SeatServiceImpl(SeatRepository seatRepository, @Lazy ShowService showService, MapStructMapper mapper) {
         this.seatRepository = seatRepository;
+        this.showService = showService;
         this.mapper = mapper;
     }
 
     @Override
-    public SeatDto createSeat(SeatDto seatDto) throws NotFoundException {
-            if ( seatRepository.findBySeatNumberAndType(seatDto.getSeatNumber(),seatDto.getType()).isPresent()){
-                throw new NotFoundException("Seat number already exists");
-            } else {
-                return mapper.seatToSeatDto(seatRepository.save(mapper.seatDtoToSeat(seatDto)));
-            }
+    public void createSeat(Seat seat)  {
+        System.out.println("Seat Id : " + seat.getSeatId());
+        seatRepository.save(seat);
     }
 
     @Override
     public List<SeatDto> getAllSeat() throws NotFoundException {
-        List<Seat> seats = seatRepository.findBySeatStatus(SeatStatus.AVAILABLE); //
+        List<Seat> seats = seatRepository.findBySeatStatus(SeatStatus.AVAILABLE);
 
         if (0 == seats.size()) {
             throw new NotFoundException("No seats found");
@@ -68,6 +71,13 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public Seat getSeatBYId(int seatId) {
         return seatRepository.findBySeatId(seatId);
+    }
+
+    @Override
+    public List<SeatDto> getSeatByShowId(int showId) {
+        Show show = mapper.showDtoToShow(showService.getShowById(showId));
+        List<Seat> seats = seatRepository.findByShow(show);
+        return mapper.seatListToSeatDtoList(seats);
     }
 
 }

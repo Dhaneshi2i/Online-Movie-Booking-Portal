@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public interface ScreenService {
      * @param screenId is passed as argument to fetch those from the database.
      * @return ScreenDto which is fetched from database with the param
      */
-    ScreenSlimDto getScreenById(int screenId) throws NotFoundException;
+    ScreenDto getScreenById(int screenId) throws NotFoundException;
 
     /**
      * This method List all the Theatre Details by screen that are present in Database

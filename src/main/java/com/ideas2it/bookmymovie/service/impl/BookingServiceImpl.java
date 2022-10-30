@@ -100,7 +100,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public boolean completePayment(Booking booking) {
-        return false;
+        return true;
     }
 
     /*public Booking cancelSeatBooking(int bookingId, int seatId) {
