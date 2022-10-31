@@ -29,12 +29,26 @@ public class SeatServiceImpl implements SeatService {
         this.mapper = mapper;
     }
 
+    /**
+     * <p>
+     * This method is used to create Seat Details
+     * </p>
+     *
+     * @param seat it contains seat objects
+     */
     @Override
     public void createSeat(Seat seat)  {
         System.out.println("Seat Id : " + seat.getSeatId());
         seatRepository.save(seat);
     }
 
+    /**
+     * <p>
+     * This method List all the Seat Details
+     * </p>
+     *
+     * @return List<SeatDto>
+     */
     @Override
     public List<SeatDto> getAllSeat() throws NotFoundException {
         List<Seat> seats = seatRepository.findBySeatStatus(SeatStatus.AVAILABLE);
@@ -46,6 +60,14 @@ public class SeatServiceImpl implements SeatService {
         }
     }
 
+    /**
+     * <p>
+     * This method updates the Seat Details
+     * </p>
+     *
+     * @param seatId it contains seat id
+     * @return SeatDto
+     */
     @Override
     public SeatDto updateSeatById(int seatId) throws NotFoundException{
         Optional<Seat> seat = seatRepository.findById(seatId);
@@ -56,23 +78,55 @@ public class SeatServiceImpl implements SeatService {
         throw new NotFoundException("Seat with the given id is not present");
     }
 
+    /**
+     * <p>
+     * This method is used to book Seats
+     * </p>
+     *
+     * @param seat it contains seat objects
+     * @return SeatDto
+     */
     @Override
     public Seat bookSeat(Seat seat) {
         seat.setSeatStatus(SeatStatus.BOOKED);
         return seatRepository.save(seat);
     }
 
+    /**
+     * <p>
+     * This method is used to cancel Seats
+     * </p>
+     *
+     * @param seat it contains seat objects
+     * @return SeatDto
+     */
     @Override
     public Seat cancelSeatBooking(Seat seat) {
         seat.setSeatStatus(SeatStatus.AVAILABLE);
         return seatRepository.save(seat);
     }
 
+    /**
+     * <p>
+     * This method gets the Seat Details
+     * </p>
+     *
+     * @param seatId it contains seat id
+     * @return SeatDto
+     */
     @Override
     public Seat getSeatBYId(int seatId) {
         return seatRepository.findBySeatId(seatId);
     }
 
+    /**
+     * <p>
+     * This method List all the Seat Details with given showId
+     * </p>
+     *
+     * @param showId it contains show id
+     * @return List<SeatDto>
+     */
     @Override
     public List<SeatDto> getSeatByShowId(int showId) {
         Show show = mapper.showDtoToShow(showService.getShowById(showId));

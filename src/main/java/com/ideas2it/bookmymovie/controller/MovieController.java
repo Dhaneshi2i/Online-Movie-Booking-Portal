@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * <p>
+ * MovieController will get the detail from admin to
+ * Create movie
+ * List all movie and view movie by specified id for the customer
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/api/v1/movie")
 public class MovieController {
@@ -24,11 +34,12 @@ public class MovieController {
     }
 
     /**
-     * Stores a Movie object in the Database.
+     * <p>
+     * This method is used to create Movie Details
+     * </p>
      *
-     * @param movieDto
+     * @param movieDto it contains movie dto objects
      * @return MovieDto
-     * @throws NotFoundException
      */
     @PostMapping
     public MovieDto createMovie(@Valid @RequestBody MovieDto movieDto) {
@@ -36,10 +47,11 @@ public class MovieController {
     }
 
     /**
-     * Return's the List of Movies from the Database
+     * <p>
+     * This method List all the Movie Details
+     * </p>
      *
-     * @return List<Movie>
-     * @throws NotFoundException
+     * @return List<MovieDto>
      */
     @GetMapping
     public List<MovieDto> getMovies() throws NotFoundException {
@@ -47,11 +59,12 @@ public class MovieController {
     }
 
     /**
-     * Returns the record from the database using identifier - movieId
+     * <p>
+     * This method gets the Movie Details which matches the id
+     * </p>
      *
-     * @param movieId
-     * @return Movie
-     * @throws NotFoundException
+     * @param movieId it contains movieId
+     * @return MovieDto
      */
     @GetMapping("/{movieId}")
     public MovieDto getMovieById(@PathVariable int movieId) throws NotFoundException {

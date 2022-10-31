@@ -18,11 +18,27 @@ public class CastServiceImpl implements CastService {
         this.mapper = mapper;
     }
 
+    /**
+     * <p>
+     * This method is used to create Cast Details
+     * </p>
+     *
+     * @param castDto it contains cast dto objects
+     * @return CastResponseDto
+     */
     @Override
     public CastResponseDto addCast(CastDto castDto) {
         return mapper.castToCastResponseDto(castRepository.save(mapper.castDtoToCast(castDto)));
     }
 
+    /**
+     * <p>
+     * This method gets castId as parameter and get the Cast Details which matches the id
+     * </p>
+     *
+     * @param castId it contains cast id
+     * @return CastDto
+     */
     @Override
     public CastDto getByCastId(int castId) {
         return castRepository.findById(castId).map(cast -> mapper.castToCastDto(cast)).orElseThrow(() -> new NotFoundException("No cast found"));

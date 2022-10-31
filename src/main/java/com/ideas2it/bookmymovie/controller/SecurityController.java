@@ -14,36 +14,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-    @RestController
-    public class SecurityController {
+/**
+ * <p>
+ * SecurityController will create authentication token
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
+@RestController
+public class SecurityController {
 
-        private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-        private JwtUtil tokenUtil;
+    private JwtUtil tokenUtil;
 
-        private UserService userService;
+    private UserService userService;
 
-        public PasswordEncoder passwordEncoder ;
+    public PasswordEncoder passwordEncoder;
 
-        public SecurityController(AuthenticationManager authenticationManager, JwtUtil tokenUtil, UserService userService) {
-            this.authenticationManager = authenticationManager;
-            this.tokenUtil = tokenUtil;
-            this.userService = userService;
-        }
+    public SecurityController(AuthenticationManager authenticationManager, JwtUtil tokenUtil, UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.tokenUtil = tokenUtil;
+        this.userService = userService;
+    }
 
-        @RequestMapping("/authenticate")
-        public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest) throws Exception {
-            try {
+    /**
+     * <p>
+     *  This method creates authentication token.
+     * </p>
+     *
+     * @param authenticationRequest it contains AuthRequest objects
+     * @return
+     */
+    @RequestMapping("/authenticate")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest) throws Exception {
+        try {
 //                authenticationRequest.setPassword(passwordEncoder.encode(authenticationRequest.getPassword()));
 //                 System.out.println(authenticationRequest.getPassword());
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(),
-                        authenticationRequest.getPassword()));
-            } catch (BadCredentialsException badCredentialsException) {
-                throw new Exception("Incorrect userName or password");
-            }
-            final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUserName());
-            final String webToken = tokenUtil.generateToken(userDetails);
-            return ResponseEntity.ok(new AuthResponse(webToken));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(),
+                    authenticationRequest.getPassword()));
+        } catch (BadCredentialsException badCredentialsException) {
+            throw new Exception("Incorrect userName or password");
         }
+        final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUserName());
+        final String webToken = tokenUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthResponse(webToken));
     }
+}
 

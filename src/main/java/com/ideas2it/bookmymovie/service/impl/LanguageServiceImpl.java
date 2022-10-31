@@ -17,11 +17,27 @@ public class LanguageServiceImpl implements LanguageService {
         this.mapper = mapper;
     }
 
+    /**
+     * <p>
+     * This method is used to create Cast Details
+     * </p>
+     *
+     * @param languageDto it contains language dto objects.
+     * @return LanguageDto
+     */
     @Override
     public LanguageDto addLanguage(LanguageDto languageDto) {
         return mapper.languageToLanguageDto(languageRepository.save(mapper.languageDtoToLanguage(languageDto)));
     }
 
+    /**
+     * <p>
+     * This method gets the language Details which matches the id
+     * </p>
+     *
+     * @param languageId it contains language id
+     * @return LanguageDto
+     */
     @Override
     public LanguageDto getByLanguageId(int languageId) {
         return languageRepository.findByLanguageId(languageId)

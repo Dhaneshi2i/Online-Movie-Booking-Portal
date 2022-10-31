@@ -20,6 +20,12 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * This Seat Class contains details that are required about a seat in a screen
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,6 +33,7 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "seats")
 public class Seat {
+
     @Id
     @Column(name = "id", nullable = false)
     private int seatId;
@@ -41,6 +48,7 @@ public class Seat {
     private double price;
 
     private LocalDate showDate;
+
     private LocalTime showStartTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

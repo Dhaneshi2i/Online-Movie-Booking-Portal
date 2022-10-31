@@ -17,11 +17,27 @@ public class GenreServiceImpl implements GenreService {
         this.mapper = mapper;
     }
 
+    /**
+     * <p>
+     * This method is used to create Genre Details
+     * </p>
+     *
+     * @param genreDto it contains genre dto objects
+     * @return GenreDto
+     */
     @Override
     public GenreDto addGenre(GenreDto genreDto) {
         return mapper.genreToGenreDto(genreRepository.save(mapper.genreDtoToGenre(genreDto)));
     }
 
+    /**
+     * <p>
+     * This method gets the Genre Details which matches the id
+     * </p>
+     *
+     * @param genreId it contains genre id
+     * @return GenreDto
+     */
     @Override
     public GenreDto  getByGenreId (int genreId) {
         return genreRepository.findByGenreId(genreId)
