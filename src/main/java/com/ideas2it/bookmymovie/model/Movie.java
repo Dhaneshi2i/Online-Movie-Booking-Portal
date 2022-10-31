@@ -46,7 +46,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    }, fetch = FetchType.LAZY)
+    })
     @JoinTable(
             name = "movie_genre",
             joinColumns = {
@@ -56,7 +56,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    }, fetch = FetchType.LAZY)
+    })
     @JoinTable(
             name = "movie_language",
             joinColumns = {
@@ -70,7 +70,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    }, fetch = FetchType.LAZY)
+    })
     @JoinTable(
             name = "movie_cast",
             joinColumns = {
@@ -87,9 +87,9 @@ public class Movie {
 
     private boolean status;
     @CreationTimestamp
-    private Timestamp createDate;
+    private Timestamp createdOn;
     @UpdateTimestamp
-    private Timestamp updatedDate;
+    private Timestamp updatedOn;
 
 }
 

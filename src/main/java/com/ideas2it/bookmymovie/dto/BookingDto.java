@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookingDto {
-    private int bookingId;
     @NotBlank
     private UserDto user;
     @NotBlank
@@ -27,5 +27,6 @@ public class BookingDto {
     private String bookingStatus;
     @NotEmpty
     private List<SeatDto> seats;
+    @NotNull
     private double totalCost;
 }

@@ -52,7 +52,6 @@ import java.util.stream.Collectors;
              List<CastDto> casts = new ArrayList<>();
              for (CastDto cast : movieDto.getCasts()) {
                  casts.add(castService.getByCastId(cast.getCastId()));
-                 System.out.println(castService.getByCastId(cast.getCastId()).getName());
              }
              movieDto.setCasts(casts);
              List<LanguageDto> languages = new ArrayList<>();
@@ -99,12 +98,12 @@ import java.util.stream.Collectors;
       * @param movieId it contains movieId
       * @return MovieDto
       */
-     public MovieDto getMovieById(int movieId) {
+     public MovieDto getMovieById(int movieId) throws NotFoundException{
          if (movieRepository.existsById(movieId)) {
              Movie movie = movieRepository.findByMovieId(movieId);
                  return mapper.movieToMovieDto(movie);
          }
-         throw new NotFoundException("Theatre details with the given id is not found");
+         throw new NotFoundException("No movie found");
      }
 
   }

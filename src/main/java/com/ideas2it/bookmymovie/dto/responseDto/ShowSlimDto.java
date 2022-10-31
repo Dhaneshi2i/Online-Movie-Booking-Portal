@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,9 +12,12 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 public class ShowSlimDto {
-    private int showId;
+    @NotNull
     private LocalTime showStartTime;
+    @NotNull
     private LocalTime showEndTime;
+    @NotNull
     private LocalDate showDate;
+    @NotNull
     private MovieSlimDto movie;
 }

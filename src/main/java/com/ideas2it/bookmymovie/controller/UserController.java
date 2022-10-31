@@ -28,8 +28,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
-    private final UserService userService;
-    private final RoleService roleService;
+    private UserService userService;
+    private RoleService roleService;
 
     public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;

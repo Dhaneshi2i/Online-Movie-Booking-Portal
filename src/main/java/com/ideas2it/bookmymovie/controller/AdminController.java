@@ -5,9 +5,11 @@ import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
+import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
+import com.ideas2it.bookmymovie.service.SeatTypeService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +34,13 @@ public class AdminController {
     private CastService castService;
     private LanguageService languageService;
 
-    public AdminController(GenreService genreService, CastService castService, LanguageService languageService) {
+    private SeatTypeService seatTypeService;
+
+    public AdminController(GenreService genreService, CastService castService, LanguageService languageService, SeatTypeService seatTypeService) {
         this.genreService = genreService;
         this.castService = castService;
         this.languageService = languageService;
+        this.seatTypeService = seatTypeService;
     }
 
     /**
@@ -77,7 +82,8 @@ public class AdminController {
         return genreService.addGenre(genreDto);
     }
 
+    @PostMapping("/seat-type")
+    public SeatType createSeatType(@Valid @RequestBody SeatType seatType) {
+        return seatTypeService.addSeatType(seatType);
+    }
 }
-
-
-

@@ -84,8 +84,4 @@ public class BookingController {
         return bookingService.cancelBooking(bookingId);
     }
 
-    /*@DeleteMapping("/{bookingId}/{seatId}")
-    public Booking ticketCancel(@PathVariable int bookingId, @PathVariable int seatId) {
-        return bookingService.cancelSeatBooking(bookingId, seatId);
-    }*/
 }

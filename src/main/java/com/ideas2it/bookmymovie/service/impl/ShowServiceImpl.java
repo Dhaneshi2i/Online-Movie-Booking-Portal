@@ -69,24 +69,25 @@ public class ShowServiceImpl implements ShowService {
         int column = show.getScreen().getNoOfColumns();
         //int row = screen.getNoOfRows();
         //int column = screen.getNoOfColumns();
+        Seat seat = new Seat();
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
                                             'v','w','x','y','z'};
 //        int k = 0;
         for (int i=0; i<row;i++) {
-            Seat seat = new Seat();
-            if (i <= 3) {
-                seat.setSeatType(SeatType.BALCONY);
-                seat.setPrice(200);
-            } else if (i < 7) {
-                seat.setSeatType(SeatType.GOLD);
-                seat.setPrice(170);
-            } else if (i < 11){
-                seat.setSeatType(SeatType.SILVER);
-                seat.setPrice(150);
-            } else {
-                seat.setSeatType(SeatType.PLATINUM);
-                seat.setPrice(120);
-            }
+//            Seat seat = new Seat();
+//            if (i <= 3) {
+//                seat.setSeatType(SeatType.BALCONY);
+//                seat.setPrice(200);
+//            } else if (i < 7) {
+//                seat.setSeatType(SeatType.GOLD);
+//                seat.setPrice(170);
+//            } else if (i < 11){
+//                seat.setSeatType(SeatType.SILVER);
+//                seat.setPrice(150);
+//            } else {
+//                seat.setSeatType(SeatType.PLATINUM);
+//                seat.setPrice(120);
+//            }
             for (int j=1;j<=column;j++) {
                 Random random = new Random();
                 seat.setSeatId(SEAT_ID + random.nextInt() + show.getShowId());
@@ -96,6 +97,8 @@ public class ShowServiceImpl implements ShowService {
                 seat.setShow(show);
                 seat.setShowDate(show.getShowDate());
                 seat.setShowStartTime(show.getShowStartTime());
+                seat.setSeatType(seat.getSeatType());
+
                 seatService.createSeat(seat);
                 //seats.add(seat);
             }

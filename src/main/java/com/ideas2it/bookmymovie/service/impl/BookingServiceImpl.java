@@ -58,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
                 seats.add(selectedSeat);
             }
             booking.setBookingDate(LocalDate.now());
-            booking.setTotalCost(calculateTotalCost(seats));
+            //booking.setTotalCost(calculateTotalCost(seats));
 
             boolean isPaymentSuccessful = completePayment(booking);
             if (isPaymentSuccessful) {
@@ -126,14 +126,14 @@ public class BookingServiceImpl implements BookingService {
      * This method is to calculate the total cost based on the given seat type
      * </p>
      *
-     * @param seats it contains list of seat objects
+     * @param  seats it contains list of seat objects
      * @return double
      */
     @Override
     public double calculateTotalCost(List<Seat> seats) {
         double amount = 0;
         for (Seat seat : seats) {
-            amount = amount + seat.getPrice();
+            amount = amount + seat.getSeatType().getPrice();
         }
         return amount;
 
