@@ -44,7 +44,7 @@ public class SeatController {
      * @return List<SeatDto>
      */
     @GetMapping
-    public List<SeatDto> viewSeatList() throws NotFoundException {
+    public List<SeatDto> viewSeatList() {
         return seatService.getAllSeat();
     }
 

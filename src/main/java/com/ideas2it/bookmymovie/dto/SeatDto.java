@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeatDto {
+    private int seatId;
     @NotBlank
     private String seatNumber;
     @NotBlank

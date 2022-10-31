@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
+    private int userId;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String userName;
@@ -37,6 +38,7 @@ public class UserDto {
     @NotNull
     private RoleDto role;
 
+    private boolean isStatus;
 }
 
 

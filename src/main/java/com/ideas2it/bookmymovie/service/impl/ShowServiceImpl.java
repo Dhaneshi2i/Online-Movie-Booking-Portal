@@ -97,7 +97,7 @@ public class ShowServiceImpl implements ShowService {
                 seat.setShow(show);
                 seat.setShowDate(show.getShowDate());
                 seat.setShowStartTime(show.getShowStartTime());
-                seat.setSeatType(seat.getSeatType());
+                seat.setSeatType();
 
                 seatService.createSeat(seat);
                 //seats.add(seat);

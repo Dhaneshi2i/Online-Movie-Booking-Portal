@@ -12,8 +12,10 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CastDto {
+    private int castId;
     @NotBlank
     private String name;
     @NotBlank
     private String role;
+
 }

@@ -25,6 +25,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShowDto {
+    private int showId;
     @NotNull
     @FutureOrPresent(message = "Please provide a present or future date")
     @JsonDeserialize(using = LocalDateDeserializer.class)

@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TheatreDto {
+    private int theatreId;
     @NotBlank(message = "Theatre name should not be empty")
     private String theatreName;
     @NotBlank(message = "Theatre location should not empty")

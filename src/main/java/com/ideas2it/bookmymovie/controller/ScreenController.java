@@ -71,7 +71,7 @@ public class ScreenController {
      * @return ScreenDto
      */
     @GetMapping("/{screenId}")
-    public ScreenDto viewScreen(@PathVariable int screenId) throws NotFoundException {
+    public ScreenDto viewScreen(@PathVariable int screenId) {
         //ScreenSlimDto screenDto = screenService.getScreenById(screenId);
         return screenService.getScreenById(screenId);
     }
@@ -81,7 +81,7 @@ public class ScreenController {
      * @throws NotFoundException
      */
     @PatchMapping
-    public ScreenDto updateScreen(@RequestParam Integer screenId) throws NotFoundException {
+    public ScreenDto updateScreen(@RequestParam Integer screenId) {
         ScreenDto screenDto = screenService.updateScreenById(screenId);
         return screenDto;
     }

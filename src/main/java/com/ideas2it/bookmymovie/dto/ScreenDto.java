@@ -18,6 +18,7 @@ import javax.validation.constraints.Pattern;
  * A DTO for the {@link com.ideas2it.bookmymovie.model.Screen} entity
  */
 public class ScreenDto {
+    private int screenId;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String screenName;

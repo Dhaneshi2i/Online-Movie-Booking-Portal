@@ -14,8 +14,9 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GenreDto {
-
+    private int genreId;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String name;
+
 }

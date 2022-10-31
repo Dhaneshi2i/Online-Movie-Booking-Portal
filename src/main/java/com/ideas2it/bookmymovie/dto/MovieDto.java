@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDto {
-
+    private int movieId;
     @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String movieName;

@@ -12,7 +12,9 @@ import javax.validation.constraints.Pattern;
 @Setter
 @Component
 public class ScreenSlimDto {
+    private int screenId;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String screenName;
+
 }

@@ -40,7 +40,7 @@ public class RoleController {
      * @return RoleDto
      */
     @PostMapping
-    public RoleDto createRoles( @Valid @RequestBody RoleDto roleDto) {
+    public RoleDto createRoles(@Valid @RequestBody RoleDto roleDto) {
         return roleService.createRole(roleDto);
     }
 
@@ -52,7 +52,7 @@ public class RoleController {
      * @return List<RoleDto>
      */
     @GetMapping
-    public List<RoleDto> getAllRoles() throws NotFoundException {
+    public List<RoleDto> getAllRoles() {
         return roleService.getAllRoles();
     }
 
