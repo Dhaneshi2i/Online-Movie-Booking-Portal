@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,12 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This Cast Class contains cast that are available for a movie
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -21,6 +21,12 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * This Booking Class contains details of booking done by a user
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

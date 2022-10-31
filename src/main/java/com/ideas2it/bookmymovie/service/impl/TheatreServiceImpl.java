@@ -33,9 +33,12 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     /**
-     * This method gets theatreDto object as parameter to create Theatre Details
+     * <p>
+     * This method is used to create Theatre Details
+     * </p>
      *
-     * @param theatreDto is passed as argument to add these value to the database.
+     * @param theatreDto it contains theatre dto object
+     * @return TheatreDto
      */
     @Override
     public TheatreDto createTheatre(TheatreDto theatreDto) throws NotFoundException {
@@ -43,10 +46,11 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     /**
-     * This method List all the Theatre Details that are present in Database
+     * <p>
+     * This method List all the Theatre Details
+     * </p>
      *
-     * @return List<TheatreDto> which will have all the Theatre Details which are present in
-     * the database.
+     * @return List<TheatreDto>
      */
     @Override
     public List<TheatreDto> getAllTheatre() throws NotFoundException {
@@ -59,10 +63,12 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     /**
-     * This method gets TheatreId as parameter and get the Theatre Details which matches the id
+     * <p>
+     * This method gets the Theatre Details which matches the id
+     * </p>
      *
-     * @param theatreId is passed as argument to fetch those from the database.
-     * @return TheatreDto which is fetched from database with the param
+     * @param theatreId it contains theatre id
+     * @return TheatreDto
      */
     @Override
     public TheatreDto findTheatreById(int theatreId) throws NotFoundException{
@@ -75,10 +81,12 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     /**
-     * This method gets TheatreId as parameter and update the Theatre Details
+     * <p>
+     * This method update the Theatre Details
+     * </p>
      *
-     * @param theatreId is passed as argument to get those value from the database.
-     * @return List of theatre details after update
+     * @param theatreId it contains theatre id
+     * @return List<TheatreDto>
      */
     @Override
     public List<TheatreDto> updateTheatreById(int theatreId) {
@@ -91,10 +99,12 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     /**
-     * This method gets TheatreId as parameter and delete the Theatre Details with the given id
+     * <p>
+     * This method delete the Theatre Details with the given id
+     * </p>
      *
-     * @param theatreId is passed as argument to delete those value from the database.
-     * @return List of theatre details after deletion
+     * @param theatreId it contains theatre id
+     * @return List<TheatreDto>
      */
     @Override
     public List<TheatreDto> deleteTheatreById(int theatreId) {
@@ -103,11 +113,12 @@ public class TheatreServiceImpl implements TheatreService {
     }
 
     /**
-     * This method List all the Theatre Details by movie that are present in Database
+     * <p>
+     * This method List all the Theatre Details by movie
+     * </p>
      *
-     * @param movieId is passed to categorize the theatre Details by Movie
-     * @return List<TheatreDto> which will have the list of all the details of theatre
-     * which was categorized by movie
+     * @param movieId it contains movie id
+     * @return List<TheatreDto>
      */
     @Override
     public List<TheatreDto> findTheatresByMovieId(int movieId) throws NotFoundException {
@@ -125,6 +136,15 @@ public class TheatreServiceImpl implements TheatreService {
         }
         return mapper.theatreListToTheatreDtoList(theatreList);
     }
+
+    /**
+     * <p>
+     * This method List all the Theatre Details by city name
+     * </p>
+     *
+     * @param city it contains city
+     * @return List<TheatreDto>
+     */
     public List<TheatreDto> findTheatresByLocation(String city) throws NotFoundException{
         return mapper.theatreListToTheatreDtoList(theatreRepository.findTheatreByTheatreCity(city));
     }

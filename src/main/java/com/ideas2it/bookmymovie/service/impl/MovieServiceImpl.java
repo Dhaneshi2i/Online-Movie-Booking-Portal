@@ -38,6 +38,14 @@ import java.util.stream.Collectors;
          this.castService = castService;
      }
 
+     /**
+      * <p>
+      * This method is used to create Movie Details
+      * </p>
+      *
+      * @param movieDto it contains movie dto objects
+      * @return MovieDto
+      */
      public MovieDto addMovie(MovieDto movieDto) {
          Movie movie = new Movie();
          if (null != movieDto) {
@@ -64,6 +72,13 @@ import java.util.stream.Collectors;
          return mapper.movieToMovieDto(movieRepository.save(movie));
      }
 
+     /**
+      * <p>
+      * This method List all the Movie Details
+      * </p>
+      *
+      * @return List<MovieDto>
+      */
      public List<MovieDto> getMovies() throws NotFoundException {
          List<Movie> movies = movieRepository.findAll();
 
@@ -76,6 +91,14 @@ import java.util.stream.Collectors;
                          .collect(Collectors.toList());
      }
 
+     /**
+      * <p>
+      * This method gets the Movie Details which matches the id
+      * </p>
+      *
+      * @param movieId it contains movieId
+      * @return MovieDto
+      */
      public MovieDto getMovieById(int movieId) {
          if (movieRepository.existsById(movieId)) {
              Movie movie = movieRepository.findByMovieId(movieId);

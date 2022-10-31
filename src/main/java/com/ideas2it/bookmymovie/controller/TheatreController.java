@@ -15,7 +15,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * This Class is to create,get,update and delete theatre Details
+ * <p>
+ * TheatreController will get the detail from admin to
+ * Create theatre,list all theatre and list theatre by movie.
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
  */
 @Slf4j
 @RestController
@@ -28,15 +34,25 @@ public class TheatreController {
         this.theatreService = theatreService;;
     }
 
+    /**
+     * <p>
+     * This method is used to create Theatre Details
+     * </p>
+     *
+     * @param theatreDto it contains theatre dto object
+     * @return TheatreDto
+     */
     @PostMapping
     public TheatreDto createTheatre(@Valid @RequestBody TheatreDto theatreDto) {
         return theatreService.createTheatre(theatreDto);
     }
 
     /**
-     * This method is to get a list of theatre details.
-     * @return listOfTheatres
-     * @throws NotFoundException
+     * <p>
+     * This method List all the Theatre Details
+     * </p>
+     *
+     * @return List<TheatreDto>
      */
     @GetMapping
     public List<TheatreDto> getAllTheatres() throws NotFoundException {
@@ -44,23 +60,41 @@ public class TheatreController {
     }
 
     /**
+     * <p>
+     * This method gets TheatreId as parameter and get the Theatre Details which matches the id
+     * </p>
      *
-     * @param theatreId
-     * @return theatre by theatreId
-     * @throws NotFoundException
+     * @param theatreId it contains theatre id
+     * @return TheatreDto
      */
     @GetMapping("/{theatreId}")
-    public TheatreDto findTheatre(@PathVariable int theatreId)
+    public TheatreDto findTheatreById(@PathVariable int theatreId)
             throws  NotFoundException {
         return theatreService.findTheatreById(theatreId);
     }
 
+    /**
+     * <p>
+     * This method List all the Theatre Details by movie
+     * </p>
+     *
+     * @param movieId it contains movie id
+     * @return List<TheatreDto>
+     */
     @GetMapping("/findByMovie/{movieId}")
     public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId)
             throws  NotFoundException {
         return theatreService.findTheatresByMovieId(movieId);
     }
 
+    /**
+     * <p>
+     * This method List all the Theatre Details by city name
+     * </p>
+     *
+     * @param city it contains city
+     * @return List<TheatreDto>
+     */
     @GetMapping("/city/{city}")
     public List<TheatreDto> findTheatreByLocation(@PathVariable String city) {
         return theatreService.findTheatresByLocation(city);

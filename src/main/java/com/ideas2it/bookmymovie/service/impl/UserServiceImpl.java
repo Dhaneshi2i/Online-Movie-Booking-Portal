@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,17 +30,40 @@ public class UserServiceImpl implements UserService {
         this.mapper = mapper;
     }
 
+    /**
+     * <p>
+     * This method is used to create customer detail
+     * </p>
+     *
+     * @param userDto it contains user dto objects.
+     * @return UserDto
+     */
     @Override
     public UserSlimDto createUser(UserDto userDto) {
         return mapper.userToUserSlimDto(userRepository.save(mapper.userDtoToUser(userDto)));
     }
 
+    /**
+     * <p>
+     * This method List all the User Details
+     * </p>
+     *
+     * @return List<UserDto>
+     */
     @Override
     public List<UserSlimDto> getAllUsers() {
         return userRepository.findAllByStatus(false).stream().
                 map(mapper::userToUserSlimDto).collect(Collectors.toList());
     }
 
+    /**
+     * <p>
+     * This method get the User Details which matches the id
+     * </p>
+     *
+     * @param id it contains user id
+     * @return UserDto
+     */
     @Override
     public UserDto getUserById(int id) {
         return userRepository.findById(id).map(mapper::userToUserDto)
@@ -46,12 +71,29 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * <p>
+     * This method is to update the user details
+     * </p>
+     *
+     * @param userDto it contains user dto objects.
+     * @return ScreenDto
+     */
     @Override
     public UserDto updateUser(UserDto userDto) {
         User user = userRepository.findByUserId(userDto.getUserId());
         user.setStatus(userDto.isStatus());
         return mapper.userToUserDto(userRepository.save(user));
     }
+
+    /**
+     * <p>
+     *  This method gets userDetails with userName.
+     * </p>
+     *
+     * @param username it contains user name
+     * @return UserDetails
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);

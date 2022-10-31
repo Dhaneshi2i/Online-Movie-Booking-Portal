@@ -9,47 +9,72 @@ import java.util.List;
 public interface SeatService {
 
     /**
-     * This method gets seatDto object as parameter to create Seat Details
+     * <p>
+     * This method is used to create Seat Details
+     * </p>
      *
-     * @param seat is passed as argument to add these value to the database.
-     * @return Seat which return the created Seat Details
+     * @param seat it contains seat objects
      */
      void createSeat(Seat seat) ;
 
     /**
-     * This method List all the Seat Details that are present in Database
+     * <p>
+     * This method List all the Seat Details
+     * </p>
      *
-     * @return List<SeatDto> which will have all the Seat Details which are present in
-     * the database.
+     * @return List<SeatDto>
      */
      List<SeatDto> getAllSeat() throws NotFoundException;
 
-    /**
-     * This method gets seatId as parameter and update the Seat Details
+     /**
+     * <p>
+     * This method updates the Seat Details
+     * </p>
      *
-     * @param seatId is passed as argument to get those value from the database.
-     * @return List of seat details after update
+     * @param seatId it contains seat id
+     * @return SeatDto
      */
      SeatDto updateSeatById(int seatId) throws NotFoundException;
 
 
     /**
-     * This method gets SeatDto object as parameter to create Seat Details
+     * <p>
+     * This method is used to book Seats
+     * </p>
      *
-     * @param seat is passed as argument to add these value to the database..
-     * @return SeatDto which return the Seat Details with seat Status
+     * @param seat it contains seat objects
+     * @return SeatDto
      */
      Seat bookSeat(Seat seat);
- 
+
     /**
-     * This method gets SeatDto object as parameter to create Seat Details
+     * <p>
+     * This method is used to cancel Seats
+     * </p>
      *
-     * @param seat is passed as argument to add these value to the database.
-     * @return SeatDto which return the Seat Details with seat Status
+     * @param seat it contains seat objects
+     * @return SeatDto
      */
     Seat cancelSeatBooking(Seat seat);
+
+    /**
+     * <p>
+     * This method gets the Seat Details
+     * </p>
+     *
+     * @param seatId it contains seat id
+     * @return SeatDto
+     */
     Seat getSeatBYId(int seatId);
 
+    /**
+     * <p>
+     * This method List all the Seat Details with given showId
+     * </p>
+     *
+     * @param showId it contains show id
+     * @return List<SeatDto>
+     */
     List<SeatDto> getSeatByShowId(int showId);
 
 }

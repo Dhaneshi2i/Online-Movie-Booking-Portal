@@ -18,7 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
-
+/**
+ * This Screen Class contains details that are required about a screen present in a theatre
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,13 +31,16 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "screens")
 public class Screen {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int screenId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
+
     private String screenName;
 
     @Column(name = "no_of_rows")

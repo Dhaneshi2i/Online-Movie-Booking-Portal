@@ -19,6 +19,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This Theatre Class contains details that are required about a theatre
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

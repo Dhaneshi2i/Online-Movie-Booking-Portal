@@ -12,36 +12,41 @@ import java.util.List;
 public interface ScreenService {
 
     /**
-     * This method gets screenDto object as parameter to create Screen Details
+     * <p>
+     * This method is used to create Screen Details
+     * </p>
      *
-     * @param screenDto is passed as argument to add these value to the database.
-     *
-     * @return ScreenDto which return the created Screen Details
+     * @param screenDto it contains screen dto object
+     * @return ScreenDto
      */
     ScreenDto createScreen(ScreenDto screenDto) throws NotFoundException;
 
     /**
-     * This method List all the Screen Details that are present in Database
+     * <p>
+     * This method List all the Screen Details
+     * </p>
      *
-     * @return List<ScreenDto> which will have all the Screen Details which are present in
-     * the database.
+     * @return List<ScreenDto>
      */
-
     List<ScreenDto> getAllScreen() throws NotFoundException;
 
     /**
-     * This method gets screenId as parameter and update the Screen Details
+     * <p>
+     * This method updates the Screen Details
+     * </p>
      *
-     * @param screenId is passed as argument to get those value from the database.
-     * @return List of screen details after update
+     * @param screenId it contains
+     * @return ScreenDto
      */
     ScreenDto updateScreenById(int screenId)  throws NotFoundException;
 
     /**
-     * This method gets screenId as parameter and get the Screen Details which matches the id
+     * <p>
+     * This method List all the Theatre Details by screen
+     * </p>
      *
-     * @param screenId is passed as argument to fetch those from the database.
-     * @return ScreenDto which is fetched from database with the param
+     * @param screenId it contains screen id
+     * @return TheatreDto
      */
     ScreenDto getScreenById(int screenId) throws NotFoundException;
 

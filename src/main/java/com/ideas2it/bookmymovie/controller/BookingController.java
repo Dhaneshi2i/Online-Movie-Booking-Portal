@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * <p>
+ * BookingController will get the detail from customer
+ * To book the ticket and cancel the ticket,list all the bookings
+ * Done by the customer.
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @RestController
 @RequestMapping("/api/v1/booking")
 public class BookingController {
@@ -22,21 +32,53 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
+    /**
+     * <p>
+     * This method is used to create Booking Details
+     * </p>
+     *
+     * @param bookingDto it contains booking dto objects
+     *
+     * @return BookingDto
+     */
     @PostMapping("/bookTicket")
     public BookingResponseDto bookTicket(@RequestBody BookingDto bookingDto) {
         return bookingService.createBooking(bookingDto);
     }
 
+    /**
+     * <p>
+     * This method List all the Booking Details
+     * </p>
+     *
+     * @return List<BookingDto>
+     */
     @GetMapping
     public List<BookingDto> getAllBookings() {
         return bookingService.getAllBookings();
     }
 
+    /**
+     * <p>
+     * This method get the Booking Details which matches the id
+     * </p>
+     *
+     * @param bookingId it contains booking id
+     * @return BookingDto
+     */
     @GetMapping("/{bookingId}")
     public BookingDto viewByBookingId(@PathVariable int bookingId) {
         return bookingService.viewByBookingId(bookingId);
     }
 
+    /**
+     * <p>
+     * This method is used to cancel the Screen Details which matches the id
+     * </p>
+     *
+     * @param bookingId it contains booking dto object
+     * @return BookingDto
+     */
     @PatchMapping("/{bookingId}")
     public BookingDto cancelBookingById(@PathVariable int bookingId) {
         return bookingService.cancelBooking(bookingId);

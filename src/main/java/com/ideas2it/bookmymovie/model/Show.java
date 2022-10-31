@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +19,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * This Show Class contains details that are required about a show
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,12 +32,17 @@ import java.util.List;
 @Entity
 @Table(name = "shows")
 public class Show {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int showId;
+
     private LocalDate showDate;
+
     private LocalTime showStartTime;
+
     private LocalTime showEndTime;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
@@ -45,7 +55,7 @@ public class Show {
     private List<Seat> seats;*/
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="theatre_id")
+    @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
     private boolean Status;

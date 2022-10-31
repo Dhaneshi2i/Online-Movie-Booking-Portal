@@ -17,8 +17,8 @@ import javax.validation.Valid;
 
 /**
  * <p>
- * AdminController class  will create the new cast, language,
- *
+ * AdminController will get the detail from admin to
+ * Create genre, language and cast
  * </p>
  *
  * @author Dhanesh kumar, Harini, sivadharshini
@@ -38,16 +38,40 @@ public class AdminController {
         this.languageService = languageService;
     }
 
+    /**
+     * <p>
+     * This method is used to create Cast Details
+     * </p>
+     *
+     * @param castDto it contains cast dto objects
+     * @return CastResponseDto
+     */
     @PostMapping("/cast")
     public CastResponseDto createCast(@Valid @RequestBody CastDto castDto) {
         return castService.addCast(castDto);
     }
 
+    /**
+     * <p>
+     * This method is used to create Cast Details
+     * </p>
+     *
+     * @param languageDto it contains language dto objects.
+     * @return LanguageDto
+     */
     @PostMapping("/language")
     public LanguageDto createLanguage(@Valid @RequestBody LanguageDto languageDto) {
         return languageService.addLanguage(languageDto);
     }
 
+    /**
+     * <p>
+     * This method is used to create Genre Details
+     * </p>
+     *
+     * @param genreDto it contains genre dto objects
+     * @return GenreDto
+     */
     @PostMapping("/genre")
     public GenreDto createGenre(@Valid @RequestBody GenreDto genreDto) {
         return genreService.addGenre(genreDto);

@@ -40,6 +40,14 @@ public class ShowServiceImpl implements ShowService {
         this.mapper = mapper;
     }
 
+    /**
+     * <p>
+     * This method is used to create Show Details
+     * </p>
+     *
+     * @param showDto it contains show dto objects
+     * @return ShowDto
+     */
     @Override
     public ShowDto createShow(ShowDto showDto){
         Show show = new Show();
@@ -95,7 +103,16 @@ public class ShowServiceImpl implements ShowService {
         //return seats;
     }
 
-
+    /**
+     * <p>
+     * This method updates Show Details
+     * </p>
+     *
+     * @param showDto it contains show dto objects
+     * @param theatreId it contains theatre id
+     * @param screenId it contains screen id
+     * @return ShowDto
+     */
     @Override
     public ShowDto updateShow(ShowDto showDto, Integer theatreId, Integer screenId) {
 
@@ -111,6 +128,14 @@ public class ShowServiceImpl implements ShowService {
         return showDto;
     }
 
+    /**
+     * <p>
+     * This method deletes the Show Details
+     * </p>
+     *
+     * @param showId it contains show id
+     * @return ShowDto
+     */
     @Override
     public void removeShow(int showId) {
         Show show = showrepository.findByShowId(showId);
@@ -119,22 +144,53 @@ public class ShowServiceImpl implements ShowService {
 
     }
 
+    /**
+     * <p>
+     * This method gets the Show Details with given id
+     * </p>
+     *
+     * @param showId it contains show id
+     * @return ShowDto
+     */
     @Override
     public ShowDto getShowById(int showId) {
         return mapper.showToShowDto(showrepository.findByShowId(showId));
     }
 
+    /**
+     * <p>
+     * This method List all the Show Details
+     * </p>
+     *
+     * @return List<ShowDto>
+     */
     @Override
     public List<ShowDto> getAllShow() {
         return mapper.showListToShowSlimDtoList(showrepository.findAll());
     }
 
+    /**
+     * <p>
+     * This method List all the Screen Details by Theatre
+     * </p>
+     *
+     * @param theatreId it contains theatre id
+     * @return List<ShowDto>
+     */
     @Override
     public List<ShowDto> getShowByTheatreId(int theatreId) {
         return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreId));
 
     }
 
+    /**
+     * <p>
+     * This method List all the Screen Details by Date
+     * </p>
+     *
+     * @param date it contains date
+     * @return List<ShowDto>
+     */
     @Override
     public List<ShowDto> getShowsByDate(LocalDate date) throws NotFoundException {
         List<Show> shows = new ArrayList<>();

@@ -37,6 +37,15 @@ public class BookingServiceImpl implements BookingService {
         this.seatService = seatService;
     }
 
+    /**
+     * <p>
+     * This method is used to create Booking Details
+     * </p>
+     *
+     * @param bookingDto it contains booking dto objects
+     *
+     * @return BookingDto
+     */
     @Override
     public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
@@ -67,16 +76,39 @@ public class BookingServiceImpl implements BookingService {
         return mapper.bookingToBookingResponseDto(bookingRepository.save(booking));
     }
 
+    /**
+     * <p>
+     * This method List all the Booking Details
+     * </p>
+     *
+     * @return List<BookingDto>
+     */
     @Override
     public List<BookingDto> getAllBookings() {
         return bookingRepository.findAll().stream().map(mapper::bookingToBookingDto).collect(Collectors.toList());
     }
 
+    /**
+     * <p>
+     * This method get the Booking Details which matches the id
+     * </p>
+     *
+     * @param bookingId it contains booking id
+     * @return BookingDto
+     */
     @Override
     public BookingDto viewByBookingId(int bookingId) throws NotFoundException {
         return mapper.bookingToBookingDto(bookingRepository.findById(bookingId).get());
     }
 
+    /**
+     * <p>
+     * This method is used to cancel the Screen Details which matches the id
+     * </p>
+     *
+     * @param bookingId it contains booking dto object
+     * @return BookingDto
+     */
     @Override
     public BookingDto cancelBooking(int bookingId) throws NotFoundException {
         Booking booking = bookingRepository.findById(bookingId).get();
@@ -89,6 +121,14 @@ public class BookingServiceImpl implements BookingService {
         return mapper.bookingToBookingDto(booking);
     }
 
+    /**
+     * <p>
+     * This method is to calculate the total cost based on the given seat type
+     * </p>
+     *
+     * @param seats it contains list of seat objects
+     * @return double
+     */
     @Override
     public double calculateTotalCost(List<Seat> seats) {
         double amount = 0;

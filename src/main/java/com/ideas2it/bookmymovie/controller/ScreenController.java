@@ -15,6 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * <p>
+ * ScreenController will get the detail from admin to
+ * Create screen,List of all screens,view the screen with given Id,
+ * Update screen details.
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @RestController
 @RequestMapping("api/v1/screen")
 public class ScreenController {
@@ -27,9 +37,12 @@ public class ScreenController {
 
 
     /**
-     * @param screenDto
-     * @return addedScreen
-     * @throws NotFoundException
+     * <p>
+     * This method is used to create Screen Details
+     * </p>
+     *
+     * @param screenDto it contains screen dto object
+     * @return ScreenDto
      */
     @PostMapping
     public ScreenDto createScreen(@Valid @RequestBody ScreenDto screenDto) {
@@ -37,8 +50,11 @@ public class ScreenController {
     }
 
     /**
-     * @return screenList
-     * @throws NotFoundException
+     * <p>
+     * This method List all the Screen Details
+     * </p>
+     *
+     * @return List<ScreenDto>
      */
     @GetMapping
     public List<ScreenDto> viewScreenList() throws NotFoundException {
@@ -46,6 +62,14 @@ public class ScreenController {
 
     }
 
+    /**
+     * <p>
+     * This method gets the Screen Details which matches the id
+     * </p>
+     *
+     * @param screenId it contains screen id
+     * @return ScreenDto
+     */
     @GetMapping("/{screenId}")
     public ScreenDto viewScreen(@PathVariable int screenId) throws NotFoundException {
         //ScreenSlimDto screenDto = screenService.getScreenById(screenId);

@@ -20,17 +20,39 @@ public class RoleServiceImpl implements RoleService {
         this.mapper = mapper;
     }
 
-
+    /**
+     * <p>
+     * This method is used to create Role Details
+     * </p>
+     *
+     * @param roleDto it contains role dto objects
+     * @return RoleDto
+     */
     @Override
     public RoleDto createRole(RoleDto roleDto) {
         return mapper.roleToRoleDto(roleRepository.save(mapper.roleDtoToRole(roleDto)));
     }
 
+    /**
+     * <p>
+     * This method List all the Role Details
+     * </p>
+     *
+     * @return List<RoleDto>
+     */
     @Override
     public List<RoleDto> getAllRoles() {
         return roleRepository.findAll().stream().map(role -> mapper.roleToRoleDto(role)).collect(Collectors.toList());
     }
 
+    /**
+     * <p>
+     * This method gets Role Details which matches the role type
+     * </p>
+     *
+     * @param roleType it contains role type
+     * @return RoleSlimDto
+     */
     @Override
     public RoleDto getRoleByRoleType(String roleType) throws NotFoundException {
         return roleRepository.findUserByRoleType(roleType).map(role ->mapper.roleToRoleDto(role))
