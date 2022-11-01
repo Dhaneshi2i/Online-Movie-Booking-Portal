@@ -47,20 +47,6 @@ public class UserController {
     @PostMapping
     public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) {
         return userService.createUser(userDto);
-    }
-
-    /**
-     * <p>
-     * This method is used to create admin detail
-     * </p>
-     *
-     * @param userDto it contains user dto objects.
-     * @return UserDto
-     */
-    /*@PostMapping("/admin")
-    public UserSlimDto createAdmin(@Valid @RequestBody UserDto userDto) {
-        userDto.setRole(roleService.getRoleByRoleType("Admin"));
-        return userService.createUser(userDto);
     }*/
 
     /**

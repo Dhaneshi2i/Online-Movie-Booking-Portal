@@ -14,10 +14,9 @@ import java.time.LocalTime;
 public class ShowSlimDto {
 
     private LocalTime showStartTime;
-
     private LocalTime showEndTime;
-
     private LocalDate showDate;
-
     private MovieSlimDto movie;
+    private TheatreSlimDto theatre;
+    private ScreenSlimDto screen;
 }

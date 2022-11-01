@@ -4,6 +4,7 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
+import com.ideas2it.bookmymovie.dto.SeatTypeDto;
 import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.service.CastService;
@@ -30,17 +31,14 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/admin")
 public class AdminController {
 
-    private GenreService genreService;
-    private CastService castService;
-    private LanguageService languageService;
+    private final GenreService genreService;
+    private final CastService castService;
+    private final LanguageService languageService;
 
-    private SeatTypeService seatTypeService;
-
-    public AdminController(GenreService genreService, CastService castService, LanguageService languageService, SeatTypeService seatTypeService) {
+    public AdminController(GenreService genreService, CastService castService, LanguageService languageService) {
         this.genreService = genreService;
         this.castService = castService;
         this.languageService = languageService;
-        this.seatTypeService = seatTypeService;
     }
 
     /**
@@ -82,16 +80,4 @@ public class AdminController {
         return genreService.addGenre(genreDto);
     }
 
-    /**
-     * <p>
-     * This method is used to create seat type
-     * </p>
-     *
-     * @param seatType it contains genre dto objects
-     * @return seatType
-     */
-    @PostMapping("/seat-type")
-    public SeatType createSeatType(@Valid @RequestBody SeatType seatType) {
-        return seatTypeService.addSeatType(seatType);
-    }
 }

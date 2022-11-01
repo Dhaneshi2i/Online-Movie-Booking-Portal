@@ -32,17 +32,8 @@ import java.util.List;
 public class Cast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int castId;
-
-    @Column(name = "cast_name")
-    private String name;
-
-    @Column
-    private String role;
-
-    @ManyToMany(targetEntity=Movie.class, mappedBy = "casts", cascade = { CascadeType.ALL },fetch = FetchType.LAZY)
-    private List<Movie> movies = new ArrayList<>();
-
+    private String castName;
+    private String castRole;
 }
 

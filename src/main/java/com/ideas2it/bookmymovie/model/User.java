@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +33,6 @@ import java.sql.Timestamp;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-
     private int userId;
 
     private String userName;
@@ -45,13 +44,13 @@ public class User {
     private String password;
 
     @CreationTimestamp
-    private Timestamp createdDate;
+    private Timestamp createdOn;
 
     @UpdateTimestamp
-    private Timestamp updatedDate;
+    private Timestamp updatedOn;
     private boolean status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
 

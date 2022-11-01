@@ -56,7 +56,7 @@ public interface  BookingService {
      * @param seats it contains list of seat objects
      * @return double
      */
-    double calculateTotalCost(List<Seat> seats);
+    float calculateTotalCost(List<Seat> seats);
 
     //Booking cancelSeatBooking(int bookingId, int seatId);
 }

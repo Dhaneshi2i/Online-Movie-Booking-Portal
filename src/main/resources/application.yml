@@ -1,14 +1,6 @@
 spring.mvc.pathmatch.matching-strategy: ant_path_matcher
 server.port: 2022
 spring:
-  jpa:
-    hibernate.ddl-auto: update
-    show_sql: true
-    use_sql_comments: true
-    format_sql: true
-    event:
-      merge:
-        entity_copy_observer: allow
   database-platform=org:
     hibernate:
       dialect: MySQL5InnoDBDialect
@@ -16,7 +8,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost/book
     username: root
-    password: siva2001
+    password: dhanesh@22
   main:
     allow-circular-references: true
 

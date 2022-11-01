@@ -120,7 +120,7 @@ public class TheatreServiceImpl implements TheatreService {
      * @param movieId it contains movie id
      * @return List<TheatreDto>
      */
-    @Override
+    /*@Override
     public List<TheatreDto> findTheatresByMovieId(int movieId) throws NotFoundException {
         List<Theatre> theatreList = new ArrayList<>();
         Movie movie = mapper.movieDtoToMovie(movieService.getMovieById(movieId));
@@ -135,7 +135,7 @@ public class TheatreServiceImpl implements TheatreService {
             }
         }
         return mapper.theatreListToTheatreDtoList(theatreList);
-    }
+    }*/
 
     /**
      * <p>

@@ -32,13 +32,8 @@ import java.util.List;
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int languageId;
 
-    @Column
     private String name;
-
-    @ManyToMany(mappedBy = "languages", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    private List<Movie> movies = new ArrayList<>();
 
 }

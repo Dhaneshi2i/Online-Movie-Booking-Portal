@@ -16,10 +16,7 @@ import javax.validation.constraints.Pattern;
 public class UserSlimDto {
 
     private String userName;
-
     private long contactNumber;
-
     private String emailId;
-
     private RoleSlimDto role;
 }

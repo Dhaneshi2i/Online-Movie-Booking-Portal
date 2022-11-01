@@ -80,10 +80,10 @@ public class TheatreController {
      * @param movieId it contains movie id
      * @return List<TheatreDto>
      */
-    @GetMapping("/findByMovie/{movieId}")
+    /*@GetMapping("/findByMovie/{movieId}")
     public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId) {
         return theatreService.findTheatresByMovieId(movieId);
-    }
+    }*/
 
     /**
      * <p>
