@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.SeatDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.model.Seat;
 
@@ -75,6 +76,6 @@ public interface SeatService {
      * @param showId it contains show id
      * @return List<SeatDto>
      */
-    List<SeatDto> getSeatByShowId(int showId);
+    List<SeatSlimDto> getSeatByShowId(int showId);
 
 }

@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
-import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +46,7 @@ public class UserController {
     @PostMapping
     public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) {
         return userService.createUser(userDto);
-    }*/
+    }
 
     /**
      * <p>

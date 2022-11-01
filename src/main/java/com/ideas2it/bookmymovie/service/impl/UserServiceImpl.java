@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,13 +25,15 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepository;
-    private RoleService roleService;
-    private MapStructMapper mapper;
+    private final UserRepository userRepository;
+    private final RoleService roleService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final MapStructMapper mapper;
 
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, MapStructMapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder, MapStructMapper mapper) {
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.mapper = mapper;
     }
 
@@ -45,14 +48,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserSlimDto createUser(UserDto userDto) {
         User user = mapper.userDtoToUser(userDto);
-        //User contactNumber = userRepository.findUserByContactNumber(userDto.getContactNumber());
-//        if (userDto.getContactNumber() == userRepository.existsByContactNumber(user.getContactNumber())) {
-//            System.out.println("User already exist");
-//            return null;
-
-        if(this.userRepository.existsByContactNumber(user.getContactNumber())) {
+        if(userRepository.existsByContactNumber(user.getContactNumber())) {
             throw new UserAlreadyExistException("User mobile number already exist ");
         } else {
+            user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
             user.setRole(roleService.getRoleByRoleId(userDto.getRole().getRoleId()));
             return mapper.userToUserSlimDto(userRepository.save(user));
         }
@@ -111,8 +110,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);
-        System.out.print(userRepository.findByUserName(username).getUserName());
-        //Role role = new Role();
         if (user == null) {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("The user name is not found for this id");

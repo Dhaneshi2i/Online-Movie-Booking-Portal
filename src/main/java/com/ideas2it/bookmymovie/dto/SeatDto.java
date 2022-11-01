@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -16,9 +18,9 @@ public class SeatDto {
     private int seatId;
     @NotBlank
     private String seatNumber;
-    private SeatTypeDto type;
+    private SeatTypeDto seatType;
     @NotNull
-    private float price;
+    private float seatPrice;
 
 }
 

@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
-import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;

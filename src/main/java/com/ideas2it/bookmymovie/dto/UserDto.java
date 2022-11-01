@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ideas2it.bookmymovie.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -20,25 +21,22 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
+
     private int userId;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+    @Size(min = 3,max = 40,message = "userName should be only between 3 and 40 characters")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Use only alphabets")
     private String userName;
     @NotBlank
-    @Email
+    @Email(message = "Email should be valid")
     private String emailId;
     @NotNull
     private long contactNumber;
     @NotBlank
     @Size(max = 20, message = "Must be only between 20 characters")
     private String password;
-
     private RoleDto role;
-
     private boolean status;
-
 }
 
 

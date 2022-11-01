@@ -1,12 +1,13 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ideas2it.bookmymovie.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDto {
     private int movieId;
     @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")

@@ -16,6 +16,7 @@ import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Cast;
@@ -107,4 +108,6 @@ public interface MapStructMapper {
     SeatType seatTypeDtoToSeatType(SeatTypeDto seatTypeDto);
 
     SeatTypeDto seatTypeToSeatTypeDto(SeatType seatType);
+
+    List<SeatSlimDto> seatListToSeatSlimDtoList(List<Seat> seats);
 }

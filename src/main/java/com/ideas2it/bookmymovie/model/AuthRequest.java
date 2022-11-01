@@ -20,6 +20,5 @@ import java.io.Serializable;
 public class AuthRequest implements Serializable {
 
     private String userName;
-
     private String password;
 }

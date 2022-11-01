@@ -3,31 +3,33 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
-import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
-import com.ideas2it.bookmymovie.service.*;
+import com.ideas2it.bookmymovie.service.MovieService;
+import com.ideas2it.bookmymovie.service.ScreenService;
+import com.ideas2it.bookmymovie.service.SeatService;
+import com.ideas2it.bookmymovie.service.SeatTypeService;
+import com.ideas2it.bookmymovie.service.ShowService;
+import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class ShowServiceImpl implements ShowService {
-    private ShowRepository showrepository;
-    private TheatreService theatreService;
-    private ScreenService screenService;
-    private MovieService movieService;
-    private SeatService seatService;
-    private MapStructMapper mapper;
-    private SeatTypeService seatTypeService;
+    private final ShowRepository showrepository;
+    private final TheatreService theatreService;
+    private final ScreenService screenService;
+    private final MovieService movieService;
+    private final SeatService seatService;
+    private final MapStructMapper mapper;
+    private final SeatTypeService seatTypeService;
 
     public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
                            ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeService seatTypeService) {
