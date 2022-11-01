@@ -105,4 +105,6 @@ public interface MapStructMapper {
     SeatType seatTypeDtoToSeatType(SeatTypeDto seatTypeDto);
 
     SeatTypeDto seatTypeToSeatTypeDto(SeatType seatType);
+
+    List<SeatResponseDto> seatListToSeatResponseDtoList(List<Seat> seats);
 }

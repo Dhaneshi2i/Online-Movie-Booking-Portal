@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.SeatDto;
-import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Seat;
@@ -129,10 +129,10 @@ public class SeatServiceImpl implements SeatService {
      * @return List<SeatDto>
      */
     @Override
-    public List<SeatSlimDto> getSeatByShowId(int showId) {
+    public List<SeatResponseDto> getSeatByShowId(int showId) {
         Show show = mapper.showDtoToShow(showService.getShowById(showId));
         List<Seat> seats = seatRepository.findByShow(show);
-        return mapper.seatListToSeatSlimDtoList(seats);
+        return mapper.seatListToSeatResponseDtoList(seats);
     }
 
 }
