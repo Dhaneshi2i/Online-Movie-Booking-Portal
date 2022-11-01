@@ -7,6 +7,7 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
+import com.ideas2it.bookmymovie.repository.SeatTypeRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
@@ -28,16 +29,18 @@ public class ShowServiceImpl implements ShowService {
     private MovieService movieService;
     private SeatService seatService;
     private MapStructMapper mapper;
+    private SeatTypeRepository seatTypeRepository;
     private int SEAT_ID = 1;
 
     public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
-                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper) {
+                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeRepository seatTypeRepository) {
         this.showrepository = showrepository;
         this.theatreService = theatreService;
         this.screenService = screenService;
         this.movieService = movieService;
         this.seatService = seatService;
         this.mapper = mapper;
+        this.seatTypeRepository = seatTypeRepository;
     }
 
     /**
@@ -97,7 +100,10 @@ public class ShowServiceImpl implements ShowService {
                 seat.setShow(show);
                 seat.setShowDate(show.getShowDate());
                 seat.setShowStartTime(show.getShowStartTime());
-                seat.setSeatType();
+                for (SeatType typeOfSeat : seatTypeRepository.findAll()) {
+                    seat.setSeatType(typeOfSeat);
+                }
+
 
                 seatService.createSeat(seat);
                 //seats.add(seat);
