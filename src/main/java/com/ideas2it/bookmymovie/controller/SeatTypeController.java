@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.SeatTypeDto;
-import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.service.SeatTypeService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

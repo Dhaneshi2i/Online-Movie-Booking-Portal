@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.CastDto;
-import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
 
 public interface CastService {
 
@@ -13,7 +12,7 @@ public interface CastService {
      * @param castDto it contains cast dto objects
      * @return CastResponseDto
      */
-    CastResponseDto addCast(CastDto castDto);
+    CastDto addCast(CastDto castDto);
 
     /**
      * <p>

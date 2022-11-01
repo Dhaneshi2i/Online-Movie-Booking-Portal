@@ -1,28 +1,19 @@
-package com.ideas2it.bookmymovie.dto;
+package com.ideas2it.bookmymovie.dto.responseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class SeatTypeDto {
-
+@NoArgsConstructor
+public class SeatTypeResponseDto {
     private int seatTypeId;
-    @NotBlank
     private String seatType;
-    @NotNull
-    private int noOfColumns;
-    @NotNull
-    private int noOfRows;
-    @NotNull
     private float price;
 }

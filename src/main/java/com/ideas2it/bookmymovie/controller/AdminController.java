@@ -4,13 +4,10 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.CastDto;
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.dto.LanguageDto;
-import com.ideas2it.bookmymovie.dto.SeatTypeDto;
 import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
-import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
-import com.ideas2it.bookmymovie.service.SeatTypeService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +47,7 @@ public class AdminController {
      * @return CastResponseDto
      */
     @PostMapping("/cast")
-    public CastResponseDto createCast(@Valid @RequestBody CastDto castDto) {
+    public CastDto createCast(@Valid @RequestBody CastDto castDto) {
         return castService.addCast(castDto);
     }
 

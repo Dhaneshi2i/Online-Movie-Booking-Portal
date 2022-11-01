@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.CastDto;
-import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.repository.CastRepository;
@@ -27,8 +26,8 @@ public class CastServiceImpl implements CastService {
      * @return CastResponseDto
      */
     @Override
-    public CastResponseDto addCast(CastDto castDto) {
-        return mapper.castToCastResponseDto(castRepository.save(mapper.castDtoToCast(castDto)));
+    public CastDto addCast(CastDto castDto) {
+        return mapper.castToCastDto(castRepository.save(mapper.castDtoToCast(castDto)));
     }
 
     /**

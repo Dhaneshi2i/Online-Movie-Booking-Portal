@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,26 +33,20 @@ import java.util.List;
 @Entity
 @Table(name = "booking")
 public class Booking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int bookingId;
     private String transactionMode;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
     private Show show;
-
     private LocalDate bookingDate;
-
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus = BookingStatus.ONPROCESS;
-
     private float totalCost;
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<Seat> seats;
 
