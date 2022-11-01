@@ -3,39 +3,21 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
-<<<<<<< HEAD
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
-=======
-import com.ideas2it.bookmymovie.model.*;
->>>>>>> cbc8368 (code changes)
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.SeatService;
-import com.ideas2it.bookmymovie.service.SeatTypeService;
 import com.ideas2it.bookmymovie.service.ShowService;
-import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
-
-@Service
-public class ShowServiceImpl implements ShowService {
-    private final ShowRepository showrepository;
-    private final TheatreService theatreService;
-    private final ScreenService screenService;
-    private final MovieService movieService;
-    private final SeatService seatService;
-    private final MapStructMapper mapper;
-    private final SeatTypeService seatTypeService;
-=======
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -46,7 +28,6 @@ public class ShowServiceImpl implements ShowService {
     private MovieService movieService;
     private SeatService seatService;
     private MapStructMapper mapper;
->>>>>>> cbc8368 (code changes)
 
     public ShowServiceImpl(ShowRepository showrepository,
                            ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper) {
