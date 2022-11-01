@@ -25,5 +25,9 @@ public class ScreenDto {
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String screenName;
     private List<SeatTypeDto> typesOfSeats;
+    @NotNull
+    private int noOfRows;
+    @NotNull
+    private int noOfColumns;
     private TheatreDto theatre;
 }

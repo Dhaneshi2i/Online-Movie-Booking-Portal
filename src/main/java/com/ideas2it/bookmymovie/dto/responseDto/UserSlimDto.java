@@ -14,13 +14,9 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class UserSlimDto {
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+
     private String userName;
-    @NotNull
     private long contactNumber;
-    @NotNull
-    @Email
     private String emailId;
     private RoleSlimDto role;
 }

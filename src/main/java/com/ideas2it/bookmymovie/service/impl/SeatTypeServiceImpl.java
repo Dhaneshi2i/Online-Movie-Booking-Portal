@@ -7,6 +7,8 @@ import com.ideas2it.bookmymovie.repository.SeatTypeRepository;
 import com.ideas2it.bookmymovie.service.SeatTypeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SeatTypeServiceImpl implements SeatTypeService {
     private SeatTypeRepository seatTypeRepository;
@@ -27,5 +29,9 @@ public class SeatTypeServiceImpl implements SeatTypeService {
     public SeatType getSeatTypeBySeatTypeId(int seatTypeId) {
        // if (seatTypeRepository.existsById(seatTypeId)) {
          return seatTypeRepository.findBySeatTypeId(seatTypeId);
+    }
+
+    public List<SeatType> getAll() {
+        return seatTypeRepository.findAll();
     }
 }

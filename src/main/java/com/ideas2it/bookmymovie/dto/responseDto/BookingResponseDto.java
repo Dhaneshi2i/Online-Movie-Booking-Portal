@@ -14,13 +14,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class BookingResponseDto {
+
     private int bookingId;
     private UserSlimDto user;
     private ShowSlimDto show;
-    @NotNull
     private LocalDate bookingDate;
-    @NotEmpty
     private List<SeatSlimDto> seats;
-    @NotNull
     private double totalCost;
 }

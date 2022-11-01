@@ -8,13 +8,8 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
-import com.ideas2it.bookmymovie.repository.SeatTypeRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
-import com.ideas2it.bookmymovie.service.MovieService;
-import com.ideas2it.bookmymovie.service.ScreenService;
-import com.ideas2it.bookmymovie.service.SeatService;
-import com.ideas2it.bookmymovie.service.ShowService;
-import com.ideas2it.bookmymovie.service.TheatreService;
+import com.ideas2it.bookmymovie.service.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,17 +27,17 @@ public class ShowServiceImpl implements ShowService {
     private MovieService movieService;
     private SeatService seatService;
     private MapStructMapper mapper;
-    private SeatTypeRepository seatTypeRepository;
+    private SeatTypeService seatTypeService;
 
     public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
-                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeRepository seatTypeRepository) {
+                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeService seatTypeService) {
         this.showrepository = showrepository;
         this.theatreService = theatreService;
         this.screenService = screenService;
         this.movieService = movieService;
         this.seatService = seatService;
         this.mapper = mapper;
-        this.seatTypeRepository = seatTypeRepository;
+        this.seatTypeService = seatTypeService;
     }
 
     /**

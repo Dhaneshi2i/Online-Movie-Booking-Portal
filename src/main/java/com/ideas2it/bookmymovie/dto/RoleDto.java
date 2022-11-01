@@ -14,8 +14,9 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto {
+
+    private int roleId;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String roleType;
-
 }

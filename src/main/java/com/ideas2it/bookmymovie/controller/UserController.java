@@ -47,7 +47,7 @@ public class UserController {
     @PostMapping
     public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) {
         return userService.createUser(userDto);
-    }
+    }*/
 
     /**
      * <p>
