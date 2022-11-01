@@ -82,6 +82,14 @@ public class AdminController {
         return genreService.addGenre(genreDto);
     }
 
+    /**
+     * <p>
+     * This method is used to create seat type
+     * </p>
+     *
+     * @param seatType it contains genre dto objects
+     * @return seatType
+     */
     @PostMapping("/seat-type")
     public SeatType createSeatType(@Valid @RequestBody SeatType seatType) {
         return seatTypeService.addSeatType(seatType);

@@ -26,7 +26,6 @@ public class ScreenDto {
     private int noOfRows;
     @NotNull
     private int noOfColumns;
-    @NotNull
     private TheatreDto theatre;
 
 }

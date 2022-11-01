@@ -12,10 +12,6 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class CastResponseDto {
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String name;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String role;
 }

@@ -16,13 +16,9 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeatSlimDto {
-    @NotBlank
-    @Pattern(regexp = Constants.ALPHA_NUMERIC_REGEX, message = "Only letter are valid")
     private String seatNumber;
 
-    @NotNull
     private double price;
 
-    @NotNull
     private SeatStatus seatStatus;
 }

@@ -12,12 +12,12 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 public class ShowSlimDto {
-    @NotNull
+
     private LocalTime showStartTime;
-    @NotNull
+
     private LocalTime showEndTime;
-    @NotNull
+
     private LocalDate showDate;
-    @NotNull
+
     private MovieSlimDto movie;
 }

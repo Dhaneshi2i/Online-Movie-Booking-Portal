@@ -42,7 +42,7 @@ public class BookingController {
      *
      * @return BookingDto
      */
-    @PostMapping("/bookTicket")
+    @PostMapping
     public BookingResponseDto bookTicket(@Valid @RequestBody BookingDto bookingDto) {
         return bookingService.createBooking(bookingDto);
     }

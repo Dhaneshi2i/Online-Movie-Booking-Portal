@@ -3,9 +3,11 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
+import com.ideas2it.bookmymovie.exception.UserAlreadyExistException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
+import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,10 +25,12 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+    private RoleService roleService;
     private MapStructMapper mapper;
 
-    public UserServiceImpl(UserRepository userRepository, MapStructMapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, MapStructMapper mapper) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
         this.mapper = mapper;
     }
 
@@ -40,7 +44,18 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserSlimDto createUser(UserDto userDto) {
-        return mapper.userToUserSlimDto(userRepository.save(mapper.userDtoToUser(userDto)));
+        User user = mapper.userDtoToUser(userDto);
+        //User contactNumber = userRepository.findUserByContactNumber(userDto.getContactNumber());
+//        if (userDto.getContactNumber() == userRepository.existsByContactNumber(user.getContactNumber())) {
+//            System.out.println("User already exist");
+//            return null;
+
+        if(this.userRepository.existsByContactNumber(user.getContactNumber())) {
+            throw new UserAlreadyExistException("User mobile number already exist ");
+        } else {
+            user.setRole(roleService.getRoleByRoleId(userDto.getRole().getRoleId()));
+            return mapper.userToUserSlimDto(userRepository.save(user));
+        }
     }
 
     /**
@@ -68,7 +83,6 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById(int id) {
         return userRepository.findById(id).map(mapper::userToUserDto)
                 .orElseThrow(() ->new NotFoundException("No user found"));
-
     }
 
     /**
