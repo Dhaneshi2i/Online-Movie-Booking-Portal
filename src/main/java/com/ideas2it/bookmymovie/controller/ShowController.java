@@ -3,14 +3,7 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -55,14 +48,12 @@ public class ShowController {
      * </p>
      *
      * @param showDto   it contains show dto objects
-     * @param theatreId it contains theatre id
-     * @param screenId  it contains screen id
+     * @param showId it contains theatre id
      * @return ShowDto
      */
-    @PutMapping
-    public ShowDto updateShow(@RequestBody ShowDto showDto, @RequestParam int theatreId,
-                              @RequestParam int screenId) {
-        return showService.updateShow(showDto, theatreId, screenId);
+    @PatchMapping("{showId}")
+    public List<ShowDto> updateShow(@RequestBody ShowDto showDto,@PathVariable int showId) {
+        return showService.updateShow(showDto, showId);
     }
 
     /**
@@ -98,7 +89,7 @@ public class ShowController {
      * @param theatreId it contains theatre id
      * @return List<ShowDto>
      */
-    @GetMapping("/show_theatre/{theatreId}")
+    @GetMapping("/show-theatre/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
         return showService.getShowByTheatreId(theatreId);
     }

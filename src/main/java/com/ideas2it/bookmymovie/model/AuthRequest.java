@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class AuthRequest implements Serializable {
 
     private String userName;

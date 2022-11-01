@@ -5,17 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * <p>
+ * Booking Dto class contains the booking dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class BookingDto {
 

@@ -23,11 +23,10 @@ public interface ShowService {
      * </p>
      *
      * @param showDto it contains show dto objects
-     * @param theatreId it contains theatre id
-     * @param screenId it contains screen id
+     * @param showId it contains theatre id
      * @return ShowDto
      */
-    ShowDto updateShow(ShowDto showDto, Integer theatreId, Integer screenId);
+    List<ShowDto> updateShow(ShowDto showDto, int showId);
 
     /**
      * <p>

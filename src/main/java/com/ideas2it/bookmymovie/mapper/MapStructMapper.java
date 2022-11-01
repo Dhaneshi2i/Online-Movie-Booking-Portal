@@ -12,12 +12,9 @@ import com.ideas2it.bookmymovie.dto.SeatTypeDto;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.dto.UserDto;
-import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
-import com.ideas2it.bookmymovie.dto.responseDto.CastResponseDto;
-import com.ideas2it.bookmymovie.dto.responseDto.MovieSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.SeatSlimDto;
-import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
+
+import com.ideas2it.bookmymovie.dto.responseDto.*;
+
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Cast;
 import com.ideas2it.bookmymovie.model.Genre;
@@ -49,7 +46,7 @@ public interface MapStructMapper {
 
     List<SeatDto> seatListToSeatDtoList(List<Seat> seats);
 
-    ScreenSlimDto screenToScreenSlimDto(Screen screen);
+    ScreenResponseDto screenToScreenResponseDto(Screen screen);
 
     Screen screenDtoToScreen(ScreenDto screenDto);
 
@@ -63,7 +60,7 @@ public interface MapStructMapper {
 
     Role roleDtoToRole(RoleDto roleDto);
 
-    UserSlimDto userToUserSlimDto(User user);
+    UserResponseDto userToUserResponseDto(User user);
 
     BookingDto bookingToBookingDto(Booking booking);
 
@@ -87,11 +84,11 @@ public interface MapStructMapper {
 
     ShowDto showToShowDto(Show show);
 
-    MovieSlimDto movieToMovieSlimDto(Movie movie);
+    MovieResponseDto movieToMovieResponseDto(Movie movie);
 
     List<ShowDto> showListToShowDtoList(List<Show> show);
 
-    List<ShowDto> showListToShowSlimDtoList(List<Show> shows);
+    List<ShowDto> showListToShowResponseDtoList(List<Show> shows);
 
     CastResponseDto castToCastResponseDto(Cast cast);
 
@@ -101,13 +98,11 @@ public interface MapStructMapper {
 
     List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
 
-    Screen screenSlimDtoToScreen(ScreenSlimDto screen);
+    Screen screenResponseDtoToScreen(ScreenResponseDto screen);
 
-    ScreenSlimDto screenDtoTOScreenSlimDto(ScreenDto screenDto);
+    ScreenResponseDto screenDtoTOScreenResponseDto(ScreenDto screenDto);
 
     SeatType seatTypeDtoToSeatType(SeatTypeDto seatTypeDto);
 
     SeatTypeDto seatTypeToSeatTypeDto(SeatType seatType);
-
-    List<SeatSlimDto> seatListToSeatSlimDtoList(List<Seat> seats);
 }

@@ -32,11 +32,6 @@ public class SeatController {
         this.seatService = seatService;
     }
 
-    /*@PostMapping
-    public SeatDto addSeat(@Valid @RequestBody SeatDto seatDto) {
-        return seatService.createSeat(seatDto);
-    }*/
-
     /**
      * <p>
      * This method List all the Seat Details

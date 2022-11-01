@@ -10,16 +10,20 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 /**
- * A DTO for the {@link com.ideas2it.bookmymovie.model.Theatre} entity
- */
+ * <p>
+ * Theatre Dto class contains the theatre dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class TheatreDto {
     private int theatreId;
-    @NotBlank(message = "Theatre name should not be empty")
+    @NotBlank(message = "Please, Enter theatre name. Theatre name should not be empty")
     private String theatreName;
-    @NotBlank(message = "Theatre location should not empty")
+    @NotBlank(message = "Please, Enter theatre city. Theatre location should not empty")
     private String theatreCity;
 }

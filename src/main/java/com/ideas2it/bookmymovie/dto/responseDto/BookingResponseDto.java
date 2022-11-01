@@ -7,15 +7,22 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * <p>
+ * Booking Response Dto class contains the required data to display.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
 @NoArgsConstructor
 public class BookingResponseDto {
 
     private int bookingId;
-    private UserSlimDto user;
-    private ShowSlimDto show;
+    private UserResponseDto user;
+    private ShowResponseDto show;
     private LocalDate bookingDate;
-    private List<SeatSlimDto> seats;
+    private List<SeatResponseDto> seats;
     private double totalCost;
 }

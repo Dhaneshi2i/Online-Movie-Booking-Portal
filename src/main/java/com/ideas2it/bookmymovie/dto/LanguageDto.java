@@ -11,15 +11,20 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-
+/**
+ * <p>
+ * Language Dto class contains the language dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class LanguageDto {
     private int languageId;
     @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid language")
     private String name;
 
 }

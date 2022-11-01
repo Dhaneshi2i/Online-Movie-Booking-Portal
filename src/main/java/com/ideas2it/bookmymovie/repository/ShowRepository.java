@@ -13,4 +13,5 @@ public interface ShowRepository extends JpaRepository<Show, Integer> {
 	List<Show> getAllByTheatreId(@Param("id") int id);
 
 
+    List<Show> findAllByStatus(boolean status);
 }

@@ -53,6 +53,7 @@ public class RoleServiceImpl implements RoleService {
      *
      * @param roleType it contains role type
      * @return RoleSlimDto
+     *
      */
     @Override
     public RoleDto getRoleByRoleType(String roleType) throws NotFoundException {

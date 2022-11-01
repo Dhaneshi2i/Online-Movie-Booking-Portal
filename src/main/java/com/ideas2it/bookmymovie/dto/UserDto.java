@@ -15,25 +15,30 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * A DTO for the {@link com.ideas2it.bookmymovie.model.User} entity
- */
+ * <p>
+ * User Dto class contains the user dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class UserDto {
 
     private int userId;
+
     @Size(min = 3,max = 40,message = "userName should be only between 3 and 40 characters")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Use only alphabets")
     private String userName;
     @NotBlank
-    @Email(message = "Email should be valid")
+    @Email(message = "Please, Enter valid user email id")
     private String emailId;
     @NotNull
     private long contactNumber;
     @NotBlank
-    @Size(max = 20, message = "Must be only between 20 characters")
+    @Size(max = 20, message = "Please, Enter valid password")
     private String password;
     private RoleDto role;
     private boolean status;

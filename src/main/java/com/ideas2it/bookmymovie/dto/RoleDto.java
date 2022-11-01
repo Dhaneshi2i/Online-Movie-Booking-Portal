@@ -10,16 +10,21 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
+/**
+ * <p>
+ * Role Dto class contains the role dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto {
-
     private int roleId;
     @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid role")
     private String roleType;
 }

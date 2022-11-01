@@ -12,15 +12,22 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
+/**
+ * <p>
+ * Screen Dto class contains the screen dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+
 public class ScreenDto {
 
     private int screenId;
     @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid screen name")
     private String screenName;
     private List<SeatTypeDto> typesOfSeats;
     private TheatreDto theatre;
