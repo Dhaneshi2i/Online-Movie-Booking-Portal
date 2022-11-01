@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
+    Role findByRoleId(int roleId);
     Optional<Role> findUserByRoleType(String roleType);
 }

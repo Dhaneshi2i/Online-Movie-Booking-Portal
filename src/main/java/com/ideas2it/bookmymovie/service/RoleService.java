@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.RoleDto;
+import com.ideas2it.bookmymovie.model.Role;
 
 import java.util.List;
 
@@ -34,4 +35,6 @@ public interface RoleService {
      * @return RoleSlimDto
      */
     RoleDto getRoleByRoleType(String roleType);
+
+    Role getRoleByRoleId(int roleId);
 }

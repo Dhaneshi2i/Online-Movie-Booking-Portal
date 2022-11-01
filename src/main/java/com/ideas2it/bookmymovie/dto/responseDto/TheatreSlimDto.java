@@ -12,10 +12,8 @@ import javax.validation.constraints.Pattern;
 @Setter
 @Component
 public class TheatreSlimDto {
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+
     private String theatreName;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+
     private String theatreCity;
 }

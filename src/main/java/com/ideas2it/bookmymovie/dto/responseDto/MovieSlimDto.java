@@ -12,7 +12,5 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class MovieSlimDto {
-    @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String movieName;
 }

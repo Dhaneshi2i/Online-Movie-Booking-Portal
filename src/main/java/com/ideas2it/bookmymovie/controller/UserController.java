@@ -44,9 +44,8 @@ public class UserController {
      * @param userDto it contains user dto objects.
      * @return UserDto
      */
-    @PostMapping("/customer")
+    @PostMapping
     public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) {
-        userDto.setRole(roleService.getRoleByRoleType("Customer"));
         return userService.createUser(userDto);
     }
 
@@ -58,11 +57,11 @@ public class UserController {
      * @param userDto it contains user dto objects.
      * @return UserDto
      */
-    @PostMapping("/admin")
+    /*@PostMapping("/admin")
     public UserSlimDto createAdmin(@Valid @RequestBody UserDto userDto) {
         userDto.setRole(roleService.getRoleByRoleType("Admin"));
         return userService.createUser(userDto);
-    }
+    }*/
 
     /**
      * <p>

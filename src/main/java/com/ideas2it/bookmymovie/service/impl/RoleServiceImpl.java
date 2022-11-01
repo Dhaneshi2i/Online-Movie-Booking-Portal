@@ -3,6 +3,7 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.RoleDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Role;
 import com.ideas2it.bookmymovie.repository.RoleRepository;
 import com.ideas2it.bookmymovie.service.RoleService;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,10 @@ public class RoleServiceImpl implements RoleService {
     public RoleDto getRoleByRoleType(String roleType) throws NotFoundException {
         return roleRepository.findUserByRoleType(roleType).map(role ->mapper.roleToRoleDto(role))
                 .orElseThrow(() ->new NotFoundException("No role found"));
+    }
+
+    @Override
+    public Role getRoleByRoleId(int roleId) {
+        return roleRepository.findByRoleId(roleId);
     }
 }

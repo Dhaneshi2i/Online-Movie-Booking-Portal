@@ -18,9 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookingDto {
-    @NotBlank
     private UserDto user;
-    @NotBlank
     private ShowDto show;
     private LocalDate bookingDate;
     @NotBlank
