@@ -8,10 +8,15 @@ import lombok.Setter;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-
+/**
+ * <p>
+ * Cast Dto class contains the cast dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class CastDto {
     private int castId;

@@ -3,10 +3,14 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+<<<<<<< HEAD
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
+=======
+import com.ideas2it.bookmymovie.model.*;
+>>>>>>> cbc8368 (code changes)
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
@@ -20,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -30,16 +35,26 @@ public class ShowServiceImpl implements ShowService {
     private final SeatService seatService;
     private final MapStructMapper mapper;
     private final SeatTypeService seatTypeService;
+=======
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-    public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
-                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeService seatTypeService) {
+@Service
+public class ShowServiceImpl implements ShowService {
+    private ShowRepository showrepository;
+    private ScreenService screenService;
+    private MovieService movieService;
+    private SeatService seatService;
+    private MapStructMapper mapper;
+>>>>>>> cbc8368 (code changes)
+
+    public ShowServiceImpl(ShowRepository showrepository,
+                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper) {
         this.showrepository = showrepository;
-        this.theatreService = theatreService;
         this.screenService = screenService;
         this.movieService = movieService;
         this.seatService = seatService;
         this.mapper = mapper;
-        this.seatTypeService = seatTypeService;
     }
 
     /**
@@ -52,14 +67,14 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     @Transactional
-    public ShowDto createShow(ShowDto showDto){
+    public ShowDto createShow(ShowDto showDto) {
         Show show = new Show();
         show.setShowDate(showDto.getShowDate());
         show.setShowStartTime(showDto.getShowStartTime());
         show.setShowEndTime(showDto.getShowEndTime());
         show.setScreen(mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId())));
         show.setTheatre(mapper.theatreDtoToTheatre(screenService.getTheatreByScreenId(showDto
-                                                                                   .getTheatre().getTheatreId())));
+                .getTheatre().getTheatreId())));
         show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
         showrepository.save(show);
         createSeat(show);
@@ -68,17 +83,17 @@ public class ShowServiceImpl implements ShowService {
 
     private void createSeat(Show show) {
 
-        char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
-                'v','w','x','y','z'};
+        char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+                'v', 'w', 'x', 'y', 'z'};
         for (SeatType seatType : show.getScreen().getTypesOfSeats()) {
             int row = seatType.getNoOfRows();
             int column = seatType.getNoOfColumns();
-            for (int i=0;i<row;i++) {
-                for (int j=1;j<column;j++) {
+            for (int i = 0; i < row; i++) {
+                for (int j = 1; j < column; j++) {
                     Seat seat = new Seat();
                     seat.setSeatType(seatType);
                     seat.setSeatPrice(seatType.getPrice());
-                    seat.setSeatNumber(alphabet[i]+""+j);
+                    seat.setSeatNumber(alphabet[i] + "" + j);
                     seat.setSeatStatus(SeatStatus.AVAILABLE);
                     seat.setScreen(show.getScreen());
                     seat.setShow(show);
@@ -96,24 +111,19 @@ public class ShowServiceImpl implements ShowService {
      * </p>
      *
      * @param showDto it contains show dto objects
-     * @param theatreId it contains theatre id
-     * @param screenId it contains screen id
+     * @param showId  it contains screen id
      * @return ShowDto
      */
     @Override
-    public ShowDto updateShow(ShowDto showDto, Integer theatreId, Integer screenId) {
-
-        if (theatreId != null) {
-            showDto.setTheatre(theatreService.findTheatreById(theatreId));
+    public List<ShowDto> updateShow(ShowDto showDto, int showId) {
+        Optional<Show> show = showrepository.findById(showId);
+        if (show.isPresent()) {
+            show.get().setStatus(true);
+            showrepository.save(show.get());
         }
-        if (screenId != null) {
-            showDto.setScreen(mapper.screenDtoTOScreenSlimDto(screenService.getScreenById(screenId)));
-        }
-
-        Show show = mapper.showDtoToShow(showDto);
-        showDto = mapper.showToShowDto(showrepository.saveAndFlush(show));
-        return showDto;
+        return mapper.showListToShowDtoList(showrepository.findAllByStatus(true));
     }
+
 
     /**
      * <p>
@@ -153,7 +163,8 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     public List<ShowDto> getAllShow() {
-        return mapper.showListToShowSlimDtoList(showrepository.findAll());
+        return showrepository.findAllByStatus(false).stream().
+                map(mapper::showToShowDto).collect(Collectors.toList());
     }
 
     /**
@@ -167,7 +178,6 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public List<ShowDto> getShowByTheatreId(int theatreId) {
         return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreId));
-
     }
 
     /**

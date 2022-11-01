@@ -80,8 +80,8 @@ public class ScreenController {
      * @param screenId
      * @throws NotFoundException
      */
-    @PatchMapping
-    public ScreenDto updateScreen(@RequestParam Integer screenId) {
+    @PatchMapping("/{screenId}")
+    public ScreenDto updateScreen(@PathVariable int screenId) {
         ScreenDto screenDto = screenService.updateScreenById(screenId);
         return screenDto;
     }

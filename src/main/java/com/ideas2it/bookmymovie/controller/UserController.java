@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
-import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +44,7 @@ public class UserController {
      * @return UserDto
      */
     @PostMapping
-    public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) {
+    public UserResponseDto createCustomer(@Valid @RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 
@@ -56,7 +56,7 @@ public class UserController {
      * @return List<UserDto>
      */
     @GetMapping
-    public List<UserSlimDto> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();
     }
 

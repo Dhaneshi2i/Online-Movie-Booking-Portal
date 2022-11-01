@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
-import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.exception.UserAlreadyExistException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
@@ -46,14 +46,14 @@ public class UserServiceImpl implements UserService {
      * @return UserDto
      */
     @Override
-    public UserSlimDto createUser(UserDto userDto) {
+    public UserResponseDto createUser(UserDto userDto) {
         User user = mapper.userDtoToUser(userDto);
         if(userRepository.existsByContactNumber(user.getContactNumber())) {
             throw new UserAlreadyExistException("User mobile number already exist ");
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
             user.setRole(roleService.getRoleByRoleId(userDto.getRole().getRoleId()));
-            return mapper.userToUserSlimDto(userRepository.save(user));
+            return mapper.userToUserResponseDto(userRepository.save(user));
         }
     }
 
@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService {
      * @return List<UserDto>
      */
     @Override
-    public List<UserSlimDto> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return userRepository.findAllByStatus(false).stream().
-                map(mapper::userToUserSlimDto).collect(Collectors.toList());
+                map(mapper::userToUserResponseDto).collect(Collectors.toList());
     }
 
     /**

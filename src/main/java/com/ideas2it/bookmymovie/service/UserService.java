@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
-import com.ideas2it.bookmymovie.dto.responseDto.UserSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface UserService extends UserDetailsService {
      * @param userDto it contains user dto objects.
      * @return UserDto
      */
-    UserSlimDto createUser(UserDto userDto);
+    UserResponseDto createUser(UserDto userDto);
 
     /**
      * <p>
@@ -25,7 +25,7 @@ public interface UserService extends UserDetailsService {
      *
      * @return List<UserDto>
      */
-    List<UserSlimDto> getAllUsers();
+    List<UserResponseDto> getAllUsers();
 
     /**
      * <p>

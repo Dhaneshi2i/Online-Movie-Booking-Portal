@@ -10,9 +10,15 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * <p>
+ * Seat Dto class contains the seat dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class SeatDto {
     private int seatId;

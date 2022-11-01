@@ -25,7 +25,6 @@ import java.sql.Timestamp;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name="users")

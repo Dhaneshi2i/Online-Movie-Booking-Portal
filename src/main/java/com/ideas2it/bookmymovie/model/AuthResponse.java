@@ -16,8 +16,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class AuthResponse implements Serializable {
-
+    public class AuthResponse implements Serializable {
         private String webToken;
     }

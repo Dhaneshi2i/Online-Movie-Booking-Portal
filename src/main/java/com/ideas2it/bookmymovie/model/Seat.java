@@ -30,7 +30,6 @@ import java.time.LocalTime;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "seats")
@@ -59,14 +58,11 @@ public class Seat {
     private Show show;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "seat_status")
     private SeatStatus seatStatus = SeatStatus.AVAILABLE;
 
     @CreationTimestamp
-    @Column(name = "created_date")
     private Timestamp createdOn;
 
     @UpdateTimestamp
-    @Column(name = "modified_date")
     private Timestamp updatedOn;
 }

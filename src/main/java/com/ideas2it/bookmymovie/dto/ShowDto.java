@@ -7,7 +7,9 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.ideas2it.bookmymovie.dto.responseDto.ScreenSlimDto;
+import com.ideas2it.bookmymovie.dto.responseDto.MovieResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +20,15 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * <p>
+ * Show Dto class contains the show dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class ShowDto {
     private int showId;
@@ -43,9 +51,9 @@ public class ShowDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime showEndTime;
 
-    private MovieDto movie;
+    private MovieResponseDto movie;
 
-    private TheatreDto theatre;
+    private TheatreResponseDto theatre;
 
-    private ScreenSlimDto screen;
+    private ScreenResponseDto screen;
 }

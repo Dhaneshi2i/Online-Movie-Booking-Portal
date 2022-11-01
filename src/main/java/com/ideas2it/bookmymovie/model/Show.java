@@ -26,7 +26,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "shows")
@@ -54,6 +53,5 @@ public class Show {
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
-    private boolean Status;
-
+    private boolean status;
 }

@@ -17,14 +17,20 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * Movie Dto class contains the movie dto data.
+ * </p>
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ **/
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class MovieDto {
     private int movieId;
     @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid movie name")
     private String movieName;
     @NotNull(message = "Please, Enter the movie duration in correct format(HH:mm)")
     private LocalTime duration;

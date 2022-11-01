@@ -19,7 +19,6 @@ import javax.persistence.Table;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "genre")
@@ -28,5 +27,6 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int genreId;
+
     private String genreName;
 }
