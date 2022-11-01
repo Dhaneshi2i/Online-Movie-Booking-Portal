@@ -14,9 +14,9 @@ spring:
       dialect: MySQL5InnoDBDialect
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/book_movie
+    url: jdbc:mysql://localhost/book
     username: root
-    password: dhanesh@22
+    password: siva2001
   main:
     allow-circular-references: true
 

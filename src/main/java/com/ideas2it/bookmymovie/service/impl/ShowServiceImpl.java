@@ -7,6 +7,7 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
+import com.ideas2it.bookmymovie.repository.SeatTypeRepository;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
@@ -28,16 +29,18 @@ public class ShowServiceImpl implements ShowService {
     private MovieService movieService;
     private SeatService seatService;
     private MapStructMapper mapper;
+    private SeatTypeRepository seatTypeRepository;
     private int SEAT_ID = 1;
 
     public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
-                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper) {
+                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeRepository seatTypeRepository) {
         this.showrepository = showrepository;
         this.theatreService = theatreService;
         this.screenService = screenService;
         this.movieService = movieService;
         this.seatService = seatService;
         this.mapper = mapper;
+        this.seatTypeRepository = seatTypeRepository;
     }
 
     /**
@@ -69,24 +72,25 @@ public class ShowServiceImpl implements ShowService {
         int column = show.getScreen().getNoOfColumns();
         //int row = screen.getNoOfRows();
         //int column = screen.getNoOfColumns();
+        Seat seat = new Seat();
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
                                             'v','w','x','y','z'};
 //        int k = 0;
         for (int i=0; i<row;i++) {
-            Seat seat = new Seat();
-            if (i <= 3) {
-                seat.setSeatType(SeatType.BALCONY);
-                seat.setPrice(200);
-            } else if (i < 7) {
-                seat.setSeatType(SeatType.GOLD);
-                seat.setPrice(170);
-            } else if (i < 11){
-                seat.setSeatType(SeatType.SILVER);
-                seat.setPrice(150);
-            } else {
-                seat.setSeatType(SeatType.PLATINUM);
-                seat.setPrice(120);
-            }
+//            Seat seat = new Seat();
+//            if (i <= 3) {
+//                seat.setSeatType(SeatType.BALCONY);
+//                seat.setPrice(200);
+//            } else if (i < 7) {
+//                seat.setSeatType(SeatType.GOLD);
+//                seat.setPrice(170);
+//            } else if (i < 11){
+//                seat.setSeatType(SeatType.SILVER);
+//                seat.setPrice(150);
+//            } else {
+//                seat.setSeatType(SeatType.PLATINUM);
+//                seat.setPrice(120);
+//            }
             for (int j=1;j<=column;j++) {
                 Random random = new Random();
                 seat.setSeatId(SEAT_ID + random.nextInt() + show.getShowId());
@@ -96,6 +100,11 @@ public class ShowServiceImpl implements ShowService {
                 seat.setShow(show);
                 seat.setShowDate(show.getShowDate());
                 seat.setShowStartTime(show.getShowStartTime());
+                for (SeatType typeOfSeat : seatTypeRepository.findAll()) {
+                    seat.setSeatType(typeOfSeat);
+                }
+
+
                 seatService.createSeat(seat);
                 //seats.add(seat);
             }

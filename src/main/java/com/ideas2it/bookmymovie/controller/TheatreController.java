@@ -55,7 +55,7 @@ public class TheatreController {
      * @return List<TheatreDto>
      */
     @GetMapping
-    public List<TheatreDto> getAllTheatres() throws NotFoundException {
+    public List<TheatreDto> getAllTheatres() {
         return theatreService.getAllTheatre();
     }
 
@@ -68,8 +68,7 @@ public class TheatreController {
      * @return TheatreDto
      */
     @GetMapping("/{theatreId}")
-    public TheatreDto findTheatreById(@PathVariable int theatreId)
-            throws  NotFoundException {
+    public TheatreDto findTheatreById(@PathVariable int theatreId) {
         return theatreService.findTheatreById(theatreId);
     }
 
@@ -82,8 +81,7 @@ public class TheatreController {
      * @return List<TheatreDto>
      */
     @GetMapping("/findByMovie/{movieId}")
-    public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId)
-            throws  NotFoundException {
+    public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId) {
         return theatreService.findTheatresByMovieId(movieId);
     }
 

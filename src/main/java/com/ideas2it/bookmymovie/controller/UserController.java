@@ -28,8 +28,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
-    private final UserService userService;
-    private final RoleService roleService;
+    private UserService userService;
+    private RoleService roleService;
 
     public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
@@ -45,7 +45,7 @@ public class UserController {
      * @return UserDto
      */
     @PostMapping("/customer")
-    public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) throws NotFoundException {
+    public UserSlimDto createCustomer(@Valid @RequestBody UserDto userDto) {
         userDto.setRole(roleService.getRoleByRoleType("Customer"));
         return userService.createUser(userDto);
     }
@@ -59,7 +59,7 @@ public class UserController {
      * @return UserDto
      */
     @PostMapping("/admin")
-    public UserSlimDto createAdmin(@Valid @RequestBody UserDto userDto) throws NotFoundException {
+    public UserSlimDto createAdmin(@Valid @RequestBody UserDto userDto) {
         userDto.setRole(roleService.getRoleByRoleType("Admin"));
         return userService.createUser(userDto);
     }
@@ -72,7 +72,7 @@ public class UserController {
      * @return List<UserDto>
      */
     @GetMapping
-    public List<UserSlimDto> getAllUsers() throws NotFoundException {
+    public List<UserSlimDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -85,7 +85,7 @@ public class UserController {
      * @return UserDto
      */
     @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable("id") int id) throws NotFoundException {
+    public UserDto getUserById(@PathVariable("id") int id) {
         return userService.getUserById(id);
     }
 
@@ -98,8 +98,7 @@ public class UserController {
      * @return ScreenDto
      */
     @PatchMapping
-    public UserDto updateUser(@RequestBody UserDto userDto)
-            throws NotFoundException {
+    public UserDto updateUser(@RequestBody UserDto userDto) {
         return userService.updateUser(userDto);
     }
 

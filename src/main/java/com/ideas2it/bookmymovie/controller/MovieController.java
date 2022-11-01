@@ -54,7 +54,7 @@ public class MovieController {
      * @return List<MovieDto>
      */
     @GetMapping
-    public List<MovieDto> getMovies() throws NotFoundException {
+    public List<MovieDto> getMovies() {
         return movieService.getMovies();
     }
 
@@ -67,7 +67,7 @@ public class MovieController {
      * @return MovieDto
      */
     @GetMapping("/{movieId}")
-    public MovieDto getMovieById(@PathVariable int movieId) throws NotFoundException {
+    public MovieDto getMovieById(@PathVariable int movieId) {
         return movieService.getMovieById(movieId);
     }
 

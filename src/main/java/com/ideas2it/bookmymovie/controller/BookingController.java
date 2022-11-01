@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class BookingController {
      * @return BookingDto
      */
     @PostMapping("/bookTicket")
-    public BookingResponseDto bookTicket(@RequestBody BookingDto bookingDto) {
+    public BookingResponseDto bookTicket(@Valid @RequestBody BookingDto bookingDto) {
         return bookingService.createBooking(bookingDto);
     }
 
@@ -84,8 +85,4 @@ public class BookingController {
         return bookingService.cancelBooking(bookingId);
     }
 
-    /*@DeleteMapping("/{bookingId}/{seatId}")
-    public Booking ticketCancel(@PathVariable int bookingId, @PathVariable int seatId) {
-        return bookingService.cancelSeatBooking(bookingId, seatId);
-    }*/
 }

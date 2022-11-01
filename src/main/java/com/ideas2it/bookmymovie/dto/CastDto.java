@@ -17,4 +17,5 @@ public class CastDto {
     private String name;
     @NotBlank
     private String role;
+
 }

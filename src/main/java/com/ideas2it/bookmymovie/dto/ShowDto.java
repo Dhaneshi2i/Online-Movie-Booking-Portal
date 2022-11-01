@@ -30,7 +30,7 @@ public class ShowDto {
     @FutureOrPresent(message = "Please provide a present or future date")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate showDate;
 
     @NotNull
@@ -44,7 +44,10 @@ public class ShowDto {
     @JsonSerialize(using = LocalTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime showEndTime;
+    @NotNull
     private MovieDto movie;
+    @NotNull
     private TheatreDto theatre;
+    @NotNull
     private ScreenSlimDto screen;
 }

@@ -55,15 +55,15 @@ public class ShowController {
      * This method updates Show Details
      * </p>
      *
-     * @param showDto it contains show dto objects
+     * @param showDto   it contains show dto objects
      * @param theatreId it contains theatre id
-     * @param screenId it contains screen id
+     * @param screenId  it contains screen id
      * @return ShowDto
      */
     @PutMapping
     public ShowDto updateShow(@RequestBody ShowDto showDto, @RequestParam int theatreId,
-                                           @RequestParam int screenId) {
-            return showService.updateShow(showDto, theatreId, screenId);
+                              @RequestParam int screenId) {
+        return showService.updateShow(showDto, theatreId, screenId);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ShowController {
      */
     @GetMapping("/{showId}")
     public ShowDto getShowById(@PathVariable int showId) {
-            return showService.getShowById(showId);
+        return showService.getShowById(showId);
     }
 
     /**
