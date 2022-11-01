@@ -3,6 +3,7 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
@@ -15,8 +16,10 @@ import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,7 +33,6 @@ public class ShowServiceImpl implements ShowService {
     private SeatService seatService;
     private MapStructMapper mapper;
     private SeatTypeRepository seatTypeRepository;
-    private int SEAT_ID = 1;
 
     public ShowServiceImpl(ShowRepository showrepository, TheatreService theatreService,
                            ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper, SeatTypeRepository seatTypeRepository) {
@@ -52,64 +54,43 @@ public class ShowServiceImpl implements ShowService {
      * @return ShowDto
      */
     @Override
+    @Transactional
     public ShowDto createShow(ShowDto showDto){
         Show show = new Show();
         show.setShowDate(showDto.getShowDate());
         show.setShowStartTime(showDto.getShowStartTime());
         show.setShowEndTime(showDto.getShowEndTime());
         show.setScreen(mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId())));
-        show.setTheatre(mapper.theatreDtoToTheatre(theatreService.findTheatreById(showDto.getTheatre().getTheatreId())));
+        show.setTheatre(mapper.theatreDtoToTheatre(screenService.getTheatreByScreenId(showDto
+                                                                                   .getTheatre().getTheatreId())));
         show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
-        showrepository.saveAndFlush(show);
+        showrepository.save(show);
         createSeat(show);
-        //show.setSeats(seats);
         return mapper.showToShowDto(show);
     }
 
     private void createSeat(Show show) {
-        //List<Seat> seats = new ArrayList<>();
-        int row = show.getScreen().getNoOfRows();
-        int column = show.getScreen().getNoOfColumns();
-        //int row = screen.getNoOfRows();
-        //int column = screen.getNoOfColumns();
-        Seat seat = new Seat();
+
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
-                                            'v','w','x','y','z'};
-//        int k = 0;
-        for (int i=0; i<row;i++) {
-//            Seat seat = new Seat();
-//            if (i <= 3) {
-//                seat.setSeatType(SeatType.BALCONY);
-//                seat.setPrice(200);
-//            } else if (i < 7) {
-//                seat.setSeatType(SeatType.GOLD);
-//                seat.setPrice(170);
-//            } else if (i < 11){
-//                seat.setSeatType(SeatType.SILVER);
-//                seat.setPrice(150);
-//            } else {
-//                seat.setSeatType(SeatType.PLATINUM);
-//                seat.setPrice(120);
-//            }
-            for (int j=1;j<=column;j++) {
-                Random random = new Random();
-                seat.setSeatId(SEAT_ID + random.nextInt() + show.getShowId());
-                seat.setSeatStatus(SeatStatus.AVAILABLE);
-                seat.setSeatNumber(alphabet[i]+""+j);
-                seat.setScreen(show.getScreen());
-                seat.setShow(show);
-                seat.setShowDate(show.getShowDate());
-                seat.setShowStartTime(show.getShowStartTime());
-                for (SeatType typeOfSeat : seatTypeRepository.findAll()) {
-                    seat.setSeatType(typeOfSeat);
+                'v','w','x','y','z'};
+        for (SeatType seatType : show.getScreen().getTypesOfSeats()) {
+            int row = seatType.getNoOfRows();
+            int column = seatType.getNoOfColumns();
+            for (int i=0;i<row;i++) {
+                for (int j=1;j<column;j++) {
+                    Seat seat = new Seat();
+                    seat.setSeatType(seatType);
+                    seat.setSeatPrice(seatType.getPrice());
+                    seat.setSeatNumber(alphabet[i]+""+j);
+                    seat.setSeatStatus(SeatStatus.AVAILABLE);
+                    seat.setScreen(show.getScreen());
+                    seat.setShow(show);
+                    seat.setShowDate(show.getShowDate());
+                    seat.setShowStartTime(show.getShowStartTime());
+                    seatService.createSeat(seat);
                 }
-
-
-                seatService.createSeat(seat);
-                //seats.add(seat);
             }
         }
-        //return seats;
     }
 
     /**

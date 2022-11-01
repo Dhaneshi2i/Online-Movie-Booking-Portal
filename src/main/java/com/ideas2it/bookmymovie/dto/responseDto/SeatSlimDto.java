@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.dto.responseDto;
 
 import com.ideas2it.bookmymovie.Constants;
+import com.ideas2it.bookmymovie.dto.SeatTypeDto;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +20,7 @@ public class SeatSlimDto {
     @NotBlank
     @Pattern(regexp = Constants.ALPHA_NUMERIC_REGEX, message = "Only letter are valid")
     private String seatNumber;
-
-    @NotNull
-    private double price;
-
-    @NotNull
+    private SeatTypeDto type;
+    private float price;
     private SeatStatus seatStatus;
 }

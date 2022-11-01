@@ -5,12 +5,15 @@ import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
+import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.service.ScreenService;
+import com.ideas2it.bookmymovie.service.SeatTypeService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,11 +22,13 @@ import java.util.stream.Collectors;
 public class ScreenServiceImpl implements ScreenService {
     private ScreenRepository screenRepository;
     private TheatreService theatreService;
+    private SeatTypeService seatTypeService;
     private MapStructMapper mapper;
 
-    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService, MapStructMapper mapper) {
+    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService, SeatTypeService seatTypeService, MapStructMapper mapper) {
         this.screenRepository = screenRepository;
         this.theatreService = theatreService;
+        this.seatTypeService = seatTypeService;
         this.mapper = mapper;
     }
 
@@ -39,6 +44,11 @@ public class ScreenServiceImpl implements ScreenService {
     @Override
     public ScreenDto createScreen(ScreenDto screenDto) throws NotFoundException {
         Screen screen = mapper.screenDtoToScreen(screenDto);
+        List<SeatType> seatTypes = new ArrayList<>();
+        for (SeatType seatType : screen.getTypesOfSeats()) {
+             seatTypes.add(seatTypeService.getSeatTypeBySeatTypeId(seatType.getSeatTypeId()));
+        }
+        screen.setTypesOfSeats(seatTypes);
         int theatreId = screenDto.getTheatre().getTheatreId();
         if (0 != theatreId) {
             Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(theatreId));

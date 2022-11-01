@@ -44,10 +44,10 @@ public class ShowDto {
     @JsonSerialize(using = LocalTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime showEndTime;
-    @NotNull
+
     private MovieDto movie;
-    @NotNull
+
     private TheatreDto theatre;
-    @NotNull
+
     private ScreenSlimDto screen;
 }

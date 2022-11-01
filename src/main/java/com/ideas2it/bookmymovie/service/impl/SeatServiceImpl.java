@@ -37,9 +37,9 @@ public class SeatServiceImpl implements SeatService {
      * @param seat it contains seat objects
      */
     @Override
+    @Transactional
     public void createSeat(Seat seat)  {
-        System.out.println("Seat Id : " + seat.getSeatId());
-        seatRepository.save(seat);
+        seatRepository.saveAndFlush(seat);
     }
 
     /**
@@ -115,7 +115,7 @@ public class SeatServiceImpl implements SeatService {
      * @return SeatDto
      */
     @Override
-    public Seat getSeatBYId(int seatId) {
+    public Seat getSeatById(int seatId) {
         return seatRepository.findBySeatId(seatId);
     }
 

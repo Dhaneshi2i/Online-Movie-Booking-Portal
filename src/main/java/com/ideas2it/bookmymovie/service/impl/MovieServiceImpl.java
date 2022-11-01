@@ -100,7 +100,9 @@ import java.util.stream.Collectors;
       */
      public MovieDto getMovieById(int movieId) throws NotFoundException{
          if (movieRepository.existsById(movieId)) {
+             System.out.println(movieId);
              Movie movie = movieRepository.findByMovieId(movieId);
+             System.out.println("id: " + movie.getMovieId());
                  return mapper.movieToMovieDto(movie);
          }
          throw new NotFoundException("No movie found");

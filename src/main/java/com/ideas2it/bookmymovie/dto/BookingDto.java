@@ -18,15 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookingDto {
-    @NotBlank
+
+    private String transactionMode;
     private UserDto user;
-    @NotBlank
     private ShowDto show;
     private LocalDate bookingDate;
-    @NotBlank
-    private String bookingStatus;
     @NotEmpty
     private List<SeatDto> seats;
     @NotNull
-    private double totalCost;
+    private float totalCost;
 }

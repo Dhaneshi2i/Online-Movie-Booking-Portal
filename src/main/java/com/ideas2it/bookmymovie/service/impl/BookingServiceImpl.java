@@ -54,11 +54,11 @@ public class BookingServiceImpl implements BookingService {
             booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
-                Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
-                seats.add(selectedSeat);
+                //Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
+                seats.add(seatService.getSeatById(seatDto.getSeatId()));
             }
             booking.setBookingDate(LocalDate.now());
-            //booking.setTotalCost(calculateTotalCost(seats));
+            booking.setTotalCost(calculateTotalCost(seats));
 
             boolean isPaymentSuccessful = completePayment(booking);
             if (isPaymentSuccessful) {
@@ -130,8 +130,8 @@ public class BookingServiceImpl implements BookingService {
      * @return double
      */
     @Override
-    public double calculateTotalCost(List<Seat> seats) {
-        double amount = 0;
+    public float calculateTotalCost(List<Seat> seats) {
+        float amount = 0;
         for (Seat seat : seats) {
             amount = amount + seat.getSeatType().getPrice();
         }

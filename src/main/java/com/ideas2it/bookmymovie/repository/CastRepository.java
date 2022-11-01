@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface CastRepository extends JpaRepository<Cast, Integer> {
-    Optional<Cast> findCastByName(String name);
 }

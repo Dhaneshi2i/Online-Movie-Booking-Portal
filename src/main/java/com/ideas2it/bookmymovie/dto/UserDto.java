@@ -32,12 +32,10 @@ public class UserDto {
     @NotNull
     private long contactNumber;
     @NotBlank
-    @Size(max = 20, message = "Must be only between 20 characters")
-    @Pattern(regexp = Constants.PASSWORD_REGEX, message = "only number are allowed and they must have 10 numbers")
+    //@Size(max = 20, message = "Must be only between 20 characters")
+    //@Pattern(regexp = Constants.PASSWORD_REGEX, message = "only number are allowed and they must have 10 numbers")
     private String password;
-    @NotNull
     private RoleDto role;
-
     private boolean isStatus;
 }
 

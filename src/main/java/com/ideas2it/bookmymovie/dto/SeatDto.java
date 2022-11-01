@@ -16,10 +16,9 @@ public class SeatDto {
     private int seatId;
     @NotBlank
     private String seatNumber;
-    @NotBlank
-    private String type;
+    private SeatTypeDto type;
     @NotNull
-    private double price;
+    private float price;
 
 }
 

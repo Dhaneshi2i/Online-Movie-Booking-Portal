@@ -27,7 +27,7 @@ import java.time.LocalTime;
 public class Seat {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seatId;
 
     @Column(name = "seat_number")
@@ -40,6 +40,7 @@ public class Seat {
     private LocalDate showDate;
 
     private LocalTime showStartTime;
+    private float seatPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id_id")

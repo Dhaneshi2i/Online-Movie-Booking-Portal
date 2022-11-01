@@ -27,10 +27,7 @@ import javax.persistence.Table;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int roleId;
-
-    @Column(name = "role_type")
     private String roleType;
 
 }

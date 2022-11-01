@@ -51,9 +51,6 @@ public class Show {
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
-    /*@OneToMany(fetch = FetchType.LAZY)
-    private List<Seat> seats;*/
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;

@@ -14,10 +14,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class BookingResponseDto {
-    @NotNull
+    private int bookingId;
     private UserSlimDto user;
-    @NotNull
-    private ShowDto show;
+    private ShowSlimDto show;
     @NotNull
     private LocalDate bookingDate;
     @NotEmpty

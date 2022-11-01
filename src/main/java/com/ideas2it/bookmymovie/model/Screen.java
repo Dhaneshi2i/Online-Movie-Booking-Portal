@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -27,33 +28,17 @@ public class Screen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int screenId;
-
+    private String screenName;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<SeatType> typesOfSeats;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
-
-    private String screenName;
-
-    @Column(name = "no_of_rows")
-    private int noOfRows;
-
-    @Column(name = "no_of_columns")
-    private int noOfColumns;
-
-    @OneToMany(mappedBy="screen")
-    private List<SeatType> typesOfSeats;
-
-    @Column(name = "status")
     private boolean status;
-
     @CreationTimestamp
-    @Column(name = "created_date")
     private Timestamp createdOn;
-
     @UpdateTimestamp
-    @Column(name = "modified_date")
     private Timestamp updatedOn;
 
 }

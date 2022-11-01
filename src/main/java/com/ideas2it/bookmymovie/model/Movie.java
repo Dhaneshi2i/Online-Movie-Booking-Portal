@@ -82,9 +82,6 @@ public class Movie {
     )
     private List<Cast> casts = new ArrayList<>();
 
-    @OneToOne(mappedBy = "movie")
-    private Show show;
-
     private boolean status;
     @CreationTimestamp
     private Timestamp createdOn;

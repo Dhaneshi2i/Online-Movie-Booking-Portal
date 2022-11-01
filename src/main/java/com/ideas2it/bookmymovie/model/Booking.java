@@ -52,7 +52,7 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus = BookingStatus.ONPROCESS;
 
-    private double totalCost;
+    private float totalCost;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Seat> seats;

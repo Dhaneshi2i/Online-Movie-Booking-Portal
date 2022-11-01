@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.ideas2it.bookmymovie.Constants;
+import com.ideas2it.bookmymovie.model.SeatType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,11 +24,6 @@ public class ScreenDto {
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private String screenName;
-    @NotNull
-    private int noOfRows;
-    @NotNull
-    private int noOfColumns;
-    @NotNull
+    private List<SeatTypeDto> typesOfSeats;
     private TheatreDto theatre;
-
 }

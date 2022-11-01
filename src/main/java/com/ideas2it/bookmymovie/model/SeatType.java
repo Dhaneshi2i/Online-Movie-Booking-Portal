@@ -21,27 +21,17 @@ import java.util.List;
 @Entity
 @Table(name = "seat_type")
 public class SeatType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int seatTypeId;
 
-    @Column
     private String seatType;
 
-    @Column
     private int noOfColumns;
 
-    @Column
     private int noOfRows;
 
-    @Column
-    private double price;
+    private float price;
 
-    @OneToMany(mappedBy="seatType")
-    private List<Seat> seats;
-
-    @ManyToOne
-    @JoinColumn(name="screen", nullable=false)
-    private Screen screen;
 }

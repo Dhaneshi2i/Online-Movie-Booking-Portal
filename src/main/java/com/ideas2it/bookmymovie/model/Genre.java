@@ -32,13 +32,8 @@ import java.util.List;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int genreId;
 
     @Column
-    private String name;
-
-    @ManyToMany(mappedBy = "genres", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-    private List<Movie> movies = new ArrayList<>();
-
+    private String genreName;
 }

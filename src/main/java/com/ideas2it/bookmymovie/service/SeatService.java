@@ -65,7 +65,7 @@ public interface SeatService {
      * @param seatId it contains seat id
      * @return SeatDto
      */
-    Seat getSeatBYId(int seatId);
+    Seat getSeatById(int seatId);
 
     /**
      * <p>

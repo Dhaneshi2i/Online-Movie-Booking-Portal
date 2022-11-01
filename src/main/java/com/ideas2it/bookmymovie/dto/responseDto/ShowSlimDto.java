@@ -18,6 +18,7 @@ public class ShowSlimDto {
     private LocalTime showEndTime;
     @NotNull
     private LocalDate showDate;
-    @NotNull
     private MovieSlimDto movie;
+    private TheatreSlimDto theatre;
+    private ScreenSlimDto screen;
 }

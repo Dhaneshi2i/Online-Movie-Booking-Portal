@@ -22,7 +22,5 @@ public class UserSlimDto {
     @NotNull
     @Email
     private String emailId;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Only letter are valid")
     private RoleSlimDto role;
 }

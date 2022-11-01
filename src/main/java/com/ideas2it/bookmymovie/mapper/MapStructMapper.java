@@ -8,6 +8,7 @@ import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.dto.RoleDto;
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.SeatDto;
+import com.ideas2it.bookmymovie.dto.SeatTypeDto;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.dto.UserDto;
@@ -24,6 +25,7 @@ import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.model.Role;
 import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Seat;
+import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.model.User;
@@ -101,4 +103,8 @@ public interface MapStructMapper {
     Screen screenSlimDtoToScreen(ScreenSlimDto screen);
 
     ScreenSlimDto screenDtoTOScreenSlimDto(ScreenDto screenDto);
+
+    SeatType seatTypeDtoToSeatType(SeatTypeDto seatTypeDto);
+
+    SeatTypeDto seatTypeToSeatTypeDto(SeatType seatType);
 }
