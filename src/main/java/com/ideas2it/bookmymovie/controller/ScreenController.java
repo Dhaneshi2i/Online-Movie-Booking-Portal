@@ -29,7 +29,7 @@ import java.util.List;
 @RequestMapping("api/v1/screen")
 public class ScreenController {
 
-    private ScreenService screenService;
+    private final ScreenService screenService;
 
     public ScreenController(ScreenService screenService) {
         this.screenService = screenService;
@@ -72,17 +72,20 @@ public class ScreenController {
      */
     @GetMapping("/{screenId}")
     public ScreenDto viewScreen(@PathVariable int screenId) {
-        //ScreenSlimDto screenDto = screenService.getScreenById(screenId);
         return screenService.getScreenById(screenId);
     }
 
     /**
-     * @param screenId
-     * @throws NotFoundException
+     * <p>
+     * This method updates the details of the respective screen
+     * </p>
+     * @param screenId it contains screenId
+     * @return ScreenDto
      */
+
     @PatchMapping("/{screenId}")
-    public ScreenDto updateScreen(@PathVariable int screenId) {
-        ScreenDto screenDto = screenService.updateScreenById(screenId);
-        return screenDto;
+    public ScreenDto updateScreen(@RequestParam int screenId) {
+        return screenService.updateScreenById(screenId);
+
     }
 }

@@ -18,14 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
- @Service
-    public class MovieServiceImpl implements MovieService {
+@Service
+public class MovieServiceImpl implements MovieService {
+
      private final MapStructMapper mapper;
-
      private final MovieRepository movieRepository;
-
      private final GenreService genreService;
-
      private final LanguageService languageService;
      private final CastService castService;
 

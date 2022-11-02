@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,27 +30,17 @@ import java.util.List;
 @Entity
 @Table(name = "theatres")
 public class Theatre {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int theatreId;
-
     private String theatreName;
-
     private String theatreCity;
-
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Screen> screen = new ArrayList<>();
-
-    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Show> show = new ArrayList<>();
-
-    private boolean status = false;
-
+    private boolean status;
     @CreationTimestamp
     private Timestamp createdOn;
-
     @UpdateTimestamp
     private Timestamp updateOn;
-
-
 }

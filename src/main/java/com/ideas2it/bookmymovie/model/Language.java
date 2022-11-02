@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,10 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "languages")
 public class Language {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int languageId;
-
     private String name;
-
 }

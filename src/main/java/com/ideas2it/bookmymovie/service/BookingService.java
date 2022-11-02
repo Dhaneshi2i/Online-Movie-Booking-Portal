@@ -15,7 +15,7 @@ public interface  BookingService {
      *
      * @param bookingDto it contains booking dto objects
      *
-     * @return BookingDto
+     * @return BookingResponseDto
      */
     BookingResponseDto createBooking(BookingDto bookingDto);
 
@@ -34,9 +34,19 @@ public interface  BookingService {
      * </p>
      *
      * @param bookingId it contains booking id
-     * @return BookingDto
+     * @return BookingResponseDto
      */
-    BookingDto viewByBookingId(int bookingId);
+    BookingResponseDto viewByBookingId(int bookingId);
+
+    /**
+     * <p>
+     * This method get the Booking Details which matches the id
+     * </p>
+     *
+     * @param userId it contains booking id
+     * @return BookingResponseDto
+     */
+    BookingResponseDto viewBookingByUserId(int userId);
 
     /**
      * <p>
@@ -54,9 +64,8 @@ public interface  BookingService {
      * </p>
      *
      * @param seats it contains list of seat objects
-     * @return double
+     * @return float
      */
     float calculateTotalCost(List<Seat> seats);
 
-    //Booking cancelSeatBooking(int bookingId, int seatId);
 }

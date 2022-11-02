@@ -1,13 +1,10 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.ideas2it.bookmymovie.Constants;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -18,6 +15,7 @@ import javax.validation.constraints.Pattern;
  * @author Dhanesh kumar, Harini, sivadharshini
  * @version 1.0
  **/
+
 
 @Getter
 @Setter

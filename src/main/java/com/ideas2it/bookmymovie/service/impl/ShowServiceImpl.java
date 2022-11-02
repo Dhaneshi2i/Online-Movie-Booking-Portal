@@ -3,10 +3,12 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
+import com.ideas2it.bookmymovie.model.TimeSlot;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
@@ -19,18 +21,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ShowServiceImpl implements ShowService {
-    private ShowRepository showrepository;
-    private ScreenService screenService;
-    private MovieService movieService;
-    private SeatService seatService;
-    private MapStructMapper mapper;
+    private final ShowRepository showrepository;
+    private final ScreenService screenService;
+    private final MovieService movieService;
+    private final SeatService seatService;
+    private final MapStructMapper mapper;
 
-    public ShowServiceImpl(ShowRepository showrepository,
-                           ScreenService screenService, MovieService movieService, SeatService seatService, MapStructMapper mapper) {
+    public ShowServiceImpl(ShowRepository showrepository,ScreenService screenService,
+                           MovieService movieService, SeatService seatService, MapStructMapper mapper ) {
+
         this.showrepository = showrepository;
         this.screenService = screenService;
         this.movieService = movieService;
@@ -48,25 +50,27 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     @Transactional
-    public ShowDto createShow(ShowDto showDto) {
-        Show show = new Show();
-        show.setShowDate(showDto.getShowDate());
-        show.setShowStartTime(showDto.getShowStartTime());
-        show.setShowEndTime(showDto.getShowEndTime());
-        show.setScreen(mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId())));
-        show.setTheatre(mapper.theatreDtoToTheatre(screenService.getTheatreByScreenId(showDto
-                .getTheatre().getTheatreId())));
-        show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
-        showrepository.save(show);
-        createSeat(show);
-        return mapper.showToShowDto(show);
+    public ShowDto createShow(ShowDto showDto){
+        Screen screen = mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId()));
+        List<TimeSlot> timeslots = screen.getTimeSlots();
+        for (TimeSlot timeSlot : timeslots) {
+            Show show = new Show();
+            show.setShowDate(showDto.getShowDate());
+            show.setShowStartTime(timeSlot.getShowStartTime());
+            show.setScreen(screen);
+            show.setTheatre(screen.getTheatre());
+            show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
+            showrepository.save(show);
+            createSeat(show);
+        }
+        return showDto;
     }
 
     private void createSeat(Show show) {
 
-        char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-                'v', 'w', 'x', 'y', 'z'};
-        for (SeatType seatType : show.getScreen().getTypesOfSeats()) {
+        char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
+                'v','w','x','y','z'};
+        for (SeatType seatType : show.getScreen().getSeatTypes()) {
             int row = seatType.getNoOfRows();
             int column = seatType.getNoOfColumns();
             for (int i = 0; i < row; i++) {
@@ -76,10 +80,8 @@ public class ShowServiceImpl implements ShowService {
                     seat.setSeatPrice(seatType.getPrice());
                     seat.setSeatNumber(alphabet[i] + "" + j);
                     seat.setSeatStatus(SeatStatus.AVAILABLE);
-                    seat.setScreen(show.getScreen());
                     seat.setShow(show);
                     seat.setShowDate(show.getShowDate());
-                    seat.setShowStartTime(show.getShowStartTime());
                     seatService.createSeat(seat);
                 }
             }
@@ -117,9 +119,11 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public void removeShow(int showId) {
         Show show = showrepository.findByShowId(showId);
-
-        show.setStatus(true);
-
+        if (null == show) {
+            throw new NotFoundException("No shows found for respective Id " + showId);
+        } else {
+            show.setStatus(true);
+        }
     }
 
     /**
@@ -132,7 +136,12 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     public ShowDto getShowById(int showId) {
-        return mapper.showToShowDto(showrepository.findByShowId(showId));
+        Show show = showrepository.findByShowId(showId);
+        if (null == show) {
+            throw new NotFoundException("No shows were found for respective id " + showId);
+        } else {
+            return mapper.showToShowDto(show);
+        }
     }
 
     /**
@@ -144,8 +153,12 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     public List<ShowDto> getAllShow() {
-        return showrepository.findAllByStatus(false).stream().
-                map(mapper::showToShowDto).collect(Collectors.toList());
+        List<Show> shows = showrepository.findAll();
+        if (shows.isEmpty()) {
+            throw new NotFoundException("No shows available");
+        } else {
+            return mapper.showListToShowSlimDtoList(shows);
+        }
     }
 
     /**
@@ -158,7 +171,12 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     public List<ShowDto> getShowByTheatreId(int theatreId) {
-        return mapper.showListToShowDtoList(showrepository.getAllByTheatreId(theatreId));
+        List<Show> shows = showrepository.getAllByTheatreId(theatreId);
+        if (shows.isEmpty()) {
+            throw new NotFoundException("No shows available for respective theatre " + theatreId);
+        } else {
+            return mapper.showListToShowDtoList(shows);
+        }
     }
 
     /**
@@ -170,14 +188,18 @@ public class ShowServiceImpl implements ShowService {
      * @return List<ShowDto>
      */
     @Override
-    public List<ShowDto> getShowsByDate(LocalDate date) throws NotFoundException {
+    public List<ShowDto> getShowsByDate(LocalDate date) {
         List<Show> shows = new ArrayList<>();
         for (Show show : showrepository.findAll()) {
             if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
                 shows.add(show);
             }
         }
-        return mapper.showListToShowDtoList(shows);
+        if(shows.isEmpty()) {
+            throw new NotFoundException("No shows available for respective date " + date);
+        } else {
+            return mapper.showListToShowDtoList(shows);
+        }
     }
 }
 

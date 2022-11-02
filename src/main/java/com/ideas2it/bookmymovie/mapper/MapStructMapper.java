@@ -11,10 +11,12 @@ import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.dto.SeatTypeDto;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.TimeSlotDto;
 import com.ideas2it.bookmymovie.dto.UserDto;
-
-import com.ideas2it.bookmymovie.dto.responseDto.*;
-
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Cast;
 import com.ideas2it.bookmymovie.model.Genre;
@@ -26,6 +28,7 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.model.Theatre;
+import com.ideas2it.bookmymovie.model.TimeSlot;
 import com.ideas2it.bookmymovie.model.User;
 import org.mapstruct.Mapper;
 
@@ -84,13 +87,9 @@ public interface MapStructMapper {
 
     ShowDto showToShowDto(Show show);
 
-    MovieResponseDto movieToMovieResponseDto(Movie movie);
-
     List<ShowDto> showListToShowDtoList(List<Show> show);
 
     List<ShowDto> showListToShowResponseDtoList(List<Show> shows);
-
-    CastResponseDto castToCastResponseDto(Cast cast);
 
     BookingResponseDto bookingToBookingResponseDto(Booking save);
 
@@ -107,4 +106,11 @@ public interface MapStructMapper {
     SeatTypeDto seatTypeToSeatTypeDto(SeatType seatType);
 
     List<SeatResponseDto> seatListToSeatResponseDtoList(List<Seat> seats);
+
+    List<ShowDto> showListToShowSlimDtoList(List<Show> shows);
+
+    TimeSlotDto timeSlotToTimeSlotDto(TimeSlot timeSlot);
+
+    TimeSlot timeSlotDtoToTimeSlot(TimeSlotDto timeSlotDto);
 }
+

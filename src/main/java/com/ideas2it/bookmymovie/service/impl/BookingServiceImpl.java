@@ -14,6 +14,7 @@ import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-    private BookingRepository bookingRepository;
-    private UserService userService;
-    private ShowService showService;
-    private MapStructMapper mapper;
-    private SeatService seatService;
+    private final BookingRepository bookingRepository;
+    private final UserService userService;
+    private final ShowService showService;
+    private final MapStructMapper mapper;
+    private final SeatService seatService;
 
     public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, ShowService showService,
                                               MapStructMapper mapper, SeatService seatService) {
@@ -47,6 +48,7 @@ public class BookingServiceImpl implements BookingService {
      * @return BookingDto
      */
     @Override
+    @Transactional
     public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
         if (null != bookingDto) {
@@ -54,7 +56,6 @@ public class BookingServiceImpl implements BookingService {
             booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
-                //Seat selectedSeat = seatService.getSeatBYId(seatDto.getSeatId());
                 seats.add(seatService.getSeatById(seatDto.getSeatId()));
             }
             booking.setBookingDate(LocalDate.now());
@@ -97,8 +98,31 @@ public class BookingServiceImpl implements BookingService {
      * @return BookingDto
      */
     @Override
-    public BookingDto viewByBookingId(int bookingId) throws NotFoundException {
-        return mapper.bookingToBookingDto(bookingRepository.findById(bookingId).get());
+    public BookingResponseDto viewByBookingId(int bookingId) {
+        Booking booking = bookingRepository.findBookingByBookingId(bookingId);
+        if (null == booking) {
+            throw new NotFoundException("No booking was found for respective id " + bookingId);
+        } else {
+            return mapper.bookingToBookingResponseDto(booking);
+        }
+    }
+
+    /**
+     * <p>
+     * This method get the Booking Details which matches the id
+     * </p>
+     *
+     * @param userId it contains booking id
+     * @return BookingResponseDto
+     */
+    @Override
+    public BookingResponseDto viewBookingByUserId(int userId) {
+        Booking booking = bookingRepository.findBookingByUser(userId);
+        if (null == booking) {
+            throw new NotFoundException("No booking was found for respective id " + userId);
+        } else {
+            return mapper.bookingToBookingResponseDto(booking);
+        }
     }
 
     /**
@@ -111,7 +135,7 @@ public class BookingServiceImpl implements BookingService {
      */
     @Override
     public BookingDto cancelBooking(int bookingId) throws NotFoundException {
-        Booking booking = bookingRepository.findById(bookingId).get();
+        Booking booking = bookingRepository.findBookingByBookingId(bookingId);
         List<Seat> seats = booking.getSeats();
         for (Seat seat : seats) {
             seatService.cancelSeatBooking(seat);
@@ -139,14 +163,16 @@ public class BookingServiceImpl implements BookingService {
 
     }
 
+    /**
+     * <p>
+     * This method is to check whether the payment is successful or not
+     * </p>
+     *
+     * @param  booking it contains list of seat objects
+     * @return boolean
+     */
     public boolean completePayment(Booking booking) {
         return true;
     }
 
-    /*public Booking cancelSeatBooking(int bookingId, int seatId) {
-        Booking booking = bookingRepository.findById(bookingId).get();
-        Seat seats = seatService.getSeatBYId(seatId);
-        booking.getSeats().remove(seats);
-        return bookingRepository.save(booking);
-    }*/
 }

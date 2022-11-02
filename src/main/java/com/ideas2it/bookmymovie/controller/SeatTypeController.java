@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/seatType")
 public class SeatTypeController {
-    private SeatTypeService seatTypeService;
+    private final SeatTypeService seatTypeService;
 
     public SeatTypeController(SeatTypeService seatTypeService) {
         this.seatTypeService = seatTypeService;

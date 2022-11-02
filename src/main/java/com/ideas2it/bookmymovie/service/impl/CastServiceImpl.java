@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CastServiceImpl implements CastService {
-    private CastRepository castRepository;
-    private MapStructMapper mapper;
+    private final CastRepository castRepository;
+    private final MapStructMapper mapper;
 
     public CastServiceImpl(CastRepository castRepository, MapStructMapper mapper) {
         this.castRepository = castRepository;

@@ -19,10 +19,9 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ShowResponseDto {
 
-    private LocalTime showStartTime;
-    private LocalTime showEndTime;
     private LocalDate showDate;
     private MovieResponseDto movie;
     private TheatreResponseDto theatre;
     private ScreenResponseDto screen;
+    private LocalTime showStartTime;
 }

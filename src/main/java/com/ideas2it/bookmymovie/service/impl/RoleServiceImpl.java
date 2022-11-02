@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-    private RoleRepository roleRepository;
-    private MapStructMapper mapper;
+    private final RoleRepository roleRepository;
+    private final MapStructMapper mapper;
 
     public RoleServiceImpl(RoleRepository roleRepository, MapStructMapper mapper) {
         this.roleRepository = roleRepository;

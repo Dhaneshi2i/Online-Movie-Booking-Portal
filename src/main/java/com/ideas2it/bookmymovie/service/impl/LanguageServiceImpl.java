@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LanguageServiceImpl implements LanguageService {
-    private LanguageRepository languageRepository;
-    private MapStructMapper mapper;
+    private final LanguageRepository languageRepository;
+    private final MapStructMapper mapper;
 
     public LanguageServiceImpl(LanguageRepository languageRepository, MapStructMapper mapper) {
         this.languageRepository = languageRepository;

@@ -3,6 +3,8 @@ CREATE TABLE roles (
    role_type VARCHAR(40) NULL,
    CONSTRAINT pk_roles PRIMARY KEY (role_id)
 );
+
+
 CREATE TABLE users (
   user_id INT AUTO_INCREMENT NOT NULL,
    user_name VARCHAR(40) NULL,
@@ -90,6 +92,7 @@ CREATE TABLE screens (
 
 ALTER TABLE screens ADD CONSTRAINT FK_SCREENS_ON_THEATRE FOREIGN KEY (theatre_id) REFERENCES theatres (theatre_id);
 
+
 CREATE TABLE seat_type (
   seat_type_id INT AUTO_INCREMENT NOT NULL,
    seat_type VARCHAR(40) NULL,
@@ -99,15 +102,20 @@ CREATE TABLE seat_type (
    CONSTRAINT pk_seat_type PRIMARY KEY (seat_type_id)
 );
 
+CREATE TABLE time_slots (
+  time_slot_id INT AUTO_INCREMENT NOT NULL,
+   show_start_time time NULL,
+   CONSTRAINT pk_time_slots PRIMARY KEY (time_slot_id)
+);
+
 CREATE TABLE shows (
   show_id INT AUTO_INCREMENT NOT NULL,
    show_date date NULL,
-   show_start_time time NULL,
-   show_end_time time NULL,
    movie_id INT NULL,
    screen_id INT NULL,
    theatre_id INT NULL,
    status BIT(1) NOT NULL,
+   show_start_time time NULL,
    CONSTRAINT pk_shows PRIMARY KEY (show_id)
 );
 
@@ -119,16 +127,16 @@ ALTER TABLE shows ADD CONSTRAINT FK_SHOWS_ON_THEATRE FOREIGN KEY (theatre_id) RE
 
 CREATE TABLE seats (
   seat_id INT AUTO_INCREMENT NOT NULL,
-   seat_number VARCHAR(5) NULL,
+   seat_number VARCHAR(255) NULL,
    seat_type_id INT NOT NULL,
    show_date date NULL,
-   show_start_time time NULL,
+   show_start_time_time_slot_id INT NULL,
    seat_price FLOAT NOT NULL,
    screen_id_id INT NULL,
    show_show_id INT NULL,
-   seat_status VARCHAR(40) NULL,
-   created_date datetime NULL,
-   modified_date datetime NULL,
+   seat_status VARCHAR(255) NULL,
+   created_on datetime NULL,
+   updated_on datetime NULL,
    CONSTRAINT pk_seats PRIMARY KEY (seat_id)
 );
 
@@ -138,16 +146,33 @@ ALTER TABLE seats ADD CONSTRAINT FK_SEATS_ON_SEATTYPEID FOREIGN KEY (seat_type_i
 
 ALTER TABLE seats ADD CONSTRAINT FK_SEATS_ON_SHOW_SHOW FOREIGN KEY (show_show_id) REFERENCES shows (show_id);
 
-CREATE TABLE screens_types_of_seats (
-  screen_screen_id INT NOT NULL,
-   types_of_seats_seat_type_id INT NOT NULL
-);
-ALTER TABLE screens_types_of_seats ADD CONSTRAINT fk_scrtypofsea_on_screen FOREIGN KEY (screen_screen_id) REFERENCES screens (screen_id);
+ALTER TABLE seats ADD CONSTRAINT FK_SEATS_ON_SHOW_START_TIME_TIME_SLOT FOREIGN KEY (show_start_time_time_slot_id) REFERENCES time_slots (time_slot_id);
 
-ALTER TABLE screens_types_of_seats ADD CONSTRAINT fk_scrtypofsea_on_seat_type FOREIGN KEY (types_of_seats_seat_type_id) REFERENCES seat_type (seat_type_id);
+CREATE TABLE screens_time_slots (
+  id INT AUTO_INCREMENT NOT NULL,
+  screen_screen_id INT NOT NULL,
+   time_slots_time_slot_id INT NOT NULL,
+   CONSTRAINT pk_booking_seats PRIMARY KEY (id)
+);
+
+
+ALTER TABLE screens_time_slots ADD CONSTRAINT fk_scrtimslo_on_screen FOREIGN KEY (screen_screen_id) REFERENCES screens (screen_id);
+
+ALTER TABLE screens_time_slots ADD CONSTRAINT fk_scrtimslo_on_time_slot FOREIGN KEY (time_slots_time_slot_id) REFERENCES time_slots (time_slot_id);
+
+CREATE TABLE screens_seat_types (
+  id INT AUTO_INCREMENT NOT NULL,
+  screen_screen_id INT NOT NULL,
+   seat_types_seat_type_id INT NOT NULL,
+   CONSTRAINT pk_booking_seats PRIMARY KEY (id)
+);
+
+ALTER TABLE screens_seat_types ADD CONSTRAINT fk_scrseatyp_on_screen FOREIGN KEY (screen_screen_id) REFERENCES screens (screen_id);
+
+ALTER TABLE screens_seat_types ADD CONSTRAINT fk_scrseatyp_on_seat_type FOREIGN KEY (seat_types_seat_type_id) REFERENCES seat_type (seat_type_id);
 
 CREATE TABLE booking (
-  booking_id INT NOT NULL,
+  booking_id INT AUTO_INCREMENT NOT NULL,
    transaction_mode VARCHAR(40) NULL,
    user_user_id INT NULL,
    show_id INT NULL,
