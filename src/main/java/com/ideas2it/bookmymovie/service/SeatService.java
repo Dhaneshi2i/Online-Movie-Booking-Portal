@@ -25,7 +25,7 @@ public interface SeatService {
      *
      * @return List<SeatDto>
      */
-     List<SeatDto> getAllSeat() throws NotFoundException;
+     List<SeatDto> getAllSeat(int pageNumber, int pageSize) throws NotFoundException;
 
      /**
      * <p>

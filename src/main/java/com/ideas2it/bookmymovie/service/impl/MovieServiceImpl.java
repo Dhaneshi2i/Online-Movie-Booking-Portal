@@ -6,12 +6,16 @@ import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,16 +80,16 @@ public class MovieServiceImpl implements MovieService {
       *
       * @return List<MovieDto>
       */
-     public List<MovieDto> getMovies() throws NotFoundException {
+     public List<MovieDto> getMovies(int pageNumber, int pageSize) throws NotFoundException {
          List<Movie> movies = movieRepository.findAll();
 
          if (movies.isEmpty()) {
              throw new NotFoundException("No Movie Found");
          }
-         return
-                 movies.stream()
-                         .map(mapper::movieToMovieDto)
-                         .collect(Collectors.toList());
+
+         Pageable p = PageRequest.of(pageNumber, pageSize);
+         Page<Movie> movie = movieRepository.findAll(p);
+         return mapper.movieListToMovieDtoList(movie.getContent());
      }
 
      /**

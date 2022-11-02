@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * <p>
  * Cast Dto class contains the cast dto data.
@@ -18,9 +20,10 @@ import javax.validation.constraints.NotBlank;
 public class CastDto {
 
     private int castId;
-    @NotBlank
+    @NotBlank(message = "Cast should not be empty")
     private String castName;
-    @NotBlank
+    @NotBlank(message = "Cast role should not be empty")
+    @Pattern(regexp="^(Actor|Actress|Director)$",message="Invalid cast role. Valid values are 1. Actor 2. Actress 3. Director")
     private String castRole;
 
 }

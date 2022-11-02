@@ -28,7 +28,7 @@ public interface TheatreService {
      *
      * @return List<TheatreDto>
      */
-    List<TheatreDto> getAllTheatre() throws NotFoundException;
+    List<TheatreDto> getAllTheatre(int pageNumber, int pageSize) throws NotFoundException;
 
     /**
      * <p>

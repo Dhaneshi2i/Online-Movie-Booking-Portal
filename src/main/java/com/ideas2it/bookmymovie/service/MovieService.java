@@ -24,7 +24,7 @@ public interface MovieService {
      *
      * @return List<MovieDto>
      */
-    List<MovieDto> getMovies() throws NotFoundException;
+    List<MovieDto> getMovies(int pageNumber, int pageSize) throws NotFoundException;
 
     /**
      * <p>

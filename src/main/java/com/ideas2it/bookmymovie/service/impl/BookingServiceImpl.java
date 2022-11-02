@@ -7,12 +7,16 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.BookingStatus;
+import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.repository.BookingRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,7 +52,7 @@ public class BookingServiceImpl implements BookingService {
      * @return BookingDto
      */
     @Override
-    @Transactional
+//    @Transactional
     public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
         if (null != bookingDto) {
@@ -86,8 +90,10 @@ public class BookingServiceImpl implements BookingService {
      * @return List<BookingDto>
      */
     @Override
-    public List<BookingDto> getAllBookings() {
-        return bookingRepository.findAll().stream().map(mapper::bookingToBookingDto).collect(Collectors.toList());
+    public List<BookingDto> getAllBookings(int pageNumber, int pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<Booking> booking = bookingRepository.findAll(p);
+        return mapper.bookingListToBookingDtoList(booking.getContent());
     }
 
     /**

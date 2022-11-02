@@ -30,7 +30,7 @@ public class CastServiceImpl implements CastService {
     @Override
     public CastDto addCast(CastDto castDto) {
         Cast cast = mapper.castDtoToCast(castDto);
-        if (castRepository.existsByCastName(castDto.getCastName())) {
+        if (castRepository.existsByCastName(castDto.getCastName()) && castRepository.existsByCastRole(castDto.getCastRole())) {
             throw new AlreadyExistException("This cast Name already exists, please provide a different cast");
         }
         return mapper.castToCastDto(castRepository.save(mapper.castDtoToCast(castDto)));

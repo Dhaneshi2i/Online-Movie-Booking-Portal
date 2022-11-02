@@ -2,12 +2,7 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.service.TheatreService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,8 +48,8 @@ public class TheatreController {
      * @return List<TheatreDto>
      */
     @GetMapping
-    public List<TheatreDto> getAllTheatres() {
-        return theatreService.getAllTheatre();
+    public List<TheatreDto> getAllTheatres(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return theatreService.getAllTheatre(pageNumber, pageSize);
     }
 
     /**

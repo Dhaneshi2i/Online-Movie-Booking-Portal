@@ -21,8 +21,8 @@ import javax.validation.constraints.Pattern;
 public class LanguageDto {
 
     private int languageId;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid language")
+    @NotBlank(message = "Language should not be empty")
+    @Pattern(regexp="^(Tamil|English|Hindi|Telugu)$",message="Invalid language . Valid values are 1. Tamil 2. English 3. Hindi 4. Telugu")
     private String languageName;
 
 }

@@ -59,7 +59,7 @@ public class ShowController {
      * @param showId it contains theatre id
      * @return ShowDto
      */
-    @PatchMapping("{showId}")
+    @PatchMapping("/{showId}")
     public List<ShowDto> updateShow(@RequestBody ShowDto showDto,@PathVariable int showId) {
         return showService.updateShow(showDto, showId);
     }
@@ -85,8 +85,8 @@ public class ShowController {
      * @return List<ShowDto>
      */
     @GetMapping
-    public List<ShowDto> getAllShow() {
-        return showService.getAllShow();
+    public List<ShowDto> getAllShow(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return showService.getAllShow(pageNumber, pageSize);
     }
 
     /**

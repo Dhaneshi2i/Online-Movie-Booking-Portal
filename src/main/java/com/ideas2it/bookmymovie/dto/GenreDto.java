@@ -20,7 +20,7 @@ import javax.validation.constraints.Pattern;
 public class GenreDto {
 
     private int genreId;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid genre")
+    @NotBlank(message = "Genre should not be empty")
+    @Pattern(regexp="^(Action|Thriller|Drama)$",message="Invalid genre. Valid values are 1. Action 2. Thriller 3.Drama")
     private String genreName;
 }

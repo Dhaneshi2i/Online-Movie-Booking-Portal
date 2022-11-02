@@ -26,7 +26,7 @@ public interface  BookingService {
      *
      * @return List<BookingDto>
      */
-    List<BookingDto> getAllBookings();
+    List<BookingDto> getAllBookings(int pageNumber, int pageSize);
 
     /**
      * <p>

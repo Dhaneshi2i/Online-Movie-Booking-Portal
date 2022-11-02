@@ -12,7 +12,7 @@ CREATE TABLE users (
    password VARCHAR(255) NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    role_id INT NULL,
    CONSTRAINT pk_users PRIMARY KEY (user_id)
 );
@@ -42,7 +42,7 @@ CREATE TABLE movies (
    movie_name VARCHAR(40) NULL,
    duration time NULL,
    release_date date NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    CONSTRAINT pk_movies PRIMARY KEY (movie_id)
@@ -78,7 +78,7 @@ CREATE TABLE theatres (
   theatre_id INT AUTO_INCREMENT NOT NULL,
    theatre_name VARCHAR(40) NULL,
    theatre_city VARCHAR(40) NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    created_on datetime NULL,
    update_on datetime NULL,
    CONSTRAINT pk_theatres PRIMARY KEY (theatre_id)
@@ -88,7 +88,7 @@ CREATE TABLE screens (
   screen_id INT AUTO_INCREMENT NOT NULL,
    screen_name VARCHAR(40) NULL,
    theatre_id INT NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    CONSTRAINT pk_screens PRIMARY KEY (screen_id)
@@ -117,7 +117,7 @@ CREATE TABLE shows (
    movie_id INT NULL,
    screen_id INT NULL,
    theatre_id INT NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    show_start_time time NULL,
    CONSTRAINT pk_shows PRIMARY KEY (show_id)
 );

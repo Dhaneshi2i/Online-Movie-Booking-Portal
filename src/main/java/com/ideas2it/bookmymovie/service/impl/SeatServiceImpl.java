@@ -4,6 +4,7 @@ import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.Show;
@@ -11,6 +12,9 @@ import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,13 +55,16 @@ public class SeatServiceImpl implements SeatService {
      * @return List<SeatDto>
      */
     @Override
-    public List<SeatDto> getAllSeat() throws NotFoundException {
+    public List<SeatDto> getAllSeat(int pageNumber, int pageSize) throws NotFoundException {
         List<Seat> seats = seatRepository.findBySeatStatus(SeatStatus.AVAILABLE);
 
         if (0 == seats.size()) {
             throw new NotFoundException("No seats found");
         } else {
-            return mapper.seatListToSeatDtoList(seats);
+            Pageable p = PageRequest.of(pageNumber, pageSize);
+            Page<Seat> seat = seatRepository.findAll(p);
+            return  mapper.seatListToSeatDtoList(seat.getContent());
+
         }
     }
 

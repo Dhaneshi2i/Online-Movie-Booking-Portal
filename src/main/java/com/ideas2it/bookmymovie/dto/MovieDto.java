@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -33,6 +30,7 @@ public class MovieDto {
     @NotNull(message = "Please, Enter the movie duration in correct format(HH:mm)")
     private LocalTime duration;
     @NotNull(message = "Please, Enter the movie release date.Release date field should not be empty")
+    @FutureOrPresent(message = "Please provide a present or future date")
     private LocalDate releaseDate;
     @NotEmpty(message = "Please, Enter the movie's cast.Cast field should not be empty")
     private List<CastDto> casts = new ArrayList<>();

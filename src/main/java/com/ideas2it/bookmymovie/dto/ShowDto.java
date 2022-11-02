@@ -29,7 +29,7 @@ import java.time.LocalTime;
 public class ShowDto {
 
     private int showId;
-    @NotNull
+    @NotNull(message = "Show date should not be empty")
     @FutureOrPresent(message = "Please provide a present or future date")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)

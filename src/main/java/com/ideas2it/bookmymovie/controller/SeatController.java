@@ -3,11 +3,7 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.service.SeatService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,8 +35,8 @@ public class SeatController {
      * @return List<SeatDto>
      */
     @GetMapping
-    public List<SeatDto> viewSeatList() {
-        return seatService.getAllSeat();
+    public List<SeatDto> viewSeatList(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return seatService.getAllSeat(pageNumber, pageSize);
     }
 
     /**

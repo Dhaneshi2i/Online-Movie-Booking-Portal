@@ -22,7 +22,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class RoleDto {
     private int roleId;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid role")
+    @NotBlank(message = "Role should not be empty")
+    @Pattern(regexp="^(Admin|Customer)$",message="Invalid ROLE . Valid Values are 1. Admin 2. Customer")
     private String roleType;
 }

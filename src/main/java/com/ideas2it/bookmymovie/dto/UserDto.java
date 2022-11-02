@@ -22,19 +22,17 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 public class UserDto {
-
     private int userId;
-
-    @Size(min = 3,max = 40,message = "userName should be only between 3 and 40 characters")
+    @Size(min = 3,max = 40,message = "UserName should be only between 3 and 40 characters")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Use only alphabets")
     private String userName;
-    @NotBlank
+    @NotBlank(message = "Email id should not be empty")
     @Email(message = "Please, Enter valid user email id")
     private String emailId;
-    @NotNull
+    @NotNull(message = "Contact number should not be empty")
     private long contactNumber;
-    @NotBlank
-    @Size(max = 20, message = "Please, Enter valid password")
+    @NotBlank(message = "Password should not be empty")
+    @Size(max = 20, message = "Please, Enter minimum 18 character")
     private String password;
     private RoleDto role;
     private boolean status;

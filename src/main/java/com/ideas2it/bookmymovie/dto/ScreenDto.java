@@ -23,7 +23,7 @@ import java.util.List;
 public class ScreenDto {
 
     private int screenId;
-    @NotBlank
+    @NotBlank(message = "Screen should not be empty")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid screen name")
     private String screenName;
     private List<SeatTypeDto> seatTypes;
