@@ -22,15 +22,10 @@ import java.util.List;
 @NoArgsConstructor
 public class ScreenDto implements Serializable {
     private static final long serialVersionUID = 3710470335120544380L;
-    
     private int id;
     @NotBlank(message = "Screen should not be empty")
-    
-    @NotBlank
-
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid screen name")
     private String screenName;
     private List<SeatTypeDto> seatTypes;
-    private List<TimeSlotDto> timeSlots;
     private TheatreDto theatre;
 }

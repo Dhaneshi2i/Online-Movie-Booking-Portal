@@ -37,8 +37,8 @@ public class Theatre implements Serializable {
     private int theatreId;
     private String theatreName;
     private String theatreCity;
-    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Screen> screen = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Show> shows = new ArrayList<>();
     private boolean status;
     @CreationTimestamp
     private Timestamp createdOn;

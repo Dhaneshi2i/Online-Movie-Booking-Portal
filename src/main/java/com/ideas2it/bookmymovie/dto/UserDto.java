@@ -22,14 +22,9 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-
-
-   
-
-public class UserDto implements Serializable {
+ public class UserDto implements Serializable {
     private static final long serialVersionUID = 3710470335120544380L;
     private int id;
-    
     @Size(min = 3,max = 40,message = "userName should be only between 3 and 40 characters")
 
     @Pattern(regexp = Constants.NAME_REGEX, message = "Use only alphabets")

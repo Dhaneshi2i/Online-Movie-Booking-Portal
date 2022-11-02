@@ -7,12 +7,9 @@ import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Theatre;
-import com.ideas2it.bookmymovie.model.TimeSlot;
 import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.service.ScreenService;
-import com.ideas2it.bookmymovie.service.SeatTypeService;
 import com.ideas2it.bookmymovie.service.TheatreService;
-import com.ideas2it.bookmymovie.service.TimeSlotService;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -26,16 +23,11 @@ import java.util.stream.Collectors;
 public class ScreenServiceImpl implements ScreenService {
     private final ScreenRepository screenRepository;
     private final TheatreService theatreService;
-    private final SeatTypeService seatTypeService;
-    private final TimeSlotService timeSlotService;
     private final MapStructMapper mapper;
 
-    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService,
-                             SeatTypeService seatTypeService, TimeSlotService timeSlotService, MapStructMapper mapper) {
+    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService, MapStructMapper mapper) {
         this.screenRepository = screenRepository;
         this.theatreService = theatreService;
-        this.seatTypeService = seatTypeService;
-        this.timeSlotService = timeSlotService;
         this.mapper = mapper;
     }
 
@@ -49,23 +41,15 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto
      */
     @Override
-    public ScreenDto createScreen(ScreenDto screenDto) throws NotFoundException {
+    public ScreenDto createScreen(ScreenDto screenDto)  {
         Screen screen = mapper.screenDtoToScreen(screenDto);
-        List<SeatType> seatTypes = new ArrayList<>();
-        for (SeatType seatType : screen.getSeatTypes()) {
-             seatTypes.add(seatTypeService.getSeatTypeBySeatTypeId(seatType.getSeatTypeId()));
-        }
-        screen.setSeatTypes(seatTypes);
-        List<TimeSlot> timeSlots = new ArrayList<>();
-        for (TimeSlot timeSlot : screen.getTimeSlots()) {
-            timeSlots.add(timeSlotService.getTimeSlotByTimeSlotId(timeSlot.getTimeSlotId()));
-        }
-        screen.setTimeSlots(timeSlots);
         int theatreId = screenDto.getTheatre().getId();
-        if (0 != theatreId) {
-            Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(theatreId));
-            screen.setTheatre(theatre);
+        if (0 == theatreId) {
+            throw new NotFoundException("No theatre id is provided");
         }
+        Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(theatreId));
+        screen.setTheatre(theatre);
+        screen.setSeatTypes(mapper.seatTypeDtoListToSeatTypeList(screenDto.getSeatTypes()));
         return mapper.screenToScreenDto(screenRepository.save(screen));
     }
 

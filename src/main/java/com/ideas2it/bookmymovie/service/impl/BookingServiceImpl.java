@@ -7,7 +7,6 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.BookingStatus;
-import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.repository.BookingRepository;
 import com.ideas2it.bookmymovie.service.BookingService;
@@ -23,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -52,17 +50,18 @@ public class BookingServiceImpl implements BookingService {
      * @return BookingDto
      */
     @Override
-//    @Transactional
+    @Transactional
     public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
-        if (null != bookingDto) {
-            booking.setTransactionMode(bookingDto.getTransactionMode());
+
+        if (null != bookingDto.getUser()) {
             booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getId())));
             booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getId())));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
                 seats.add(seatService.getSeatById(seatDto.getId()));
             }
+            booking.setTransactionMode(bookingDto.getTransactionMode());
             booking.setBookingDate(LocalDate.now());
             booking.setTotalCost(calculateTotalCost(seats));
 
@@ -147,6 +146,7 @@ public class BookingServiceImpl implements BookingService {
         for (Seat seat : seats) {
             seatService.cancelSeatBooking(seat);
         }
+        booking.setBookingStatus(BookingStatus.CANCELLED);
         booking.setSeats(seats);
         bookingRepository.save(booking);
         return mapper.bookingToBookingResponseDto(booking);

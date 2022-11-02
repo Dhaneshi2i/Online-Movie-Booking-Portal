@@ -3,12 +3,14 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.service.LanguageService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -39,6 +41,11 @@ public class LanguageController {
     @PostMapping
     public LanguageDto createLanguage(@Valid @RequestBody LanguageDto languageDto) {
         return languageService.addLanguage(languageDto);
+    }
+
+    @GetMapping
+    public List<LanguageDto> getAllLanguages() {
+        return languageService.getAllLanguages();
     }
 
 }

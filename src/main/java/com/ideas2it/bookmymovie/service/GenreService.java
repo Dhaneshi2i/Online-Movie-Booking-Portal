@@ -2,6 +2,8 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.GenreDto;
 
+import java.util.List;
+
 public interface GenreService {
 
     /**
@@ -23,4 +25,6 @@ public interface GenreService {
      * @return GenreDto
      */
     GenreDto getByGenreId(int genreId);
+
+    List<GenreDto> getAllGenres();
 }

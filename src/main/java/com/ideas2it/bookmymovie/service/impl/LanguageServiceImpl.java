@@ -9,6 +9,8 @@ import com.ideas2it.bookmymovie.repository.LanguageRepository;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LanguageServiceImpl implements LanguageService {
     private final LanguageRepository languageRepository;
@@ -47,7 +49,16 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public LanguageDto getByLanguageId(int languageId) {
         return languageRepository.findByLanguageId(languageId)
-                .map(language -> mapper.languageToLanguageDto(language))
+                .map(mapper::languageToLanguageDto)
                 .orElseThrow(() ->new NotFoundException("No language found by name:" + languageId));
+    }
+
+    @Override
+    public List<LanguageDto> getAllLanguages() {
+        List<Language> languages = languageRepository.findAll();
+        if (languages.isEmpty()) {
+            throw new NotFoundException("No language details is available");
+        }
+        return mapper.languageListToLanguageDtoList(languages);
     }
 }

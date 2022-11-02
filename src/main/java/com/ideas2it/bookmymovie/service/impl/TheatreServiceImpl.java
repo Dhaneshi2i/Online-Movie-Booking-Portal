@@ -8,15 +8,13 @@ import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.TheatreService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TheatreServiceImpl implements TheatreService {
@@ -79,8 +77,9 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto
      */
     @Override
+
     @Cacheable(value = "theatre")
-    public TheatreDto findTheatreById(int theatreId) throws NotFoundException{
+    public TheatreDto findTheatreById(int theatreId) {
         if (theatreRepository.existsById(theatreId)) {
             Theatre theatre = theatreRepository.findByTheatreId(theatreId);
                 return mapper.theatreToTheatreDto(theatre);
@@ -94,31 +93,16 @@ public class TheatreServiceImpl implements TheatreService {
      * This method update the Theatre Details
      * </p>
      *
-     * @param theatreId it contains theatre id
+     * @param theatreDto it contains theatre details
      * @return List<TheatreDto>
      */
     @Override
-    public List<TheatreDto> updateTheatreById(int theatreId) {
-        Optional<Theatre> theatre = theatreRepository.findById(theatreId);
-        if(theatre.isPresent()) {
-            theatre.get().setStatus(true);
-            theatreRepository.save(theatre.get());
+    public TheatreDto updateTheatre(TheatreDto theatreDto) {
+        if(null == theatreDto) {
+            throw new NotFoundException("No theatre found for this id");
         }
-        return mapper.theatreListToTheatreDtoList(theatreRepository.findAllByStatus(true));
-    }
+        return mapper.theatreToTheatreDto(theatreRepository.save(mapper.theatreDtoToTheatre(theatreDto)));
 
-    /**
-     * <p>
-     * This method delete the Theatre Details with the given id
-     * </p>
-     *
-     * @param theatreId it contains theatre id
-     * @return List<TheatreDto>
-     */
-    @Override
-    public List<TheatreDto> deleteTheatreById(int theatreId) {
-        theatreRepository.deleteById(theatreId);
-        return mapper.theatreListToTheatreDtoList(theatreRepository.findAll());
     }
 
     /**
@@ -130,7 +114,12 @@ public class TheatreServiceImpl implements TheatreService {
      * @return List<TheatreDto>
      */
     @Cacheable(value = "theatre", key = "#city")
-    public List<TheatreDto> findTheatresByLocation(String city) throws NotFoundException{
-        return mapper.theatreListToTheatreDtoList(theatreRepository.findTheatreByTheatreCity(city));
+    public List<TheatreDto> findTheatresByLocation(String city) {
+        List<Theatre> theatres = theatreRepository.findTheatreByTheatreCity(city);
+        if (theatres.isEmpty()) {
+            throw new NotFoundException("No theatres were found for this location");
+        }
+        return mapper.theatreListToTheatreDtoList(theatres);
     }
+
 }

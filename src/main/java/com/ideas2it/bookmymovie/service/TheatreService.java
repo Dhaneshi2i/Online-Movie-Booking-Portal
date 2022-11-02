@@ -45,20 +45,10 @@ public interface TheatreService {
      * This method update the Theatre Details
      * </p>
      *
-     * @param theatreId it contains theatre id
+     * @param theatreDto it contains theatre details
      * @return List<TheatreDto>
      */
-    List<TheatreDto> updateTheatreById(int theatreId );
-
-    /**
-     * <p>
-     * This method delete the Theatre Details with the given id
-     * </p>
-     *
-     * @param theatreId it contains theatre id
-     * @return List<TheatreDto>
-     */
-    List<TheatreDto> deleteTheatreById(int theatreId);
+    TheatreDto updateTheatre(TheatreDto theatreDto );
 
     /**
      * <p>
@@ -69,4 +59,5 @@ public interface TheatreService {
      * @return List<TheatreDto>
      */
     List<TheatreDto> findTheatresByLocation(String city) throws NotFoundException;
+
 }

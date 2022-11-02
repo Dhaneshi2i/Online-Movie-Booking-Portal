@@ -1,23 +1,36 @@
 CREATE TABLE roles (
   role_id INT AUTO_INCREMENT NOT NULL,
-   role_type VARCHAR(40) NULL,
+   role_type VARCHAR(255) NULL,
    CONSTRAINT pk_roles PRIMARY KEY (role_id)
 );
 
 CREATE TABLE users (
   user_id INT AUTO_INCREMENT NOT NULL,
-   user_name VARCHAR(40) NULL,
-   email_id VARCHAR(40) NULL,
+   user_name VARCHAR(255) NULL,
+   email_id VARCHAR(255) NULL,
    contact_number BIGINT NOT NULL,
    password VARCHAR(255) NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
-   status INT NOT NULL,
+   status BIT(1) NOT NULL,
    role_id INT NULL,
    CONSTRAINT pk_users PRIMARY KEY (user_id)
 );
 
 ALTER TABLE users ADD CONSTRAINT FK_USERS_ON_ROLE FOREIGN KEY (role_id) REFERENCES roles (role_id);
+
+CREATE TABLE casts (
+  cast_id INT AUTO_INCREMENT NOT NULL,
+   cast_name VARCHAR(255) NULL,
+   cast_role VARCHAR(255) NULL,
+   CONSTRAINT pk_casts PRIMARY KEY (cast_id)
+);
+
+CREATE TABLE genres (
+  genre_id INT AUTO_INCREMENT NOT NULL,
+   genre_name VARCHAR(255) NULL,
+   CONSTRAINT pk_genres PRIMARY KEY (genre_id)
+);
 
 CREATE TABLE languages (
   language_id INT AUTO_INCREMENT NOT NULL,
@@ -25,28 +38,17 @@ CREATE TABLE languages (
    CONSTRAINT pk_languages PRIMARY KEY (language_id)
 );
 
-CREATE TABLE casts (
-  cast_id INT AUTO_INCREMENT NOT NULL,
-   cast_name VARCHAR(40) NULL,
-   cast_role VARCHAR(40) NULL,
-   CONSTRAINT pk_casts PRIMARY KEY (cast_id)
-);
-CREATE TABLE genres (
-  genre_id INT AUTO_INCREMENT NOT NULL,
-   genre_name VARCHAR(255) NULL,
-   CONSTRAINT pk_genres PRIMARY KEY (genre_id)
-);
-
 CREATE TABLE movies (
   movie_id INT AUTO_INCREMENT NOT NULL,
-   movie_name VARCHAR(40) NULL,
+   movie_name VARCHAR(255) NULL,
    duration time NULL,
    release_date date NULL,
-   status INT NOT NULL,
+   status BIT(1) NOT NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    CONSTRAINT pk_movies PRIMARY KEY (movie_id)
 );
+
 CREATE TABLE movie_cast (
   cast_id INT NOT NULL,
    movie_id INT NOT NULL
@@ -76,9 +78,9 @@ ALTER TABLE movie_language ADD CONSTRAINT fk_movlan_on_movie FOREIGN KEY (movie_
 
 CREATE TABLE theatres (
   theatre_id INT AUTO_INCREMENT NOT NULL,
-   theatre_name VARCHAR(40) NULL,
-   theatre_city VARCHAR(40) NULL,
-   status INT NOT NULL,
+   theatre_name VARCHAR(255) NULL,
+   theatre_city VARCHAR(255) NULL,
+   status BIT(1) NOT NULL,
    created_on datetime NULL,
    update_on datetime NULL,
    CONSTRAINT pk_theatres PRIMARY KEY (theatre_id)
@@ -86,9 +88,9 @@ CREATE TABLE theatres (
 
 CREATE TABLE screens (
   screen_id INT AUTO_INCREMENT NOT NULL,
-   screen_name VARCHAR(40) NULL,
+   screen_name VARCHAR(255) NULL,
    theatre_id INT NULL,
-   status INT NOT NULL,
+   status BIT(1) NOT NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    CONSTRAINT pk_screens PRIMARY KEY (screen_id)
@@ -98,12 +100,23 @@ ALTER TABLE screens ADD CONSTRAINT FK_SCREENS_ON_THEATRE FOREIGN KEY (theatre_id
 
 CREATE TABLE seat_type (
   seat_type_id INT AUTO_INCREMENT NOT NULL,
-   seat_type VARCHAR(40) NULL,
+   seat_type VARCHAR(255) NULL,
    no_of_columns INT NOT NULL,
    no_of_rows INT NOT NULL,
    price FLOAT NOT NULL,
    CONSTRAINT pk_seat_type PRIMARY KEY (seat_type_id)
 );
+
+CREATE TABLE screens_seat_types (
+  screens_seat_types_id INT AUTO_INCREMENT NOT NULL,
+  screen_screen_id INT NOT NULL,
+   seat_types_seat_type_id INT NOT NULL,
+   CONSTRAINT pk_screens_seat_types PRIMARY KEY (screens_seat_types_id)
+);
+
+ALTER TABLE screens_seat_types ADD CONSTRAINT fk_scrseatyp_on_screen FOREIGN KEY (screen_screen_id) REFERENCES screens (screen_id);
+
+ALTER TABLE screens_seat_types ADD CONSTRAINT fk_scrseatyp_on_seat_type FOREIGN KEY (seat_types_seat_type_id) REFERENCES seat_type (seat_type_id);
 
 CREATE TABLE time_slots (
   time_slot_id INT AUTO_INCREMENT NOT NULL,
@@ -114,11 +127,10 @@ CREATE TABLE time_slots (
 CREATE TABLE shows (
   show_id INT AUTO_INCREMENT NOT NULL,
    show_date date NULL,
+   show_start_time time NULL,
    movie_id INT NULL,
    screen_id INT NULL,
-   theatre_id INT NULL,
-   status INT NOT NULL,
-   show_start_time time NULL,
+   status BIT(1) NOT NULL,
    CONSTRAINT pk_shows PRIMARY KEY (show_id)
 );
 
@@ -126,7 +138,16 @@ ALTER TABLE shows ADD CONSTRAINT FK_SHOWS_ON_MOVIE FOREIGN KEY (movie_id) REFERE
 
 ALTER TABLE shows ADD CONSTRAINT FK_SHOWS_ON_SCREEN FOREIGN KEY (screen_id) REFERENCES screens (screen_id);
 
-ALTER TABLE shows ADD CONSTRAINT FK_SHOWS_ON_THEATRE FOREIGN KEY (theatre_id) REFERENCES theatres (theatre_id);
+CREATE TABLE theatres_shows (
+  theatres_shows_id INT AUTO_INCREMENT NOT NULL,
+  theatre_theatre_id INT NOT NULL,
+   shows_show_id INT NOT NULL,
+   CONSTRAINT pk_theatres_shows PRIMARY KEY (theatres_shows_id)
+);
+
+ALTER TABLE theatres_shows ADD CONSTRAINT fk_thesho_on_show FOREIGN KEY (shows_show_id) REFERENCES shows (show_id);
+
+ALTER TABLE theatres_shows ADD CONSTRAINT fk_thesho_on_theatre FOREIGN KEY (theatre_theatre_id) REFERENCES theatres (theatre_id);
 
 CREATE TABLE seats (
   seat_id INT AUTO_INCREMENT NOT NULL,
@@ -145,34 +166,13 @@ ALTER TABLE seats ADD CONSTRAINT FK_SEATS_ON_SEATTYPEID FOREIGN KEY (seat_type_i
 
 ALTER TABLE seats ADD CONSTRAINT FK_SEATS_ON_SHOW_SHOW FOREIGN KEY (show_show_id) REFERENCES shows (show_id);
 
-CREATE TABLE screens_time_slots (
-  id INT AUTO_INCREMENT NOT NULL,
-  screen_screen_id INT NOT NULL,
-   time_slots_time_slot_id INT NOT NULL,
-   CONSTRAINT pk_booking_seats PRIMARY KEY (id)
-);
-
-ALTER TABLE screens_time_slots ADD CONSTRAINT fk_scrtimslo_on_screen FOREIGN KEY (screen_screen_id) REFERENCES screens (screen_id);
-
-ALTER TABLE screens_time_slots ADD CONSTRAINT fk_scrtimslo_on_time_slot FOREIGN KEY (time_slots_time_slot_id) REFERENCES time_slots (time_slot_id);
-
-CREATE TABLE screens_seat_types (
-  id INT AUTO_INCREMENT NOT NULL,
-  screen_screen_id INT NOT NULL,
-   seat_types_seat_type_id INT NOT NULL,
-   CONSTRAINT pk_booking_seats PRIMARY KEY (id)
-);
-
-ALTER TABLE screens_seat_types ADD CONSTRAINT fk_scrseatyp_on_screen FOREIGN KEY (screen_screen_id) REFERENCES screens (screen_id);
-
-ALTER TABLE screens_seat_types ADD CONSTRAINT fk_scrseatyp_on_seat_type FOREIGN KEY (seat_types_seat_type_id) REFERENCES seat_type (seat_type_id);
 CREATE TABLE booking (
   booking_id INT AUTO_INCREMENT NOT NULL,
-   transaction_mode VARCHAR(40) NULL,
+   transaction_mode VARCHAR(255) NULL,
    user_user_id INT NULL,
    show_id INT NULL,
    booking_date date NULL,
-   booking_status VARCHAR(40) NULL,
+   booking_status VARCHAR(255) NULL,
    total_cost FLOAT NOT NULL,
    CONSTRAINT pk_booking PRIMARY KEY (booking_id)
 );
@@ -182,14 +182,13 @@ ALTER TABLE booking ADD CONSTRAINT FK_BOOKING_ON_SHOW FOREIGN KEY (show_id) REFE
 ALTER TABLE booking ADD CONSTRAINT FK_BOOKING_ON_USER_USERID FOREIGN KEY (user_user_id) REFERENCES users (user_id);
 
 CREATE TABLE booking_seats (
-  id INT AUTO_INCREMENT NOT NULL,
+  booking_seats_id INT AUTO_INCREMENT NOT NULL,
   booking_booking_id INT NOT NULL,
    seats_seat_id INT NOT NULL,
-   CONSTRAINT pk_booking_seats PRIMARY KEY (id)
+   CONSTRAINT pk_booking PRIMARY KEY (booking_seats_id)
 );
+
 
 ALTER TABLE booking_seats ADD CONSTRAINT fk_boosea_on_booking FOREIGN KEY (booking_booking_id) REFERENCES booking (booking_id);
 
 ALTER TABLE booking_seats ADD CONSTRAINT fk_boosea_on_seat FOREIGN KEY (seats_seat_id) REFERENCES seats (seat_id);
-
-

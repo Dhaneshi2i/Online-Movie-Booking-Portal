@@ -13,10 +13,10 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
 
-    url: jdbc:mysql://localhost/tk
+    url: jdbc:mysql://localhost/book
 
     username: root
-    password: siva2001
+    password: dhanesh@22
 
   main:
     allow-circular-references: true

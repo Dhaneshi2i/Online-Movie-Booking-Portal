@@ -20,8 +20,7 @@ import java.time.LocalTime;
 public class ShowResponseDto {
 
     private LocalDate showDate;
-    private MovieResponseDto movie;
-    private TheatreResponseDto theatre;
-    private ScreenResponseDto screen;
     private LocalTime showStartTime;
+    private MovieResponseDto movie;
+    private ScreenResponseDto screen;
 }
