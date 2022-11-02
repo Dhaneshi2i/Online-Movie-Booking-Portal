@@ -3,12 +3,9 @@ package com.ideas2it.bookmymovie.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cache.annotation.Cacheable;
 
 import javax.validation.constraints.NotBlank;
-
 import javax.validation.constraints.Pattern;
-
 import java.io.Serializable;
 
 
@@ -22,7 +19,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class TheatreDto implements Serializable{
     private static final long serialVersionUID = 3710470335120544380L;
     private int id;

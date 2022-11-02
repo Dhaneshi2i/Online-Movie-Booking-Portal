@@ -24,20 +24,9 @@ public interface ShowService {
      * </p>
      *
      * @param showDto it contains show dto objects
-     * @param showId it contains theatre id
      * @return ShowDto
      */
-    List<ShowDto> updateShow(ShowDto showDto, int showId);
-
-    /**
-     * <p>
-     * This method deletes the Show Details
-     * </p>
-     *
-     * @param showId it contains show id
-     * @return ShowDto
-     */
-    void removeShow(int showId);
+    ShowDto updateShow(ShowDto showDto);
 
     /**
      * <p>
@@ -66,7 +55,7 @@ public interface ShowService {
      * @param theatreId it contains theatre id
      * @return List<ShowDto>
      */
-    List<ShowDto> getShowByTheatreId(int theatreId);
+    //List<ShowDto> getShowByTheatreId(int theatreId);
 
     /**
      * <p>
@@ -78,13 +67,4 @@ public interface ShowService {
      */
     List<ShowDto> getShowsByDate(LocalDate date);
 
-    /**
-     * <p>
-     * This method List all the Screen Details by theatreCity
-     * </p>
-     *
-     * @param theatreCity it contains theatreCity
-     * @return List<ShowDto>
-     */
-    List<ShowDto> getShowByTheatreLocation(String theatreCity);
 }

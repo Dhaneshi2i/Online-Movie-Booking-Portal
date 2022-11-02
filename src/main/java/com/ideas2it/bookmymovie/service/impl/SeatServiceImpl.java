@@ -2,9 +2,9 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.SeatDto;
 import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
+import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
-import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.Show;
@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +101,10 @@ public class SeatServiceImpl implements SeatService {
     @Override
     @Transactional
     public Seat bookSeat(Seat seat) {
+        Seat currentSeat = seatRepository.findBySeatId(seat.getSeatId());
+        if (currentSeat.getSeatStatus().equals(SeatStatus.BOOKED)) {
+            throw new AlreadyExistException("This seat is already booked, please choose a different seat");
+        }
         seat.setSeatStatus(SeatStatus.BOOKED);
         return seatRepository.save(seat);
     }
@@ -143,7 +148,15 @@ public class SeatServiceImpl implements SeatService {
     @Cacheable(value = "seat",key = "#showId")
     public List<SeatResponseDto> getSeatByShowId(int showId) {
         Show show = mapper.showDtoToShow(showService.getShowById(showId));
-        List<Seat> seats = seatRepository.findByShow(show);
+        List<Seat> seats = new ArrayList<>();
+        for (Seat seat : seatRepository.findByShow(show)) {
+            if (seat.getSeatStatus().equals(SeatStatus.AVAILABLE)) {
+                seats.add(seat);
+            }
+        }
+        if (seats.isEmpty()) {
+            throw new NotFoundException("No available seats found for this show");
+        }
         return mapper.seatListToSeatResponseDtoList(seats);
     }
 

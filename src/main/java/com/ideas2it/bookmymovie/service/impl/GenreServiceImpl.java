@@ -9,6 +9,8 @@ import com.ideas2it.bookmymovie.repository.GenreRepository;
 import com.ideas2it.bookmymovie.service.GenreService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
@@ -47,7 +49,16 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public GenreDto  getByGenreId (int genreId) {
         return genreRepository.findByGenreId(genreId)
-                .map(genre -> mapper.genreToGenreDto(genre))
+                .map(mapper::genreToGenreDto)
                 .orElseThrow(() -> new NotFoundException("No genre found by name: " + genreId ));
+    }
+
+    @Override
+    public List<GenreDto> getAllGenres() {
+        List<Genre> genres = genreRepository.findAll();
+        if (genres.isEmpty()) {
+            throw new NotFoundException("No genre details is available");
+        }
+        return mapper.genreListToGenreDtoList(genres);
     }
 }

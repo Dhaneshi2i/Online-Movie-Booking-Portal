@@ -6,22 +6,20 @@ import com.ideas2it.bookmymovie.dto.LanguageDto;
 import com.ideas2it.bookmymovie.dto.MovieDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
-import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Movie;
 import com.ideas2it.bookmymovie.repository.MovieRepository;
 import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl implements MovieService {

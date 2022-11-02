@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.TimeSlotDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
@@ -9,12 +10,13 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
-import com.ideas2it.bookmymovie.model.TimeSlot;
+import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
+import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -32,15 +33,17 @@ public class ShowServiceImpl implements ShowService {
     private final ScreenService screenService;
     private final MovieService movieService;
     private final SeatService seatService;
+    private final TheatreService theatreService;
     private final MapStructMapper mapper;
 
-    public ShowServiceImpl(ShowRepository showrepository,ScreenService screenService,
-                           MovieService movieService, SeatService seatService, MapStructMapper mapper ) {
+    public ShowServiceImpl(ShowRepository showrepository, ScreenService screenService,
+                           MovieService movieService, SeatService seatService, TheatreService theatreService, MapStructMapper mapper ) {
 
         this.showrepository = showrepository;
         this.screenService = screenService;
         this.movieService = movieService;
         this.seatService = seatService;
+        this.theatreService = theatreService;
         this.mapper = mapper;
     }
 
@@ -57,18 +60,22 @@ public class ShowServiceImpl implements ShowService {
     public List<ShowResponseDto> createShow(ShowDto showDto){
         List<Show> shows = new ArrayList<>();
         Screen screen = mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getId()));
-        List<TimeSlot> timeslots = screen.getTimeSlots();
-        for (TimeSlot timeSlot : timeslots) {
+        for (TimeSlotDto timeSlot : showDto.getTimeSlots()) {
             Show show = new Show();
-            show.setShowDate(showDto.getShowDate());
             show.setShowStartTime(timeSlot.getShowStartTime());
+            show.setShowDate(showDto.getShowDate());
             show.setScreen(screen);
-            show.setTheatre(screen.getTheatre());
             show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getId())));
             showrepository.save(show);
             createSeat(show);
             shows.add(show);
         }
+        Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(screen.getTheatre().getTheatreId()));
+        if (shows.isEmpty()) {
+            throw new NotFoundException("No shows found ");
+        }
+        theatre.setShows(shows);
+        theatreService.updateTheatre(mapper.theatreToTheatreDto(theatre));
         return mapper.showListToShowResponseDtoList(shows);
     }
 
@@ -100,36 +107,16 @@ public class ShowServiceImpl implements ShowService {
      * </p>
      *
      * @param showDto it contains show dto objects
-     * @param showId  it contains screen id
      * @return ShowDto
      */
     @Override
-    public List<ShowDto> updateShow(ShowDto showDto, int showId) {
-        Optional<Show> show = showrepository.findById(showId);
-        if (show.isPresent()) {
-            show.get().setStatus(true);
-            showrepository.save(show.get());
-        }
-        return mapper.showListToShowDtoList(showrepository.findAllByStatus(true));
-    }
-
-
-    /**
-     * <p>
-     * This method deletes the Show Details
-     * </p>
-     *
-     * @param showId it contains show id
-     * @return ShowDto
-     */
-    @Override
-    public void removeShow(int showId) {
-        Show show = showrepository.findByShowId(showId);
+    public ShowDto updateShow(ShowDto showDto) {
+        Show show = showrepository.findByShowId(showDto.getId());
         if (null == show) {
-            throw new NotFoundException("No shows found for respective Id " + showId);
-        } else {
-            show.setStatus(true);
+            throw new NotFoundException("No show were found for this id");
         }
+        show.setStatus(true);
+        return mapper.showToShowDto(showrepository.save(show));
     }
 
     /**
@@ -179,15 +166,14 @@ public class ShowServiceImpl implements ShowService {
      * @param theatreId it contains theatre id
      * @return List<ShowDto>
      */
-    @Override
+    /*@Override
     public List<ShowDto> getShowByTheatreId(int theatreId) {
         List<Show> shows = showrepository.getAllByTheatreId(theatreId);
         if (shows.isEmpty()) {
             throw new NotFoundException("No shows available for respective theatre " + theatreId);
-        } else {
-            return mapper.showListToShowDtoList(shows);
         }
-    }
+        return mapper.showListToShowDtoList(shows);
+    }*/
 
     /**
      * <p>
@@ -212,27 +198,5 @@ public class ShowServiceImpl implements ShowService {
         }
     }
 
-    /**
-     * <p>
-     * This method List all the Screen Details by theatreCity
-     * </p>
-     *
-     * @param theatreCity it contains theatreCity
-     * @return List<ShowDto>
-     */
-    @Override
-    public List<ShowDto> getShowByTheatreLocation(String theatreCity) {
-        List<Show> shows = new ArrayList<>();
-        for (Show show : showrepository.findAll()) {
-            if (show.getTheatre().getTheatreCity().equalsIgnoreCase(theatreCity)) {
-                shows.add(show);
-            }
-        }
-        if (shows.isEmpty()) {
-            throw new NotFoundException("No movie shows were found for the given location " + theatreCity);
-        } else {
-            return mapper.showListToShowDtoList(shows);
-        }
-    }
 }
 

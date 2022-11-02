@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,6 @@ import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,10 +37,10 @@ public class MovieDto implements Serializable {
     @FutureOrPresent(message = "Please provide a present or future date")
     private LocalDate releaseDate;
     @NotEmpty(message = "Please, Enter the movie's cast.Cast field should not be empty")
-    private List<CastDto> casts = new ArrayList<>();
+    private List<CastDto> casts;
     @NotEmpty(message = "Please, Enter the movie's language.Language field should not be empty")
-    private List<LanguageDto> languages = new ArrayList<>();
+    private List<LanguageDto> languages;
     @NotEmpty(message = "Please, Enter the movie's genre.Genre field should not be empty")
-    private List<GenreDto> genres = new ArrayList<>();
+    private List<GenreDto> genres;
 
 }

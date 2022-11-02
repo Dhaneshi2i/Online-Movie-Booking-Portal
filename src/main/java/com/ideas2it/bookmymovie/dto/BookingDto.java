@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -22,12 +21,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookingDto {
-
 public class BookingDto implements Serializable {
     private static final long serialVersionUID = 3710470335120544380L;
     @NotBlank(message = "Transaction mode should not be empty")
-    @Pattern(regexp="^(Online|Offline)$",message="Invalid transaction status . Valid values are 1. ONLINE 2. OFFLINE");
+    @Pattern(regexp="^(Online|Offline)$",message="Invalid transaction status . Valid values are 1. ONLINE 2. OFFLINE")
     private String transactionMode;
     private UserDto user;
     private ShowDto show;

@@ -34,8 +34,8 @@ import java.io.IOException;
         String userName = null;
         String webToken = null;
 
-        if (authHeader != null && authHeader.startsWith("Token ")) {
-            webToken = authHeader.substring(6);
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            webToken = authHeader.substring(7);
             userName = jwtUtil.extractUserName(webToken);
         }
 

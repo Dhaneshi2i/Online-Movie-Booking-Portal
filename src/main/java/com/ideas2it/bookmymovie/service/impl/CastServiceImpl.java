@@ -9,6 +9,8 @@ import com.ideas2it.bookmymovie.repository.CastRepository;
 import com.ideas2it.bookmymovie.service.CastService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CastServiceImpl implements CastService {
     private final CastRepository castRepository;
@@ -33,7 +35,7 @@ public class CastServiceImpl implements CastService {
         if (castRepository.existsByCastName(castDto.getCastName()) && castRepository.existsByCastRole(castDto.getCastRole())) {
             throw new AlreadyExistException("This cast Name already exists, please provide a different cast");
         }
-        return mapper.castToCastDto(castRepository.save(mapper.castDtoToCast(castDto)));
+        return mapper.castToCastDto(castRepository.save(cast));
     }
 
     /**
@@ -46,6 +48,16 @@ public class CastServiceImpl implements CastService {
      */
     @Override
     public CastDto getByCastId(int castId) {
-        return castRepository.findById(castId).map(cast -> mapper.castToCastDto(cast)).orElseThrow(() -> new NotFoundException("No cast found"));
+        return castRepository.findById(castId).map(mapper::castToCastDto)
+                .orElseThrow(() -> new NotFoundException("No cast found"));
+    }
+
+    @Override
+    public List<CastDto> getAllCasts() {
+        List<Cast> casts = castRepository.findAll();
+        if (casts.isEmpty()) {
+            throw new NotFoundException("No cast details available");
+        }
+        return mapper.castListToCastDtoList(casts);
     }
 }

@@ -2,22 +2,19 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
-import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.exception.AlreadyExistException;
+import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +24,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -129,7 +125,8 @@ public class UserServiceImpl implements UserService {
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRoleType()));
-        return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(),
+                                                                                                   grantedAuthorities);
     }
 }
 

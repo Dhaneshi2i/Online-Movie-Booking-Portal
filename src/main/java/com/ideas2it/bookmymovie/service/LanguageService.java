@@ -2,6 +2,8 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.LanguageDto;
 
+import java.util.List;
+
 public interface LanguageService {
 
     /**
@@ -23,4 +25,6 @@ public interface LanguageService {
      * @return LanguageDto
      */
     LanguageDto getByLanguageId(int languageId);
+
+    List<LanguageDto> getAllLanguages();
 }

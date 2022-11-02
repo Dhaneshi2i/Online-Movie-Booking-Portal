@@ -2,12 +2,14 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.GenreDto;
 import com.ideas2it.bookmymovie.service.GenreService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/genre")
@@ -30,4 +32,10 @@ public class GenreController {
     public GenreDto createGenre(@Valid @RequestBody GenreDto genreDto) {
         return genreService.addGenre(genreDto);
     }
+
+    @GetMapping
+    public List<GenreDto> getAllGenres() {
+        return genreService.getAllGenres();
+    }
+
 }

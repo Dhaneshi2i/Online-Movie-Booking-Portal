@@ -56,12 +56,12 @@ public class ShowController {
      * </p>
      *
      * @param showDto   it contains show dto objects
-     * @param showId it contains theatre id
      * @return ShowDto
      */
-    @PatchMapping("/{showId}")
-    public List<ShowDto> updateShow(@RequestBody ShowDto showDto,@PathVariable int showId) {
-        return showService.updateShow(showDto, showId);
+
+    @PatchMapping
+    public ShowDto updateShow(@RequestBody ShowDto showDto) {
+        return showService.updateShow(showDto);
     }
 
     /**
@@ -91,19 +91,6 @@ public class ShowController {
 
     /**
      * <p>
-     * This method List all the Screen Details by Theatre
-     * </p>
-     *
-     * @param theatreId it contains theatre id
-     * @return List<ShowDto>
-     */
-    @GetMapping("/get-by-theatre/{theatreId}")
-    public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
-        return showService.getShowByTheatreId(theatreId);
-    }
-
-    /**
-     * <p>
      * This method List all the Screen Details by Date
      * </p>
      *
@@ -113,19 +100,6 @@ public class ShowController {
     @GetMapping("/date")
     public List<ShowDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return showService.getShowsByDate(date);
-    }
-
-    /**
-     * <p>
-     * This method List all the Screen Details by theatreCity
-     * </p>
-     *
-     * @param theatreCity it contains date
-     * @return List<ShowDto>
-     */
-    @GetMapping("/theatre-city")
-    public List<ShowDto> getShowByTheatreCity(@RequestParam(value = "theatre-city") String theatreCity) {
-        return showService.getShowByTheatreLocation(theatreCity);
     }
 
 }

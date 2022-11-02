@@ -2,6 +2,8 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.CastDto;
 
+import java.util.List;
+
 public interface CastService {
 
     /**
@@ -23,4 +25,6 @@ public interface CastService {
      * @return CastDto
      */
     CastDto getByCastId(int castId);
+
+    List<CastDto> getAllCasts();
 }
