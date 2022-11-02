@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/timeSlot")
+@RequestMapping("/api/v1/time-slot")
 public class TimeSlotController {
     private final TimeSlotService timeSlotService;
 

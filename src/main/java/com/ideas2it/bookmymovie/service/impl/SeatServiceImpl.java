@@ -10,6 +10,8 @@ import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,6 +72,7 @@ public class SeatServiceImpl implements SeatService {
      * @return SeatDto
      */
     @Override
+    @CachePut(value = "seat", key = "#seatId")
     public SeatDto updateSeatById(int seatId) throws NotFoundException{
         Optional<Seat> seat = seatRepository.findById(seatId);
         if(seat.isPresent()) {
@@ -130,6 +133,7 @@ public class SeatServiceImpl implements SeatService {
      * @return List<SeatDto>
      */
     @Override
+    @Cacheable(value = "seat",key = "#showId")
     public List<SeatResponseDto> getSeatByShowId(int showId) {
         Show show = mapper.showDtoToShow(showService.getShowById(showId));
         List<Seat> seats = seatRepository.findByShow(show);

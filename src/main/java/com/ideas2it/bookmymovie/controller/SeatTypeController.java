@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/seatType")
+@RequestMapping("/api/v1/seat-type")
 public class SeatTypeController {
     private final SeatTypeService seatTypeService;
 

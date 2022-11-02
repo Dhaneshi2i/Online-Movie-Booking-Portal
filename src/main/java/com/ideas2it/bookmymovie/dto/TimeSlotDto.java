@@ -16,7 +16,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 public class TimeSlotDto {
-    private int timeSlotId;
+    private int id;
 
     @NotNull
     @JsonDeserialize(using = LocalTimeDeserializer.class)

@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+
 /**
  * <p>
  * Cast Dto class contains the cast dto data.
@@ -15,9 +17,9 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CastDto {
+public class CastDto implements Serializable  {
 
-    private int castId;
+    private int id;
     @NotBlank
     private String castName;
     @NotBlank

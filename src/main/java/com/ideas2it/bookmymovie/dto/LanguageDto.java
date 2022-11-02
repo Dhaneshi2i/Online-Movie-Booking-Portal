@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
 /**
  * <p>
  * Language Dto class contains the language dto data.
@@ -18,9 +20,9 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LanguageDto {
+public class LanguageDto implements Serializable {
 
-    private int languageId;
+    private int id;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid language")
     private String languageName;

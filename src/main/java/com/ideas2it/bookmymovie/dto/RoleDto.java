@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.sql.rowset.serial.SerialArray;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -20,8 +22,9 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RoleDto {
-    private int roleId;
+public class RoleDto implements Serializable {
+    private static final long serialVersionUID = 3710470335120544380L;
+    private int id;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid role")
     private String roleType;

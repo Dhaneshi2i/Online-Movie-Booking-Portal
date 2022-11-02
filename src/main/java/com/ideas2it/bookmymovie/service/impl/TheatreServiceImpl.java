@@ -8,6 +8,7 @@ import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.TheatreService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,6 +74,7 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto
      */
     @Override
+    @Cacheable(value = "theatre")
     public TheatreDto findTheatreById(int theatreId) throws NotFoundException{
         if (theatreRepository.existsById(theatreId)) {
             Theatre theatre = theatreRepository.findByTheatreId(theatreId);
@@ -122,6 +124,7 @@ public class TheatreServiceImpl implements TheatreService {
      * @param city it contains city
      * @return List<TheatreDto>
      */
+    @Cacheable(value = "theatre", key = "#city")
     public List<TheatreDto> findTheatresByLocation(String city) throws NotFoundException{
         return mapper.theatreListToTheatreDtoList(theatreRepository.findTheatreByTheatreCity(city));
     }
