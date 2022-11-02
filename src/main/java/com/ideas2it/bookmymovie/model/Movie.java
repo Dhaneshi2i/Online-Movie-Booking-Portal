@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,13 +33,13 @@ import java.util.List;
 @Entity
 @Table(name = "movies")
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieId;
     private String movieName;
     private LocalTime duration;
     private LocalDate releaseDate;
-
     @ManyToMany(cascade = {
             CascadeType.MERGE
     })
@@ -78,13 +77,11 @@ public class Movie {
             }
     )
     private List<Cast> casts = new ArrayList<>();
-
     private boolean status;
     @CreationTimestamp
     private Timestamp createdOn;
     @UpdateTimestamp
     private Timestamp updatedOn;
-
 }
 
 

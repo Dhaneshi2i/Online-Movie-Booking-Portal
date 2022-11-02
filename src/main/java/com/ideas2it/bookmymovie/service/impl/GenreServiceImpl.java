@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GenreServiceImpl implements GenreService {
-    private GenreRepository genreRepository;
-    private MapStructMapper mapper;
+    private final GenreRepository genreRepository;
+    private final MapStructMapper mapper;
 
     public GenreServiceImpl(GenreRepository genreRepository, MapStructMapper mapper) {
         this.genreRepository = genreRepository;

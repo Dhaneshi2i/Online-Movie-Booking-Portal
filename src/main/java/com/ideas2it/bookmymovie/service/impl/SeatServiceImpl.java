@@ -20,9 +20,9 @@ import java.util.Optional;
 @Service
 public class SeatServiceImpl implements SeatService {
 
-    private SeatRepository seatRepository;
-    private ShowService showService;
-    private MapStructMapper mapper;
+    private final SeatRepository seatRepository;
+    private final ShowService showService;
+    private final MapStructMapper mapper;
 
     public SeatServiceImpl(SeatRepository seatRepository, @Lazy ShowService showService, MapStructMapper mapper) {
         this.seatRepository = seatRepository;
@@ -40,7 +40,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     @Transactional
     public void createSeat(Seat seat)  {
-        seatRepository.saveAndFlush(seat);
+        seatRepository.save(seat);
     }
 
     /**
@@ -88,6 +88,7 @@ public class SeatServiceImpl implements SeatService {
      * @return SeatDto
      */
     @Override
+    @Transactional
     public Seat bookSeat(Seat seat) {
         seat.setSeatStatus(SeatStatus.BOOKED);
         return seatRepository.save(seat);

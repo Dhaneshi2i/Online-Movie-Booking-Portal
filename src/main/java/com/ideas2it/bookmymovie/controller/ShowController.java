@@ -3,7 +3,14 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -23,7 +30,7 @@ import java.util.List;
 @RequestMapping("/api/v1/shows")
 public class ShowController {
 
-    private ShowService showService;
+    private final ShowService showService;
 
     public ShowController(ShowService showService) {
         this.showService = showService;
@@ -89,7 +96,7 @@ public class ShowController {
      * @param theatreId it contains theatre id
      * @return List<ShowDto>
      */
-    @GetMapping("/show-theatre/{theatreId}")
+    @GetMapping("/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
         return showService.getShowByTheatreId(theatreId);
     }

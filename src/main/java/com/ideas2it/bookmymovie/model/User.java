@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,27 +28,20 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
-
     private String userName;
-
     private String emailId;
-
     private long contactNumber;
-
     private String password;
-
     @CreationTimestamp
     private Timestamp createdOn;
-
     @UpdateTimestamp
     private Timestamp updatedOn;
     private boolean status;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
-
 }

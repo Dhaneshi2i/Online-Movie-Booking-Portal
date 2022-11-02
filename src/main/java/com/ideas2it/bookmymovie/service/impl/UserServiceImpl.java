@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
@@ -50,6 +49,8 @@ public class UserServiceImpl implements UserService {
         User user = mapper.userDtoToUser(userDto);
         if(userRepository.existsByContactNumber(user.getContactNumber())) {
             throw new UserAlreadyExistException("User mobile number already exist ");
+        } else if (userRepository.existsByUserName(user.getUserName())) {
+            throw new UserAlreadyExistException("UserName already exist, please provide different userName");
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
             user.setRole(roleService.getRoleByRoleId(userDto.getRole().getRoleId()));
@@ -94,9 +95,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto updateUser(UserDto userDto) {
-        User user = userRepository.findByUserId(userDto.getUserId());
-        user.setStatus(userDto.isStatus());
-        return mapper.userToUserDto(userRepository.save(user));
+        return mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDto)));
     }
 
     /**

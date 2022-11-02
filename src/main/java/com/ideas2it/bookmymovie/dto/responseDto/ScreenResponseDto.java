@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.dto.responseDto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,9 +12,8 @@ import org.springframework.stereotype.Component;
  **/
 @Getter
 @Setter
-@Component
 public class ScreenResponseDto {
+
     private int screenId;
     private String screenName;
-
 }

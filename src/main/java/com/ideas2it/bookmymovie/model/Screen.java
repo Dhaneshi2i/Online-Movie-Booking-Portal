@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,7 +36,9 @@ public class Screen {
     private int screenId;
     private String screenName;
     @OneToMany(fetch = FetchType.LAZY)
-    private List<SeatType> typesOfSeats;
+    private List<SeatType> seatTypes;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<TimeSlot> timeSlots;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
@@ -46,5 +47,4 @@ public class Screen {
     private Timestamp createdOn;
     @UpdateTimestamp
     private Timestamp updatedOn;
-
 }

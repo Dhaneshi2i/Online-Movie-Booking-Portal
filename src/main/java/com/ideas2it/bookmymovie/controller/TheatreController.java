@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.service.TheatreService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +21,12 @@ import java.util.List;
  * @author Dhanesh kumar, Harini, sivadharshini
  * @version 1.0
  */
-@Slf4j
+
 @RestController
 @RequestMapping("api/v1/theatre")
 public class TheatreController {
 
-    private TheatreService theatreService;
+    private final TheatreService theatreService;
 
     public TheatreController(TheatreService theatreService) {
         this.theatreService = theatreService;;

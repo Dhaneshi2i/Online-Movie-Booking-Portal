@@ -1,13 +1,10 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.ideas2it.bookmymovie.Constants;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.List;
@@ -29,6 +26,7 @@ public class ScreenDto {
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid screen name")
     private String screenName;
-    private List<SeatTypeDto> typesOfSeats;
+    private List<SeatTypeDto> seatTypes;
+    private List<TimeSlotDto> timeSlots;
     private TheatreDto theatre;
 }

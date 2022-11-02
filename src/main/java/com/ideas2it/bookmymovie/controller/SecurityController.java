@@ -9,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SecurityController {
 
-    private AuthenticationManager authenticationManager;
-
-    private JwtUtil tokenUtil;
-
-    private UserService userService;
-
-    public PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil tokenUtil;
+    private final UserService userService;
 
     public SecurityController(AuthenticationManager authenticationManager, JwtUtil tokenUtil, UserService userService) {
         this.authenticationManager = authenticationManager;
@@ -45,13 +40,11 @@ public class SecurityController {
      * </p>
      *
      * @param authenticationRequest it contains AuthRequest objects
-     * @return
+     * @return ResponseEntity
      */
     @RequestMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest) throws Exception {
         try {
-//                authenticationRequest.setPassword(passwordEncoder.encode(authenticationRequest.getPassword()));
-//                 System.out.println(authenticationRequest.getPassword());
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(),
                     authenticationRequest.getPassword()));
         } catch (BadCredentialsException badCredentialsException) {

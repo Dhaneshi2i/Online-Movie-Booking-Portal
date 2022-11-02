@@ -68,8 +68,21 @@ public class BookingController {
      * @return BookingDto
      */
     @GetMapping("/{bookingId}")
-    public BookingDto viewByBookingId(@PathVariable int bookingId) {
+    public BookingResponseDto viewByBookingId(@PathVariable int bookingId) {
         return bookingService.viewByBookingId(bookingId);
+    }
+
+    /**
+     * <p>
+     * This method get the Booking Details which matches the id
+     * </p>
+     *
+     * @param userId it contains booking id
+     * @return BookingResponseDto
+     */
+    @GetMapping("/userId")
+    public BookingResponseDto viewBookingByUserId(@PathVariable int userId) {
+        return bookingService.viewBookingByUserId(userId);
     }
 
     /**

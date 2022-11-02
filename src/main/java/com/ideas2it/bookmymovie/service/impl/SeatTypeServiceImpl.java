@@ -11,8 +11,8 @@ import java.util.List;
 
 @Service
 public class SeatTypeServiceImpl implements SeatTypeService {
-    private SeatTypeRepository seatTypeRepository;
-    private MapStructMapper mapper;
+    private final SeatTypeRepository seatTypeRepository;
+    private final MapStructMapper mapper;
 
     public SeatTypeServiceImpl(SeatTypeRepository seatTypeRepository, MapStructMapper mapper) {
         this.seatTypeRepository = seatTypeRepository;
