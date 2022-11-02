@@ -20,8 +20,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SeatTypeDto {
 
-    private int seatTypeId;
+
+   
+
+    private int id;
+
     @NotBlank(message = "Seat type should not be empty")
+
     private String seatType;
     @NotNull(message = "Number of columns should not be empty")
     @Range(min=5,max=50)

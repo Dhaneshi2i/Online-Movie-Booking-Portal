@@ -10,9 +10,14 @@ import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,7 +61,7 @@ public class UserServiceImpl implements UserService {
             throw new AlreadyExistException("UserName already exist, please provide different userName");
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-            user.setRole(roleService.getRoleByRoleId(userDto.getRole().getRoleId()));
+            user.setRole(roleService.getRoleByRoleId(userDto.getRole().getId()));
             return mapper.userToUserResponseDto(userRepository.save(user));
         }
     }
@@ -85,6 +90,7 @@ public class UserServiceImpl implements UserService {
      * @return UserDto
      */
     @Override
+    @Cacheable(value = "user")
     public UserDto getUserById(int id) {
         return userRepository.findById(id).map(mapper::userToUserDto)
                 .orElseThrow(() ->new NotFoundException("No user found"));
@@ -99,6 +105,7 @@ public class UserServiceImpl implements UserService {
      * @return ScreenDto
      */
     @Override
+    @CachePut(value = "user",key = "#userDto.getUserId()")
     public UserDto updateUser(UserDto userDto) {
         return mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDto)));
     }

@@ -3,9 +3,14 @@ package com.ideas2it.bookmymovie.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.Pattern;
+
+import java.io.Serializable;
+
 
 /**
  * <p>
@@ -18,9 +23,9 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 
-public class TheatreDto {
-
-    private int theatreId;
+public class TheatreDto implements Serializable{
+    private static final long serialVersionUID = 3710470335120544380L;
+    private int id;
     @NotBlank(message = "Please, Enter theatre name. Theatre name should not be empty")
     private String theatreName;
     @NotBlank(message = "Please, Enter theatre city. Theatre location should not empty")

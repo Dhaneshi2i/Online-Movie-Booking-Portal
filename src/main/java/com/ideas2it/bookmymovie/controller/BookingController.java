@@ -3,7 +3,15 @@ package com.ideas2it.bookmymovie.controller;
 import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.service.BookingService;
-import org.springframework.web.bind.annotation.*;
+import org.hibernate.annotations.Cache;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -62,6 +70,7 @@ public class BookingController {
      * @return BookingDto
      */
     @GetMapping("/{bookingId}")
+    @Cacheable(value = "booking")
     public BookingResponseDto viewByBookingId(@PathVariable int bookingId) {
         return bookingService.viewByBookingId(bookingId);
     }
@@ -74,7 +83,8 @@ public class BookingController {
      * @param userId it contains booking id
      * @return BookingResponseDto
      */
-    @GetMapping("/userId")
+    @GetMapping("/get-by-user/userId")
+    @Cacheable(value = "booking",key = "#userId")
     public BookingResponseDto viewBookingByUserId(@PathVariable int userId) {
         return bookingService.viewBookingByUserId(userId);
     }
@@ -87,7 +97,7 @@ public class BookingController {
      * @param bookingId it contains booking dto object
      * @return BookingDto
      */
-    @PatchMapping("/{bookingId}")
+    @PatchMapping("/cancel-booking/{bookingId}")
     public BookingResponseDto cancelBookingById(@PathVariable int bookingId) {
         return bookingService.cancelBooking(bookingId);
     }

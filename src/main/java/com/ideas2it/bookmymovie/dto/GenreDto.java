@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
 /**
  * <p>
  * Genre Dto class contains the genre dto data.
@@ -17,10 +19,13 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GenreDto {
+public class GenreDto implements Serializable {
 
-    private int genreId;
+
     @NotBlank(message = "Genre should not be empty")
     @Pattern(regexp="^(Action|Thriller|Drama)$",message="Invalid genre. Valid values are 1. Action 2. Thriller 3.Drama")
+    private int id;
+    @NotBlank
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid genre")
     private String genreName;
 }

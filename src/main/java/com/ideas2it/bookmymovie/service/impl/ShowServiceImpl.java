@@ -56,7 +56,7 @@ public class ShowServiceImpl implements ShowService {
     @Transactional
     public List<ShowResponseDto> createShow(ShowDto showDto){
         List<Show> shows = new ArrayList<>();
-        Screen screen = mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId()));
+        Screen screen = mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getId()));
         List<TimeSlot> timeslots = screen.getTimeSlots();
         for (TimeSlot timeSlot : timeslots) {
             Show show = new Show();
@@ -64,7 +64,7 @@ public class ShowServiceImpl implements ShowService {
             show.setShowStartTime(timeSlot.getShowStartTime());
             show.setScreen(screen);
             show.setTheatre(screen.getTheatre());
-            show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
+            show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getId())));
             showrepository.save(show);
             createSeat(show);
             shows.add(show);

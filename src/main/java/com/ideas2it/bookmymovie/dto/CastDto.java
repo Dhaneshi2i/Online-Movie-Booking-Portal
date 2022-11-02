@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
 
 /**
  * <p>
@@ -17,10 +19,9 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CastDto {
-
-    private int castId;
-    @NotBlank(message = "Cast should not be empty")
+public class CastDto implements Serializable  {
+    private int id;
+    @NotBlank
     private String castName;
     @NotBlank(message = "Cast role should not be empty")
     @Pattern(regexp="^(Actor|Actress|Director)$",message="Invalid cast role. Valid values are 1. Actor 2. Actress 3. Director")

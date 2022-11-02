@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,15 +31,15 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "booking")
-public class Booking {
-
+public class Booking implements Serializable {
+    private static final long serialVersionUID = 3710470335120544380L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bookingId;
     private String transactionMode;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "show_id")
     private Show show;
     private LocalDate bookingDate;

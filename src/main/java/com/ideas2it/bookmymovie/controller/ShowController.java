@@ -97,7 +97,7 @@ public class ShowController {
      * @param theatreId it contains theatre id
      * @return List<ShowDto>
      */
-    @GetMapping("/{theatreId}")
+    @GetMapping("/get-by-theatre/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
         return showService.getShowByTheatreId(theatreId);
     }
@@ -123,8 +123,8 @@ public class ShowController {
      * @param theatreCity it contains date
      * @return List<ShowDto>
      */
-    @GetMapping("/theatreCity")
-    public List<ShowDto> getShowByTheatreCity(@RequestParam(value = "theatreCity") String theatreCity) {
+    @GetMapping("/theatre-city")
+    public List<ShowDto> getShowByTheatreCity(@RequestParam(value = "theatre-city") String theatreCity) {
         return showService.getShowByTheatreLocation(theatreCity);
     }
 

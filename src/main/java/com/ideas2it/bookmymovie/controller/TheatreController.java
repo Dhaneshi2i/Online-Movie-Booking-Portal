@@ -74,7 +74,7 @@ public class TheatreController {
      * @param city it contains city
      * @return List<TheatreDto>
      */
-    @GetMapping("/city/{city}")
+    @GetMapping("/get-by-city/{city}")
     public List<TheatreDto> findTheatreByLocation(@PathVariable String city) {
         return theatreService.findTheatresByLocation(city);
     }

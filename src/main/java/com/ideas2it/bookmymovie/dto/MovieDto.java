@@ -5,7 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -21,9 +26,9 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MovieDto {
-
-    private int movieId;
+public class MovieDto implements Serializable {
+    private static final long serialVersionUID = 3710470335120544380L;
+    private int id;
     @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid movie name")
     private String movieName;
