@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CastRepository extends JpaRepository<Cast, Integer> {
     boolean existsByCastName(String castName);
+
+    boolean existsByCastRole(String castRole);
 }

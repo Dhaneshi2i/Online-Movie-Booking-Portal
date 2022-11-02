@@ -8,6 +8,9 @@ import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.TheatreService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -56,13 +59,15 @@ public class TheatreServiceImpl implements TheatreService {
      * @return List<TheatreDto>
      */
     @Override
-    public List<TheatreDto> getAllTheatre() throws NotFoundException {
+    public List<TheatreDto> getAllTheatre(int pageNumber, int pageSize) throws NotFoundException {
         List<Theatre> theatres = theatreRepository.findAllByStatus(false);
         if (theatres.isEmpty()) {
             throw new NotFoundException("No Details Present Here");
         }
-        return theatres.stream().
-                map(mapper::theatreToTheatreDto).collect(Collectors.toList());
+
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<Theatre> theatre = theatreRepository.findAll(p);
+        return mapper.theatreListToTheatreDtoList(theatre.getContent());
     }
 
     /**

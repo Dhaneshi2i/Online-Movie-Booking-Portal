@@ -6,7 +6,11 @@ import lombok.Setter;
 import org.springframework.cache.annotation.Cacheable;
 
 import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.Pattern;
+
 import java.io.Serializable;
+
 
 /**
  * <p>
@@ -25,5 +29,6 @@ public class TheatreDto implements Serializable{
     @NotBlank(message = "Please, Enter theatre name. Theatre name should not be empty")
     private String theatreName;
     @NotBlank(message = "Please, Enter theatre city. Theatre location should not empty")
+    @Pattern(regexp="^(Chennai|Mumbai|Delhi|Hyderabad|Kochi)$",message="Invalid city. Valid Values are 1. Chennai 2. Mumbai 3. Delhi 4.Hyderabad 5.Kochi ")
     private String theatreCity;
 }

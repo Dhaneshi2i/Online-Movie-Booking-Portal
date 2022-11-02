@@ -103,5 +103,11 @@ public interface MapStructMapper {
     TimeSlotDto timeSlotToTimeSlotDto(TimeSlot timeSlot);
     @Mapping(target="timeSlotId", source="id")
     TimeSlot timeSlotDtoToTimeSlot(TimeSlotDto timeSlotDto);
+
+    List<BookingDto> bookingListToBookingDtoList(List<Booking> content);
+
+    List<MovieDto> movieListToMovieDtoList(List<Movie> content);
+
+    List<UserResponseDto> userListToUserDtoList(List<User> content);
 }
 

@@ -28,8 +28,12 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ShowDto {
 
+
+   
+
     private int id;
-    @NotNull
+     @NotNull(message = "Show date should not be empty")
+
     @FutureOrPresent(message = "Please provide a present or future date")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)

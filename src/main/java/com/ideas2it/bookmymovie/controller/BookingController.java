@@ -57,8 +57,8 @@ public class BookingController {
      * @return List<BookingDto>
      */
     @GetMapping
-    public List<BookingDto> getAllBookings() {
-        return bookingService.getAllBookings();
+    public List<BookingDto> getAllBookings(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return bookingService.getAllBookings(pageNumber, pageSize);
     }
 
     /**

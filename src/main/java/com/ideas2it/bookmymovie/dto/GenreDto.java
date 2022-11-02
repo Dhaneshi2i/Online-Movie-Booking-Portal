@@ -21,6 +21,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class GenreDto implements Serializable {
 
+
+    @NotBlank(message = "Genre should not be empty")
+    @Pattern(regexp="^(Action|Thriller|Drama)$",message="Invalid genre. Valid values are 1. Action 2. Thriller 3.Drama")
     private int id;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid genre")

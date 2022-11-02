@@ -15,6 +15,9 @@ import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -155,12 +158,16 @@ public class ShowServiceImpl implements ShowService {
      * @return List<ShowDto>
      */
     @Override
-    public List<ShowDto> getAllShow() {
+    public List<ShowDto> getAllShow(int pageNumber, int pageSize) {
         List<Show> shows = showrepository.findAll();
         if (shows.isEmpty()) {
             throw new NotFoundException("No shows available");
         } else {
-            return mapper.showListToShowSlimDtoList(shows);
+
+            Pageable p = PageRequest.of(pageNumber, pageSize);
+            Page<Show> show = showrepository.findAll(p);
+            return mapper.showListToShowSlimDtoList(show.getContent());
+
         }
     }
 

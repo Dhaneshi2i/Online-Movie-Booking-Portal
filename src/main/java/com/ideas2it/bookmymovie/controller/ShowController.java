@@ -85,8 +85,8 @@ public class ShowController {
      * @return List<ShowDto>
      */
     @GetMapping
-    public List<ShowDto> getAllShow() {
-        return showService.getAllShow();
+    public List<ShowDto> getAllShow(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return showService.getAllShow(pageNumber, pageSize);
     }
 
     /**

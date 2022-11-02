@@ -10,8 +10,14 @@ import com.ideas2it.bookmymovie.repository.UserRepository;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -68,9 +74,11 @@ public class UserServiceImpl implements UserService {
      * @return List<UserDto>
      */
     @Override
-    public List<UserResponseDto> getAllUsers() {
-        return userRepository.findAllByStatus(false).stream().
-                map(mapper::userToUserResponseDto).collect(Collectors.toList());
+    public List<UserResponseDto> getAllUsers(int pageNumber, int pageSize) {
+
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<User> pageMovie = userRepository.findAll(p);
+        return mapper.userListToUserDtoList(pageMovie.getContent());
     }
 
     /**

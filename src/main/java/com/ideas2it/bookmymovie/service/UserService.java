@@ -25,7 +25,7 @@ public interface UserService extends UserDetailsService {
      *
      * @return List<UserDto>
      */
-    List<UserResponseDto> getAllUsers();
+    List<UserResponseDto> getAllUsers(int pageNumber, int pageSize);
 
     /**
      * <p>

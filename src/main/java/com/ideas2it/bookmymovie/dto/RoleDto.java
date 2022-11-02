@@ -22,6 +22,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+public class RoleDto {
+    private int roleId;
+    @NotBlank(message = "Role should not be empty")
+    @Pattern(regexp="^(Admin|Customer)$",message="Invalid ROLE . Valid Values are 1. Admin 2. Customer")
 public class RoleDto implements Serializable {
     private static final long serialVersionUID = 3710470335120544380L;
     private int id;

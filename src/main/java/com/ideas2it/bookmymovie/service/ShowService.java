@@ -56,7 +56,7 @@ public interface ShowService {
      *
      * @return List<ShowDto>
      */
-    List<ShowDto> getAllShow();
+    List<ShowDto> getAllShow(int pageNumber, int pageSize);
 
     /**
      * <p>
