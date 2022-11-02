@@ -53,11 +53,11 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = new Booking();
         if (null != bookingDto) {
             booking.setTransactionMode(bookingDto.getTransactionMode());
-            booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
-            booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
+            booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getId())));
+            booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getId())));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
-                seats.add(seatService.getSeatById(seatDto.getSeatId()));
+                seats.add(seatService.getSeatById(seatDto.getId()));
             }
             booking.setBookingDate(LocalDate.now());
             booking.setTotalCost(calculateTotalCost(seats));

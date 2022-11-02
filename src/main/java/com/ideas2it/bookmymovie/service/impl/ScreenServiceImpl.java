@@ -13,6 +13,8 @@ import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.SeatTypeService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import com.ideas2it.bookmymovie.service.TimeSlotService;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -59,7 +61,7 @@ public class ScreenServiceImpl implements ScreenService {
             timeSlots.add(timeSlotService.getTimeSlotByTimeSlotId(timeSlot.getTimeSlotId()));
         }
         screen.setTimeSlots(timeSlots);
-        int theatreId = screenDto.getTheatre().getTheatreId();
+        int theatreId = screenDto.getTheatre().getId();
         if (0 != theatreId) {
             Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(theatreId));
             screen.setTheatre(theatre);
@@ -94,6 +96,7 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto
      */
     @Override
+    @CachePut(value = "screen", key = "#screenId")
     public ScreenDto updateScreenById(int screenId) throws NotFoundException {
         Optional<Screen> screen = screenRepository.findById(screenId);
         if (screen.isPresent()) {
@@ -113,6 +116,7 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto
      */
     @Override
+    @Cacheable(value = "screen")
     public ScreenDto getScreenById(int screenId)  {
         Screen screen = screenRepository.findByScreenId(screenId);
         if (null == screen) {

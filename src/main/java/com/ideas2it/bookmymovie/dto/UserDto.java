@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -21,10 +22,9 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDto {
-
-    private int userId;
-
+public class UserDto implements Serializable {
+    private static final long serialVersionUID = 3710470335120544380L;
+    private int id;
     @Size(min = 3,max = 40,message = "userName should be only between 3 and 40 characters")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Use only alphabets")
     private String userName;

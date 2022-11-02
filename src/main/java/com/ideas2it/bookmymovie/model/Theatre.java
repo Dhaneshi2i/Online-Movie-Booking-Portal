@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "theatres")
-public class Theatre {
-
+public class Theatre implements Serializable {
+    private static final long serialVersionUID = 3710470335120544380L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int theatreId;

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,8 +33,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "movies")
-public class Movie {
-
+public class Movie implements Serializable {
+    private static final long serialVersionUID = 3710470335120544380L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieId;

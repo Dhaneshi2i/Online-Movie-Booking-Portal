@@ -51,7 +51,7 @@ public class SeatController {
      * @param seatId it contains seat id
      * @return SeatDto
      */
-    @PatchMapping("/{seatId}/{status}")
+    @PatchMapping("/{seatId}")
     public SeatDto updateSeat(@PathVariable("seatId") int seatId) {
         return seatService.updateSeatById(seatId);
     }

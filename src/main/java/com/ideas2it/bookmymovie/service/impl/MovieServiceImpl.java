@@ -12,6 +12,7 @@ import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,18 +50,18 @@ public class MovieServiceImpl implements MovieService {
          if (null != movieDto) {
              List<CastDto> casts = new ArrayList<>();
              for (CastDto cast : movieDto.getCasts()) {
-                 casts.add(castService.getByCastId(cast.getCastId()));
+                 casts.add(castService.getByCastId(cast.getId()));
              }
              movieDto.setCasts(casts);
              List<LanguageDto> languages = new ArrayList<>();
              for (LanguageDto language : movieDto.getLanguages()) {
-                 languages.add(languageService.getByLanguageId(language.getLanguageId()));
+                 languages.add(languageService.getByLanguageId(language.getId()));
              }
              movieDto.setLanguages(languages);
 
              List<GenreDto> genres = new ArrayList<>();
              for (GenreDto genre : movieDto.getGenres()) {
-                 genres.add(genreService.getByGenreId(genre.getGenreId()));
+                 genres.add(genreService.getByGenreId(genre.getId()));
              }
              movieDto.setGenres(genres);
              movie = mapper.movieDtoToMovie(movieDto);
@@ -96,6 +97,7 @@ public class MovieServiceImpl implements MovieService {
       * @param movieId it contains movieId
       * @return MovieDto
       */
+     @Cacheable(value = "movie")
      public MovieDto getMovieById(int movieId) throws NotFoundException{
          if (movieRepository.existsById(movieId)) {
              System.out.println(movieId);

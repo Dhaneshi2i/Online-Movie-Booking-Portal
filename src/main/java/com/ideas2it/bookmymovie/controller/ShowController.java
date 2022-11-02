@@ -59,7 +59,7 @@ public class ShowController {
      * @param showId it contains theatre id
      * @return ShowDto
      */
-    @PatchMapping("{showId}")
+    @PatchMapping("/{showId}")
     public List<ShowDto> updateShow(@RequestBody ShowDto showDto,@PathVariable int showId) {
         return showService.updateShow(showDto, showId);
     }
@@ -97,7 +97,7 @@ public class ShowController {
      * @param theatreId it contains theatre id
      * @return List<ShowDto>
      */
-    @GetMapping("/{theatreId}")
+    @GetMapping("/get-by-theatre/{theatreId}")
     public List<ShowDto> getShowByTheatreId(@PathVariable int theatreId) {
         return showService.getShowByTheatreId(theatreId);
     }
@@ -123,8 +123,8 @@ public class ShowController {
      * @param theatreCity it contains date
      * @return List<ShowDto>
      */
-    @GetMapping("/theatreCity")
-    public List<ShowDto> getShowByTheatreCity(@RequestParam(value = "theatreCity") String theatreCity) {
+    @GetMapping("/theatre-city")
+    public List<ShowDto> getShowByTheatreCity(@RequestParam(value = "theatre-city") String theatreCity) {
         return showService.getShowByTheatreLocation(theatreCity);
     }
 

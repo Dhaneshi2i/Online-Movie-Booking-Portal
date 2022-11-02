@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SeatTypeDto {
 
-    private int seatTypeId;
+    private int id;
     @NotBlank
     private String seatType;
     @NotNull
