@@ -52,6 +52,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
         if (null != bookingDto) {
+            booking.setTransactionMode(bookingDto.getTransactionMode());
             booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getUserId())));
             booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getShowId())));
             List<Seat> seats = new ArrayList<>();
@@ -134,7 +135,7 @@ public class BookingServiceImpl implements BookingService {
      * @return BookingDto
      */
     @Override
-    public BookingDto cancelBooking(int bookingId) throws NotFoundException {
+    public BookingResponseDto cancelBooking(int bookingId) throws NotFoundException {
         Booking booking = bookingRepository.findBookingByBookingId(bookingId);
         List<Seat> seats = booking.getSeats();
         for (Seat seat : seats) {
@@ -142,7 +143,7 @@ public class BookingServiceImpl implements BookingService {
         }
         booking.setSeats(seats);
         bookingRepository.save(booking);
-        return mapper.bookingToBookingDto(booking);
+        return mapper.bookingToBookingResponseDto(booking);
     }
 
     /**

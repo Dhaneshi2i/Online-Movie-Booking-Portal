@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Theatre;
@@ -36,8 +37,14 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto
      */
     @Override
-    public TheatreDto createTheatre(TheatreDto theatreDto) throws NotFoundException {
-        return mapper.theatreToTheatreDto(theatreRepository.save(mapper.theatreDtoToTheatre(theatreDto)));
+    public TheatreDto createTheatre(TheatreDto theatreDto) {
+        Theatre theatre = mapper.theatreDtoToTheatre(theatreDto);
+        if (theatreRepository.existsByTheatreName(theatreDto.getTheatreName())) {
+            if (theatreRepository.existsByTheatreCity(theatreDto.getTheatreCity())) {
+                throw new AlreadyExistException("This Theatre is already exist in this location ");
+            }
+        }
+        return mapper.theatreToTheatreDto(theatreRepository.save(theatre));
     }
 
     /**
@@ -106,31 +113,6 @@ public class TheatreServiceImpl implements TheatreService {
         theatreRepository.deleteById(theatreId);
         return mapper.theatreListToTheatreDtoList(theatreRepository.findAll());
     }
-
-    /**
-     * <p>
-     * This method List all the Theatre Details by movie
-     * </p>
-     *
-     * @param movieId it contains movie id
-     * @return List<TheatreDto>
-     */
-    /*@Override
-    public List<TheatreDto> findTheatresByMovieId(int movieId) throws NotFoundException {
-        List<Theatre> theatreList = new ArrayList<>();
-        Movie movie = mapper.movieDtoToMovie(movieService.getMovieById(movieId));
-        int showId = movie.getShow().getShowId();
-        List<Theatre> theatres = theatreRepository.findAll();
-        for (Theatre theatre : theatres) {
-            List<Show> shows = theatre.getShow();
-            for (Show show : shows) {
-                if (show.getShowId() == showId) {
-                    theatreList.add(theatre);
-                }
-            }
-        }
-        return mapper.theatreListToTheatreDtoList(theatreList);
-    }*/
 
     /**
      * <p>

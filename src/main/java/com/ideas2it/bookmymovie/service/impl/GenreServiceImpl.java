@@ -1,8 +1,10 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.GenreDto;
+import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Genre;
 import com.ideas2it.bookmymovie.repository.GenreRepository;
 import com.ideas2it.bookmymovie.service.GenreService;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,11 @@ public class GenreServiceImpl implements GenreService {
      */
     @Override
     public GenreDto addGenre(GenreDto genreDto) {
-        return mapper.genreToGenreDto(genreRepository.save(mapper.genreDtoToGenre(genreDto)));
+        Genre genre = mapper.genreDtoToGenre(genreDto);
+        if (genreRepository.existsByGenreName(genreDto.getGenreName())) {
+            throw new AlreadyExistException("This genre already exists, please provide a different genre ");
+        }
+        return mapper.genreToGenreDto(genreRepository.save(genre));
     }
 
     /**

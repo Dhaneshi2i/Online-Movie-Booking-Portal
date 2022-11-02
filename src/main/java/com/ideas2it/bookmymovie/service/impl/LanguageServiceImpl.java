@@ -1,8 +1,10 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.LanguageDto;
+import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
+import com.ideas2it.bookmymovie.model.Language;
 import com.ideas2it.bookmymovie.repository.LanguageRepository;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,11 @@ public class LanguageServiceImpl implements LanguageService {
      */
     @Override
     public LanguageDto addLanguage(LanguageDto languageDto) {
-        return mapper.languageToLanguageDto(languageRepository.save(mapper.languageDtoToLanguage(languageDto)));
+        Language language = mapper.languageDtoToLanguage(languageDto);
+        if (languageRepository.existsByLanguageName(languageDto.getLanguageName())) {
+            throw new AlreadyExistException("This language already exists, please provide a different language");
+        }
+        return mapper.languageToLanguageDto(languageRepository.save(language));
     }
 
     /**

@@ -62,16 +62,6 @@ public interface TheatreService {
 
     /**
      * <p>
-     * This method List all the Theatre Details by movie
-     * </p>
-     *
-     * @param movieId it contains movie id
-     * @return List<TheatreDto>
-     */
-   // List<TheatreDto> findTheatresByMovieId(int movieId) throws NotFoundException;
-
-    /**
-     * <p>
      * This method List all the Theatre Details by city name
      * </p>
      *

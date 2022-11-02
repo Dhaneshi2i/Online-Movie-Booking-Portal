@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class MovieResponseDto {
+
     private int movieId;
     private String movieName;
 }

@@ -29,6 +29,13 @@ public class ExceptionHandlerAdvice {
         return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AlreadyExistException.class)
+    public ResponseEntity<Map<String, String>> handleBusinessException(AlreadyExistException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler({ Exception.class })
     public ErrorMapper handleConflict(Exception ex, HttpServletRequest req) {
         String msg = ex.getMessage();

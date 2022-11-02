@@ -56,7 +56,7 @@ public interface  BookingService {
      * @param bookingId it contains booking dto object
      * @return BookingDto
      */
-    BookingDto cancelBooking(int bookingId);
+    BookingResponseDto cancelBooking(int bookingId);
 
     /**
      * <p>

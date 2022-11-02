@@ -36,7 +36,7 @@ public class LanguageController {
      * @param languageDto it contains language dto objects.
      * @return LanguageDto
      */
-    @PostMapping("/language")
+    @PostMapping
     public LanguageDto createLanguage(@Valid @RequestBody LanguageDto languageDto) {
         return languageService.addLanguage(languageDto);
     }

@@ -46,6 +46,7 @@ public class Booking {
     private BookingStatus bookingStatus = BookingStatus.ONPROCESS;
     private float totalCost;
     @OneToMany(fetch = FetchType.LAZY)
+   // @JoinColumn(name = "seat_id")
     private List<Seat> seats;
 
 }
