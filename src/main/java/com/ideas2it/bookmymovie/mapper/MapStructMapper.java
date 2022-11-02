@@ -16,6 +16,7 @@ import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Cast;
@@ -43,13 +44,9 @@ public interface MapStructMapper {
 
     List<TheatreDto> theatreListToTheatreDtoList(List<Theatre> theatres);
 
-    Seat seatDtoToSeat(SeatDto seatDto);
-
     SeatDto seatToSeatDto(Seat seat);
 
     List<SeatDto> seatListToSeatDtoList(List<Seat> seats);
-
-    ScreenResponseDto screenToScreenResponseDto(Screen screen);
 
     Screen screenDtoToScreen(ScreenDto screenDto);
 
@@ -89,17 +86,9 @@ public interface MapStructMapper {
 
     List<ShowDto> showListToShowDtoList(List<Show> show);
 
-    List<ShowDto> showListToShowResponseDtoList(List<Show> shows);
+    List<ShowResponseDto> showListToShowResponseDtoList(List<Show> shows);
 
     BookingResponseDto bookingToBookingResponseDto(Booking save);
-
-    Booking bookingDtoToBooking(BookingDto bookingDto);
-
-    List<Seat> seatDtoListToSeatList(List<SeatDto> seats);
-
-    Screen screenResponseDtoToScreen(ScreenResponseDto screen);
-
-    ScreenResponseDto screenDtoTOScreenResponseDto(ScreenDto screenDto);
 
     SeatType seatTypeDtoToSeatType(SeatTypeDto seatTypeDto);
 

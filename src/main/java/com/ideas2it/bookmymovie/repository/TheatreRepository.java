@@ -11,4 +11,6 @@ public interface TheatreRepository extends JpaRepository<Theatre,Integer> {
     Theatre findByTheatreId(int theatreId);
     List<Theatre> findAllByStatus(Boolean status);
     List<Theatre> findTheatreByTheatreCity(String cityName);
+    boolean existsByTheatreCity(String theatreCity);
+    boolean existsByTheatreName(String theatreName);
 }

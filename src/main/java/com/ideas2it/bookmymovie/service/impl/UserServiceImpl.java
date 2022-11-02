@@ -3,7 +3,7 @@ package com.ideas2it.bookmymovie.service.impl;
 import com.ideas2it.bookmymovie.dto.UserDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
-import com.ideas2it.bookmymovie.exception.UserAlreadyExistException;
+import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto createUser(UserDto userDto) {
         User user = mapper.userDtoToUser(userDto);
         if(userRepository.existsByContactNumber(user.getContactNumber())) {
-            throw new UserAlreadyExistException("User mobile number already exist ");
+            throw new AlreadyExistException("User mobile number already exist ");
         } else if (userRepository.existsByUserName(user.getUserName())) {
-            throw new UserAlreadyExistException("UserName already exist, please provide different userName");
+            throw new AlreadyExistException("UserName already exist, please provide different userName");
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
             user.setRole(roleService.getRoleByRoleId(userDto.getRole().getRoleId()));

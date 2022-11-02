@@ -19,8 +19,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class SeatResponseDto {
-    private int seatId;
+
     private String seatNumber;
-    private SeatTypeDto type;
-    private float price;
+    private SeatTypeResponseDto seatType;
+    private float seatPrice;
 }

@@ -40,9 +40,6 @@ public class Seat {
     @JoinColumn(name="seatTypeId", nullable=false)
     private SeatType seatType;
     private LocalDate showDate;
-    @ManyToOne
-    @JoinColumn(name = "show_start_time_time_slot_id")
-    private TimeSlot showStartTime;
     private float seatPrice;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_show_id")

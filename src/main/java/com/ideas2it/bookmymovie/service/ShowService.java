@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +16,7 @@ public interface ShowService {
      * @param showDto it contains show dto objects
      * @return ShowDto
      */
-    ShowDto createShow(ShowDto showDto);
+    List<ShowResponseDto> createShow(ShowDto showDto);
 
     /**
      * <p>
@@ -76,4 +77,14 @@ public interface ShowService {
      * @return List<ShowDto>
      */
     List<ShowDto> getShowsByDate(LocalDate date);
+
+    /**
+     * <p>
+     * This method List all the Screen Details by theatreCity
+     * </p>
+     *
+     * @param theatreCity it contains theatreCity
+     * @return List<ShowDto>
+     */
+    List<ShowDto> getShowByTheatreLocation(String theatreCity);
 }

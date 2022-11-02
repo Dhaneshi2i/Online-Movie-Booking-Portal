@@ -23,6 +23,6 @@ public class LanguageDto {
     private int languageId;
     @NotBlank
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid language")
-    private String name;
+    private String languageName;
 
 }

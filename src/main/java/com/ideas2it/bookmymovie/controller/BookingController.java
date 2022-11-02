@@ -94,7 +94,7 @@ public class BookingController {
      * @return BookingDto
      */
     @PatchMapping("/{bookingId}")
-    public BookingDto cancelBookingById(@PathVariable int bookingId) {
+    public BookingResponseDto cancelBookingById(@PathVariable int bookingId) {
         return bookingService.cancelBooking(bookingId);
     }
 

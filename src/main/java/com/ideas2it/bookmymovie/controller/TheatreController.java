@@ -70,18 +70,6 @@ public class TheatreController {
         return theatreService.findTheatreById(theatreId);
     }
 
-    /**
-     * <p>
-     * This method List all the Theatre Details by movie
-     * </p>
-     *
-     * @param movieId it contains movie id
-     * @return List<TheatreDto>
-     */
-    /*@GetMapping("/findByMovie/{movieId}")
-    public List<TheatreDto> findTheatreByMovieId(@PathVariable int movieId) {
-        return theatreService.findTheatresByMovieId(movieId);
-    }*/
 
     /**
      * <p>

@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
     Optional<Genre> findByGenreId(int genreId);
 
+    boolean existsByGenreName(String genreName);
 }

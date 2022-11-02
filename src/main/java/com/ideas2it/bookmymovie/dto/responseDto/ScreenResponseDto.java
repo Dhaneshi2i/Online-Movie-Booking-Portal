@@ -14,6 +14,5 @@ import lombok.Setter;
 @Setter
 public class ScreenResponseDto {
 
-    private int screenId;
     private String screenName;
 }

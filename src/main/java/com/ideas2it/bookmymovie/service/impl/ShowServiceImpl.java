@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
@@ -50,7 +51,8 @@ public class ShowServiceImpl implements ShowService {
      */
     @Override
     @Transactional
-    public ShowDto createShow(ShowDto showDto){
+    public List<ShowResponseDto> createShow(ShowDto showDto){
+        List<Show> shows = new ArrayList<>();
         Screen screen = mapper.screenDtoToScreen(screenService.getScreenById(showDto.getScreen().getScreenId()));
         List<TimeSlot> timeslots = screen.getTimeSlots();
         for (TimeSlot timeSlot : timeslots) {
@@ -62,8 +64,9 @@ public class ShowServiceImpl implements ShowService {
             show.setMovie(mapper.movieDtoToMovie(movieService.getMovieById(showDto.getMovie().getMovieId())));
             showrepository.save(show);
             createSeat(show);
+            shows.add(show);
         }
-        return showDto;
+        return mapper.showListToShowResponseDtoList(shows);
     }
 
     private void createSeat(Show show) {
@@ -74,7 +77,7 @@ public class ShowServiceImpl implements ShowService {
             int row = seatType.getNoOfRows();
             int column = seatType.getNoOfColumns();
             for (int i = 0; i < row; i++) {
-                for (int j = 1; j < column; j++) {
+                for (int j = 1; j <= column; j++) {
                     Seat seat = new Seat();
                     seat.setSeatType(seatType);
                     seat.setSeatPrice(seatType.getPrice());
@@ -197,6 +200,29 @@ public class ShowServiceImpl implements ShowService {
         }
         if(shows.isEmpty()) {
             throw new NotFoundException("No shows available for respective date " + date);
+        } else {
+            return mapper.showListToShowDtoList(shows);
+        }
+    }
+
+    /**
+     * <p>
+     * This method List all the Screen Details by theatreCity
+     * </p>
+     *
+     * @param theatreCity it contains theatreCity
+     * @return List<ShowDto>
+     */
+    @Override
+    public List<ShowDto> getShowByTheatreLocation(String theatreCity) {
+        List<Show> shows = new ArrayList<>();
+        for (Show show : showrepository.findAll()) {
+            if (show.getTheatre().getTheatreCity().equalsIgnoreCase(theatreCity)) {
+                shows.add(show);
+            }
+        }
+        if (shows.isEmpty()) {
+            throw new NotFoundException("No movie shows were found for the given location " + theatreCity);
         } else {
             return mapper.showListToShowDtoList(shows);
         }

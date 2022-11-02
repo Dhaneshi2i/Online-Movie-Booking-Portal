@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,7 @@ public class ShowController {
      * @return ShowDto
      */
     @PostMapping
-    public ShowDto createShow(@Valid @RequestBody ShowDto showDto) {
+    public List<ShowResponseDto> createShow(@Valid @RequestBody ShowDto showDto) {
         return showService.createShow(showDto);
     }
 
@@ -112,6 +113,19 @@ public class ShowController {
     @GetMapping("/date")
     public List<ShowDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return showService.getShowsByDate(date);
+    }
+
+    /**
+     * <p>
+     * This method List all the Screen Details by theatreCity
+     * </p>
+     *
+     * @param theatreCity it contains date
+     * @return List<ShowDto>
+     */
+    @GetMapping("/theatreCity")
+    public List<ShowDto> getShowByTheatreCity(@RequestParam(value = "theatreCity") String theatreCity) {
+        return showService.getShowByTheatreLocation(theatreCity);
     }
 
 }

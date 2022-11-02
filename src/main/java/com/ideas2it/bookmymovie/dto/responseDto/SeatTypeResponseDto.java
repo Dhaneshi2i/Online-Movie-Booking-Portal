@@ -6,8 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SeatTypeResponseDto {
-
-    private int seatTypeId;
     private String seatType;
-    private float price;
 }
