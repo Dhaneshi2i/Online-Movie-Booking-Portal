@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
-import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 
 import java.util.List;
 
@@ -50,11 +50,12 @@ public interface ScreenService {
     ScreenDto getScreenById(int screenId) ;
 
     /**
-     * This method List all the Theatre Details by screen that are present in Database
+     * This method List all the screen details by theatre that are present in Database
      *
-     * @param screenId is passed to categorize the screen Details by Movie
-     * @return TheatreDto which will have the details of theatre
+     * @param theatreId is passed to categorize the screen Details by Movie
+     * @return ScreenResponseDto which will have the details of theatre
      * which was categorized by screen
      */
-    TheatreDto getTheatreByScreenId(int screenId) ;
+    List<ScreenResponseDto> getScreenByTheatreId(int theatreId);
+
 }

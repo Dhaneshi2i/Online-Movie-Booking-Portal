@@ -49,17 +49,7 @@ public interface ShowService {
 
     /**
      * <p>
-     * This method List all the Screen Details by Theatre
-     * </p>
-     *
-     * @param theatreId it contains theatre id
-     * @return List<ShowResponseDto>
-     */
-    //List<ShowResponseDto> getShowByTheatreId(int theatreId);
-
-    /**
-     * <p>
-     * This method List all the Screen Details by Date
+     * This method List all the Shows Details by Date
      * </p>
      *
      * @param date it contains date
@@ -67,4 +57,13 @@ public interface ShowService {
      */
     List<ShowResponseDto> getShowsByDate(LocalDate date);
 
+    /**
+     * <p>
+     * This method List all the shows Details for the screen
+     * </p>
+     *
+     * @param screenId it contains date
+     * @return List<ShowResponseDto>
+     */
+    List<ShowResponseDto> getShowByScreenId(int screenId);
 }

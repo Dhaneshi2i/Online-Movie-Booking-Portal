@@ -32,7 +32,8 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final MapStructMapper mapper;
 
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder, MapStructMapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService,
+                           BCryptPasswordEncoder bCryptPasswordEncoder, MapStructMapper mapper) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;

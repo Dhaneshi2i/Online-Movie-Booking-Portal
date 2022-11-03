@@ -42,8 +42,8 @@ public class Show {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "screen_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "show_screen_id", referencedColumnName = "screenId")
     private Screen screen;
 
     private boolean status;

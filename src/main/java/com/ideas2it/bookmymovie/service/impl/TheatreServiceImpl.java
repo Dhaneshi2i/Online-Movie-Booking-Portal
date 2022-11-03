@@ -8,7 +8,6 @@ import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
 import com.ideas2it.bookmymovie.service.TheatreService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,10 +37,9 @@ public class TheatreServiceImpl implements TheatreService {
     @Override
     public TheatreResponseDto createTheatre(TheatreDto theatreDto) {
         Theatre theatre = mapper.theatreDtoToTheatre(theatreDto);
-        if (theatreRepository.existsByTheatreName(theatreDto.getTheatreName())) {
-            if (theatreRepository.existsByTheatreCity(theatreDto.getTheatreCity())) {
+        if (theatreRepository.existsByTheatreName(theatreDto.getTheatreName()) && theatreRepository
+                .existsByTheatreCity(theatreDto.getTheatreCity())) {
                 throw new AlreadyExistException("This Theatre is already exist in this location ");
-            }
         }
         return mapper.theatreToTheatreResponseDto(theatreRepository.save(theatre));
     }

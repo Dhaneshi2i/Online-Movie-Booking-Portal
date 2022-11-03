@@ -1,7 +1,7 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
-import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
@@ -11,8 +11,8 @@ import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +40,7 @@ public class ScreenServiceImpl implements ScreenService {
     public ScreenDto createScreen(ScreenDto screenDto)  {
         Screen screen = mapper.screenDtoToScreen(screenDto);
         int theatreId = screenDto.getTheatre().getId();
+
         if (0 == theatreId) {
             throw new NotFoundException("No theatre id is provided");
         }
@@ -76,11 +77,9 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto
      */
     @Override
-    //@CachePut(value = "screen", key = "#screenId")
     public ScreenDto updateScreen(ScreenDto screenDto){
-        //Screen screen = screenRepository.findByScreenId(screenDto.getId());
         if (null == screenDto) {
-            throw new NotFoundException("Screen with the given id is not present");
+            throw new NotFoundException("No Screen details is present");
         }
         return mapper.screenToScreenDto(screenRepository.save(mapper.screenDtoToScreen(screenDto)));
     }
@@ -94,7 +93,6 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto
      */
     @Override
-    //@Cacheable(value = "screen")
     public ScreenDto getScreenById(int screenId)  {
         Screen screen = screenRepository.findByScreenId(screenId);
         if (null == screen) {
@@ -105,24 +103,20 @@ public class ScreenServiceImpl implements ScreenService {
     }
 
     /**
-     * <p>
-     * This method List all the Theatre Details by screen
-     * </p>
+     * This method List all the screen details by theatre that are present in Database
      *
-     * @param screenId it contains screen id
-     * @return TheatreDto
+     * @param theatreId is passed to categorize the screen Details by Movie
+     * @return ScreenResponseDto which will have the details of theatre
+     * which was categorized by screen
      */
     @Override
-    public TheatreDto getTheatreByScreenId(int screenId) throws NotFoundException {
-        Optional<Screen> screen =screenRepository.findById(screenId);
-        if(screen.isPresent()) {
-            Theatre theatre = screen.get().getTheatre();
-            return mapper.theatreToTheatreDto(theatre);
+    public List<ScreenResponseDto> getScreenByTheatreId(int theatreId) {
+        List<Screen> screens = new ArrayList<>();
+        for (Screen screen : screenRepository.findAll()) {
+            if (screen.getTheatre().getTheatreId() == theatreId) {
+                screens.add(screen);
+            }
         }
-        throw new NotFoundException("Screen Id not found");
-    }
-
-    public Screen findScreenById(int screenId) {
-        return screenRepository.findByScreenId(screenId);
+        return mapper.screenListToScreenResponseDtoList(screens);
     }
 }

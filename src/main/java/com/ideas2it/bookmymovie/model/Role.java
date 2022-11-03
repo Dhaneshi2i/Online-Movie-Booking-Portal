@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 /**
  * This Role Class contains role details that are assigned to a user
@@ -22,9 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
-public class Role implements Serializable {
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -46,6 +46,7 @@ public class Seat {
     private LocalDate showDate;
 
     private float seatPrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_show_id")
     private Show show;
