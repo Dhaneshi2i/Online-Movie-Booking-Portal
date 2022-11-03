@@ -10,7 +10,6 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Show;
-import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.ShowRepository;
 import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
@@ -70,15 +69,6 @@ public class ShowServiceImpl implements ShowService {
             createSeat(show);
             shows.add(show);
         }
-        Theatre theatre = mapper.theatreDtoToTheatre(theatreService.findTheatreById(screen.getTheatre().getTheatreId()));
-        if (shows.isEmpty()) {
-            throw new NotFoundException("No shows found ");
-        }
-        for (Show show : shows) {
-            theatre.getShows().add(show);
-        }
-        //theatre.setShows(shows);
-        theatreService.updateTheatre(mapper.theatreToTheatreDto(theatre));
         return mapper.showListToShowResponseDtoList(shows);
     }
 
@@ -163,24 +153,7 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * <p>
-     * This method List all the Screen Details by Theatre
-     * </p>
-     *
-     * @param theatreId it contains theatre id
-     * @return List<ShowResponseDto>
-     */
-    /*@Override
-    public List<ShowResponseDto> getShowByTheatreId(int theatreId) {
-        List<Show> shows = showrepository.getAllByTheatreId(theatreId);
-        if (shows.isEmpty()) {
-            throw new NotFoundException("No shows available for respective theatre " + theatreId);
-        }
-        return mapper.showListToShowResponseDtoList(shows);
-    }*/
-
-    /**
-     * <p>
-     * This method List all the Screen Details by Date
+     * This method List all the show Details by Date
      * </p>
      *
      * @param date it contains date
@@ -199,6 +172,28 @@ public class ShowServiceImpl implements ShowService {
         } else {
             return mapper.showListToShowResponseDtoList(shows);
         }
+    }
+
+    /**
+     * <p>
+     * This method List all the show Details by screen
+     * </p>
+     *
+     * @param screenId it contains theatre id
+     * @return List<ShowResponseDto>
+     */
+    @Override
+    public List<ShowResponseDto> getShowByScreenId(int screenId) {
+        List<Show> shows = new ArrayList<>();
+        for (Show show : showrepository.findAll()) {
+            if (screenId == show.getScreen().getScreenId()) {
+                shows.add(show);
+            }
+        }
+        if (shows.isEmpty()) {
+            throw new NotFoundException("No shows found for this screen");
+        }
+        return mapper.showListToShowResponseDtoList(shows);
     }
 }
 

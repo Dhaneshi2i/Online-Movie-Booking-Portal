@@ -17,9 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +31,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "booking")
-public class Booking implements Serializable {
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +40,7 @@ public class Booking implements Serializable {
     private String transactionMode;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -59,6 +56,6 @@ public class Booking implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "booking_seat_id")
-    private List<Seat> seats = new ArrayList<>();
+    private List<Seat> seats;
 
 }

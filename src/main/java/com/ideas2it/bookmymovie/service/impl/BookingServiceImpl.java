@@ -117,20 +117,26 @@ public class BookingServiceImpl implements BookingService {
 
     /**
      * <p>
-     * This method get the Booking Details which matches the id
+     * This method get the Booking Details of the user
      * </p>
      *
      * @param userId it contains booking id
-     * @return BookingResponseDto
+     * @return List<BookingResponseDto>
      */
     @Override
-    public BookingResponseDto viewBookingByUserId(int userId) {
-        Booking booking = bookingRepository.findBookingByUser(userId);
-        if (null == booking) {
-            throw new NotFoundException("No booking was found for respective id " + userId);
-        } else {
-            return mapper.bookingToBookingResponseDto(booking);
+    public List<BookingResponseDto> viewBookingByUserId(int userId) {
+
+        List<Booking> bookings = new ArrayList<>();
+        for (Booking booking : bookingRepository.findAll()) {
+            if (userId == booking.getUser().getUserId()) {
+                bookings.add(booking);
+            }
         }
+        if (bookings.isEmpty()) {
+            throw new NotFoundException("No booking was found for respective id " + userId);
+        }
+        return mapper.bookingListToBookingResponseList(bookings);
+
     }
 
     /**

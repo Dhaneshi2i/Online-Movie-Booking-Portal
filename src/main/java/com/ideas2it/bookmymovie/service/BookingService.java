@@ -47,7 +47,7 @@ public interface  BookingService {
      * @param userId it contains booking id
      * @return BookingResponseDto
      */
-    BookingResponseDto viewBookingByUserId(int userId);
+    List<BookingResponseDto> viewBookingByUserId(int userId);
 
     /**
      * <p>

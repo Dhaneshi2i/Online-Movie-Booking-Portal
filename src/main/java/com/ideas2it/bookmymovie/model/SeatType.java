@@ -25,7 +25,6 @@ public class SeatType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int seatTypeId;
 
     private String seatType;

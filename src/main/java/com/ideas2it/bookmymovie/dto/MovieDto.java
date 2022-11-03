@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -25,18 +24,15 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MovieDto implements Serializable {
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class MovieDto  {
 
     private int id;
 
     @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid movie name")
-
     private String movieName;
+
     @NotNull(message = "Please, Enter the movie duration in correct format(HH:mm)")
-    
     private LocalTime duration;
 
     @NotNull(message = "Please, Enter the movie release date.Release date field should not be empty")

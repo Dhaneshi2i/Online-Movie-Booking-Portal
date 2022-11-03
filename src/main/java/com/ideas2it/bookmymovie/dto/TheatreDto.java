@@ -1,15 +1,12 @@
 package com.ideas2it.bookmymovie.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ideas2it.bookmymovie.model.Show;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,9 +21,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class TheatreDto implements Serializable{
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class TheatreDto {
 
     private int id;
 
@@ -37,5 +32,6 @@ public class TheatreDto implements Serializable{
     @Pattern(regexp="^(Chennai|Mumbai|Delhi|Hyderabad|Kochi)$",message="Invalid city. Valid Values are 1. Chennai 2. Mumbai 3. Delhi 4.Hyderabad 5.Kochi ")
     private String theatreCity;
 
-    private List<Show> shows = new ArrayList<>();
+    List<ScreenDto> screens;
+
 }

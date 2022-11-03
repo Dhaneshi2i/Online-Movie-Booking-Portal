@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -20,15 +19,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ScreenDto implements Serializable {
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class ScreenDto {
 
     private int id;
 
     @NotBlank(message = "Screen should not be empty")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid screen name")
-
     private String screenName;
 
     private List<SeatTypeDto> seatTypes;

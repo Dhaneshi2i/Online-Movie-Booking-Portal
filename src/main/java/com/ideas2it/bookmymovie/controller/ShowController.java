@@ -70,7 +70,7 @@ public class ShowController {
      * </p>
      *
      * @param showId it contains show id
-     * @return ShowDto
+     * @return ShowResponseDto
      */
     @GetMapping("/{showId}")
     public ShowResponseDto getShowById(@PathVariable int showId) {
@@ -82,7 +82,7 @@ public class ShowController {
      * This method List all the Show Details
      * </p>
      *
-     * @return List<ShowDto>
+     * @return List<ShowResponseDto>
      */
     @GetMapping
     public List<ShowResponseDto> getAllShow(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
@@ -91,20 +91,28 @@ public class ShowController {
 
     /**
      * <p>
-     * This method List all the Screen Details by Date
+     * This method List all the show Details by Date
      * </p>
      *
      * @param date it contains date
-     * @return List<ShowDto>
+     * @return List<ShowResponseDto>
      */
     @GetMapping("/date")
     public List<ShowResponseDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return showService.getShowsByDate(date);
     }
 
-    /*@GetMapping("{theatreId]")
-    public List<ShowResponseDto> getShowsByTheatreId(@PathVariable int theatreId) {
-        return showService.getShowByTheatreId(theatreId);
-    }*/
+    /**
+     * <p>
+     * This method List all the show Details by screen
+     * </p>
+     *
+     * @param screenId it contains date
+     * @return List<ShowResponseDto>
+     */
+    @GetMapping("/screen/{screenId}")
+    public List<ShowResponseDto> getShowsByScreenId(@PathVariable int screenId) {
+        return showService.getShowByScreenId(screenId);
+    }
 
 }

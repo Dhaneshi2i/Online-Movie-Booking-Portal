@@ -4,7 +4,6 @@ import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingCancelledResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.service.BookingService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/booking")
 public class BookingController {
-    private BookingService bookingService;
+    private final BookingService bookingService;
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
@@ -71,7 +70,6 @@ public class BookingController {
      * @return BookingDto
      */
     @GetMapping("/{bookingId}")
-    @Cacheable(value = "booking")
     public BookingResponseDto viewByBookingId(@PathVariable int bookingId) {
         return bookingService.viewByBookingId(bookingId);
     }
@@ -82,11 +80,10 @@ public class BookingController {
      * </p>
      *
      * @param userId it contains booking id
-     * @return BookingResponseDto
+     * @return List<BookingResponseDto>
      */
-    @GetMapping("/get-by-user/userId")
-    @Cacheable(value = "booking",key = "#userId")
-    public BookingResponseDto viewBookingByUserId(@PathVariable int userId) {
+    @GetMapping("/user/{userId}")
+    public List<BookingResponseDto> viewBookingByUserId(@PathVariable int userId) {
         return bookingService.viewBookingByUserId(userId);
     }
 
@@ -98,7 +95,7 @@ public class BookingController {
      * @param bookingId it contains booking dto object
      * @return BookingDto
      */
-    @PatchMapping("/cancel-booking/{bookingId}")
+    @PatchMapping("/{bookingId}")
     public BookingCancelledResponseDto cancelBookingById(@PathVariable int bookingId) {
         return bookingService.cancelBooking(bookingId);
     }

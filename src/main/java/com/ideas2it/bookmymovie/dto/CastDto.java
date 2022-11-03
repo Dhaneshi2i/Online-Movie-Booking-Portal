@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 
 
 /**
@@ -19,7 +18,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CastDto implements Serializable  {
+public class CastDto {
 
     private int id;
 

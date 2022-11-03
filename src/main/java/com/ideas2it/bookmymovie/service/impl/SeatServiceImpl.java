@@ -7,11 +7,9 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
-import com.ideas2it.bookmymovie.model.Show;
 import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,8 +57,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<SeatDto> getAllSeat(int pageNumber, int pageSize) throws NotFoundException {
         List<Seat> seats = seatRepository.findBySeatStatus(SeatStatus.AVAILABLE);
-
-        if (0 == seats.size()) {
+        if (seats.isEmpty()) {
             throw new NotFoundException("No seats found");
         } else {
             Pageable p = PageRequest.of(pageNumber, pageSize);
@@ -79,7 +76,6 @@ public class SeatServiceImpl implements SeatService {
      * @return SeatDto
      */
     @Override
-    @CachePut(value = "seat", key = "#seatId")
     public SeatDto updateSeatById(int seatId) throws NotFoundException{
         Optional<Seat> seat = seatRepository.findById(seatId);
         if(seat.isPresent()) {
@@ -95,7 +91,7 @@ public class SeatServiceImpl implements SeatService {
      * </p>
      *
      * @param seat it contains seat objects
-     * @return SeatDto
+     * @return Seat
      */
     @Override
     @Transactional
@@ -114,7 +110,7 @@ public class SeatServiceImpl implements SeatService {
      * </p>
      *
      * @param seat it contains seat objects
-     * @return SeatDto
+     * @return Seat
      */
     @Override
     public Seat cancelSeatBooking(Seat seat) {
@@ -128,7 +124,7 @@ public class SeatServiceImpl implements SeatService {
      * </p>
      *
      * @param seatId it contains seat id
-     * @return SeatDto
+     * @return Seat
      */
     @Override
     public Seat getSeatById(int seatId) {
@@ -141,15 +137,13 @@ public class SeatServiceImpl implements SeatService {
      * </p>
      *
      * @param showId it contains show id
-     * @return List<SeatDto>
+     * @return List<SeatResponseDto>
      */
     @Override
-    //@Cacheable(value = "seat",key = "#showId")
     public List<SeatResponseDto> getSeatByShowId(int showId) {
-        Show show = mapper.showResponseDtoToShow(showService.getShowById(showId));
         List<Seat> seats = new ArrayList<>();
-        for (Seat seat : seatRepository.findByShow(show)) {
-            if (seat.getSeatStatus().equals(SeatStatus.AVAILABLE)) {
+        for (Seat seat : seatRepository.findAll()) {
+            if (showId == seat.getShow().getShowId()) {
                 seats.add(seat);
             }
         }

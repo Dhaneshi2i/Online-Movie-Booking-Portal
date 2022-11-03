@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.dto.responseDto;
 
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 

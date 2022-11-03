@@ -17,9 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,9 +32,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "screens")
-public class Screen implements Serializable {
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class Screen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,10 +42,10 @@ public class Screen implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "screen_seat_type_id")
-    private List<SeatType> seatTypes = new ArrayList<>();
+    private List<SeatType> seatTypes;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "theatre_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "theatre_theatre_id", referencedColumnName = "theatreId")
     private Theatre theatre;
 
     private boolean status;

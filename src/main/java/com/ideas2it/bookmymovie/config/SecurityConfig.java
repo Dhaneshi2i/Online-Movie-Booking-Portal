@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/api/v1/users/{id}").hasAuthority("Customer")
                 .antMatchers(HttpMethod.GET,"/api/v1/users").hasAuthority("Admin")
                 .antMatchers(HttpMethod.PATCH,"/api/v1/users").hasAnyAuthority("Customer","Admin")
-                .antMatchers("api/v1/role").denyAll()
+                .antMatchers("/api/v1/role").hasAuthority("Admin")
                 .antMatchers("/api/v1/cast").hasAuthority("Admin")
                 .antMatchers("/api/v1/language").hasAuthority("Admin")
                 .antMatchers("/api/v1/genre").hasAuthority("Admin")

@@ -7,10 +7,10 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
 
-    url: jdbc:mysql://localhost/tk
+    url: jdbc:mysql://localhost/bk
 
     username: root
-    password: harini@04
+    password: dhanesh@22
 
     flyway:baselineOnMigrate : true
 

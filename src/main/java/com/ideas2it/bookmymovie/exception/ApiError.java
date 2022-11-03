@@ -1,14 +1,13 @@
 package com.ideas2it.bookmymovie.exception;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ApiError
@@ -24,25 +23,13 @@ public class ApiError {
 
     /** The time stamp. */
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime timeStamp;
+    private LocalDateTime timeStamp = LocalDateTime.now();
 
     /** The message. */
     private String message;
 
     /** The sub errors. */
     private List<ApiSubError> subErrors;
-
-
-
-//    public ApiError(HttpStatus status, String message, Throwable ex)
-//    {
-//        this();
-//        this.status= status;
-//        this.message = ex.getMessage();
-//        this.debugMessage= ex.getLocalizedMessage();
-//
-//
-//    }
 
     public ApiError(HttpStatus status, String detail,List<FieldError> subError) {
         this();

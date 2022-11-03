@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,9 +31,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "movies")
-public class Movie implements Serializable {
-
-    private static final long serialVersionUID = 3710470335120544380L;
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,19 +43,15 @@ public class Movie implements Serializable {
 
     private LocalDate releaseDate;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
+    @ManyToMany
     @JoinTable(
             name = "movie_genre",
             joinColumns = {
                     @JoinColumn(name = "movie_id")
             }, inverseJoinColumns = {@JoinColumn(name = "genre_id")})
-    private List<Genre> genres = new ArrayList<>();
+    private List<Genre> genres;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
+    @ManyToMany
     @JoinTable(
             name = "movie_language",
             joinColumns = {
@@ -70,11 +61,9 @@ public class Movie implements Serializable {
                     @JoinColumn(name = "language_id")
             }
     )
-    private List<Language> languages = new ArrayList<>();
+    private List<Language> languages;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
+    @ManyToMany
     @JoinTable(
             name = "movie_cast",
             joinColumns = {
@@ -84,7 +73,7 @@ public class Movie implements Serializable {
                     @JoinColumn(name = "cast_id")
             }
     )
-    private List<Cast> casts = new ArrayList<>();
+    private List<Cast> casts;
 
     private boolean status;
 
