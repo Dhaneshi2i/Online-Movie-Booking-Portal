@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.dto;
 
-import com.ideas2it.bookmymovie.Constants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,11 +20,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class GenreDto implements Serializable {
 
+    private int id;
 
     @NotBlank(message = "Genre should not be empty")
     @Pattern(regexp="^(Action|Thriller|Drama)$",message="Invalid genre. Valid values are 1. Action 2. Thriller 3.Drama")
-    private int id;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid genre")
     private String genreName;
 }

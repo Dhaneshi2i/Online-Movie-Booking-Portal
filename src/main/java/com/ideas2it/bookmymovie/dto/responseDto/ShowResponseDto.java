@@ -16,11 +16,13 @@ import java.time.LocalTime;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
 public class ShowResponseDto {
 
     private LocalDate showDate;
+
     private LocalTime showStartTime;
+
     private MovieResponseDto movie;
+
     private ScreenResponseDto screen;
 }

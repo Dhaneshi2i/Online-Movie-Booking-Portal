@@ -22,14 +22,21 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class BookingDto implements Serializable {
+
     private static final long serialVersionUID = 3710470335120544380L;
+
     @NotBlank(message = "Transaction mode should not be empty")
     @Pattern(regexp="^(Online|Offline)$",message="Invalid transaction status . Valid values are 1. ONLINE 2. OFFLINE")
     private String transactionMode;
+
     private UserDto user;
+
     private ShowDto show;
+
     private LocalDate bookingDate;
+
     @NotEmpty(message = "Seat should not be empty")
     private List<SeatDto> seats;
+
     private float totalCost;
 }

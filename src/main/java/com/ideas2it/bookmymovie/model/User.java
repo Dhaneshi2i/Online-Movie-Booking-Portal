@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,19 +30,30 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="users")
 public class User implements Serializable {
+
     private static final long serialVersionUID = 3710470335120544380L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
+
     private String userName;
+
     private String emailId;
+
     private long contactNumber;
+
     private String password;
+
     @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp createdOn;
+
     @UpdateTimestamp
     private Timestamp updatedOn;
+
     private boolean status;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;

@@ -6,9 +6,11 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,19 +36,27 @@ public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seatId;
+
     private String seatNumber;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="seatTypeId", nullable=false)
     private SeatType seatType;
+
     private LocalDate showDate;
+
     private float seatPrice;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_show_id")
     private Show show;
+
     @Enumerated(EnumType.STRING)
     private SeatStatus seatStatus = SeatStatus.AVAILABLE;
+
     @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp createdOn;
+
     @UpdateTimestamp
     private Timestamp updatedOn;
 }

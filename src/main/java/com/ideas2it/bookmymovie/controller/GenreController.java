@@ -33,6 +33,13 @@ public class GenreController {
         return genreService.addGenre(genreDto);
     }
 
+    /**
+     * <p>
+     * This method List all the genre Details
+     * </p>
+     *
+     * @return List<GenreDto>
+     */
     @GetMapping
     public List<GenreDto> getAllGenres() {
         return genreService.getAllGenres();

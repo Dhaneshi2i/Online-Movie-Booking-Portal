@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface TheatreService {
      * @param theatreDto it contains theatre dto object
      * @return TheatreDto
      */
-    TheatreDto createTheatre(TheatreDto theatreDto) throws NotFoundException;
+    TheatreResponseDto createTheatre(TheatreDto theatreDto) throws NotFoundException;
 
     /**
      * <p>
@@ -58,6 +59,6 @@ public interface TheatreService {
      * @param city it contains city
      * @return List<TheatreDto>
      */
-    List<TheatreDto> findTheatresByLocation(String city) throws NotFoundException;
+    List<TheatreDto> findTheatresByLocation(String city) ;
 
 }

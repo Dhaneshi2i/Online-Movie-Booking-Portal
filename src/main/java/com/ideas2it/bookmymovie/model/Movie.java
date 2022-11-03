@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,15 +35,21 @@ import java.util.List;
 @Entity
 @Table(name = "movies")
 public class Movie implements Serializable {
+
     private static final long serialVersionUID = 3710470335120544380L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieId;
+
     private String movieName;
+
     private LocalTime duration;
+
     private LocalDate releaseDate;
+
     @ManyToMany(cascade = {
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     @JoinTable(
             name = "movie_genre",
@@ -52,7 +59,7 @@ public class Movie implements Serializable {
     private List<Genre> genres = new ArrayList<>();
 
     @ManyToMany(cascade = {
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     @JoinTable(
             name = "movie_language",
@@ -66,7 +73,7 @@ public class Movie implements Serializable {
     private List<Language> languages = new ArrayList<>();
 
     @ManyToMany(cascade = {
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     @JoinTable(
             name = "movie_cast",
@@ -78,9 +85,13 @@ public class Movie implements Serializable {
             }
     )
     private List<Cast> casts = new ArrayList<>();
+
     private boolean status;
+
     @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp createdOn;
+
     @UpdateTimestamp
     private Timestamp updatedOn;
 }

@@ -74,7 +74,10 @@ public class ShowServiceImpl implements ShowService {
         if (shows.isEmpty()) {
             throw new NotFoundException("No shows found ");
         }
-        theatre.setShows(shows);
+        for (Show show : shows) {
+            theatre.getShows().add(show);
+        }
+        //theatre.setShows(shows);
         theatreService.updateTheatre(mapper.theatreToTheatreDto(theatre));
         return mapper.showListToShowResponseDtoList(shows);
     }
@@ -128,12 +131,12 @@ public class ShowServiceImpl implements ShowService {
      * @return ShowDto
      */
     @Override
-    public ShowDto getShowById(int showId) {
+    public ShowResponseDto getShowById(int showId) {
         Show show = showrepository.findByShowId(showId);
         if (null == show) {
             throw new NotFoundException("No shows were found for respective id " + showId);
         } else {
-            return mapper.showToShowDto(show);
+            return mapper.showToShowResponseDto(show);
         }
     }
 
@@ -145,7 +148,7 @@ public class ShowServiceImpl implements ShowService {
      * @return List<ShowDto>
      */
     @Override
-    public List<ShowDto> getAllShow(int pageNumber, int pageSize) {
+    public List<ShowResponseDto> getAllShow(int pageNumber, int pageSize) {
         List<Show> shows = showrepository.findAll();
         if (shows.isEmpty()) {
             throw new NotFoundException("No shows available");
@@ -153,7 +156,7 @@ public class ShowServiceImpl implements ShowService {
 
             Pageable p = PageRequest.of(pageNumber, pageSize);
             Page<Show> show = showrepository.findAll(p);
-            return mapper.showListToShowSlimDtoList(show.getContent());
+            return mapper.showListToShowResponseDtoList(show.getContent());
 
         }
     }
@@ -164,15 +167,15 @@ public class ShowServiceImpl implements ShowService {
      * </p>
      *
      * @param theatreId it contains theatre id
-     * @return List<ShowDto>
+     * @return List<ShowResponseDto>
      */
     /*@Override
-    public List<ShowDto> getShowByTheatreId(int theatreId) {
+    public List<ShowResponseDto> getShowByTheatreId(int theatreId) {
         List<Show> shows = showrepository.getAllByTheatreId(theatreId);
         if (shows.isEmpty()) {
             throw new NotFoundException("No shows available for respective theatre " + theatreId);
         }
-        return mapper.showListToShowDtoList(shows);
+        return mapper.showListToShowResponseDtoList(shows);
     }*/
 
     /**
@@ -181,10 +184,10 @@ public class ShowServiceImpl implements ShowService {
      * </p>
      *
      * @param date it contains date
-     * @return List<ShowDto>
+     * @return List<ShowResponseDto>
      */
     @Override
-    public List<ShowDto> getShowsByDate(LocalDate date) {
+    public List<ShowResponseDto> getShowsByDate(LocalDate date) {
         List<Show> shows = new ArrayList<>();
         for (Show show : showrepository.findAll()) {
             if (show.getShowDate() != null && show.getShowDate().isEqual(date)) {
@@ -194,9 +197,8 @@ public class ShowServiceImpl implements ShowService {
         if(shows.isEmpty()) {
             throw new NotFoundException("No shows available for respective date " + date);
         } else {
-            return mapper.showListToShowDtoList(shows);
+            return mapper.showListToShowResponseDtoList(shows);
         }
     }
-
 }
 

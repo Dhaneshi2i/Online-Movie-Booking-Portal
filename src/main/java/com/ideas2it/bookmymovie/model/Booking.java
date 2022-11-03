@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,22 +34,31 @@ import java.util.List;
 @Entity
 @Table(name = "booking")
 public class Booking implements Serializable {
+
     private static final long serialVersionUID = 3710470335120544380L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bookingId;
+
     private String transactionMode;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "show_id")
     private Show show;
+
     private LocalDate bookingDate;
+
     @Enumerated(EnumType.STRING)
-    private BookingStatus bookingStatus = BookingStatus.ONPROCESS;
+    private BookingStatus bookingStatus;
+
     private float totalCost;
-    @OneToMany(fetch = FetchType.LAZY)
-   // @JoinColumn(name = "seat_id")
-    private List<Seat> seats;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_seat_id")
+    private List<Seat> seats = new ArrayList<>();
 
 }

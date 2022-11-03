@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingCancelledResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.model.Seat;
 
@@ -56,7 +57,7 @@ public interface  BookingService {
      * @param bookingId it contains booking dto object
      * @return BookingDto
      */
-    BookingResponseDto cancelBooking(int bookingId);
+    BookingCancelledResponseDto cancelBooking(int bookingId);
 
     /**
      * <p>

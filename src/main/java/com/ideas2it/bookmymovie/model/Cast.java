@@ -26,7 +26,9 @@ public class Cast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int castId;
+
     private String castName;
+
     private String castRole;
 }
 

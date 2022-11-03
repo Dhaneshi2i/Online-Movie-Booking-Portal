@@ -15,8 +15,5 @@ public class BookMyMovieApplication {
         SpringApplication.run(BookMyMovieApplication.class, args);
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }}
+}
 

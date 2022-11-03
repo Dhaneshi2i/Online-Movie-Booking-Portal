@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -31,7 +32,7 @@ public class TheatreController {
     private final TheatreService theatreService;
 
     public TheatreController(TheatreService theatreService) {
-        this.theatreService = theatreService;;
+        this.theatreService = theatreService;
     }
 
     /**
@@ -43,7 +44,7 @@ public class TheatreController {
      * @return TheatreDto
      */
     @PostMapping
-    public TheatreDto createTheatre(@Valid @RequestBody TheatreDto theatreDto) {
+    public TheatreResponseDto createTheatre(@Valid @RequestBody TheatreDto theatreDto) {
         return theatreService.createTheatre(theatreDto);
     }
 

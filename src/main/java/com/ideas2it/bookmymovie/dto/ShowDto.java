@@ -18,6 +18,7 @@ import java.util.List;
  * <p>
  * Show Dto class contains the show dto data.
  * </p>
+ *
  * @author Dhanesh kumar, Harini, sivadharshini
  * @version 1.0
  **/
@@ -26,21 +27,21 @@ import java.util.List;
 @NoArgsConstructor
 public class ShowDto {
 
-
-   
-
     private int id;
-     @NotNull(message = "Show date should not be empty")
 
+    @NotNull(message = "Show date should not be empty")
     @FutureOrPresent(message = "Please provide a present or future date")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate showDate;
+
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private List<TimeSlotDto> timeSlots;
+
     private MovieDto movie;
+
     private ScreenDto screen;
 
 }

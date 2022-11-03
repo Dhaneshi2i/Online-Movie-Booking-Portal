@@ -28,7 +28,7 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/api/v1/shows")
+@RequestMapping("/api/v1/show")
 public class ShowController {
 
     private final ShowService showService;
@@ -73,7 +73,7 @@ public class ShowController {
      * @return ShowDto
      */
     @GetMapping("/{showId}")
-    public ShowDto getShowById(@PathVariable int showId) {
+    public ShowResponseDto getShowById(@PathVariable int showId) {
         return showService.getShowById(showId);
     }
 
@@ -85,7 +85,7 @@ public class ShowController {
      * @return List<ShowDto>
      */
     @GetMapping
-    public List<ShowDto> getAllShow(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+    public List<ShowResponseDto> getAllShow(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
         return showService.getAllShow(pageNumber, pageSize);
     }
 
@@ -98,8 +98,13 @@ public class ShowController {
      * @return List<ShowDto>
      */
     @GetMapping("/date")
-    public List<ShowDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+    public List<ShowResponseDto> getShowByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return showService.getShowsByDate(date);
     }
+
+    /*@GetMapping("{theatreId]")
+    public List<ShowResponseDto> getShowsByTheatreId(@PathVariable int theatreId) {
+        return showService.getShowByTheatreId(theatreId);
+    }*/
 
 }

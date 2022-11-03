@@ -12,6 +12,8 @@ spring:
     username: root
     password: harini@04
 
+    flyway:baselineOnMigrate : true
+
   main:
     allow-circular-references: true
 

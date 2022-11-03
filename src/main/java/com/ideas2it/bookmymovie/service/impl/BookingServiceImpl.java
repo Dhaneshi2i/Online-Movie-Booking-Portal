@@ -2,6 +2,7 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
 import com.ideas2it.bookmymovie.dto.SeatDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingCancelledResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
@@ -53,10 +54,11 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingResponseDto createBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
+        booking.setBookingStatus(BookingStatus.ONPROCESS);
 
         if (null != bookingDto.getUser()) {
             booking.setUser(mapper.userDtoToUser(userService.getUserById(bookingDto.getUser().getId())));
-            booking.setShow(mapper.showDtoToShow(showService.getShowById(bookingDto.getShow().getId())));
+            booking.setShow(mapper.showResponseDtoToShow(showService.getShowById(bookingDto.getShow().getId())));
             List<Seat> seats = new ArrayList<>();
             for(SeatDto seatDto : bookingDto.getSeats()) {
                 seats.add(seatService.getSeatById(seatDto.getId()));
@@ -140,7 +142,7 @@ public class BookingServiceImpl implements BookingService {
      * @return BookingDto
      */
     @Override
-    public BookingResponseDto cancelBooking(int bookingId) throws NotFoundException {
+    public BookingCancelledResponseDto cancelBooking(int bookingId) throws NotFoundException {
         Booking booking = bookingRepository.findBookingByBookingId(bookingId);
         List<Seat> seats = booking.getSeats();
         for (Seat seat : seats) {
@@ -149,7 +151,7 @@ public class BookingServiceImpl implements BookingService {
         booking.setBookingStatus(BookingStatus.CANCELLED);
         booking.setSeats(seats);
         bookingRepository.save(booking);
-        return mapper.bookingToBookingResponseDto(booking);
+        return mapper.bookingToBookingCancelledResponseDto(booking);
     }
 
     /**

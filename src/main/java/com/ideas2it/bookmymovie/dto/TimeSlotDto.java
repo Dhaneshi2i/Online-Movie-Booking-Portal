@@ -16,6 +16,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 public class TimeSlotDto {
+
     private int id;
 
     @NotNull

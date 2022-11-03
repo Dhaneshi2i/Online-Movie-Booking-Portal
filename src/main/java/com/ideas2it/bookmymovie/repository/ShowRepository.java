@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ShowRepository extends JpaRepository<Show, Integer> {
 	Show findByShowId(int showId);
-    List<Show> findAllByStatus(boolean status);
+
+//    List<Show> getAllByTheatreId(int theatreId);
 }

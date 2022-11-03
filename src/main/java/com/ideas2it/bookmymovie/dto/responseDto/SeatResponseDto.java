@@ -16,12 +16,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-
 public class SeatResponseDto {
 
     private String seatNumber;
+
     private SeatTypeResponseDto seatType;
+
     private float seatPrice;
+
     private SeatStatus seatStatus;
 }
