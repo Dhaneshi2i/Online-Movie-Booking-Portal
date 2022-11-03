@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.dto;
 
 
-import com.ideas2it.bookmymovie.Constants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,13 +21,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class LanguageDto implements Serializable {
 
+    private int id;
 
     @NotBlank(message = "Language should not be empty")
     @Pattern(regexp="^(Tamil|English|Hindi|Telugu)$",message="Invalid language . Valid values are 1. Tamil 2. English 3. Hindi 4. Telugu")
-
-    private int id;
-    @NotBlank
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid language")
     private String languageName;
 
 }

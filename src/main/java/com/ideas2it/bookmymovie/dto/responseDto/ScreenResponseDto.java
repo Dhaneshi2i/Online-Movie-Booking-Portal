@@ -15,5 +15,6 @@ import lombok.Setter;
 public class ScreenResponseDto {
 
     private String screenName;
+
     private TheatreResponseDto theatre;
 }

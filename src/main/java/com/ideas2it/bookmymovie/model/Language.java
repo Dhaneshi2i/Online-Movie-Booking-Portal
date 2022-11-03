@@ -26,5 +26,6 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int languageId;
+
     private String languageName;
 }

@@ -14,7 +14,6 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
 public class RoleResponseDto {
 
     private String roleType;

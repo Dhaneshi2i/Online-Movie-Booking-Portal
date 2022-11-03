@@ -12,9 +12,9 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
 public class MovieResponseDto {
 
     private int movieId;
+
     private String movieName;
 }

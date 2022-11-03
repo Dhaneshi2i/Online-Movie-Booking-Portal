@@ -12,7 +12,6 @@ import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -145,9 +144,9 @@ public class SeatServiceImpl implements SeatService {
      * @return List<SeatDto>
      */
     @Override
-    @Cacheable(value = "seat",key = "#showId")
+    //@Cacheable(value = "seat",key = "#showId")
     public List<SeatResponseDto> getSeatByShowId(int showId) {
-        Show show = mapper.showDtoToShow(showService.getShowById(showId));
+        Show show = mapper.showResponseDtoToShow(showService.getShowById(showId));
         List<Seat> seats = new ArrayList<>();
         for (Seat seat : seatRepository.findByShow(show)) {
             if (seat.getSeatStatus().equals(SeatStatus.AVAILABLE)) {

@@ -1,12 +1,12 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
-import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -20,13 +20,10 @@ import java.util.List;
 public class TheatreServiceImpl implements TheatreService {
 
     private final TheatreRepository theatreRepository;
-    private MovieService movieService;
     private final MapStructMapper mapper;
 
-    public TheatreServiceImpl(TheatreRepository theatreRepository,
-                              MovieService movieService, MapStructMapper mapper) {
+    public TheatreServiceImpl(TheatreRepository theatreRepository, MapStructMapper mapper) {
         this.theatreRepository = theatreRepository;
-        this.movieService = movieService;
         this.mapper = mapper;
     }
 
@@ -39,14 +36,14 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto
      */
     @Override
-    public TheatreDto createTheatre(TheatreDto theatreDto) {
+    public TheatreResponseDto createTheatre(TheatreDto theatreDto) {
         Theatre theatre = mapper.theatreDtoToTheatre(theatreDto);
         if (theatreRepository.existsByTheatreName(theatreDto.getTheatreName())) {
             if (theatreRepository.existsByTheatreCity(theatreDto.getTheatreCity())) {
                 throw new AlreadyExistException("This Theatre is already exist in this location ");
             }
         }
-        return mapper.theatreToTheatreDto(theatreRepository.save(theatre));
+        return mapper.theatreToTheatreResponseDto(theatreRepository.save(theatre));
     }
 
     /**
@@ -77,15 +74,14 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto
      */
     @Override
-
-    @Cacheable(value = "theatre")
+    //@Cacheable(value = "theatre")
     public TheatreDto findTheatreById(int theatreId) {
         if (theatreRepository.existsById(theatreId)) {
             Theatre theatre = theatreRepository.findByTheatreId(theatreId);
                 return mapper.theatreToTheatreDto(theatre);
         }
-        return mapper.theatreToTheatreDto(theatreRepository.findByTheatreId(theatreId));
-//        throw new NotFoundException("Theatre details with the given id is not found");
+        throw new NotFoundException("Theatre details with the given id is not found");
+
     }
 
     /**
@@ -102,7 +98,6 @@ public class TheatreServiceImpl implements TheatreService {
             throw new NotFoundException("No theatre found for this id");
         }
         return mapper.theatreToTheatreDto(theatreRepository.save(mapper.theatreDtoToTheatre(theatreDto)));
-
     }
 
     /**
@@ -113,7 +108,7 @@ public class TheatreServiceImpl implements TheatreService {
      * @param city it contains city
      * @return List<TheatreDto>
      */
-    @Cacheable(value = "theatre", key = "#city")
+    //@Cacheable(value = "theatre", key = "#city")
     public List<TheatreDto> findTheatresByLocation(String city) {
         List<Theatre> theatres = theatreRepository.findTheatreByTheatreCity(city);
         if (theatres.isEmpty()) {

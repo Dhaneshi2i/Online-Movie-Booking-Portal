@@ -16,6 +16,5 @@ public class TheatreResponseDto {
 
     private String theatreName;
     private String theatreCity;
-    //private List<Show> shows = new ArrayList<>();
 
 }

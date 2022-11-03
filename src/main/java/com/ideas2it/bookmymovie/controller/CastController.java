@@ -33,6 +33,13 @@ public class CastController {
         return castService.addCast(castDto);
     }
 
+    /**
+     * <p>
+     * This method List all the cast details
+     * </p>
+     *
+     * @return List<CastDto>
+     */
     @GetMapping
     public List<CastDto> getAllCast() {
         return castService.getAllCasts();

@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.BookingDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingCancelledResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.service.BookingService;
 import org.springframework.cache.annotation.Cacheable;
@@ -98,7 +99,7 @@ public class BookingController {
      * @return BookingDto
      */
     @PatchMapping("/cancel-booking/{bookingId}")
-    public BookingResponseDto cancelBookingById(@PathVariable int bookingId) {
+    public BookingCancelledResponseDto cancelBookingById(@PathVariable int bookingId) {
         return bookingService.cancelBooking(bookingId);
     }
 

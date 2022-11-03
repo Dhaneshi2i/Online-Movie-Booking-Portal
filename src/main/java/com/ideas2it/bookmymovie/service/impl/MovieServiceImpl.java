@@ -12,7 +12,6 @@ import com.ideas2it.bookmymovie.service.CastService;
 import com.ideas2it.bookmymovie.service.GenreService;
 import com.ideas2it.bookmymovie.service.LanguageService;
 import com.ideas2it.bookmymovie.service.MovieService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +46,7 @@ public class MovieServiceImpl implements MovieService {
       * @param movieDto it contains movie dto objects
       * @return MovieDto
       */
+     @Override
      public MovieDto addMovie(MovieDto movieDto) {
          Movie movie = new Movie();
          if (null != movieDto) {
@@ -79,6 +79,7 @@ public class MovieServiceImpl implements MovieService {
       *
       * @return List<MovieDto>
       */
+     @Override
      public List<MovieDto> getMovies(int pageNumber, int pageSize) throws NotFoundException {
          List<Movie> movies = movieRepository.findAll();
 
@@ -99,12 +100,11 @@ public class MovieServiceImpl implements MovieService {
       * @param movieId it contains movieId
       * @return MovieDto
       */
-     @Cacheable(value = "movie")
+     @Override
+     //@Cacheable(value = "movie")
      public MovieDto getMovieById(int movieId) throws NotFoundException{
          if (movieRepository.existsById(movieId)) {
-             System.out.println(movieId);
              Movie movie = movieRepository.findByMovieId(movieId);
-             System.out.println("id: " + movie.getMovieId());
                  return mapper.movieToMovieDto(movie);
          }
          throw new NotFoundException("No movie found");

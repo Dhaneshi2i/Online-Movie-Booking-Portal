@@ -11,7 +11,6 @@ import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -86,7 +85,7 @@ public class UserServiceImpl implements UserService {
      * @return UserDto
      */
     @Override
-    @Cacheable(value = "user")
+    //@Cacheable(value = "user")
     public UserDto getUserById(int id) {
         return userRepository.findById(id).map(mapper::userToUserDto)
                 .orElseThrow(() ->new NotFoundException("No user found"));

@@ -20,9 +20,12 @@ import javax.validation.constraints.NotNull;
 public class SeatDto {
 
     private int id;
+
     @NotBlank
     private String seatNumber;
+
     private SeatTypeDto seatType;
+
     @NotNull
     private float seatPrice;
 

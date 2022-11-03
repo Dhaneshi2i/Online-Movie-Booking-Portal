@@ -29,7 +29,7 @@ import java.io.IOException;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException, ServletException, IOException {
+            throws  ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         String userName = null;
         String webToken = null;

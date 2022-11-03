@@ -13,11 +13,13 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
 public class UserResponseDto {
 
     private String userName;
+
     private long contactNumber;
+
     private String emailId;
+
     private RoleResponseDto role;
 }

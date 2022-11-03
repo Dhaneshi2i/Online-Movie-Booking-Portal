@@ -36,7 +36,7 @@ public interface ShowService {
      * @param showId it contains show id
      * @return ShowDto
      */
-    ShowDto getShowById(int showId);
+    ShowResponseDto getShowById(int showId);
 
     /**
      * <p>
@@ -45,7 +45,7 @@ public interface ShowService {
      *
      * @return List<ShowDto>
      */
-    List<ShowDto> getAllShow(int pageNumber, int pageSize);
+    List<ShowResponseDto> getAllShow(int pageNumber, int pageSize);
 
     /**
      * <p>
@@ -53,9 +53,9 @@ public interface ShowService {
      * </p>
      *
      * @param theatreId it contains theatre id
-     * @return List<ShowDto>
+     * @return List<ShowResponseDto>
      */
-    //List<ShowDto> getShowByTheatreId(int theatreId);
+    //List<ShowResponseDto> getShowByTheatreId(int theatreId);
 
     /**
      * <p>
@@ -63,8 +63,8 @@ public interface ShowService {
      * </p>
      *
      * @param date it contains date
-     * @return List<ShowDto>
+     * @return List<ShowResponseDto>
      */
-    List<ShowDto> getShowsByDate(LocalDate date);
+    List<ShowResponseDto> getShowsByDate(LocalDate date);
 
 }

@@ -43,6 +43,13 @@ public class LanguageController {
         return languageService.addLanguage(languageDto);
     }
 
+    /**
+     * <p>
+     * This method List all the language Details
+     * </p>
+     *
+     * @return List<LanguageDto>
+     */
     @GetMapping
     public List<LanguageDto> getAllLanguages() {
         return languageService.getAllLanguages();

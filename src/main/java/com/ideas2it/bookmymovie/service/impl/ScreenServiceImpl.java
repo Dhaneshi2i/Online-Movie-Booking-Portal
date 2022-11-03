@@ -5,16 +5,12 @@ import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
-import com.ideas2it.bookmymovie.model.SeatType;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.TheatreService;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,19 +72,17 @@ public class ScreenServiceImpl implements ScreenService {
      * This method updates the Screen Details
      * </p>
      *
-     * @param screenId it contains
+     * @param screenDto it contains
      * @return ScreenDto
      */
     @Override
-    @CachePut(value = "screen", key = "#screenId")
-    public ScreenDto updateScreenById(int screenId) throws NotFoundException {
-        Optional<Screen> screen = screenRepository.findById(screenId);
-        if (screen.isPresent()) {
-            screen.get().setStatus(false);
-            screenRepository.saveAndFlush(screen.get());
-            return mapper.screenToScreenDto(screen.get());
+    //@CachePut(value = "screen", key = "#screenId")
+    public ScreenDto updateScreen(ScreenDto screenDto){
+        //Screen screen = screenRepository.findByScreenId(screenDto.getId());
+        if (null == screenDto) {
+            throw new NotFoundException("Screen with the given id is not present");
         }
-        throw new NotFoundException("Screen with the given id is not present");
+        return mapper.screenToScreenDto(screenRepository.save(mapper.screenDtoToScreen(screenDto)));
     }
 
     /**
@@ -100,7 +94,7 @@ public class ScreenServiceImpl implements ScreenService {
      * @return ScreenDto
      */
     @Override
-    @Cacheable(value = "screen")
+    //@Cacheable(value = "screen")
     public ScreenDto getScreenById(int screenId)  {
         Screen screen = screenRepository.findByScreenId(screenId);
         if (null == screen) {

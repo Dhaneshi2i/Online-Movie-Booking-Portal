@@ -16,6 +16,7 @@ import lombok.Setter;
 public class CastResponseDto {
 
     private String castName;
+
     private String castRole;
 
 }

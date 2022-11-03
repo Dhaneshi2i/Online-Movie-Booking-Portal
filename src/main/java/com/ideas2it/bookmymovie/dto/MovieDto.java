@@ -26,20 +26,29 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class MovieDto implements Serializable {
+
     private static final long serialVersionUID = 3710470335120544380L;
+
     private int id;
+
     @NotBlank(message = "Please, Enter the movie name.Movie field should not be empty")
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please, Enter valid movie name")
+
     private String movieName;
     @NotNull(message = "Please, Enter the movie duration in correct format(HH:mm)")
+    
     private LocalTime duration;
+
     @NotNull(message = "Please, Enter the movie release date.Release date field should not be empty")
     @FutureOrPresent(message = "Please provide a present or future date")
     private LocalDate releaseDate;
+
     @NotEmpty(message = "Please, Enter the movie's cast.Cast field should not be empty")
     private List<CastDto> casts;
+
     @NotEmpty(message = "Please, Enter the movie's language.Language field should not be empty")
     private List<LanguageDto> languages;
+
     @NotEmpty(message = "Please, Enter the movie's genre.Genre field should not be empty")
     private List<GenreDto> genres;
 

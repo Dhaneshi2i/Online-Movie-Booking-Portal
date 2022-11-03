@@ -2,7 +2,6 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
-import com.ideas2it.bookmymovie.exception.NotFoundException;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface ScreenService {
      * @param screenDto it contains screen dto object
      * @return ScreenDto
      */
-    ScreenDto createScreen(ScreenDto screenDto) throws NotFoundException;
+    ScreenDto createScreen(ScreenDto screenDto) ;
 
     /**
      * <p>
@@ -28,17 +27,17 @@ public interface ScreenService {
      *
      * @return List<ScreenDto>
      */
-    List<ScreenDto> getAllScreen() throws NotFoundException;
+    List<ScreenDto> getAllScreen();
 
     /**
      * <p>
      * This method updates the Screen Details
      * </p>
      *
-     * @param screenId it contains
+     * @param screenDto it contains
      * @return ScreenDto
      */
-    ScreenDto updateScreenById(int screenId)  throws NotFoundException;
+    ScreenDto updateScreen(ScreenDto screenDto);
 
     /**
      * <p>
@@ -48,7 +47,7 @@ public interface ScreenService {
      * @param screenId it contains screen id
      * @return TheatreDto
      */
-    ScreenDto getScreenById(int screenId) throws NotFoundException;
+    ScreenDto getScreenById(int screenId) ;
 
     /**
      * This method List all the Theatre Details by screen that are present in Database
@@ -57,5 +56,5 @@ public interface ScreenService {
      * @return TheatreDto which will have the details of theatre
      * which was categorized by screen
      */
-    TheatreDto getTheatreByScreenId(int screenId) throws NotFoundException;
+    TheatreDto getTheatreByScreenId(int screenId) ;
 }

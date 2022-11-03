@@ -13,9 +13,11 @@ import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.dto.TheatreDto;
 import com.ideas2it.bookmymovie.dto.TimeSlotDto;
 import com.ideas2it.bookmymovie.dto.UserDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingCancelledResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.model.Booking;
 import com.ideas2it.bookmymovie.model.Cast;
@@ -119,5 +121,10 @@ public interface MapStructMapper {
 
     List<SeatType> seatTypeDtoListToSeatTypeList(List<SeatTypeDto> seatTypes);
 
+    BookingCancelledResponseDto bookingToBookingCancelledResponseDto(Booking booking);
+
+    TheatreResponseDto theatreToTheatreResponseDto(Theatre save);
+
+    Show showResponseDtoToShow(ShowResponseDto showById);
 }
 
