@@ -1,6 +1,6 @@
 CREATE TABLE roles (
   role_id INT AUTO_INCREMENT NOT NULL,
-   role_type VARCHAR(255) NULL,
+   role_type VARCHAR(40) NULL,
    CONSTRAINT pk_roles PRIMARY KEY (role_id)
 );
 
@@ -9,13 +9,13 @@ insert into roles (role_type) values ("Customer");
 
 CREATE TABLE users (
   user_id INT AUTO_INCREMENT NOT NULL,
-   user_name VARCHAR(255) NULL,
-   email_id VARCHAR(255) NULL,
+   user_name VARCHAR(40) NULL,
+   email_id VARCHAR(40) NULL,
    contact_number BIGINT NOT NULL,
    password VARCHAR(255) NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    role_id INT NULL,
    CONSTRAINT pk_users PRIMARY KEY (user_id)
 );
@@ -24,29 +24,29 @@ ALTER TABLE users ADD CONSTRAINT FK_USERS_ON_ROLE FOREIGN KEY (role_id) REFERENC
 
 CREATE TABLE languages (
   language_id INT AUTO_INCREMENT NOT NULL,
-   language_name VARCHAR(255) NULL,
+   language_name VARCHAR(40) NULL,
    CONSTRAINT pk_languages PRIMARY KEY (language_id)
 );
 
 CREATE TABLE genres (
   genre_id INT AUTO_INCREMENT NOT NULL,
-   genre_name VARCHAR(255) NULL,
+   genre_name VARCHAR(40) NULL,
    CONSTRAINT pk_genres PRIMARY KEY (genre_id)
 );
 
 CREATE TABLE casts (
   cast_id INT AUTO_INCREMENT NOT NULL,
-   cast_name VARCHAR(255) NULL,
-   cast_role VARCHAR(255) NULL,
+   cast_name VARCHAR(40) NULL,
+   cast_role VARCHAR(40) NULL,
    CONSTRAINT pk_casts PRIMARY KEY (cast_id)
 );
 
 CREATE TABLE movies (
   movie_id INT AUTO_INCREMENT NOT NULL,
-   movie_name VARCHAR(255) NULL,
+   movie_name VARCHAR(40) NULL,
    duration time NULL,
    release_date date NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    CONSTRAINT pk_movies PRIMARY KEY (movie_id)
@@ -81,9 +81,9 @@ ALTER TABLE movie_cast ADD CONSTRAINT fk_movcas_on_movie FOREIGN KEY (movie_id) 
 
 CREATE TABLE theatres (
   theatre_id INT AUTO_INCREMENT NOT NULL,
-   theatre_name VARCHAR(255) NULL,
-   theatre_city VARCHAR(255) NULL,
-   status BIT(1) NOT NULL,
+   theatre_name VARCHAR(40) NULL,
+   theatre_city VARCHAR(40) NULL,
+   status INT NOT NULL,
    created_on datetime NULL,
    update_on datetime NULL,
    CONSTRAINT pk_theatres PRIMARY KEY (theatre_id)
@@ -91,9 +91,9 @@ CREATE TABLE theatres (
 
 CREATE TABLE screens (
   screen_id INT AUTO_INCREMENT NOT NULL,
-   screen_name VARCHAR(255) NULL,
+   screen_name VARCHAR(40) NULL,
    theatre_theatre_id INT NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    CONSTRAINT pk_screens PRIMARY KEY (screen_id)
@@ -103,7 +103,7 @@ ALTER TABLE screens ADD CONSTRAINT FK_SCREENS_ON_THEATRE_THEATRE FOREIGN KEY (th
 
 CREATE TABLE seat_type (
   seat_type_id INT AUTO_INCREMENT NOT NULL,
-   seat_type VARCHAR(255) NULL,
+   seat_type VARCHAR(40) NULL,
    no_of_columns INT NOT NULL,
    no_of_rows INT NOT NULL,
    price FLOAT NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE shows (
    show_start_time time NULL,
    movie_id INT NULL,
    show_screen_id INT NULL,
-   status BIT(1) NOT NULL,
+   status INT NOT NULL,
    CONSTRAINT pk_shows PRIMARY KEY (show_id)
 );
 
@@ -135,11 +135,11 @@ CREATE TABLE time_slots (
 
 CREATE TABLE booking (
   booking_id INT AUTO_INCREMENT NOT NULL,
-   transaction_mode VARCHAR(255) NULL,
+   transaction_mode VARCHAR(40) NULL,
    user_id INT NULL,
    show_id INT NULL,
    booking_date date NULL,
-   booking_status VARCHAR(255) NULL,
+   booking_status VARCHAR(40) NULL,
    total_cost FLOAT NOT NULL,
    CONSTRAINT pk_booking PRIMARY KEY (booking_id)
 );
@@ -150,12 +150,12 @@ ALTER TABLE booking ADD CONSTRAINT FK_BOOKING_ON_USER FOREIGN KEY (user_id) REFE
 
 CREATE TABLE seats (
   seat_id INT AUTO_INCREMENT NOT NULL,
-   seat_number VARCHAR(255) NULL,
+   seat_number VARCHAR(40) NULL,
    seat_type_id INT NOT NULL,
    show_date date NULL,
    seat_price FLOAT NOT NULL,
    show_show_id INT NULL,
-   seat_status VARCHAR(255) NULL,
+   seat_status VARCHAR(40) NULL,
    created_on datetime NULL,
    updated_on datetime NULL,
    booking_seat_id INT NULL,

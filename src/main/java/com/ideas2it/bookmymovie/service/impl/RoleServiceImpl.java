@@ -11,6 +11,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * <p>
+ * This {@Code RoleService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
@@ -43,7 +51,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<RoleDto> getAllRoles() {
-        return roleRepository.findAll().stream().map(role -> mapper.roleToRoleDto(role)).collect(Collectors.toList());
+        return roleRepository.findAll().stream().map(mapper::roleToRoleDto).collect(Collectors.toList());
     }
 
     /**
@@ -51,16 +59,10 @@ public class RoleServiceImpl implements RoleService {
      * This method gets Role Details which matches the role type
      * </p>
      *
-     * @param roleType it contains role type
-     * @return RoleSlimDto
+     * @param roleId it contains role type
+     * @return Role
      *
      */
-    @Override
-    public RoleDto getRoleByRoleType(String roleType) throws NotFoundException {
-        return roleRepository.findUserByRoleType(roleType).map(role ->mapper.roleToRoleDto(role))
-                .orElseThrow(() ->new NotFoundException("No role found"));
-    }
-
     @Override
     public Role getRoleByRoleId(int roleId) {
         return roleRepository.findByRoleId(roleId);

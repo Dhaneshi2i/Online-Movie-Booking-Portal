@@ -7,6 +7,15 @@ import com.ideas2it.bookmymovie.model.Seat;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code BookingService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
+
 public interface  BookingService {
 
     /**

@@ -11,6 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code GenreService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
@@ -53,6 +61,12 @@ public class GenreServiceImpl implements GenreService {
                 .orElseThrow(() -> new NotFoundException("No genre found by name: " + genreId ));
     }
 
+    /**
+     * <p>
+     * This methods returns list of all genres
+     * </p>
+     * @return List<GenreDto>
+     */
     @Override
     public List<GenreDto> getAllGenres() {
         List<Genre> genres = genreRepository.findAll();

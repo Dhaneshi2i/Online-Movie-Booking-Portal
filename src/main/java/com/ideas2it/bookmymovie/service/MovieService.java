@@ -5,6 +5,14 @@ import com.ideas2it.bookmymovie.exception.NotFoundException;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code MovieService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 public interface MovieService {
 
     /**
@@ -24,7 +32,7 @@ public interface MovieService {
      *
      * @return List<MovieDto>
      */
-    List<MovieDto> getMovies(int pageNumber, int pageSize) throws NotFoundException;
+    List<MovieDto> getMovies(int pageNumber, int pageSize) ;
 
     /**
      * <p>

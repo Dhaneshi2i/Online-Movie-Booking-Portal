@@ -15,6 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * <p>
+ * This {@Code ScreenServiceImpl} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class ScreenServiceImpl implements ScreenService {
     private final ScreenRepository screenRepository;
@@ -106,8 +114,7 @@ public class ScreenServiceImpl implements ScreenService {
      * This method List all the screen details by theatre that are present in Database
      *
      * @param theatreId is passed to categorize the screen Details by Movie
-     * @return ScreenResponseDto which will have the details of theatre
-     * which was categorized by screen
+     * @return List<ScreenResponseDto>
      */
     @Override
     public List<ScreenResponseDto> getScreenByTheatreId(int theatreId) {

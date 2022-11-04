@@ -7,6 +7,14 @@ import com.ideas2it.bookmymovie.model.Seat;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code SeatService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 public interface SeatService {
 
     /**
@@ -44,9 +52,8 @@ public interface SeatService {
      * </p>
      *
      * @param seat it contains seat objects
-     * @return SeatDto
      */
-     Seat bookSeat(Seat seat);
+     void bookSeat(Seat seat);
 
     /**
      * <p>
@@ -54,9 +61,8 @@ public interface SeatService {
      * </p>
      *
      * @param seat it contains seat objects
-     * @return SeatDto
      */
-    Seat cancelSeatBooking(Seat seat);
+    void cancelSeatBooking(Seat seat);
 
     /**
      * <p>
@@ -74,7 +80,7 @@ public interface SeatService {
      * </p>
      *
      * @param showId it contains show id
-     * @return List<SeatDto>
+     * @return List<SeatResponseDto>
      */
     List<SeatResponseDto> getSeatByShowId(int showId);
 

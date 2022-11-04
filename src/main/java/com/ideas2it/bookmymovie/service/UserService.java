@@ -6,6 +6,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code UserService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
+
 public interface UserService extends UserDetailsService {
 
     /**

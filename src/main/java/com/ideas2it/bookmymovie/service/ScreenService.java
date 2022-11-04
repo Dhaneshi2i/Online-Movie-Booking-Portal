@@ -6,7 +6,12 @@ import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 import java.util.List;
 
 /**
- * This an interface for Screen related business logic
+ * <p>
+ * This {@Code ScreenService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
  */
 public interface ScreenService {
 
@@ -50,11 +55,12 @@ public interface ScreenService {
     ScreenDto getScreenById(int screenId) ;
 
     /**
+     * <p>
      * This method List all the screen details by theatre that are present in Database
+     * </p>
      *
      * @param theatreId is passed to categorize the screen Details by Movie
-     * @return ScreenResponseDto which will have the details of theatre
-     * which was categorized by screen
+     * @return List<ScreenResponseDto>
      */
     List<ScreenResponseDto> getScreenByTheatreId(int theatreId);
 

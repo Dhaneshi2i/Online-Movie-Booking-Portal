@@ -8,7 +8,12 @@ import java.util.List;
 
 
 /**
- * This an interface for theatre related business logic
+ * <p>
+ * This {@Code TheatreService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
  */
 public interface TheatreService {
 

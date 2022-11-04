@@ -11,6 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code LanguageService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class LanguageServiceImpl implements LanguageService {
     private final LanguageRepository languageRepository;
@@ -53,6 +61,12 @@ public class LanguageServiceImpl implements LanguageService {
                 .orElseThrow(() ->new NotFoundException("No language found by name:" + languageId));
     }
 
+    /**
+     * <p>
+     * This method returns list of all languages
+     * </p>
+     * @return List<LanguageDto>
+     */
     @Override
     public List<LanguageDto> getAllLanguages() {
         List<Language> languages = languageRepository.findAll();
