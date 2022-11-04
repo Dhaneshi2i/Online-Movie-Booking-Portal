@@ -4,6 +4,14 @@ import com.ideas2it.bookmymovie.dto.LanguageDto;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code LanguageService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 public interface LanguageService {
 
     /**
@@ -26,5 +34,11 @@ public interface LanguageService {
      */
     LanguageDto getByLanguageId(int languageId);
 
+    /**
+     * <p>
+     * This method returns list of all languages
+     * </p>
+     * @return List<LanguageDto>
+     */
     List<LanguageDto> getAllLanguages();
 }

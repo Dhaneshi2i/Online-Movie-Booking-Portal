@@ -24,6 +24,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code UserServiceImpl} class used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
+
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
@@ -86,7 +95,6 @@ public class UserServiceImpl implements UserService {
      * @return UserDto
      */
     @Override
-    //@Cacheable(value = "user")
     public UserDto getUserById(int id) {
         return userRepository.findById(id).map(mapper::userToUserDto)
                 .orElseThrow(() ->new NotFoundException("No user found"));
@@ -101,7 +109,6 @@ public class UserServiceImpl implements UserService {
      * @return ScreenDto
      */
     @Override
-    @CachePut(value = "user",key = "#userDto.getUserId()")
     public UserDto updateUser(UserDto userDto) {
         return mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDto)));
     }

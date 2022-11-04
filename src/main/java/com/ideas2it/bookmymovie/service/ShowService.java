@@ -6,6 +6,14 @@ import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code ShowService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 public interface ShowService {
 
     /**

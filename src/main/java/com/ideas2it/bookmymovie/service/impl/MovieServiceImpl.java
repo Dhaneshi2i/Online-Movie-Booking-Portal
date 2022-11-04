@@ -20,6 +20,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code MovieService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -80,7 +88,7 @@ public class MovieServiceImpl implements MovieService {
       * @return List<MovieDto>
       */
      @Override
-     public List<MovieDto> getMovies(int pageNumber, int pageSize) throws NotFoundException {
+     public List<MovieDto> getMovies(int pageNumber, int pageSize) {
          List<Movie> movies = movieRepository.findAll();
 
          if (movies.isEmpty()) {
@@ -101,8 +109,7 @@ public class MovieServiceImpl implements MovieService {
       * @return MovieDto
       */
      @Override
-     //@Cacheable(value = "movie")
-     public MovieDto getMovieById(int movieId) throws NotFoundException{
+     public MovieDto getMovieById(int movieId) {
          if (movieRepository.existsById(movieId)) {
              Movie movie = movieRepository.findByMovieId(movieId);
                  return mapper.movieToMovieDto(movie);

@@ -5,6 +5,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,9 +47,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   final HttpHeaders headers, final HttpStatus status,
                                                                   final WebRequest request) {
         Set<ApiError> errorMap = new LinkedHashSet<>();
-        errorMap.add(new ApiError(HttpStatus.BAD_REQUEST, ex.getFieldErrors().get(0).getDefaultMessage(),
-                ex.getFieldErrors() ));
-        return new ResponseEntity(errorMap, HttpStatus.BAD_REQUEST);
+//        errorMap.add(new ApiError(HttpStatus.BAD_REQUEST, ex.getFieldErrors().get(0).getDefaultMessage(),
+//                ex.getFieldErrors() ));
+        StringBuilder errormsg = new StringBuilder("Please make sure all the required fields and unique fields are given properly.");
+        for(FieldError fieldError : ex.getFieldErrors()) {
+            errormsg.append(fieldError.getField()).append(" ");
+        }
+        return new ResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, errormsg.toString(),
+                ex.getFieldErrors() ), HttpStatus.BAD_REQUEST);
     }
 
     /**

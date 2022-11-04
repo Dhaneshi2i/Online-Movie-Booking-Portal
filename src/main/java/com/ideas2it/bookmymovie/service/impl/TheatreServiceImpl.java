@@ -14,7 +14,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * <p>
+ * This {@Code TheatreService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class TheatreServiceImpl implements TheatreService {
 
@@ -72,7 +79,6 @@ public class TheatreServiceImpl implements TheatreService {
      * @return TheatreDto
      */
     @Override
-    //@Cacheable(value = "theatre")
     public TheatreDto findTheatreById(int theatreId) {
         if (theatreRepository.existsById(theatreId)) {
             Theatre theatre = theatreRepository.findByTheatreId(theatreId);
@@ -106,7 +112,8 @@ public class TheatreServiceImpl implements TheatreService {
      * @param city it contains city
      * @return List<TheatreDto>
      */
-    //@Cacheable(value = "theatre", key = "#city")
+
+    @Override
     public List<TheatreDto> findTheatresByLocation(String city) {
         List<Theatre> theatres = theatreRepository.findTheatreByTheatreCity(city);
         if (theatres.isEmpty()) {

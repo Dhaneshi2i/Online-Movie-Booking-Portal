@@ -7,6 +7,14 @@ import com.ideas2it.bookmymovie.repository.SeatTypeRepository;
 import com.ideas2it.bookmymovie.service.SeatTypeService;
 import org.springframework.stereotype.Service;
 
+/**
+ * <p>
+ * This {@Code SeatTypeService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class SeatTypeServiceImpl implements SeatTypeService {
     private final SeatTypeRepository seatTypeRepository;
@@ -17,11 +25,14 @@ public class SeatTypeServiceImpl implements SeatTypeService {
         this.mapper = mapper;
     }
 
-    @Override
-    public SeatType getSeatTypeBySeatTypeId(int seatTypeId) {
-         return seatTypeRepository.findBySeatTypeId(seatTypeId);
-    }
-
+    /**
+     * <p>
+     * This method is used to create the SeatType details
+     * </p>
+     *
+     * @param seatTypeDto it contains seatType Dto object
+     * @return SeatTypeDto
+     */
     @Override
     public SeatTypeDto addSeatType(SeatTypeDto seatTypeDto) {
         return mapper.seatTypeToSeatTypeDto(seatTypeRepository.save(mapper.seatTypeDtoToSeatType(seatTypeDto)));

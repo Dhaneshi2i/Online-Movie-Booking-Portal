@@ -21,16 +21,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>
+ * This {@Code SeatService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class SeatServiceImpl implements SeatService {
 
     private final SeatRepository seatRepository;
-    private final ShowService showService;
     private final MapStructMapper mapper;
 
-    public SeatServiceImpl(SeatRepository seatRepository, @Lazy ShowService showService, MapStructMapper mapper) {
+    public SeatServiceImpl(SeatRepository seatRepository,MapStructMapper mapper) {
         this.seatRepository = seatRepository;
-        this.showService = showService;
         this.mapper = mapper;
     }
 
@@ -91,17 +97,16 @@ public class SeatServiceImpl implements SeatService {
      * </p>
      *
      * @param seat it contains seat objects
-     * @return Seat
      */
     @Override
     @Transactional
-    public Seat bookSeat(Seat seat) {
+    public void bookSeat(Seat seat) {
         Seat currentSeat = seatRepository.findBySeatId(seat.getSeatId());
         if (currentSeat.getSeatStatus().equals(SeatStatus.BOOKED)) {
             throw new AlreadyExistException("This seat is already booked, please choose a different seat");
         }
         seat.setSeatStatus(SeatStatus.BOOKED);
-        return seatRepository.save(seat);
+        seatRepository.save(seat);
     }
 
     /**
@@ -110,12 +115,11 @@ public class SeatServiceImpl implements SeatService {
      * </p>
      *
      * @param seat it contains seat objects
-     * @return Seat
      */
     @Override
-    public Seat cancelSeatBooking(Seat seat) {
+    public void cancelSeatBooking(Seat seat) {
         seat.setSeatStatus(SeatStatus.AVAILABLE);
-        return seatRepository.save(seat);
+        seatRepository.save(seat);
     }
 
     /**

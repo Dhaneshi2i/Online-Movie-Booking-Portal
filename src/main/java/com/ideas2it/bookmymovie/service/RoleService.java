@@ -5,6 +5,14 @@ import com.ideas2it.bookmymovie.model.Role;
 
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code RoleService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 public interface RoleService {
 
     /**
@@ -31,10 +39,8 @@ public interface RoleService {
      * This method gets Role Details which matches the role type
      * </p>
      *
-     * @param roleType it contains role type
-     * @return RoleSlimDto
+     * @param roleId it contains role type
+     * @return Role
      */
-    RoleDto getRoleByRoleType(String roleType);
-
     Role getRoleByRoleId(int roleId);
 }

@@ -15,7 +15,6 @@ import com.ideas2it.bookmymovie.service.MovieService;
 import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
-import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,23 +25,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * This {@Code ShowService} interface used for crud operations
+ * </p>
+ *
+ * @author Dhanesh kumar, Harini, sivadharshini
+ * @version 1.0
+ */
 @Service
 public class ShowServiceImpl implements ShowService {
     private final ShowRepository showrepository;
     private final ScreenService screenService;
     private final MovieService movieService;
     private final SeatService seatService;
-    private final TheatreService theatreService;
     private final MapStructMapper mapper;
 
-    public ShowServiceImpl(ShowRepository showrepository, ScreenService screenService,
-                           MovieService movieService, SeatService seatService, TheatreService theatreService, MapStructMapper mapper ) {
+    public ShowServiceImpl(ShowRepository showrepository, ScreenService screenService,MovieService movieService,
+                                                                   SeatService seatService, MapStructMapper mapper ) {
 
         this.showrepository = showrepository;
         this.screenService = screenService;
         this.movieService = movieService;
         this.seatService = seatService;
-        this.theatreService = theatreService;
         this.mapper = mapper;
     }
 
@@ -72,10 +77,17 @@ public class ShowServiceImpl implements ShowService {
         return mapper.showListToShowResponseDtoList(shows);
     }
 
+    /**
+     * <p>
+     * This method is used to create seat for the show
+     * </p>
+     * @param show it contains show details
+     */
     private void createSeat(Show show) {
 
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
                 'v','w','x','y','z'};
+        int k = 0;
         for (SeatType seatType : show.getScreen().getSeatTypes()) {
             int row = seatType.getNoOfRows();
             int column = seatType.getNoOfColumns();
@@ -84,7 +96,7 @@ public class ShowServiceImpl implements ShowService {
                     Seat seat = new Seat();
                     seat.setSeatType(seatType);
                     seat.setSeatPrice(seatType.getPrice());
-                    seat.setSeatNumber(alphabet[i] + "" + j);
+                    seat.setSeatNumber(alphabet[k++] + "" + j);
                     seat.setSeatStatus(SeatStatus.AVAILABLE);
                     seat.setShow(show);
                     seat.setShowDate(show.getShowDate());
