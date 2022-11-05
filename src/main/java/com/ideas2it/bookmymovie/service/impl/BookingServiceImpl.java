@@ -14,6 +14,7 @@ import com.ideas2it.bookmymovie.service.BookingService;
 import com.ideas2it.bookmymovie.service.SeatService;
 import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,8 +33,8 @@ public class BookingServiceImpl implements BookingService {
     private final MapStructMapper mapper;
     private final SeatService seatService;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, ShowService showService,
-                                              MapStructMapper mapper, SeatService seatService) {
+    public BookingServiceImpl(BookingRepository bookingRepository, @Lazy UserService userService, ShowService showService,
+                              MapStructMapper mapper, SeatService seatService) {
         this.bookingRepository = bookingRepository;
         this.userService = userService;
         this.showService = showService;

@@ -1,7 +1,6 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.SeatDto;
-import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.service.SeatService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -57,16 +56,4 @@ public class SeatController {
         return seatService.updateSeatById(seatId);
     }
 
-    /**
-     * <p>
-     * This method List all the Seat Details with given showId
-     * </p>
-     *
-     * @param showId it contains show id
-     * @return List<SeatDto>
-     */
-    @GetMapping("/{showId}")
-    public List<SeatResponseDto> getSeatsByShow(@PathVariable int showId) {
-        return seatService.getSeatByShowId(showId);
-    }
 }

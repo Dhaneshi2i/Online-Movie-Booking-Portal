@@ -18,17 +18,13 @@ import java.util.List;
 @Data
 public class ApiError {
 
-    /** The status. */
     private HttpStatus status;
 
-    /** The time stamp. */
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timeStamp = LocalDateTime.now();
 
-    /** The message. */
     private String message;
 
-    /** The sub errors. */
     private List<ApiSubError> subErrors;
 
     public ApiError(HttpStatus status, String detail,List<FieldError> subError) {
@@ -60,19 +56,15 @@ public class ApiError {
         return subErrors;
     }
 
-
-
     /**
      * Adds the validation error.
      *
-     * @param object the object
      * @param field the field
      * @param rejectedValue the rejected value
      * @param message the message
      */
-    private List<ApiSubError> addValidationError(String object, String field, Object rejectedValue, String message)
-    {
-        return addSubError(new ApiValidationError(object, field, rejectedValue, message));
+    private List<ApiSubError> addValidationError(String field, Object rejectedValue, String message) {
+        return addSubError(new ApiValidationError(field, rejectedValue, message));
     }
 
     /**
@@ -82,7 +74,6 @@ public class ApiError {
      */
     private List<ApiSubError> addValidationError(FieldError fieldError) {
         return this.addValidationError(
-                fieldError.getObjectName(),
                 fieldError.getField(),
                 fieldError.getRejectedValue(),
                 fieldError.getDefaultMessage());
@@ -104,6 +95,4 @@ public class ApiError {
         return error;
     }
 
-    public void addValidationErrors(String message) {
-    }
 }

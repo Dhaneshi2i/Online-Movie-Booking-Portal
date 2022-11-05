@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApiValidationError extends ApiSubError {
 
-    private String object;
-
     private String field;
 
     private Object rejectedValue;
@@ -20,8 +18,7 @@ public class ApiValidationError extends ApiSubError {
     private String message;
 
 
-    ApiValidationError(String object, String msg) {
+    ApiValidationError(String msg) {
         this.message = msg;
-        this.object = object;
     }
 }

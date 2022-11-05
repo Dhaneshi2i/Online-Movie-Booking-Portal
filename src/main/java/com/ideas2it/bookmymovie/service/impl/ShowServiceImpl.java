@@ -2,6 +2,7 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
 import com.ideas2it.bookmymovie.dto.TimeSlotDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
@@ -57,7 +58,7 @@ public class ShowServiceImpl implements ShowService {
      * </p>
      *
      * @param showDto it contains show dto objects
-     * @return ShowDto
+     * @return List<ShowResponseDto>
      */
     @Override
     @Transactional
@@ -87,7 +88,6 @@ public class ShowServiceImpl implements ShowService {
 
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u',
                 'v','w','x','y','z'};
-        int k = 0;
         for (SeatType seatType : show.getScreen().getSeatTypes()) {
             int row = seatType.getNoOfRows();
             int column = seatType.getNoOfColumns();
@@ -96,7 +96,7 @@ public class ShowServiceImpl implements ShowService {
                     Seat seat = new Seat();
                     seat.setSeatType(seatType);
                     seat.setSeatPrice(seatType.getPrice());
-                    seat.setSeatNumber(alphabet[k++] + "" + j);
+                    seat.setSeatNumber(alphabet[i++] + "" + j);
                     seat.setSeatStatus(SeatStatus.AVAILABLE);
                     seat.setShow(show);
                     seat.setShowDate(show.getShowDate());
@@ -130,7 +130,7 @@ public class ShowServiceImpl implements ShowService {
      * </p>
      *
      * @param showId it contains show id
-     * @return ShowDto
+     * @return ShowResponseDto
      */
     @Override
     public ShowResponseDto getShowById(int showId) {
@@ -206,6 +206,19 @@ public class ShowServiceImpl implements ShowService {
             throw new NotFoundException("No shows found for this screen");
         }
         return mapper.showListToShowResponseDtoList(shows);
+    }
+
+    /**
+     * <p>
+     * This method List all the Seat Details with given showId
+     * </p>
+     *
+     * @param showId it contains show id
+     * @return List<SeatDto>
+     */
+    @Override
+    public List<SeatResponseDto> getSeatByShowId(int showId) {
+        return seatService.getSeatByShowId(showId);
     }
 }
 

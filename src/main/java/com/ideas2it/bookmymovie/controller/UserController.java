@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ import java.util.List;
  * @version 1.0
  **/
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/user")
 public class UserController {
     private final UserService userService;
 
@@ -84,4 +85,16 @@ public class UserController {
         return userService.updateUser(userDto);
     }
 
+    /**
+     * <p>
+     * This method get the Booking Details which matches the id
+     * </p>
+     *
+     * @param userId it contains booking id
+     * @return List<BookingResponseDto>
+     */
+    @GetMapping("/{userId}/booking")
+    public List<BookingResponseDto> viewBookingByUserId(@PathVariable int userId) {
+        return userService.viewBookingByUserId(userId);
+    }
 }

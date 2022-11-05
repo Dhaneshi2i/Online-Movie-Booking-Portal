@@ -13,10 +13,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserResponseDto {
+    private int id;
 
     private String userName;
 
-    private long contactNumber;
+    private String contactNumber;
 
     private String emailId;
 

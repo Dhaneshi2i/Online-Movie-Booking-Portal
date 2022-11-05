@@ -5,15 +5,13 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * The Class RestExceptionHandler.
@@ -24,6 +22,13 @@ import java.util.Set;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request)
+    {
+        String error = "Please enter valid input";
+        return buildResponseEntity(new ErrorMapper(HttpStatus.BAD_REQUEST, error));
+    }
 
     /**
      * Builds the response entity.
@@ -46,14 +51,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
                                                                   final HttpHeaders headers, final HttpStatus status,
                                                                   final WebRequest request) {
-        Set<ApiError> errorMap = new LinkedHashSet<>();
-//        errorMap.add(new ApiError(HttpStatus.BAD_REQUEST, ex.getFieldErrors().get(0).getDefaultMessage(),
-//                ex.getFieldErrors() ));
-        StringBuilder errormsg = new StringBuilder("Please make sure all the required fields and unique fields are given properly.");
+
+        StringBuilder errorMsg = new StringBuilder("Please make sure all the required fields and unique fields are given properly.");
         for(FieldError fieldError : ex.getFieldErrors()) {
-            errormsg.append(fieldError.getField()).append(" ");
+            errorMsg.append(fieldError.getField()).append(" ");
         }
-        return new ResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, errormsg.toString(),
+        return new ResponseEntity<>(new ApiError(HttpStatus.BAD_REQUEST, errorMsg.toString(),
                 ex.getFieldErrors() ), HttpStatus.BAD_REQUEST);
     }
 

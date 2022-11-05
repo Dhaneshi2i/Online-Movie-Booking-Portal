@@ -1,6 +1,5 @@
 package com.ideas2it.bookmymovie.dto.responseDto;
 
-import com.ideas2it.bookmymovie.model.SeatStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,11 +16,12 @@ import lombok.Setter;
 @Setter
 public class SeatResponseDto {
 
+    private int id;
+
     private String seatNumber;
 
     private SeatTypeResponseDto seatType;
 
     private float seatPrice;
 
-    private SeatStatus seatStatus;
 }

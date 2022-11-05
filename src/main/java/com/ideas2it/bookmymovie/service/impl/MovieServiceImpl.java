@@ -58,29 +58,34 @@ public class MovieServiceImpl implements MovieService {
      public MovieDto addMovie(MovieDto movieDto) {
          Movie movie = new Movie();
          if (null != movieDto) {
-             List<CastDto> casts = new ArrayList<>();
-             for (CastDto cast : movieDto.getCasts()) {
-                 casts.add(castService.getByCastId(cast.getId()));
-             }
-             movieDto.setCasts(casts);
-             List<LanguageDto> languages = new ArrayList<>();
-             for (LanguageDto language : movieDto.getLanguages()) {
-                 languages.add(languageService.getByLanguageId(language.getId()));
-             }
-             movieDto.setLanguages(languages);
-
-             List<GenreDto> genres = new ArrayList<>();
-             for (GenreDto genre : movieDto.getGenres()) {
-                 genres.add(genreService.getByGenreId(genre.getId()));
-             }
-             movieDto.setGenres(genres);
-             movie = mapper.movieDtoToMovie(movieDto);
+             movie = getMovie(movieDto);
          }
-
          return mapper.movieToMovieDto(movieRepository.save(movie));
      }
 
-     /**
+    private Movie getMovie(MovieDto movieDto) {
+        Movie movie;
+        List<CastDto> casts = new ArrayList<>();
+        for (CastDto cast : movieDto.getCasts()) {
+            casts.add(castService.getByCastId(cast.getId()));
+        }
+        movieDto.setCasts(casts);
+        List<LanguageDto> languages = new ArrayList<>();
+        for (LanguageDto language : movieDto.getLanguages()) {
+            languages.add(languageService.getByLanguageId(language.getId()));
+        }
+        movieDto.setLanguages(languages);
+
+        List<GenreDto> genres = new ArrayList<>();
+        for (GenreDto genre : movieDto.getGenres()) {
+            genres.add(genreService.getByGenreId(genre.getId()));
+        }
+        movieDto.setGenres(genres);
+        movie = mapper.movieDtoToMovie(movieDto);
+        return movie;
+    }
+
+    /**
       * <p>
       * This method List all the Movie Details
       * </p>
@@ -90,11 +95,9 @@ public class MovieServiceImpl implements MovieService {
      @Override
      public List<MovieDto> getMovies(int pageNumber, int pageSize) {
          List<Movie> movies = movieRepository.findAll();
-
          if (movies.isEmpty()) {
              throw new NotFoundException("No Movie Found");
          }
-
          Pageable p = PageRequest.of(pageNumber, pageSize);
          Page<Movie> movie = movieRepository.findAll(p);
          return mapper.movieListToMovieDtoList(movie.getContent());
@@ -116,6 +119,5 @@ public class MovieServiceImpl implements MovieService {
          }
          throw new NotFoundException("No movie found");
      }
-
   }
 

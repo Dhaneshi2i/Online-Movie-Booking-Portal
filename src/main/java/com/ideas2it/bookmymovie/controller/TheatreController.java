@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.service.TheatreService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,6 +86,19 @@ public class TheatreController {
     @GetMapping("/city/{city}")
     public List<TheatreDto> findTheatreByLocation(@PathVariable String city) {
         return theatreService.findTheatresByLocation(city);
+    }
+
+    /**
+     * <p>
+     * This method List all the screens Details of the theatre
+     * </p>
+     *
+     * @param theatreId it contains theatreId
+     * @return List<ScreenResponseDto>
+     */
+    @GetMapping("/{theatreId}/screen")
+    public List<ScreenResponseDto> getScreenByTheatreId(@PathVariable int theatreId) {
+        return theatreService.getScreenByTheatreId(theatreId);
     }
 
     /**
