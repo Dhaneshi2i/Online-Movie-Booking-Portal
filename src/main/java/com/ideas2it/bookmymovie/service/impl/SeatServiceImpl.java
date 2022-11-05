@@ -9,8 +9,6 @@ import com.ideas2it.bookmymovie.model.Seat;
 import com.ideas2it.bookmymovie.model.SeatStatus;
 import com.ideas2it.bookmymovie.repository.SeatRepository;
 import com.ideas2it.bookmymovie.service.SeatService;
-import com.ideas2it.bookmymovie.service.ShowService;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

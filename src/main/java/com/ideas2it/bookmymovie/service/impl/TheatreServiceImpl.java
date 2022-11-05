@@ -1,13 +1,16 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.TheatreRepository;
+import com.ideas2it.bookmymovie.service.ScreenService;
 import com.ideas2it.bookmymovie.service.TheatreService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,10 +29,12 @@ import java.util.List;
 public class TheatreServiceImpl implements TheatreService {
 
     private final TheatreRepository theatreRepository;
+    private final ScreenService screenService;
     private final MapStructMapper mapper;
 
-    public TheatreServiceImpl(TheatreRepository theatreRepository, MapStructMapper mapper) {
+    public TheatreServiceImpl(TheatreRepository theatreRepository, @Lazy ScreenService screenService, MapStructMapper mapper) {
         this.theatreRepository = theatreRepository;
+        this.screenService = screenService;
         this.mapper = mapper;
     }
 
@@ -120,6 +125,18 @@ public class TheatreServiceImpl implements TheatreService {
             throw new NotFoundException("No theatres were found for this location");
         }
         return mapper.theatreListToTheatreDtoList(theatres);
+    }
+
+    /**
+     * <p>
+     * This methods list all the screens for the theatre
+     * </p>
+     * @param theatreId it contains theatreId
+     * @return List<ScreenResponseDto>
+     */
+    @Override
+    public List<ScreenResponseDto> getScreenByTheatreId(int theatreId) {
+        return screenService.getScreenByTheatreId(theatreId);
     }
 
 }

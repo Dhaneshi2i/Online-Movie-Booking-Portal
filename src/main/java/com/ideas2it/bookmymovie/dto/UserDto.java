@@ -34,7 +34,8 @@ import javax.validation.constraints.Size;
     private String emailId;
 
     @NotNull(message = "Contact number should not be empty")
-    private long contactNumber;
+    @Pattern(regexp = "(0|91)?[6-9][0-9]{9}", message = "Please enter valid mobile number")
+    private String contactNumber;
 
     @NotBlank(message = "Password should not be empty")
     @Size(max = 20, message = "Please, Enter minimum 8 character")

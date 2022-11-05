@@ -38,7 +38,7 @@ public class User {
 
     private String emailId;
 
-    private long contactNumber;
+    private String contactNumber;
 
     private String password;
 

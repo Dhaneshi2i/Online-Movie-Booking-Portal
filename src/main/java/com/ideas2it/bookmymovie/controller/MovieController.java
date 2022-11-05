@@ -71,4 +71,9 @@ public class MovieController {
         return movieService.getMovieById(movieId);
     }
 
+    /*@PatchMapping
+    public MovieDto updateMovie(@RequestBody MovieDto movieDto) {
+        return movieService.updateMovie(movieDto);
+    }*/
+
 }

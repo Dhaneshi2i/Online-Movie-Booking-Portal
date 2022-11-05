@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public interface ShowService {
      * </p>
      *
      * @param showDto it contains show dto objects
-     * @return ShowDto
+     * @return List<ShowResponseDto>
      */
     List<ShowResponseDto> createShow(ShowDto showDto);
 
@@ -42,7 +43,7 @@ public interface ShowService {
      * </p>
      *
      * @param showId it contains show id
-     * @return ShowDto
+     * @return ShowResponseDto
      */
     ShowResponseDto getShowById(int showId);
 
@@ -74,4 +75,14 @@ public interface ShowService {
      * @return List<ShowResponseDto>
      */
     List<ShowResponseDto> getShowByScreenId(int screenId);
+
+    /**
+     * <p>
+     * This method List all the Seat Details with given showId
+     * </p>
+     *
+     * @param showId it contains show id
+     * @return List<SeatDto>
+     */
+    List<SeatResponseDto> getSeatByShowId(int showId);
 }

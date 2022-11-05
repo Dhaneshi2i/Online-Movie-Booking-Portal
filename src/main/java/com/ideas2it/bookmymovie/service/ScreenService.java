@@ -2,6 +2,7 @@ package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 
 import java.util.List;
 
@@ -64,4 +65,13 @@ public interface ScreenService {
      */
     List<ScreenResponseDto> getScreenByTheatreId(int theatreId);
 
+    /**
+     * <p>
+     * This method List all the shows Details for the screen
+     * </p>
+     *
+     * @param screenId it contains date
+     * @return List<ShowResponseDto>
+     */
+    List<ShowResponseDto> getShowByScreenId(int screenId);
 }

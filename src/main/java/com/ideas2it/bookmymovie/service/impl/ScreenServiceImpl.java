@@ -2,13 +2,16 @@ package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.ScreenDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.Screen;
 import com.ideas2it.bookmymovie.model.Theatre;
 import com.ideas2it.bookmymovie.repository.ScreenRepository;
 import com.ideas2it.bookmymovie.service.ScreenService;
+import com.ideas2it.bookmymovie.service.ShowService;
 import com.ideas2it.bookmymovie.service.TheatreService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,11 +30,14 @@ import java.util.stream.Collectors;
 public class ScreenServiceImpl implements ScreenService {
     private final ScreenRepository screenRepository;
     private final TheatreService theatreService;
+    private final ShowService showService;
     private final MapStructMapper mapper;
 
-    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService, MapStructMapper mapper) {
+    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService,MapStructMapper mapper,
+                             @Lazy ShowService showService) {
         this.screenRepository = screenRepository;
         this.theatreService = theatreService;
+        this.showService = showService;
         this.mapper = mapper;
     }
 
@@ -125,5 +131,10 @@ public class ScreenServiceImpl implements ScreenService {
             }
         }
         return mapper.screenListToScreenResponseDtoList(screens);
+    }
+
+    @Override
+    public List<ShowResponseDto> getShowByScreenId(int screenId) {
+        return showService.getShowByScreenId(screenId);
     }
 }

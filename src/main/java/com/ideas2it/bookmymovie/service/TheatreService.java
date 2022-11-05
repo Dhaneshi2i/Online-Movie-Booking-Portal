@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.TheatreDto;
+import com.ideas2it.bookmymovie.dto.responseDto.ScreenResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.TheatreResponseDto;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 
@@ -66,4 +67,12 @@ public interface TheatreService {
      */
     List<TheatreDto> findTheatresByLocation(String city) ;
 
+    /**
+     * <p>
+     * This methods list all the screens for the theatre
+     * </p>
+     * @param theatreId it contains theatreId
+     * @return List<ScreenResponseDto>
+     */
+    List<ScreenResponseDto> getScreenByTheatreId(int theatreId);
 }

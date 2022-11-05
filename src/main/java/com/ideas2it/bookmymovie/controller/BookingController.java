@@ -76,19 +76,6 @@ public class BookingController {
 
     /**
      * <p>
-     * This method get the Booking Details which matches the id
-     * </p>
-     *
-     * @param userId it contains booking id
-     * @return List<BookingResponseDto>
-     */
-    @GetMapping("/user/{userId}")
-    public List<BookingResponseDto> viewBookingByUserId(@PathVariable int userId) {
-        return bookingService.viewBookingByUserId(userId);
-    }
-
-    /**
-     * <p>
      * This method is used to cancel the Screen Details which matches the id
      * </p>
      *

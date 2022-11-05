@@ -87,7 +87,12 @@ public interface MapStructMapper {
     SeatDto seatToSeatDto(Seat seat);
     @Mapping(target = "id", source = "showId")
     ShowResponseDto showToShowResponseDto(Show show);
+    @Mapping(target = "id",source = "seatId")
+    SeatResponseDto seatToSeatResponseDto(Seat seat);
+    @Mapping(target = "id",source = "userId")
     UserResponseDto userToUserResponseDto(User user);
+    @Mapping(target = "id",source = "screenId")
+    ScreenResponseDto screenToScreenResponseDto(Screen screen);
     Show showResponseDtoToShow(ShowResponseDto showResponseDto);
     BookingResponseDto bookingToBookingResponseDto(Booking booking);
     TheatreResponseDto theatreToTheatreResponseDto(Theatre theatre);

@@ -8,10 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * This Seat repository save and retrieve data of booking in database.
+ *
+ * @author DhaneshKumar,Harini,SivaDharshini
+ * @version 1.0
+ */
 @Repository
 public interface SeatRepository extends JpaRepository<Seat,Integer> {
     Seat findBySeatId(int seat);
     List<Seat> findBySeatStatus(SeatStatus seatStatus);
-    List<Seat> findByShow(Show show);
 
 }

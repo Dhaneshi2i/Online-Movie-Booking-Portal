@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.service;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -55,4 +56,14 @@ public interface UserService extends UserDetailsService {
      * @return ScreenDto
      */
     UserDto updateUser(UserDto userDto);
+
+    /**
+     * <p>
+     * This method get the Booking Details of the user
+     * </p>
+     *
+     * @param userId it contains booking id
+     * @return BookingResponseDto
+     */
+    List<BookingResponseDto> viewBookingByUserId(int userId);
 }

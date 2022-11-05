@@ -1,6 +1,7 @@
 package com.ideas2it.bookmymovie.controller;
 
 import com.ideas2it.bookmymovie.dto.ShowDto;
+import com.ideas2it.bookmymovie.dto.responseDto.SeatResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.ShowResponseDto;
 import com.ideas2it.bookmymovie.service.ShowService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -102,17 +103,17 @@ public class ShowController {
         return showService.getShowsByDate(date);
     }
 
+
     /**
      * <p>
-     * This method List all the show Details by screen
+     * This method list all the seats for the show
      * </p>
-     *
-     * @param screenId it contains date
-     * @return List<ShowResponseDto>
+     * @param showId it contains showId
+     * @return <SeatResponseDto>
      */
-    @GetMapping("/screen/{screenId}")
-    public List<ShowResponseDto> getShowsByScreenId(@PathVariable int screenId) {
-        return showService.getShowByScreenId(screenId);
+    @GetMapping("/{showId}/seat")
+    public List<SeatResponseDto> getSeatsByShow(@PathVariable int showId) {
+        return showService.getSeatByShowId(showId);
     }
 
 }

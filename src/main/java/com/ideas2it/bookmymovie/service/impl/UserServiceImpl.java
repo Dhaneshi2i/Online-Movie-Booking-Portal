@@ -1,16 +1,16 @@
 package com.ideas2it.bookmymovie.service.impl;
 
 import com.ideas2it.bookmymovie.dto.UserDto;
+import com.ideas2it.bookmymovie.dto.responseDto.BookingResponseDto;
 import com.ideas2it.bookmymovie.dto.responseDto.UserResponseDto;
 import com.ideas2it.bookmymovie.exception.AlreadyExistException;
 import com.ideas2it.bookmymovie.exception.NotFoundException;
 import com.ideas2it.bookmymovie.mapper.MapStructMapper;
 import com.ideas2it.bookmymovie.model.User;
 import com.ideas2it.bookmymovie.repository.UserRepository;
+import com.ideas2it.bookmymovie.service.BookingService;
 import com.ideas2it.bookmymovie.service.RoleService;
 import com.ideas2it.bookmymovie.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,19 +32,19 @@ import java.util.List;
  * @author Dhanesh kumar, Harini, sivadharshini
  * @version 1.0
  */
-
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
+    private final BookingService bookingService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final MapStructMapper mapper;
 
     public UserServiceImpl(UserRepository userRepository, RoleService roleService,
-                           BCryptPasswordEncoder bCryptPasswordEncoder, MapStructMapper mapper) {
+                           BookingService bookingService, BCryptPasswordEncoder bCryptPasswordEncoder, MapStructMapper mapper) {
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.bookingService = bookingService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.mapper = mapper;
     }
@@ -113,6 +113,11 @@ public class UserServiceImpl implements UserService {
         return mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDto)));
     }
 
+    @Override
+    public List<BookingResponseDto> viewBookingByUserId(int userId) {
+        return bookingService.viewBookingByUserId(userId);
+    }
+
     /**
      * <p>
      *  This method gets userDetails with userName.
@@ -125,10 +130,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);
         if (user == null) {
-            log.error("User not found in the database");
             throw new UsernameNotFoundException("The user name is not found for this id");
-        } else {
-            log.info("User found in the database: {}",username);
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRoleType()));
